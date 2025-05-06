@@ -3,10 +3,11 @@ import { ZodSchema } from "zod";
 
 export const validateBody =
   <T>(schema: ZodSchema<T>) =>
-  (req: Request, res: Response, next: NextFunction) => {
+  (req: Request, res: Response, next: NextFunction): void => {
     const result = schema.safeParse(req.body);
     if (!result.success) {
-      return res.status(400).json({ errors: result.error.flatten() });
+      res.status(400).json({ errors: result.error.flatten() });
+      return;
     }
     req.body = result.data;
     next();
