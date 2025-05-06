@@ -1,12 +1,7 @@
-import api from '@/config/axios';
-import { useEffect, useState } from 'react';
+import { useLoaderData } from '@tanstack/react-router';
 
 export default function User() {
-  const [name, setName] = useState('');
-
-  useEffect(() => {
-    api.get('/api/user').then((res) => setName(res.data.name));
-  }, []);
+  const { name } = useLoaderData({ from: '/user' });
 
   return <div>Hello {name}</div>;
 }
