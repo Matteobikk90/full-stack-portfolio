@@ -1,16 +1,25 @@
+import { useEffect, useState } from "react";
+
 function App() {
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "light"
+  );
+
+  useEffect(() => {
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="p-6">
+      <h1 className="text-2xl font-bold">Full Stack Portfolio</h1>
+      <button
+        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+        className="mt-4 px-4 py-2 border">
+        Toggle theme
+      </button>
+    </div>
   );
 }
 
