@@ -1,4 +1,3 @@
-
 // Include below line for test configuration
 /// <reference types="vitest" />
 
@@ -17,8 +16,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/tests/setup.ts',
-    include: ['src/**/*.test.{ts,tsx}'],
+    setupFiles: './src/tests/vitest/setup.ts',
+    include: ['./src/tests/vitest/*.test.{ts,tsx}'],
     exclude: ['node_modules', 'dist'],
   },
 });

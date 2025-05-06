@@ -1,4 +1,3 @@
-
 import { expect, test } from '@playwright/test';
 
 test('toggles theme when clicking button', async ({ page }) => {
