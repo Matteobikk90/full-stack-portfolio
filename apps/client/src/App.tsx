@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Button } from "@/lib/ui/button";
 
 function App() {
   const [theme, setTheme] = useState(
@@ -14,11 +15,11 @@ function App() {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold">Full Stack Portfolio</h1>
-      <button
+      <Button
         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         className="mt-4 px-4 py-2 border">
         Toggle theme
-      </button>
+      </Button>
     </div>
   );
 }
