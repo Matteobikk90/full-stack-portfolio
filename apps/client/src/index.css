@@ -1,7 +1,7 @@
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 /* ---------- Tailwind layers ---------- */
-@import "tailwindcss/preflight";
+@import 'tailwindcss/preflight';
 @tailwind utilities;
 
 /* ---------- Custom dark variant ---------- */
