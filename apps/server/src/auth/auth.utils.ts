@@ -10,4 +10,4 @@ export const comparePasswords = async (plain: string, hash: string) =>
   bcrypt.compare(plain, hash);
 
 export const generateToken = (payload: object) =>
-  jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+  jwt.sign(payload, JWT_SECRET, { expiresIn: "30m" });
