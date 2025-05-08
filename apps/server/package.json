@@ -20,6 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "passport": "^0.7.0",
     "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0",
     "passport-oauth2": "^1.8.0",
     "zod": "^3.24.4"
   },
@@ -29,6 +30,7 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/passport": "^1.0.17",
     "@types/passport-github2": "^1.2.9",
+    "@types/passport-google-oauth20": "^2.0.16",
     "@types/passport-oauth2": "^1.4.17",
     "@types/supertest": "^6.0.3",
     "prisma": "^6.7.0",

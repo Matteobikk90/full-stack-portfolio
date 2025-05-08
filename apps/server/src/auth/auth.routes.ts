@@ -33,4 +33,22 @@ router.get(
   }
 );
 
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { session: false, failureRedirect: "/" }),
+  (req, res) => {
+    const user = req.user as { id: string };
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
+      expiresIn: "15m",
+    });
+
+    res.json({ token });
+  }
+);
+
 export default router;

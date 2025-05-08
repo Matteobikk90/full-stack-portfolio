@@ -3,11 +3,14 @@ import { Strategy as GitHubStrategy } from "passport-github2";
 import { PrismaClient } from "@prisma/client";
 import type { Profile } from "passport-github2";
 import type { VerifyCallback } from "passport-oauth2";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
 const prisma = new PrismaClient();
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
 const GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL!;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 
 passport.use(
   new GitHubStrategy(
@@ -43,6 +46,20 @@ passport.use(
       } catch (err) {
         done(err);
       }
+    }
+  )
+);
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+      callbackURL: "http://localhost:4000/auth/google/callback",
+    },
+    async (_accessToken, _refreshToken, profile, done) => {
+      const user = { id: profile.id, provider: "google" };
+      return done(null, user);
     }
   )
 );
