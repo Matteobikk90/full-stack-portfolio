@@ -1,10 +1,19 @@
 import express from "express";
+import cors from "cors";
+import helmet from "helmet";
 import authRoutes from "@/auth/auth.route";
 import userRoutes from "@/routes/user.route";
 import "@/auth/passport";
 import { globalErrorHandler } from "@/middleware/error";
 
 const app = express();
+app.use(helmet());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use("/auth", authRoutes);
