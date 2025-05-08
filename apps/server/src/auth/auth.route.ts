@@ -2,27 +2,34 @@ import { Router, Request, Response } from "express";
 import passport from "passport";
 import jwt from "jsonwebtoken";
 import { login, handleRefreshToken, signup } from "@/auth/auth.controller";
-import { validateBody } from "@/middleware/validate.middleware";
+import { validateBody } from "@/middleware/validate";
 import {
   loginSchema,
   refreshSchema,
   signupSchema,
 } from "@/validation/auth.schema";
 import { authenticateToken } from "@/auth/auth.middleware";
+import { authRateLimiter } from "@/middleware/rate-limit";
 
 const router = Router();
 
-router.post("/signup", validateBody(signupSchema), signup);
-router.post("/login", validateBody(loginSchema), login);
+router.post("/signup", authRateLimiter, validateBody(signupSchema), signup);
+router.post("/login", authRateLimiter, validateBody(loginSchema), login);
 
 router.get("/protected", authenticateToken, (_req, res) => {
   res.json({ message: "Protected content" });
 });
 
-router.post("/refresh", validateBody(refreshSchema), handleRefreshToken);
+router.post(
+  "/refresh",
+  authRateLimiter,
+  validateBody(refreshSchema),
+  handleRefreshToken
+);
 
 router.get(
   "/github",
+  authRateLimiter,
   passport.authenticate("github", { scope: ["user:email"] })
 );
 
@@ -50,6 +57,7 @@ router.get(
 
 router.get(
   "/google",
+  authRateLimiter,
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 

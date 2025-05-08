@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validateBody } from "@/middleware/validate.middleware";
+import { validateBody } from "@/middleware/validate";
 import { createUserSchema } from "@/validation/user.schema";
 
 const router = Router();

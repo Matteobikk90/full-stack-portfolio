@@ -2,7 +2,7 @@ import express from "express";
 import authRoutes from "@/auth/auth.route";
 import userRoutes from "@/routes/user.route";
 import "@/auth/passport";
-import { globalErrorHandler } from "@/middleware/error.middleware";
+import { globalErrorHandler } from "@/middleware/error";
 
 const app = express();
 app.use(express.json());

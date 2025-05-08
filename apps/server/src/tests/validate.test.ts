@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { validateBody } from "@/middleware/validate.middleware";
+import { validateBody } from "@/middleware/validate";
 import { createUserSchema } from "@/validation/user.schema";
 
 describe("validateBody middleware", () => {
