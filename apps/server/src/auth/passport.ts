@@ -1,6 +1,5 @@
 import passport from "passport";
 import { Strategy as GitHubStrategy } from "passport-github2";
-import { PrismaClient } from "@prisma/client";
 import type { Profile } from "passport-github2";
 import type { VerifyCallback } from "passport-oauth2";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
