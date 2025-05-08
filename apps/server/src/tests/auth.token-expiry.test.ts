@@ -1,8 +1,7 @@
 import request from "supertest";
 import app from "@/app";
 import jwt from "jsonwebtoken";
-
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
+import { JWT_SECRET } from "@/utils/constants";
 
 describe("GET /auth/protected", () => {
   it("should return 401 if the token is expired", async () => {

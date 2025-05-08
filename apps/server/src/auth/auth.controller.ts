@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import { hashPassword, comparePasswords, generateToken } from "./auth.utils";
+import {
+  hashPassword,
+  comparePasswords,
+  generateToken,
+} from "@/auth/auth.utils";
+import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 
@@ -35,4 +40,24 @@ export const login = async (req: Request, res: Response) => {
 
   const token = generateToken({ userId: user.id });
   res.json({ token });
+};
+
+export const handleRefreshToken = (req: Request, res: Response): void => {
+  const { refreshToken } = req.body;
+
+  try {
+    const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET!) as {
+      userId: string;
+    };
+
+    const newAccessToken = jwt.sign(
+      { userId: decoded.userId },
+      process.env.JWT_SECRET!,
+      { expiresIn: "15m" }
+    );
+
+    res.json({ accessToken: newAccessToken });
+  } catch (err) {
+    res.status(403).json({ message: "Invalid or expired refresh token" });
+  }
 };

@@ -1,7 +1,6 @@
+import { JWT_SECRET } from "@/utils/constants";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 
 export const hashPassword = async (password: string) =>
   bcrypt.hash(password, 10);
