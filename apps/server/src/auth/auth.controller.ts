@@ -6,8 +6,7 @@ import {
   generateToken,
 } from "@/auth/auth.utils";
 import jwt from "jsonwebtoken";
-
-const prisma = new PrismaClient();
+import prisma from "@/utils/prisma";
 
 export const signup = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
@@ -59,5 +58,27 @@ export const handleRefreshToken = (req: Request, res: Response): void => {
     res.json({ accessToken: newAccessToken });
   } catch (err) {
     res.status(403).json({ message: "Invalid or expired refresh token" });
+  }
+};
+
+export const getMe = async (req: Request, res: Response) => {
+  const userId = (req.user as { userId: string }).userId;
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        createdAt: true,
+      },
+    });
+
+    if (!user) res.status(404).json({ message: "User not found" });
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to retrieve user" });
   }
 };

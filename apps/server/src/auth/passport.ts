@@ -4,8 +4,8 @@ import { PrismaClient } from "@prisma/client";
 import type { Profile } from "passport-github2";
 import type { VerifyCallback } from "passport-oauth2";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import prisma from "@/utils/prisma";
 
-const prisma = new PrismaClient();
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
 const GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL!;

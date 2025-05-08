@@ -1,7 +1,12 @@
 import { Router, Request, Response } from "express";
 import passport from "passport";
 import jwt from "jsonwebtoken";
-import { login, handleRefreshToken, signup } from "@/auth/auth.controller";
+import {
+  login,
+  handleRefreshToken,
+  signup,
+  getMe,
+} from "@/auth/auth.controller";
 import { validateBody } from "@/middleware/validate";
 import {
   loginSchema,
@@ -26,6 +31,8 @@ router.post(
   validateBody(refreshSchema),
   handleRefreshToken
 );
+
+router.get("/me", authenticateToken, getMe);
 
 router.get(
   "/github",
