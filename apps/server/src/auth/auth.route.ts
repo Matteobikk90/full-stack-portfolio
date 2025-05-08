@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import passport from "passport";
 import jwt from "jsonwebtoken";
 import { login, handleRefreshToken, signup } from "@/auth/auth.controller";
-import { validateBody } from "@/middleware/validate";
+import { validateBody } from "@/middleware/validate.middleware";
 import {
   loginSchema,
   refreshSchema,
