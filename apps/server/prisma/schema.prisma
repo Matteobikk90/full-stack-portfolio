@@ -24,11 +24,28 @@ enum Provider {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  provider  Provider
-  role      Role     @default(user)
-  avatarUrl String?
-  createdAt DateTime @default(now())
+  id          String       @id @default(cuid())
+  name        String
+  email       String       @unique
+  provider    Provider
+  role        Role         @default(user)
+  avatarUrl   String?
+  createdAt   DateTime     @default(now())
+  experiences Experience[]
+}
+
+model Experience {
+  id           String    @id @default(cuid())
+  company      String
+  title        String
+  location     String?
+  startDate    DateTime
+  endDate      DateTime?
+  description  String?
+  duties       String[]
+  technologies String[]
+  imageUrl     String?
+  createdAt    DateTime  @default(now())
+  User         User?     @relation(fields: [userId], references: [id])
+  userId       String?
 }
