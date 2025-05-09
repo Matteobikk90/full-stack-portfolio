@@ -4,6 +4,7 @@ import { Sentry } from '@/config/sentry';
 import { globalErrorHandler } from '@/middleware/error.middleware';
 import commentRoutes from '@/routes/comments.route';
 import experiencesRoute from '@/routes/experiences.route';
+import likeRoutes from '@/routes/likes.route';
 import projectsRoute from '@/routes/projects.route';
 import userRoutes from '@/routes/user.route';
 import cors from 'cors';
@@ -26,6 +27,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/experiences', experiencesRoute);
 app.use('/api/projects', projectsRoute);
 app.use('/api/comments', commentRoutes);
+app.use('/api/likes', likeRoutes);
 
 app.get('/', (_req, res) => {
   res.send('API is working');
