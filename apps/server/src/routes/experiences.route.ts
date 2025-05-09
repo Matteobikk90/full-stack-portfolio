@@ -7,6 +7,7 @@ import {
   updateExperience,
 } from '@/controllers/experinces.controller';
 import { validateBody, validateParams } from '@/middleware/validate.middleware';
+import { asyncHandler } from '@/utils/async-handlers';
 import {
   createExperienceSchema,
   idParamSchema,
@@ -16,28 +17,32 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('/', getAllExperiences);
-router.get('/:id', validateParams(idParamSchema), getExperienceById);
+router.get('/', asyncHandler(getAllExperiences));
+router.get(
+  '/:id',
+  validateParams(idParamSchema),
+  asyncHandler(getExperienceById)
+);
 
-// protected
+// protected routes
 router.post(
   '/',
   authenticateToken,
   validateBody(createExperienceSchema),
-  createExperience
+  asyncHandler(createExperience)
 );
 router.put(
   '/:id',
   authenticateToken,
   validateParams(idParamSchema),
   validateBody(updateExperienceSchema),
-  updateExperience
+  asyncHandler(updateExperience)
 );
 router.delete(
   '/:id',
   authenticateToken,
   validateParams(idParamSchema),
-  deleteExperience
+  asyncHandler(deleteExperience)
 );
 
 export default router;

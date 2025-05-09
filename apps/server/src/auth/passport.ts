@@ -56,8 +56,12 @@ passport.use(
       callbackURL: 'http://localhost:4000/auth/google/callback',
     },
     async (_accessToken, _refreshToken, profile, done) => {
-      const user = { id: profile.id, provider: 'google' };
-      return done(null, user);
+      try {
+        const user = { id: profile.id, provider: 'google' };
+        return done(null, user);
+      } catch (err) {
+        done(err);
+      }
     }
   )
 );

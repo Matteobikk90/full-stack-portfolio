@@ -1,12 +1,13 @@
+import '@/auth/passport';
 import authRoutes from '@/auth/auth.route';
 import { Sentry } from '@/config/sentry';
-import experienceRoutes from '@/routes/experiences.route';
+import { globalErrorHandler } from '@/middleware/error.middleware';
+import experiencesRoute from '@/routes/experiences.route';
+import projectsRoute from '@/routes/projects.route';
 import userRoutes from '@/routes/user.route';
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
-import '@/auth/passport';
-import { globalErrorHandler } from '@/middleware/error.middleware';
 
 const app = express();
 
@@ -21,7 +22,8 @@ app.use(express.json());
 
 app.use('/auth', authRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/experience', experienceRoutes);
+app.use('/api/experiences', experiencesRoute);
+app.use('/api/projects', projectsRoute);
 
 app.get('/', (_req, res) => {
   res.send('API is working');
