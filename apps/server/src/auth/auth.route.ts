@@ -1,7 +1,7 @@
 import { getMe, handleRefreshToken } from '@/auth/auth.controller';
 import { authenticateToken } from '@/auth/auth.middleware';
-import { authRateLimiter } from '@/middleware/rate-limit';
-import { validateBody } from '@/middleware/validate';
+import { authRateLimiter } from '@/middleware/rate-limit.middleware';
+import { validateBody } from '@/middleware/validate.middleware';
 import { refreshSchema } from '@/validation/auth.schema';
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';

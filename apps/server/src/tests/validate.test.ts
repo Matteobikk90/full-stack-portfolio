@@ -1,4 +1,4 @@
-import { validateBody } from '@/middleware/validate';
+import { validateBody } from '@/middleware/validate.middleware';
 import { createUserSchema } from '@/validation/user.schema';
 import { NextFunction, Request, Response } from 'express';
 import { beforeEach, describe, expect, it, vi } from 'vitest';

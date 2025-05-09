@@ -1,5 +1,5 @@
 import { authenticateToken } from '@/auth/auth.middleware';
-import { validateBody } from '@/middleware/validate';
+import { validateBody } from '@/middleware/validate.middleware';
 import { createUserSchema } from '@/validation/user.schema';
 import { Router } from 'express';
 

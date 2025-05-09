@@ -36,7 +36,7 @@ passport.use(
 
         if (!user) {
           user = await prisma.user.create({
-            data: { email, name },
+            data: { email, name, provider: 'github' },
           });
         }
 
