@@ -1,9 +1,8 @@
-import passport from "passport";
-import { Strategy as GitHubStrategy } from "passport-github2";
-import type { Profile } from "passport-github2";
-import type { VerifyCallback } from "passport-oauth2";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import prisma from "@/utils/prisma";
+import prisma from '@/utils/prisma';
+import passport from 'passport';
+import { Strategy as GitHubStrategy, type Profile } from 'passport-github2';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import type { VerifyCallback } from 'passport-oauth2';
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
@@ -26,11 +25,11 @@ passport.use(
     ) => {
       try {
         const email = profile.emails?.[0]?.value;
-        const name = profile.displayName || profile.username || "";
+        const name = profile.displayName || profile.username || '';
 
         if (!email)
           return done(null, false, {
-            message: "GitHub account has no public email",
+            message: 'GitHub account has no public email',
           });
 
         let user = await prisma.user.findUnique({ where: { email } });
@@ -54,10 +53,10 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:4000/auth/google/callback",
+      callbackURL: 'http://localhost:4000/auth/google/callback',
     },
     async (_accessToken, _refreshToken, profile, done) => {
-      const user = { id: profile.id, provider: "google" };
+      const user = { id: profile.id, provider: 'google' };
       return done(null, user);
     }
   )
