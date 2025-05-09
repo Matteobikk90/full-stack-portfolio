@@ -1,4 +1,7 @@
-import app from "@/app";
+import app from '@/app';
+import { initSentry } from '@/config/sentry';
+
+initSentry();
 
 const PORT = process.env.PORT || 4000;
 

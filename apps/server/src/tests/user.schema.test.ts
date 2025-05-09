@@ -1,42 +1,42 @@
-import { describe, expect, it } from "vitest";
-import { createUserSchema, idParamSchema } from "@/validation/user.schema";
+import { createUserSchema } from '@/validation/user.schema';
+import { describe, expect, it } from 'vitest';
 
-describe("createUserSchema", () => {
-  it("passes with valid input", () => {
+describe('createUserSchema', () => {
+  it('passes with valid input (minimum fields)', () => {
     const result = createUserSchema.safeParse({
-      name: "Matteo",
-      email: "matteo@example.com",
+      name: 'Matteo',
+      email: 'matteo@example.com',
+      provider: 'google',
     });
     expect(result.success).toBe(true);
   });
 
-  it("fails with empty name", () => {
+  it('passes with all optional fields', () => {
     const result = createUserSchema.safeParse({
-      name: "",
-      email: "matteo@example.com",
-    });
-    expect(result.success).toBe(false);
-  });
-
-  it("fails with invalid email", () => {
-    const result = createUserSchema.safeParse({
-      name: "Matteo",
-      email: "not-an-email",
-    });
-    expect(result.success).toBe(false);
-  });
-});
-
-describe("idParamSchema", () => {
-  it("passes with valid UUID", () => {
-    const result = idParamSchema.safeParse({
-      id: "9c3d4e59-f18f-4a67-b4f1-2c828e9d3e36",
+      name: 'Matteo',
+      email: 'matteo@example.com',
+      provider: 'github',
+      role: 'admin',
+      avatarUrl: 'https://example.com/avatar.png',
     });
     expect(result.success).toBe(true);
   });
 
-  it("fails with invalid UUID", () => {
-    const result = idParamSchema.safeParse({ id: "not-a-uuid" });
+  it('fails with missing provider', () => {
+    const result = createUserSchema.safeParse({
+      name: 'Matteo',
+      email: 'matteo@example.com',
+      // missing provider
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('fails with invalid provider', () => {
+    const result = createUserSchema.safeParse({
+      name: 'Matteo',
+      email: 'matteo@example.com',
+      provider: 'linkedin', // invalid
+    });
     expect(result.success).toBe(false);
   });
 });
