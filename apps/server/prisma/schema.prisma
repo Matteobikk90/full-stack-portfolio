@@ -24,13 +24,15 @@ enum Provider {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   name      String
-  email     String   @unique
+  email     String    @unique
   provider  Provider
-  role      Role     @default(user)
+  role      Role      @default(user)
   avatarUrl String?
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
+  Comment   Comment[]
+  Like      Like[]
 }
 
 model Experience {
@@ -45,18 +47,45 @@ model Experience {
   technologies String[]
   imageUrl     String?
   createdAt    DateTime  @default(now())
+  Comment      Comment[]
+  Like         Like[]
 }
 
 model Project {
-  id           String   @id @default(cuid())
+  id           String    @id @default(cuid())
   title        String
   description  String
-  slug         String   @unique
+  slug         String    @unique
   technologies String[]
   repoUrl      String?
   demoUrl      String?
   imageUrl     String?
-  isFeatured   Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  isFeatured   Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  Comment      Comment[]
+  Like         Like[]
+}
+
+model Comment {
+  id           String      @id @default(cuid())
+  content      String
+  createdAt    DateTime    @default(now())
+  user         User        @relation(fields: [userId], references: [id])
+  userId       String
+  experience   Experience? @relation(fields: [experienceId], references: [id])
+  experienceId String?
+  project      Project?    @relation(fields: [projectId], references: [id])
+  projectId    String?
+}
+
+model Like {
+  id           String      @id @default(cuid())
+  createdAt    DateTime    @default(now())
+  user         User        @relation(fields: [userId], references: [id])
+  userId       String
+  experience   Experience? @relation(fields: [experienceId], references: [id])
+  experienceId String?
+  project      Project?    @relation(fields: [projectId], references: [id])
+  projectId    String?
 }
