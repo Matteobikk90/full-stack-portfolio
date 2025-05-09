@@ -24,14 +24,13 @@ enum Provider {
 }
 
 model User {
-  id          String       @id @default(cuid())
-  name        String
-  email       String       @unique
-  provider    Provider
-  role        Role         @default(user)
-  avatarUrl   String?
-  createdAt   DateTime     @default(now())
-  experiences Experience[]
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  provider  Provider
+  role      Role     @default(user)
+  avatarUrl String?
+  createdAt DateTime @default(now())
 }
 
 model Experience {
@@ -46,6 +45,18 @@ model Experience {
   technologies String[]
   imageUrl     String?
   createdAt    DateTime  @default(now())
-  User         User?     @relation(fields: [userId], references: [id])
-  userId       String?
+}
+
+model Project {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  slug         String   @unique
+  technologies String[]
+  repoUrl      String?
+  demoUrl      String?
+  imageUrl     String?
+  isFeatured   Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

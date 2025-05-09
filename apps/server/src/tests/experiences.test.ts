@@ -22,9 +22,9 @@ beforeAll(async () => {
 });
 
 describe('Experience routes', () => {
-  it('POST /api/experience → creates a new experience (auth required)', async () => {
+  it('POST /api/experiences → creates a new experience (auth required)', async () => {
     const res = await request(app)
-      .post('/api/experience')
+      .post('/api/experiences')
       .set('Authorization', `Bearer ${token}`)
       .send({
         title: 'Frontend Developer',
@@ -41,21 +41,21 @@ describe('Experience routes', () => {
     experienceId = res.body.id;
   });
 
-  it('GET /api/experience → gets all experiences', async () => {
-    const res = await request(app).get('/api/experience');
+  it('GET /api/experiences → gets all experiences', async () => {
+    const res = await request(app).get('/api/experiences');
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
   });
 
-  it('GET /api/experience/:id → gets experience by ID', async () => {
-    const res = await request(app).get(`/api/experience/${experienceId}`);
+  it('GET /api/experiences/:id → gets experience by ID', async () => {
+    const res = await request(app).get(`/api/experiences/${experienceId}`);
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty('id', experienceId);
   });
 
-  it('PUT /api/experience/:id → updates experience (auth required)', async () => {
+  it('PUT /api/experiences/:id → updates experience (auth required)', async () => {
     const res = await request(app)
-      .put(`/api/experience/${experienceId}`)
+      .put(`/api/experiences/${experienceId}`)
       .set('Authorization', `Bearer ${token}`)
       .send({
         title: 'Updated Title',
@@ -68,16 +68,16 @@ describe('Experience routes', () => {
     expect(res.body.title).toBe('Updated Title');
   });
 
-  it('DELETE /api/experience/:id → deletes experience (auth required)', async () => {
+  it('DELETE /api/experiences/:id → deletes experience (auth required)', async () => {
     const res = await request(app)
-      .delete(`/api/experience/${experienceId}`)
+      .delete(`/api/experiences/${experienceId}`)
       .set('Authorization', `Bearer ${token}`);
 
     expect(res.status).toBe(204);
   });
 
-  it('POST /api/experience → fails without auth', async () => {
-    const res = await request(app).post('/api/experience').send({
+  it('POST /api/experiences → fails without auth', async () => {
+    const res = await request(app).post('/api/experiences').send({
       title: 'Test',
       company: 'Company',
       startDate: '2022-01-01',
