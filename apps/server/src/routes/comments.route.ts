@@ -5,6 +5,7 @@ import {
   updateComment,
 } from '@/controllers/comments.controller';
 import { validateBody, validateParams } from '@/middleware/validate.middleware';
+import { asyncHandler } from '@/utils/async-handlers';
 import {
   createCommentSchema,
   idParamSchema,
@@ -18,20 +19,20 @@ router.post(
   '/',
   authenticateToken,
   validateBody(createCommentSchema),
-  createComment
+  asyncHandler(createComment)
 );
 router.put(
   '/:id',
   authenticateToken,
   validateParams(idParamSchema),
   validateBody(updateCommentSchema),
-  updateComment
+  asyncHandler(updateComment)
 );
 router.delete(
   '/:id',
   authenticateToken,
   validateParams(idParamSchema),
-  deleteComment
+  asyncHandler(deleteComment)
 );
 
 export default router;
