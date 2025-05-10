@@ -89,3 +89,11 @@ model Like {
   project      Project?    @relation(fields: [projectId], references: [id])
   projectId    String?
 }
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+}
