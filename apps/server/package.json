@@ -13,8 +13,9 @@
     "lint-fix": "eslint --fix .",
     "format": "prettier --write .",
     "prepare": "husky",
-    "reset": "prisma migrate reset",
-    "generate": "prisma generate"
+    "db:r": "prisma migrate reset",
+    "db:g": "prisma generate",
+    "db:p": "prisma db push"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,7 @@
     "express-rate-limit": "^7.5.0",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^7.0.3",
     "passport": "^0.7.0",
     "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^2.0.0",
@@ -41,6 +43,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.1",
     "@types/jsonwebtoken": "^9.0.9",
+    "@types/nodemailer": "^6.4.17",
     "@types/passport": "^1.0.17",
     "@types/passport-github2": "^1.2.9",
     "@types/passport-google-oauth20": "^2.0.16",
