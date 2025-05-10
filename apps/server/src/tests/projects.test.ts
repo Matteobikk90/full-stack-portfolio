@@ -35,7 +35,7 @@ describe('Project routes', () => {
         technologies: ['React', 'Prisma'],
         isFeatured: true,
       });
-    console.log('Reshggfhvjbknmghfvjbknmfghvbjnkponse:', res.body);
+
     expect(res.status).toBe(201);
     expect(res.body).toHaveProperty('id');
     projectId = res.body.id;
