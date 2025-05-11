@@ -24,15 +24,16 @@ enum Provider {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  name      String
-  email     String    @unique
-  provider  Provider
-  role      Role      @default(user)
-  avatarUrl String?
-  createdAt DateTime  @default(now())
-  Comment   Comment[]
-  Like      Like[]
+  id          String        @id @default(cuid())
+  name        String
+  email       String        @unique
+  provider    Provider
+  role        Role          @default(user)
+  avatarUrl   String?
+  createdAt   DateTime      @default(now())
+  Comment     Comment[]
+  Like        Like[]
+  ChatMessage ChatMessage[]
 }
 
 model Experience {
@@ -95,5 +96,13 @@ model ContactMessage {
   name      String
   email     String
   message   String
+  createdAt DateTime @default(now())
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  content   String
+  senderId  String
+  sender    User     @relation(fields: [senderId], references: [id])
   createdAt DateTime @default(now())
 }

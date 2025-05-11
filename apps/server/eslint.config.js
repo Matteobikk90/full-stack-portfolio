@@ -29,8 +29,6 @@ export default [
       'prettier/prettier': 'error',
       'no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
-      'simple-import-sort/imports': 'error',
-      'simple-import-sort/exports': 'error',
       'unused-imports/no-unused-vars': [
         'warn',
         {
