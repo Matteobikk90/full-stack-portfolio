@@ -1,6 +1,4 @@
 import App from '@/App';
-import User from '@/components/User';
-import api from '@/config/axios';
 import {
   createRootRoute,
   createRoute,
@@ -20,17 +18,7 @@ const indexRoute = createRoute({
   component: () => <App />,
 });
 
-const userRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/user',
-  component: () => <User />,
-  loader: async () => {
-    const response = await api.get('/api/user');
-    return { name: response.data.name };
-  },
-});
-
-const routeTree = rootRoute.addChildren([indexRoute, userRoute]);
+const routeTree = rootRoute.addChildren([indexRoute]);
 
 export const router = createRouter({ routeTree });
 

@@ -1,16 +1,27 @@
 @import 'tw-animate-css';
 
-/* ---------- Tailwind layers ---------- */
-@import 'tailwindcss/preflight';
-@tailwind utilities;
+/* ✅ Tailwind v4 only includes utilities */
+@import 'tailwindcss';
 
-/* ---------- Custom dark variant ---------- */
-@custom-variant dark (&:is(.dark *)); /* solo se ti serve per plugin esterni */
+/* Optional: custom plugin variants */
+@custom-variant dark (&:is(.dark *));
 
-/* ---------- Base layout styles ---------- */
-html,
-body {
-  @apply bg-background text-foreground transition-colors duration-300;
+/* ✅ Your theme overrides */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  /* ... more tokens */
+}
+
+/* ✅ Tailwind base overrides */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html,
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+  }
 }
 
 /* ---------- Radius system ---------- */
@@ -144,15 +155,4 @@ body {
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
-}
-
-/* ---------- Base Tailwind overrides ---------- */
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
 }
