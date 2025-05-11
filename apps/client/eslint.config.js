@@ -11,7 +11,6 @@ import globals from 'globals';
 export default [
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
-
     languageOptions: {
       ecmaVersion: 2020,
       sourceType: 'module',
@@ -31,12 +30,10 @@ export default [
       'unused-imports': unusedImportsPlugin,
     },
     rules: {
-      // Use @eslint/js recommended rules
       ...js.configs.recommended.rules,
       ...typescriptEslintPlugin.configs.recommended.rules,
       ...reactHooksPlugin.configs.recommended.rules,
       ...storybookPlugin.configs.recommended.rules,
-
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
