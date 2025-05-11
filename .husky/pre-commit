@@ -1,0 +1,5 @@
+cd apps/server
+pnpm lint-staged || exit 1
+
+cd ../client
+pnpm lint-staged
