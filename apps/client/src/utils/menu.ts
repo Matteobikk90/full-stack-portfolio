@@ -1,7 +1,7 @@
 import { Briefcase, Code, Contact, Home, Info } from 'lucide-react';
 
 export const menuLinks = [
-  { path: '/', label: 'Home', icon: Home },
+  { path: '/', label: '', icon: Home },
   { path: '/projects', label: 'Projects', icon: Code },
   { path: '/experiences', label: 'Experiences', icon: Briefcase },
   { path: '/about', label: 'About', icon: Info },

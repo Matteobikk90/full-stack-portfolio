@@ -1,5 +1,8 @@
-cd apps/server
-pnpm lint-staged || exit 1
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
-cd ../client
-pnpm lint-staged
+echo "→ Linting client"
+cd apps/client && pnpm lint-staged 
+
+echo "→ Linting server"
+cd ../server && pnpm lint-staged 
