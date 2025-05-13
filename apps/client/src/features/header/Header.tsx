@@ -1,7 +1,7 @@
 import { MenuDesktop, MenuMobile } from '@/components/Menu';
 import { Button } from '@/lib/ui/button';
 import useStore from '@/stores';
-import { Moon, Sun } from 'lucide-react';
+import { MessageCircle, Moon, Sun } from 'lucide-react';
 import { useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -22,7 +22,7 @@ export const Header = () => {
     <header className="flex items-center justify-between p-4 w-full backdrop-blur border-b shadow-xs relative z-50">
       <MenuDesktop />
       <MenuMobile />
-      <div className="flex items-center gap-2 z-10">
+      <div className="flex items-center gap-4">
         <Button variant="outline" size="icon" onClick={toggle}>
           {mode === 'dark' ? (
             <Sun className="h-4 w-4" />
@@ -30,8 +30,12 @@ export const Header = () => {
             <Moon className="h-4 w-4" />
           )}
         </Button>
-        <Button variant="ghost" className="text-sm font-medium">
-          Login
+        <Button
+          variant="outline"
+          size="icon"
+          // aria-label={isLoggedIn ? 'Open chat' : 'Login to chat'}
+        >
+          <MessageCircle className="h-4 w-4" />
         </Button>
       </div>
     </header>
