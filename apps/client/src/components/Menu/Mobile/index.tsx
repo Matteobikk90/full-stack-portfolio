@@ -10,21 +10,21 @@ export const MenuMobile = () => {
 
   return (
     <>
-      <nav
-        className={cn(
-          'md:hidden fixed inset-0 h-[calc(100vh_-_4.4rem)] top-[4.4rem] bg-background justify-evenly p-6 flex flex-col gap-4 transform transition-transform duration-300',
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        )}
-      >
-        {menuLinks.map(({ path, label, icon: Icon }) => (
+      <nav className="md:hidden fixed inset-0 top-[4.4rem] h-[calc(100vh_-_4.4rem)] bg-background/80 backdrop-blur-lg z-40 p-6 flex flex-col items-center justify-evenly gap-6">
+        {menuLinks.map(({ path, label, icon: Icon }, index) => (
           <Link
-            key={path}
             to={path}
             onClick={() => setIsOpen(false)}
             className={cn(
-              'flex-1 flex items-center gap-2',
+              'flex flex-1 items-center gap-2 w-full -translate-x-[100vw] ease-in-out',
+              isOpen && 'translate-x-0',
               buttonVariants({ variant: 'ghost' })
             )}
+            style={{
+              transitionDelay: isOpen
+                ? `${index * 200}ms`
+                : `${(menuLinks.length - 1 - index) * 200}ms`,
+            }}
             activeProps={{
               className: 'bg-accent text-accent-foreground',
             }}
@@ -37,10 +37,11 @@ export const MenuMobile = () => {
           </Link>
         ))}
       </nav>
+
       <Button
         variant="outline"
         size="icon"
-        className="md:hidden"
+        className="md:hidden z-50"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Toggle menu"
       >
