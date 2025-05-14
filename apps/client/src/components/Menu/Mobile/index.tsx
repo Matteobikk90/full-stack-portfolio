@@ -1,6 +1,6 @@
-import { Button, buttonVariants } from '@/lib/ui/button';
+import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
-import { menuLinks } from '@/utils/menu';
+import { hoverStyles, menuLinks } from '@/utils/menu';
 import { Link } from '@tanstack/react-router';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
@@ -13,12 +13,13 @@ export const MenuMobile = () => {
       <nav className="md:hidden fixed inset-0 top-[4.4rem] h-[calc(100vh_-_4.4rem)] bg-background/80 backdrop-blur-lg z-40 p-6 flex flex-col items-center justify-evenly gap-6">
         {menuLinks.map(({ path, label, icon: Icon }, index) => (
           <Link
+            key={path}
             to={path}
             onClick={() => setIsOpen(false)}
             className={cn(
-              'flex flex-1 items-center gap-2 w-full -translate-x-[100vw] ease-in-out',
+              'relative group flex flex-1 items-center justify-center gap-2 w-full overflow-hidden transition-transform duration-300 ease-in-out -translate-x-[100vw]',
               isOpen && 'translate-x-0',
-              buttonVariants({ variant: 'ghost' })
+              hoverStyles[path]
             )}
             style={{
               transitionDelay: isOpen
@@ -26,14 +27,22 @@ export const MenuMobile = () => {
                 : `${(menuLinks.length - 1 - index) * 200}ms`,
             }}
             activeProps={{
-              className: 'bg-accent text-accent-foreground',
-            }}
-            inactiveProps={{
-              className: 'bg-transparent hover:bg-muted',
+              className: 'text-accent font-semibold',
             }}
           >
-            <Icon className="h-4 w-4" />
-            {label}
+            <span
+              className={cn(
+                'absolute inset-0 left-[-100%] w-full h-full z-0 transition-all duration-300 group-hover:left-0',
+                'bg-[var(--section-projects)]'
+              )}
+              style={{
+                background: `var(--section${path.replace('/', '-')})`,
+              }}
+            />
+            <span className="relative z-10 flex items-center gap-2">
+              <Icon className="h-4 w-4 group-hover:text-current" />
+              {label}
+            </span>
           </Link>
         ))}
       </nav>
