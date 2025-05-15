@@ -1,4 +1,4 @@
-import { MenuDesktop } from '@/components/Menu/Desktop';
-import { MenuMobile } from '@/components/Menu/Mobile';
+import { MenuDesktop } from '@/components/menu/desktop';
+import { MenuMobile } from '@/components/menu/mobile';
 
 export { MenuDesktop, MenuMobile };
