@@ -11,7 +11,7 @@ export const menuLinks = [
 export const hoverStyles: Record<string, string> = {
   '/projects':
     'md:focus:text-[var(--section-projects)] md:hover:text-[var(--section-projects)] before:bg-[var(--section-projects)]',
-  '/experiences':
+  '/experience':
     'md:focus:text-[var(--section-experiences)] md:hover:text-[var(--section-experiences)] before:bg-[var(--section-experiences)]',
   '/about':
     'md:focus:text-[var(--section-about)] md:hover:text-[var(--section-about)] before:bg-[var(--section-about)]',

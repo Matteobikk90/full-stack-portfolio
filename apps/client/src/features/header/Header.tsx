@@ -19,7 +19,7 @@ export const Header = () => {
   }, [mode]);
 
   return (
-    <header className="flex items-center justify-between p-4 w-full backdrop-blur border-b shadow-xs relative z-50">
+    <header className="fixed flex items-center justify-between p-4 w-full backdrop-blur shadow-elevation z-10">
       <MenuDesktop />
       <MenuMobile />
       <div className="flex items-center gap-4">
