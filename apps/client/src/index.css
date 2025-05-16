@@ -15,6 +15,10 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-projects: var(--section-projects);
+  --color-experience: var(--section-experience);
+  --color-about: var(--section-about);
+  --color-contact: var(--section-contact);
 
   --shadow-elevation: var(--shadow-elevation);
 }
@@ -49,6 +53,10 @@
 @layer base {
   html,
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground transition-colors duration-300 font-ibm;
+  }
+
+  h1 {
+    @apply pt-24 text-3xl sm:text-5xl md:text-7xl text-projects text-center;
   }
 }

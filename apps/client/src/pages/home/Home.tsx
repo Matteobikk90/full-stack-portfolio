@@ -5,7 +5,7 @@ export const Home = () => {
   return (
     <main className="h-screen flex flex-col items-center justify-center gap-5">
       <ParticlesBackground />
-      <h1 className="text-3xl sm:text-5xl md:text-7xl text-foreground">
+      <h1 className="p-0 text-foreground">
         Hello, I’m{' '}
         <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
           Matteo
