@@ -10,7 +10,14 @@ export const MenuMobile = () => {
 
   return (
     <>
-      <nav className="md:hidden fixed inset-0 top-[4.4rem] h-[calc(100vh_-_4.4rem)] bg-background/80 backdrop-blur-lg z-40 p-6 flex flex-col items-center justify-evenly gap-6">
+      <nav
+        className={cn(
+          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100vh_-_4.4rem)] z-10 p-6 flex flex-col items-center justify-evenly gap-6',
+          isOpen
+            ? 'opacity-100 bg-background'
+            : 'opacity-0 bg-transparent delay-[800ms]'
+        )}
+      >
         {menuLinks.map(({ path, label, icon: Icon }, index) => (
           <Link
             key={path}
@@ -31,10 +38,7 @@ export const MenuMobile = () => {
             }}
           >
             <span
-              className={cn(
-                'absolute inset-0 left-[-100%] w-full h-full z-0 transition-all duration-300 group-hover:left-0',
-                'bg-[var(--section-projects)]'
-              )}
+              className="absolute inset-0 left-[-100%] w-full h-full z-0 transition-all duration-300 group-hover:left-0"
               style={{
                 background: `var(--section${path.replace('/', '-')})`,
               }}

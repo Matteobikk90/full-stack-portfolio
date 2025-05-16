@@ -6,10 +6,11 @@ import { useEffect } from 'react';
 import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
-  const { mode, toggle } = useStore(
+  const { mode, toggle, updateBackground } = useStore(
     useShallow((state) => ({
       mode: state.mode,
       toggle: state.toggle,
+      updateBackground: state.updateBackground,
     }))
   );
 
@@ -18,12 +19,17 @@ export const Header = () => {
     document.documentElement.classList.add(mode);
   }, [mode]);
 
+  const handleToggle = () => {
+    toggle();
+    updateBackground();
+  };
+
   return (
     <header className="fixed flex items-center justify-between p-4 w-full backdrop-blur shadow-elevation z-10">
       <MenuDesktop />
       <MenuMobile />
       <div className="flex items-center gap-4">
-        <Button variant="outline" size="icon" onClick={toggle}>
+        <Button variant="outline" size="icon" onClick={handleToggle}>
           {mode === 'dark' ? (
             <Sun className="h-4 w-4" />
           ) : (
