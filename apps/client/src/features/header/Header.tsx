@@ -1,6 +1,6 @@
 import { MenuDesktop, MenuMobile } from '@/components/menu';
 import { Button } from '@/lib/ui/button';
-import useStore from '@/stores';
+import { useStore } from '@/stores';
 import { MessageCircle, Moon, Sun } from 'lucide-react';
 import { useEffect } from 'react';
 import { useShallow } from 'zustand/shallow';

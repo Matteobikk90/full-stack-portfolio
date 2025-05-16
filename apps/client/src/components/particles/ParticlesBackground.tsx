@@ -1,4 +1,4 @@
-import useStore from '@/stores';
+import { useStore } from '@/stores';
 import { getParticlesOptions } from '@/utils/particles';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';

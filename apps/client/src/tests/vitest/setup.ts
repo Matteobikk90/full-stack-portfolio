@@ -1,6 +1,13 @@
 import '@testing-library/jest-dom';
 import { server } from '@/mocks/server';
-import { afterAll, afterEach, beforeAll } from 'vitest';
+import { useStore } from '@/stores';
+import { afterAll, afterEach, beforeAll, beforeEach } from 'vitest';
+
+beforeEach(() => {
+  useStore.setState({
+    mode: 'light',
+  });
+});
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
