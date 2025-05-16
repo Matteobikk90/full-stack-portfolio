@@ -10,14 +10,21 @@ export const MenuMobile = () => {
 
   return (
     <>
-      <nav className="md:hidden fixed inset-0 top-[4.4rem] h-[calc(100vh_-_4.4rem)] bg-background/80 backdrop-blur-lg z-40 p-6 flex flex-col items-center justify-evenly gap-6">
+      <nav
+        className={cn(
+          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100vh_-_4.4rem)] z-10 p-6 flex flex-col items-center justify-evenly gap-6',
+          isOpen
+            ? 'opacity-100 bg-background'
+            : 'opacity-0 bg-transparent delay-[800ms]'
+        )}
+      >
         {menuLinks.map(({ path, label, icon: Icon }, index) => (
           <Link
             key={path}
             to={path}
             onClick={() => setIsOpen(false)}
             className={cn(
-              'relative group flex flex-1 items-center justify-center gap-2 w-full overflow-hidden transition-transform duration-300 ease-in-out -translate-x-[100vw]',
+              'relative group flex flex-1 items-center justify-center gap-2 w-full overflow-hidden transition-transform duration-300 ease-in-out -translate-x-[100vw] outline-0',
               isOpen && 'translate-x-0',
               hoverStyles[path]
             )}
@@ -27,20 +34,17 @@ export const MenuMobile = () => {
                 : `${(menuLinks.length - 1 - index) * 200}ms`,
             }}
             activeProps={{
-              className: 'text-accent font-semibold',
+              className: 'font-semibold',
             }}
           >
             <span
-              className={cn(
-                'absolute inset-0 left-[-100%] w-full h-full z-0 transition-all duration-300 group-hover:left-0',
-                'bg-[var(--section-projects)]'
-              )}
+              className="absolute inset-0 left-[-100%] w-full h-full z-0 transition-all duration-300 group-hover:left-0 group-focus:left-0 group-data-[status=active]:left-0"
               style={{
                 background: `var(--section${path.replace('/', '-')})`,
               }}
             />
             <span className="relative z-10 flex items-center gap-2">
-              <Icon className="h-4 w-4 group-hover:text-current" />
+              <Icon className="h-4 w-4" />
               {label}
             </span>
           </Link>

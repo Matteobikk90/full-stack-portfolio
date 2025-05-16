@@ -1,15 +1,16 @@
-import { MenuDesktop, MenuMobile } from '@/components/Menu';
+import { MenuDesktop, MenuMobile } from '@/components/menu';
 import { Button } from '@/lib/ui/button';
-import useStore from '@/stores';
+import { useStore } from '@/stores';
 import { MessageCircle, Moon, Sun } from 'lucide-react';
 import { useEffect } from 'react';
-import { useShallow } from 'zustand/react/shallow';
+import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
-  const { mode, toggle } = useStore(
+  const { mode, toggle, updateBackground } = useStore(
     useShallow((state) => ({
       mode: state.mode,
       toggle: state.toggle,
+      updateBackground: state.updateBackground,
     }))
   );
 
@@ -18,12 +19,22 @@ export const Header = () => {
     document.documentElement.classList.add(mode);
   }, [mode]);
 
+  const handleToggle = () => {
+    toggle();
+    updateBackground();
+  };
+
   return (
-    <header className="flex items-center justify-between p-4 w-full backdrop-blur border-b shadow-xs relative z-50">
+    <header className="fixed flex items-center justify-between p-4 w-full backdrop-blur shadow-elevation z-10">
       <MenuDesktop />
       <MenuMobile />
       <div className="flex items-center gap-4">
-        <Button variant="outline" size="icon" onClick={toggle}>
+        <Button
+          variant="outline"
+          data-testid="theme-toggle"
+          size="icon"
+          onClick={handleToggle}
+        >
           {mode === 'dark' ? (
             <Sun className="h-4 w-4" />
           ) : (
