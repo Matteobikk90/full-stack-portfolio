@@ -6,7 +6,7 @@ import { persist } from 'zustand/middleware';
 const createThemeSlice = persist(
   (set) => ({
     mode: 'light' as 'light' | 'dark',
-    background: getCSSVariable('--foreground'),
+    background: getCSSVariable('--background'),
     toggle: () =>
       set((state) => ({
         mode: state.mode === 'light' ? 'dark' : 'light',

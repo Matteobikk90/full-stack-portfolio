@@ -20,3 +20,4 @@ playwright-report/
 # OS
 .DS_Store
 Thumbs.db
+*storybook.log
