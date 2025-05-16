@@ -29,7 +29,12 @@ export const Header = () => {
       <MenuDesktop />
       <MenuMobile />
       <div className="flex items-center gap-4">
-        <Button variant="outline" size="icon" onClick={handleToggle}>
+        <Button
+          variant="outline"
+          data-testid="theme-toggle"
+          size="icon"
+          onClick={handleToggle}
+        >
           {mode === 'dark' ? (
             <Sun className="h-4 w-4" />
           ) : (
