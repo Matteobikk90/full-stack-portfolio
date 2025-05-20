@@ -15,13 +15,27 @@ import { Route as AboutImport } from './routes/about';
 import { Route as ContactImport } from './routes/contact';
 import { Route as ExperienceImport } from './routes/experience';
 import { Route as IndexImport } from './routes/index';
+import { Route as PrivacyPolicyImport } from './routes/privacy-policy';
 import { Route as ProjectsImport } from './routes/projects';
+import { Route as TermsOfServiceImport } from './routes/terms-of-service';
 
 // Create/Update Routes
+
+const TermsOfServiceRoute = TermsOfServiceImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
+  getParentRoute: () => rootRoute,
+} as any);
 
 const ProjectsRoute = ProjectsImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRoute,
+} as any);
+
+const PrivacyPolicyRoute = PrivacyPolicyImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -81,11 +95,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExperienceImport;
       parentRoute: typeof rootRoute;
     };
+    '/privacy-policy': {
+      id: '/privacy-policy';
+      path: '/privacy-policy';
+      fullPath: '/privacy-policy';
+      preLoaderRoute: typeof PrivacyPolicyImport;
+      parentRoute: typeof rootRoute;
+    };
     '/projects': {
       id: '/projects';
       path: '/projects';
       fullPath: '/projects';
       preLoaderRoute: typeof ProjectsImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/terms-of-service': {
+      id: '/terms-of-service';
+      path: '/terms-of-service';
+      fullPath: '/terms-of-service';
+      preLoaderRoute: typeof TermsOfServiceImport;
       parentRoute: typeof rootRoute;
     };
   }
@@ -98,7 +126,9 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute;
   '/contact': typeof ContactRoute;
   '/experience': typeof ExperienceRoute;
+  '/privacy-policy': typeof PrivacyPolicyRoute;
   '/projects': typeof ProjectsRoute;
+  '/terms-of-service': typeof TermsOfServiceRoute;
 }
 
 export interface FileRoutesByTo {
@@ -106,7 +136,9 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute;
   '/contact': typeof ContactRoute;
   '/experience': typeof ExperienceRoute;
+  '/privacy-policy': typeof PrivacyPolicyRoute;
   '/projects': typeof ProjectsRoute;
+  '/terms-of-service': typeof TermsOfServiceRoute;
 }
 
 export interface FileRoutesById {
@@ -115,15 +147,39 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute;
   '/contact': typeof ContactRoute;
   '/experience': typeof ExperienceRoute;
+  '/privacy-policy': typeof PrivacyPolicyRoute;
   '/projects': typeof ProjectsRoute;
+  '/terms-of-service': typeof TermsOfServiceRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/about' | '/contact' | '/experience' | '/projects';
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/experience'
+    | '/privacy-policy'
+    | '/projects'
+    | '/terms-of-service';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/about' | '/contact' | '/experience' | '/projects';
-  id: '__root__' | '/' | '/about' | '/contact' | '/experience' | '/projects';
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/experience'
+    | '/privacy-policy'
+    | '/projects'
+    | '/terms-of-service';
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/experience'
+    | '/privacy-policy'
+    | '/projects'
+    | '/terms-of-service';
   fileRoutesById: FileRoutesById;
 }
 
@@ -132,7 +188,9 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute;
   ContactRoute: typeof ContactRoute;
   ExperienceRoute: typeof ExperienceRoute;
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute;
   ProjectsRoute: typeof ProjectsRoute;
+  TermsOfServiceRoute: typeof TermsOfServiceRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -140,7 +198,9 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   ExperienceRoute: ExperienceRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProjectsRoute: ProjectsRoute,
+  TermsOfServiceRoute: TermsOfServiceRoute,
 };
 
 export const routeTree = rootRoute
@@ -157,7 +217,9 @@ export const routeTree = rootRoute
         "/about",
         "/contact",
         "/experience",
-        "/projects"
+        "/privacy-policy",
+        "/projects",
+        "/terms-of-service"
       ]
     },
     "/": {
@@ -172,8 +234,14 @@ export const routeTree = rootRoute
     "/experience": {
       "filePath": "experience.tsx"
     },
+    "/privacy-policy": {
+      "filePath": "privacy-policy.tsx"
+    },
     "/projects": {
       "filePath": "projects.tsx"
+    },
+    "/terms-of-service": {
+      "filePath": "terms-of-service.tsx"
     }
   }
 }

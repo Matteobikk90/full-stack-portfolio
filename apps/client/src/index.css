@@ -21,6 +21,8 @@
   --color-contact: var(--section-contact);
   --color-error: var(--error);
   --color-success: var(--success);
+
+  --shadow-elevation: var(--shadow-elevation);
 }
 
 /* ---------- Light theme ---------- */
@@ -61,6 +63,6 @@
   }
 
   h1 {
-    @apply pt-24 text-3xl sm:text-5xl md:text-7xl text-projects text-center;
+    @apply pt-24 text-3xl sm:text-5xl md:text-7xl text-foreground text-center;
   }
 }

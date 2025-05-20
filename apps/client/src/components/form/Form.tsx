@@ -1,5 +1,6 @@
 import { Button } from '@/lib/ui/button';
 import { Input } from '@/lib/ui/input';
+import { Label } from '@/lib/ui/label';
 import { Textarea } from '@/lib/ui/textarea';
 import { cn } from '@/lib/utils';
 import {
@@ -8,6 +9,7 @@ import {
 } from '@/schemas/contact-form.schema';
 import { asyncDebounceMs, getValidationClass } from '@/utils/form';
 import { useForm } from '@tanstack/react-form';
+import { Link } from '@tanstack/react-router';
 
 export const ContactForm = () => {
   const form = useForm({
@@ -28,9 +30,9 @@ export const ContactForm = () => {
         e.preventDefault();
         form.handleSubmit();
       }}
-      className="space-y-6 max-w-3xl m-auto"
+      className="space-y-6"
     >
-      <div className="flex gap-6">
+      <div className="grid grid-cols-2 gap-6">
         <form.Field
           name="name"
           validators={{
@@ -38,15 +40,24 @@ export const ContactForm = () => {
           }}
         >
           {({ state, handleChange }) => (
-            <Input
-              placeholder="Your name"
-              value={state.value}
-              onChange={(e) => handleChange(e.target.value)}
-              className={cn(
-                'border-0 border-b shadow-none rounded-none',
-                getValidationClass(state)
+            <div className="flex flex-col gap-1">
+              <Label htmlFor="email">Name</Label>
+              <Input
+                id="name"
+                placeholder="Your name"
+                value={state.value}
+                onChange={(e) => handleChange(e.target.value)}
+                className={cn(
+                  'border-0 border-b shadow-none rounded-none',
+                  getValidationClass(state)
+                )}
+              />
+              {state.meta.errors?.[0] && (
+                <p className="text-xs text-error">
+                  {state.meta.errors?.[0].message || ''}
+                </p>
               )}
-            />
+            </div>
           )}
         </form.Field>
         <form.Field
@@ -56,16 +67,25 @@ export const ContactForm = () => {
           }}
         >
           {({ state, handleChange }) => (
-            <Input
-              placeholder="Your email"
-              type="email"
-              value={state.value}
-              onChange={(e) => handleChange(e.target.value)}
-              className={cn(
-                'border-0 border-b shadow-none rounded-none',
-                getValidationClass(state)
+            <div className="flex flex-col gap-1">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                placeholder="Your email"
+                type="email"
+                value={state.value}
+                onChange={(e) => handleChange(e.target.value)}
+                className={cn(
+                  'border-0 border-b shadow-none rounded-none',
+                  getValidationClass(state)
+                )}
+              />
+              {state.meta.errors?.[0] && (
+                <p className="text-xs text-error">
+                  {state.meta.errors?.[0].message || ''}
+                </p>
               )}
-            />
+            </div>
           )}
         </form.Field>
       </div>
@@ -77,15 +97,50 @@ export const ContactForm = () => {
         }}
       >
         {({ state, handleChange }) => (
-          <Textarea
-            placeholder="Your message"
-            value={state.value}
-            onChange={(e) => handleChange(e.target.value)}
-            className={cn(
-              'border-0 border-b shadow-none rounded-none',
-              getValidationClass(state)
+          <div className="flex flex-col gap-1">
+            <Label htmlFor="Message">Message</Label>
+            <Textarea
+              id="Message"
+              placeholder="Your message"
+              value={state.value}
+              onChange={(e) => handleChange(e.target.value)}
+              className={cn(
+                'border-0 border-b shadow-none rounded-none',
+                getValidationClass(state)
+              )}
+            />
+          </div>
+        )}
+      </form.Field>
+
+      <form.Field name="acceptedTerms">
+        {({ state, handleChange }) => (
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <Input
+                id="acceptedTerms"
+                type="checkbox"
+                checked={state.value}
+                onChange={(e) => handleChange(e.target.checked)}
+                className="h-3"
+              />
+              <Label htmlFor="acceptedTerms">
+                I agree to the
+                <Link to="/privacy-policy" className="underline">
+                  privacy policy
+                </Link>
+                and
+                <Link to="/terms-of-service" className="underline">
+                  terms of service
+                </Link>
+              </Label>
+            </div>
+            {state.meta.errors?.[0] && (
+              <p className="text-xs text-error">
+                {state.meta.errors?.[0].message || ''}
+              </p>
             )}
-          />
+          </div>
         )}
       </form.Field>
 
