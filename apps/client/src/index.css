@@ -19,6 +19,8 @@
   --color-experience: var(--section-experience);
   --color-about: var(--section-about);
   --color-contact: var(--section-contact);
+  --color-error: var(--error);
+  --color-success: var(--success);
 
   --shadow-elevation: var(--shadow-elevation);
 }
@@ -33,6 +35,8 @@
   --section-experience: rgba(161, 122, 0, 1);
   --section-about: rgba(34, 126, 0, 1);
   --section-contact: rgba(203, 69, 79, 1);
+  --error: rgba(139, 0, 0, 1);
+  --success: rgba(0, 100, 0, 1);
 
   --shadow-elevation: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
@@ -45,6 +49,8 @@
   --section-experience: rgba(221, 183, 73);
   --section-about: rgba(131, 214, 112, 1);
   --section-contact: rgba(248, 110, 116, 1);
+  --error: rgba(255, 82, 144);
+  --success: rgba(205, 255, 0, 1);
 
   --shadow-elevation: 0 1px 3px rgba(255, 255, 255, 0.5);
 }
@@ -57,6 +63,11 @@
   }
 
   h1 {
-    @apply pt-24 text-3xl sm:text-5xl md:text-7xl text-projects text-center;
+    @apply pt-24 text-3xl sm:text-5xl md:text-7xl text-foreground text-center;
+  }
+
+  input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px transparent inset !important;
+    -webkit-text-fill-color: theme('colors.foreground') !important;
   }
 }

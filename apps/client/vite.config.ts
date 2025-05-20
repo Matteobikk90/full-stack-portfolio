@@ -27,4 +27,13 @@ export default defineConfig({
     include: ['./src/tests/vitest/*.test.{ts,tsx}'],
     exclude: ['node_modules', 'dist'],
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '/api'),
+      },
+    },
+  },
 });

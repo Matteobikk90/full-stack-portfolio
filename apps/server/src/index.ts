@@ -1,7 +1,7 @@
 import { initSentry } from '@/config/sentry';
 import { httpServer, io } from '@/config/socket';
 import { JWT_SECRET, PORT } from '@/utils/constants';
-import { prisma } from '@/utils/prisma';
+import prisma from '@/utils/prisma';
 import jwt from 'jsonwebtoken';
 
 initSentry();

@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only --require tsconfig-paths/register src/index.ts",
     "build": "tsc",
@@ -64,6 +63,7 @@
     "prisma": "^6.7.0",
     "socket.io-client": "^4.8.1",
     "supertest": "^7.1.0",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.19.4",
