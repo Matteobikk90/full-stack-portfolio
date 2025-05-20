@@ -10,9 +10,9 @@ export const sendContactEmail = async ({
   message: string;
 }) => {
   await transporter.sendMail({
-    from: `"${name}" <${email}>`,
+    from: `<${email}>`,
     to: process.env.CONTACT_EMAIL,
-    subject: 'Portfolio - New Message',
+    subject: `Matteo Soresini Portfolio - New Message from ${name}`,
     text: message,
   });
 };
