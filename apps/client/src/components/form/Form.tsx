@@ -7,11 +7,18 @@ import {
   currentSchema,
   currentSchemaDefault,
 } from '@/schemas/contact-form.schema';
+import { toastDuration } from '@/utils/constants';
 import { asyncDebounceMs, getValidationClass } from '@/utils/form';
 import { useForm } from '@tanstack/react-form';
 import { Link } from '@tanstack/react-router';
+import axios, { AxiosError } from 'axios';
+import { Loader } from 'lucide-react';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 export const ContactForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const form = useForm({
     defaultValues: currentSchemaDefault,
     validators: {
@@ -19,8 +26,31 @@ export const ContactForm = () => {
     },
     asyncDebounceMs,
     onSubmit: async ({ value }) => {
-      const parsed = currentSchema.parse(value);
-      console.log(parsed);
+      setIsSubmitting(true);
+      const { name, email, message } = value;
+
+      try {
+        const res = await axios.post('/api/contact', {
+          name,
+          email,
+          message,
+        });
+
+        form.reset();
+        toast.success(res.data.message, {
+          description: 'I’ll get back to you soon.',
+          duration: toastDuration,
+        });
+      } catch (error: unknown) {
+        const axiosError = error as AxiosError<{ message?: string }>;
+
+        toast.error(axiosError.response?.data?.message, {
+          description: 'If the issue persists, contact me directly.',
+          duration: toastDuration,
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
     },
   });
 
@@ -156,8 +186,15 @@ export const ContactForm = () => {
           const canSubmit = allTouched && allValid;
 
           return (
-            <Button type="submit" disabled={!canSubmit}>
-              Send message
+            <Button type="submit" disabled={!canSubmit || isSubmitting}>
+              {isSubmitting ? (
+                <span className="flex items-center gap-2">
+                  <Loader className="h-4 w-4 animate-spin" />
+                  Sending...
+                </span>
+              ) : (
+                'Send message'
+              )}
             </Button>
           );
         }}
