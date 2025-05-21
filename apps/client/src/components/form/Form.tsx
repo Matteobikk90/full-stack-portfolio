@@ -9,10 +9,10 @@ import {
 } from '@/schemas/contact-form.schema';
 import { toastDuration } from '@/utils/constants';
 import { asyncDebounceMs, getValidationClass } from '@/utils/form';
+import { SpinnerIcon } from '@phosphor-icons/react';
 import { useForm } from '@tanstack/react-form';
 import { Link } from '@tanstack/react-router';
 import axios, { AxiosError } from 'axios';
-import { Loader } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -189,7 +189,9 @@ export const ContactForm = () => {
             <Button type="submit" disabled={!canSubmit || isSubmitting}>
               {isSubmitting ? (
                 <span className="flex items-center gap-2">
-                  <Loader className="h-4 w-4 animate-spin" />
+                  <span className="animate-spin">
+                    <SpinnerIcon size={32} weight="duotone" />
+                  </span>
                   Sending...
                 </span>
               ) : (

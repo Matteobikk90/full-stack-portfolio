@@ -23,6 +23,31 @@
   --color-success: var(--success);
 
   --shadow-elevation: var(--shadow-elevation);
+
+  --animate-rotate-in: rotate-in 1.5s ease-out forwards;
+  --animate-fade-up: fade-up 0.5s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes rotate-in {
+    0% {
+      transform: translateX(-100vw) rotate(720deg);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0) rotate(0deg);
+      opacity: 1;
+    }
+  }
 }
 
 /* ---------- Light theme ---------- */
@@ -63,7 +88,23 @@
   }
 
   h1 {
-    @apply pt-24 text-3xl sm:text-5xl md:text-7xl text-foreground text-center;
+    @apply lg:pt-8 text-3xl sm:text-5xl md:text-7xl text-foreground text-center;
+  }
+
+  h2 {
+    @apply text-xl sm:text-3xl md:text-4xl text-foreground;
+  }
+
+  h3 {
+    @apply text-sm md:text-lg sm:text-2xl text-foreground;
+  }
+
+  p {
+    @apply text-sm md:text-lg text-foreground;
+  }
+
+  main {
+    @apply relative h-[calc(100dvh_-_4.3rem)] p-4 mt-[4.3rem];
   }
 
   input:-webkit-autofill {

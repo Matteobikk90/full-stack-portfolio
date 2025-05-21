@@ -3,7 +3,7 @@ import TypedText from '@/components/typed-text';
 
 export const Home = () => {
   return (
-    <main className="h-screen flex flex-col items-center justify-center gap-5">
+    <main className="flex flex-col items-center justify-center gap-5">
       <ParticlesBackground />
       <h1 className="p-0 text-foreground">
         Hello, I’m{' '}
@@ -12,10 +12,10 @@ export const Home = () => {
         </span>{' '}
         👋
       </h1>
-      <h2 className="text-xl sm:text-3xl md:text-4xl text-foreground">
+      <h2>
         I build elegant <strong>full-stack</strong> apps.
       </h2>
-      <div className="text-lg sm:text-xxl text-muted-foreground">
+      <div className="text-lg sm:text-xxl text-foreground">
         <TypedText
           text={[
             'React, TypeScript, Node.js, Prisma.',

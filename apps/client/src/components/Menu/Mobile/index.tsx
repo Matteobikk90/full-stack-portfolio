@@ -1,8 +1,8 @@
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 import { hoverStyles, menuLinks } from '@/utils/menu';
+import { DotsThreeOutlineVerticalIcon, XIcon } from '@phosphor-icons/react';
 import { Link } from '@tanstack/react-router';
-import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 export const MenuMobile = () => {
@@ -12,7 +12,7 @@ export const MenuMobile = () => {
     <>
       <nav
         className={cn(
-          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100vh_-_4.4rem)] z-10 p-6 flex flex-col items-center justify-evenly gap-6',
+          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100dvh_-_4.4rem)] z-10 p-6 flex flex-col items-center justify-evenly gap-6',
           isOpen
             ? 'opacity-100 bg-background'
             : 'opacity-0 bg-transparent delay-[800ms]'
@@ -44,7 +44,7 @@ export const MenuMobile = () => {
               }}
             />
             <span className="relative z-10 flex items-center gap-2">
-              <Icon className="h-4 w-4" />
+              <Icon size={16} weight="duotone" />
               {label}
             </span>
           </Link>
@@ -54,11 +54,15 @@ export const MenuMobile = () => {
       <Button
         variant="outline"
         size="icon"
-        className="md:hidden z-50"
+        className="md:hidden"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Toggle menu"
       >
-        {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        {isOpen ? (
+          <XIcon size={20} />
+        ) : (
+          <DotsThreeOutlineVerticalIcon size={20} weight="duotone" />
+        )}
       </Button>
     </>
   );

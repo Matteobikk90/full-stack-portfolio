@@ -44,7 +44,7 @@ export const TermsOfService = () => {
         always be available on this page.
       </p>
 
-      <p className="text-sm text-muted-foreground">
+      <p className="text-sm">
         Effective Date:{' '}
         {new Date().toLocaleDateString('en-US', {
           year: 'numeric',
