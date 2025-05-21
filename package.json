@@ -8,7 +8,7 @@
     "prepare": "husky"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matteo Soresini",
   "license": "ISC",
   "packageManager": "pnpm@10.6.5",
   "devDependencies": {
