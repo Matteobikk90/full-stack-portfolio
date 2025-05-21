@@ -43,7 +43,7 @@ export const PrivacyPolicy = () => {
         contact form on this website.
       </p>
 
-      <p className="text-sm text-muted-foreground">
+      <p className="text-sm">
         Effective Date:{' '}
         {new Date().toLocaleDateString('en-US', {
           year: 'numeric',

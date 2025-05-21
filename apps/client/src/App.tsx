@@ -16,9 +16,9 @@ export default function App() {
           classNames: {
             toast: 'rounded-xl border border-muted shadow-lg bg-background',
             title: 'font-semibold text-foreground',
-            description: 'text-muted-foreground text-sm',
+            description: 'text-foreground text-sm',
             actionButton: 'bg-primary text-white',
-            cancelButton: 'text-muted-foreground',
+            cancelButton: 'text-foreground',
           },
         }}
         expand

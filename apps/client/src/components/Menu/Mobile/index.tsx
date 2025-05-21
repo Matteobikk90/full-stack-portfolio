@@ -12,7 +12,7 @@ export const MenuMobile = () => {
     <>
       <nav
         className={cn(
-          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100vh_-_4.4rem)] z-10 p-6 flex flex-col items-center justify-evenly gap-6',
+          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100dvh_-_4.4rem)] z-10 p-6 flex flex-col items-center justify-evenly gap-6',
           isOpen
             ? 'opacity-100 bg-background'
             : 'opacity-0 bg-transparent delay-[800ms]'
@@ -54,7 +54,7 @@ export const MenuMobile = () => {
       <Button
         variant="outline"
         size="icon"
-        className="md:hidden z-50"
+        className="md:hidden"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Toggle menu"
       >

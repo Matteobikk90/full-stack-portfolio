@@ -88,7 +88,23 @@
   }
 
   h1 {
-    @apply pt-24 text-3xl sm:text-5xl md:text-7xl text-foreground text-center;
+    @apply lg:pt-8 text-3xl sm:text-5xl md:text-7xl text-foreground text-center;
+  }
+
+  h2 {
+    @apply text-xl sm:text-3xl md:text-4xl text-foreground;
+  }
+
+  h3 {
+    @apply text-sm md:text-lg sm:text-2xl text-foreground;
+  }
+
+  p {
+    @apply text-sm md:text-lg text-foreground;
+  }
+
+  main {
+    @apply relative h-[calc(100dvh_-_4.3rem)] p-4 mt-[4.3rem];
   }
 
   input:-webkit-autofill {

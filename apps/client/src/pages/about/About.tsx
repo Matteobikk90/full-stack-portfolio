@@ -1,22 +1,24 @@
 import profileImg from '@/assets/images/me.jpeg';
+import AccentFrame from '@/components/accent-frame';
 import { aboutMeList } from '@/utils/lists';
 
 export const About = () => (
-  <main className="h-screen p-4 max-w-5xl m-auto space-y-12">
+  <main>
+    <AccentFrame className="stroke-about" />
     <h1 className="text-about">About me</h1>
-    <section className="flex gap-24">
+    <section className="flex flex-col lg:flex-row lg:gap-12 xl:gap-24 max-w-5xl mx-auto mt-4 lg:mt-16 px-4">
       <figure className="animate-rotate-in">
         <img
           src={profileImg}
           alt="Matteo Soresini"
-          className="rounded-xl object-cover w-160 max-h-100 shadow-elevation"
+          className="rounded-xl object-contain m-auto lg:w-160 max-h-56 lg:max-h-100 shadow-elevation"
           loading="lazy"
         />
         <figcaption className="mt-2 text-center text-sm text-foreground">
           <em>Matteo Soresini</em>
         </figcaption>
       </figure>
-      <article className="flex flex-col justify-evenly mb-6">
+      <article className="flex flex-col justify-evenly lg:mb-6 gap-3 mt-4 lg:mt-0">
         {aboutMeList.map(({ icon, text }, index) => (
           <div
             key={text}
@@ -24,7 +26,7 @@ export const About = () => (
             className="animate-fade-up flex items-center gap-4 p-4 rounded-xl shadow-elevation hover:shadow-md transition-shadow"
           >
             <div className="shrink-0">{icon}</div>
-            <p className="text-foreground">{text}</p>
+            <p>{text}</p>
           </div>
         ))}
       </article>
