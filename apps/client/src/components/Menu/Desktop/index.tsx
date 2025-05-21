@@ -17,7 +17,7 @@ export const MenuDesktop = () => (
           className: cn('font-semibold before:w-full', hoverStyles[path]),
         }}
       >
-        <Icon className="h-4 w-4" />
+        <Icon size={16} weight="duotone" />
         {label}
       </Link>
     ))}

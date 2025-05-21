@@ -1,11 +1,16 @@
-import { Briefcase, Code, Contact, Info } from 'lucide-react';
+import {
+  BriefcaseIcon,
+  InfoIcon,
+  PenIcon,
+  StackOverflowLogoIcon,
+} from '@phosphor-icons/react';
 
 export const menuLinks = [
   // { path: '/', label: '', icon: Home },
-  { path: '/projects', label: 'Projects', icon: Code },
-  { path: '/experience', label: 'Experience', icon: Briefcase },
-  { path: '/about', label: 'About', icon: Info },
-  { path: '/contact', label: 'Contact', icon: Contact },
+  { path: '/projects', label: 'Projects', icon: StackOverflowLogoIcon },
+  { path: '/experience', label: 'Experience', icon: BriefcaseIcon },
+  { path: '/about', label: 'About', icon: InfoIcon },
+  { path: '/contact', label: 'Contact', icon: PenIcon },
 ];
 
 export const hoverStyles: Record<string, string> = {

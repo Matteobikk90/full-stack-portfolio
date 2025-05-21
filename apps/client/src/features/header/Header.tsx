@@ -1,7 +1,7 @@
 import { MenuDesktop, MenuMobile } from '@/components/menu';
 import { Button } from '@/lib/ui/button';
 import { useStore } from '@/stores';
-import { MessageCircle, Moon, Sun } from 'lucide-react';
+import { ChatCircleDotsIcon, MoonIcon, SunIcon } from '@phosphor-icons/react';
 import { useEffect } from 'react';
 import { useShallow } from 'zustand/shallow';
 
@@ -36,9 +36,9 @@ export const Header = () => {
           onClick={handleToggle}
         >
           {mode === 'dark' ? (
-            <Sun className="h-4 w-4" />
+            <SunIcon size={32} weight="duotone" />
           ) : (
-            <Moon className="h-4 w-4" />
+            <MoonIcon size={32} weight="duotone" />
           )}
         </Button>
         <Button
@@ -46,7 +46,7 @@ export const Header = () => {
           size="icon"
           // aria-label={isLoggedIn ? 'Open chat' : 'Login to chat'}
         >
-          <MessageCircle className="h-4 w-4" />
+          <ChatCircleDotsIcon size={32} weight="duotone" />
         </Button>
       </div>
     </header>

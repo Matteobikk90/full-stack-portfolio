@@ -1,8 +1,8 @@
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 import { hoverStyles, menuLinks } from '@/utils/menu';
+import { DotsThreeOutlineVerticalIcon, XIcon } from '@phosphor-icons/react';
 import { Link } from '@tanstack/react-router';
-import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 export const MenuMobile = () => {
@@ -44,7 +44,7 @@ export const MenuMobile = () => {
               }}
             />
             <span className="relative z-10 flex items-center gap-2">
-              <Icon className="h-4 w-4" />
+              <Icon size={16} weight="duotone" />
               {label}
             </span>
           </Link>
@@ -58,7 +58,11 @@ export const MenuMobile = () => {
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Toggle menu"
       >
-        {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        {isOpen ? (
+          <XIcon size={20} />
+        ) : (
+          <DotsThreeOutlineVerticalIcon size={20} weight="duotone" />
+        )}
       </Button>
     </>
   );
