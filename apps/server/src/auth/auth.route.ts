@@ -25,17 +25,23 @@ router.post(
 
 router.get('/me', authenticateToken, getMe);
 
-router.get(
-  '/github',
-  authRateLimiter,
-  passport.authenticate('github', { scope: ['user:email'] })
-);
+router.get('/github', authRateLimiter, (req, res, next) => {
+  const state = req.query.state as string;
+
+  passport.authenticate('github', {
+    scope: ['user:email'],
+    session: false,
+    state,
+  })(req, res, next);
+});
 
 router.get(
   '/github/callback',
+  authRateLimiter,
   passport.authenticate('github', { session: false, failureRedirect: '/' }),
   (req, res) => {
     const user = req.user as { id: string };
+    const redirect = req.query.state || '/';
 
     const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
       expiresIn: '15m',
@@ -49,21 +55,42 @@ router.get(
       }
     );
 
-    res.json({ accessToken, refreshToken });
+    res
+      .cookie('accessToken', accessToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax',
+        maxAge: 15 * 60 * 1000,
+      })
+      .cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
+      .redirect(
+        `http://localhost:5173${decodeURIComponent(redirect as string)}`
+      );
   }
 );
 
-router.get(
-  '/google',
-  authRateLimiter,
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
+router.get('/google', (req, res, next) => {
+  const state = req.query.state as string;
+
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    session: false,
+    state,
+  })(req, res, next);
+});
 
 router.get(
   '/google/callback',
+  authRateLimiter,
   passport.authenticate('google', { session: false, failureRedirect: '/' }),
   (req, res) => {
     const user = req.user as { id: string };
+    const redirect = req.query.state || '/';
 
     const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
       expiresIn: '15m',
@@ -77,7 +104,22 @@ router.get(
       }
     );
 
-    res.json({ accessToken, refreshToken });
+    res
+      .cookie('accessToken', accessToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax',
+        maxAge: 15 * 60 * 1000,
+      })
+      .cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
+      .redirect(
+        `http://localhost:5173${decodeURIComponent(redirect as string)}`
+      );
   }
 );
 

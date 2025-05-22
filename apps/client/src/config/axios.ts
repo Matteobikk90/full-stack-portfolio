@@ -1,32 +1,50 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/',
+  baseURL: 'http://localhost:4000',
+  withCredentials: true,
 });
 
+let isRefreshing = false;
+let subscribers: (() => void)[] = [];
+
+const onRefreshed = () => {
+  subscribers.forEach((callback) => callback());
+  subscribers = [];
+};
+
 api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('access_token');
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-
-    return config;
-  },
+  (config) => config,
   (error) => Promise.reject(error)
 );
 
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
+    const originalRequest = error.config;
     const status = error.response?.status;
 
-    if (status === 401 || status === 403) {
-      console.warn('Unauthorized or Forbidden:', status);
-    }
+    // If 401 and not already retried
+    if (status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
 
-    console.error('API Error:', error.response?.data || error.message);
+      if (!isRefreshing) {
+        isRefreshing = true;
+
+        try {
+          await api.post('/auth/refresh');
+          isRefreshing = false;
+          onRefreshed();
+        } catch (refreshError) {
+          isRefreshing = false;
+          return Promise.reject(refreshError);
+        }
+      }
+
+      return new Promise((resolve) => {
+        subscribers.push(() => resolve(api(originalRequest)));
+      });
+    }
 
     return Promise.reject(error);
   }

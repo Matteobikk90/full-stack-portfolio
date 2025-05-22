@@ -19,7 +19,6 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL!;
 
 type OAuthProfile = GitHubProfile | GoogleProfile;
-
 const handleOAuthCallback =
   (provider: Provider) =>
   async (

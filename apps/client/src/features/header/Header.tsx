@@ -1,4 +1,5 @@
 import { MenuDesktop, MenuMobile } from '@/components/menu';
+import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/lib/ui/button';
 import { useStore } from '@/stores';
 import { ChatCircleDotsIcon, MoonIcon, SunIcon } from '@phosphor-icons/react';
@@ -6,6 +7,7 @@ import { useEffect } from 'react';
 import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
+  const { user } = useAuth();
   const { mode, toggleTheme, updateBackground, toggleModal } = useStore(
     useShallow((state) => ({
       mode: state.mode,
@@ -14,6 +16,8 @@ export const Header = () => {
       toggleModal: state.toggleModal,
     }))
   );
+
+  console.log(user);
 
   useEffect(() => {
     document.documentElement.classList.remove('light', 'dark');

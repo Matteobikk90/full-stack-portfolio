@@ -1,14 +1,21 @@
-import { useEffect, useState } from 'react';
+import api from '@/config/axios';
+import { useQuery } from '@tanstack/react-query';
 
 export const useAuth = () => {
-  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const query = useQuery({
+    queryKey: ['me'],
+    queryFn: async () => {
+      const { data } = await api.get('/auth/me');
+      return data;
+    },
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
 
-  useEffect(() => {
-    const stored = localStorage.getItem('accessToken');
-    if (stored) setAccessToken(stored);
-  }, []);
-
-  const isLoggedIn = !!accessToken;
-
-  return { isLoggedIn, accessToken };
+  return {
+    user: query.data,
+    isAuthenticated: !!query.data,
+    isLoading: query.isLoading,
+    isError: query.isError,
+  };
 };

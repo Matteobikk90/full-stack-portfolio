@@ -36,7 +36,7 @@ import jwt from 'jsonwebtoken';
 // };
 
 export const handleRefreshToken = (req: Request, res: Response): void => {
-  const { refreshToken } = req.body;
+  const refreshToken = req.cookies?.refreshToken;
 
   try {
     const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET!) as {
