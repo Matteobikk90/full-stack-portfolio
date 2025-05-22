@@ -7,7 +7,10 @@ import jwt from 'jsonwebtoken';
 initSentry();
 
 io.use((socket, next) => {
-  const token = socket.handshake.auth?.token;
+  const token = socket.request.headers.cookie
+    ?.split('; ')
+    .find((row) => row.startsWith('accessToken='))
+    ?.split('=')[1];
 
   if (!token) {
     return next(new Error('Authentication token missing'));
@@ -49,7 +52,7 @@ io.on('connection', async (socket) => {
         },
       });
 
-      io.emit('chat:message', saved);
+      io.to('public-room').emit('chat:message', saved);
     } catch (err) {
       console.error('❌ Failed to save message:', err);
     }

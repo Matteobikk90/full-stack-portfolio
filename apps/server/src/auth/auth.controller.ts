@@ -38,6 +38,10 @@ import jwt from 'jsonwebtoken';
 export const handleRefreshToken = (req: Request, res: Response): void => {
   const refreshToken = req.cookies?.refreshToken;
 
+  if (!refreshToken) {
+    res.status(400).json({ message: 'Missing refresh token' });
+  }
+
   try {
     const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET!) as {
       userId: string;
@@ -46,12 +50,19 @@ export const handleRefreshToken = (req: Request, res: Response): void => {
     const newAccessToken = jwt.sign(
       { userId: decoded.userId },
       process.env.JWT_SECRET!,
-      { expiresIn: '15m' }
+      { expiresIn: '30m' }
     );
 
-    res.json({ accessToken: newAccessToken });
+    res.cookie('accessToken', newAccessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 30 * 60 * 1000,
+    });
+
+    res.status(200).json({ message: 'Access token refreshed' });
   } catch (err) {
-    console.error(err);
+    console.error('❌ Refresh token error:', err);
     res.status(403).json({ message: 'Invalid or expired refresh token' });
   }
 };

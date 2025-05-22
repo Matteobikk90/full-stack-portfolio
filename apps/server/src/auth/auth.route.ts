@@ -1,37 +1,62 @@
 import { getMe, handleRefreshToken } from '@/auth/auth.controller';
 import { authenticateToken } from '@/auth/auth.middleware';
 import { authRateLimiter } from '@/middleware/rate-limit.middleware';
-import { validateBody } from '@/middleware/validate.middleware';
-import { refreshSchema } from '@/validation/auth.schema';
-import { Router } from 'express';
+import { Router, type Response } from 'express';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
 
 const router = Router();
 
-// router.post('/signup', authRateLimiter, validateBody(signupSchema), signup);
-// router.post('/login', authRateLimiter, validateBody(loginSchema), login);
+const createTokens = (userId: string) => {
+  const accessToken = jwt.sign({ userId }, process.env.JWT_SECRET!, {
+    expiresIn: '30m',
+  });
 
+  const refreshToken = jwt.sign({ userId }, process.env.JWT_SECRET!, {
+    expiresIn: '7d',
+  });
+
+  return { accessToken, refreshToken };
+};
+
+const sendTokensAndRedirect = (
+  res: Response,
+  userId: string,
+  redirect: string
+) => {
+  const { accessToken, refreshToken } = createTokens(userId);
+
+  res
+    .cookie('accessToken', accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 30 * 60 * 1000,
+    })
+    .cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    })
+    .redirect(`http://localhost:5173${decodeURIComponent(redirect)}`);
+};
+
+// --- Protected Routes ---
 router.get('/protected', authenticateToken, (_req, res) => {
   res.json({ message: 'Protected content' });
 });
 
-router.post(
-  '/refresh',
-  authRateLimiter,
-  validateBody(refreshSchema),
-  handleRefreshToken
-);
-
 router.get('/me', authenticateToken, getMe);
 
-router.get('/github', authRateLimiter, (req, res, next) => {
-  const state = req.query.state as string;
+router.post('/refresh', authRateLimiter, handleRefreshToken);
 
+// --- GitHub OAuth ---
+router.get('/github', authRateLimiter, (req, res, next) => {
   passport.authenticate('github', {
     scope: ['user:email'],
     session: false,
-    state,
+    state: req.query.state as string,
   })(req, res, next);
 });
 
@@ -41,46 +66,17 @@ router.get(
   passport.authenticate('github', { session: false, failureRedirect: '/' }),
   (req, res) => {
     const user = req.user as { id: string };
-    const redirect = req.query.state || '/';
-
-    const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
-      expiresIn: '15m',
-    });
-
-    const refreshToken = jwt.sign(
-      { userId: user.id },
-      process.env.JWT_SECRET!,
-      {
-        expiresIn: '7d',
-      }
-    );
-
-    res
-      .cookie('accessToken', accessToken, {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
-        maxAge: 15 * 60 * 1000,
-      })
-      .cookie('refreshToken', refreshToken, {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      })
-      .redirect(
-        `http://localhost:5173${decodeURIComponent(redirect as string)}`
-      );
+    const redirect = (req.query.state as string) || '/';
+    sendTokensAndRedirect(res, user.id, redirect);
   }
 );
 
-router.get('/google', (req, res, next) => {
-  const state = req.query.state as string;
-
+// --- Google OAuth ---
+router.get('/google', authRateLimiter, (req, res, next) => {
   passport.authenticate('google', {
     scope: ['profile', 'email'],
     session: false,
-    state,
+    state: req.query.state as string,
   })(req, res, next);
 });
 
@@ -90,36 +86,8 @@ router.get(
   passport.authenticate('google', { session: false, failureRedirect: '/' }),
   (req, res) => {
     const user = req.user as { id: string };
-    const redirect = req.query.state || '/';
-
-    const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
-      expiresIn: '15m',
-    });
-
-    const refreshToken = jwt.sign(
-      { userId: user.id },
-      process.env.JWT_SECRET!,
-      {
-        expiresIn: '7d',
-      }
-    );
-
-    res
-      .cookie('accessToken', accessToken, {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
-        maxAge: 15 * 60 * 1000,
-      })
-      .cookie('refreshToken', refreshToken, {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      })
-      .redirect(
-        `http://localhost:5173${decodeURIComponent(redirect as string)}`
-      );
+    const redirect = (req.query.state as string) || '/';
+    sendTokensAndRedirect(res, user.id, redirect);
   }
 );
 
