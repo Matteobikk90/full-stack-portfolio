@@ -104,7 +104,7 @@
   }
 
   main {
-    @apply relative h-[calc(100dvh_-_4.3rem)] p-4 mt-[4.3rem];
+    @apply h-[calc(100dvh_-_4.3rem)] p-4 mt-[4.3rem];
   }
 
   input:-webkit-autofill {
