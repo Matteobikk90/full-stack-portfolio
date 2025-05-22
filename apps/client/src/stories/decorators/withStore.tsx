@@ -6,7 +6,7 @@ export const withStore = (Story: () => ReactNode) => {
   useStore.setState({
     mode: 'light' as 'light' | 'dark',
     background: getCSSVariable('--foreground'),
-    toggle: () => useStore.setState({ mode: 'dark' }),
+    toggleTheme: () => useStore.setState({ mode: 'dark' }),
     updateBackground: () =>
       useStore.setState({
         background: getCSSVariable('--background'),

@@ -6,11 +6,12 @@ import { useEffect } from 'react';
 import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
-  const { mode, toggle, updateBackground } = useStore(
+  const { mode, toggleTheme, updateBackground, toggleModal } = useStore(
     useShallow((state) => ({
       mode: state.mode,
-      toggle: state.toggle,
+      toggleTheme: state.toggleTheme,
       updateBackground: state.updateBackground,
+      toggleModal: state.toggleModal,
     }))
   );
 
@@ -20,7 +21,7 @@ export const Header = () => {
   }, [mode]);
 
   const handleToggle = () => {
-    toggle();
+    toggleTheme();
     updateBackground();
   };
 
@@ -44,6 +45,7 @@ export const Header = () => {
         <Button
           variant="outline"
           size="icon"
+          onClick={toggleModal}
           // aria-label={isLoggedIn ? 'Open chat' : 'Login to chat'}
         >
           <ChatCircleDotsIcon size={32} weight="duotone" />

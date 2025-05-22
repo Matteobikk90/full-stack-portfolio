@@ -1,4 +1,5 @@
 // import Footer from '@/features/footer';
+import CustomModal from '@/components/custom-modal';
 import Header from '@/features/header';
 import { Toaster } from '@/lib/ui/sonner';
 import { Outlet } from '@tanstack/react-router';
@@ -9,22 +10,8 @@ export default function App() {
       <Header />
       <Outlet />
       {/* <Footer /> */}
-      <Toaster
-        position="bottom-right"
-        theme="light"
-        toastOptions={{
-          classNames: {
-            toast: 'rounded-xl border border-muted shadow-lg bg-background',
-            title: 'font-semibold text-foreground',
-            description: 'text-foreground text-sm',
-            actionButton: 'bg-primary text-white',
-            cancelButton: 'text-foreground',
-          },
-        }}
-        expand
-        richColors
-        closeButton
-      />
+      <Toaster position="bottom-right" richColors closeButton />
+      <CustomModal />
     </>
   );
 }
