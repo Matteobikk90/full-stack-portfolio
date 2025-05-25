@@ -1,5 +1,6 @@
 // import Footer from '@/features/footer';
 import CustomModal from '@/components/custom-modal';
+import ChatBox from '@/features/chat-box';
 import Header from '@/features/header';
 import { Toaster } from '@/lib/ui/sonner';
 import { Outlet } from '@tanstack/react-router';
@@ -12,6 +13,7 @@ export default function App() {
       {/* <Footer /> */}
       <Toaster position="bottom-right" richColors closeButton />
       <CustomModal />
+      <ChatBox />
     </>
   );
 }

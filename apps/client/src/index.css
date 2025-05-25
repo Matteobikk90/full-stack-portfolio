@@ -22,9 +22,12 @@
   --color-error: var(--error);
   --color-success: var(--success);
 
+  --pulse-shadow: var(--pulse-shadow);
   --shadow-elevation: var(--shadow-elevation);
+  --shadow-hover-elevation: var(--shadow-hover-elevation);
 
   --animate-rotate-in: rotate-in 1.5s ease-out forwards;
+  --animate-pulse-slow: pulse-slow 1.5s ease-out infinite;
   --animate-fade-up: fade-up 0.5s ease-out both;
 
   @keyframes fade-up {
@@ -48,6 +51,24 @@
       opacity: 1;
     }
   }
+
+  @keyframes pulse-slow {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: 0 0 0 0 var(--pulse-shadow);
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.7;
+      box-shadow: 0 0 0 4px var(--pulse-shadow);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: 0 0 0 0 var(--pulse-shadow);
+    }
+  }
 }
 
 /* ---------- Light theme ---------- */
@@ -63,7 +84,9 @@
   --error: rgba(139, 0, 0, 1);
   --success: rgba(0, 100, 0, 1);
 
-  --shadow-elevation: 0 1px 3px rgba(0, 0, 0, 0.15);
+  --pulse-shadow: rgba(0, 0, 0, 0.2);
+  --shadow-elevation: 0 1px 3px var(--pulse-shadow);
+  --shadow-hover-elevation: 0 2px 3px var(--pulse-shadow);
 }
 
 /* ---------- Dark theme override ---------- */
@@ -77,7 +100,9 @@
   --error: rgba(255, 82, 144);
   --success: rgba(205, 255, 0, 1);
 
-  --shadow-elevation: 0 1px 3px rgba(255, 255, 255, 0.5);
+  --pulse-shadow: rgba(255, 255, 255, 0.5);
+  --shadow-elevation: 0 1px 3px var(--pulse-shadow);
+  --shadow-hover-elevation: 0 2px 3px var(--pulse-shadow);
 }
 
 /* ✅ Tailwind base overrides */

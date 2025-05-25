@@ -23,7 +23,7 @@ export const About = () => (
           <div
             key={text}
             style={{ animationDelay: `${index + 1 * 0.25}s` }}
-            className="animate-fade-up flex items-center gap-4 p-4 rounded-xl shadow-elevation hover:shadow-md transition-shadow"
+            className="animate-fade-up flex items-center gap-4 p-4 rounded-xl shadow-elevation hover:shadow-hover-elevation transition-shadow"
           >
             <div className="shrink-0">{icon}</div>
             <p>{text}</p>
