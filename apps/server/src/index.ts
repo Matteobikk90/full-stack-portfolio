@@ -52,7 +52,7 @@ io.on('connection', async (socket) => {
         },
       });
 
-      io.to('public-room').emit('chat:message', saved);
+      io.emit('chat:message', saved);
     } catch (err) {
       console.error('❌ Failed to save message:', err);
     }

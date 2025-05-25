@@ -5,16 +5,10 @@ import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
 import type { ChatMessageType } from '@/types/chat.types';
 import { SOCKET_URL } from '@/utils/constants';
-import { chartDimensions } from '@/utils/form';
 import { ChatsIcon, PaperPlaneRightIcon, XIcon } from '@phosphor-icons/react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { io, type Socket } from 'socket.io-client';
 import { useShallow } from 'zustand/shallow';
-
-const ANIMATION_CLASSES = {
-  pulse: 'animate-pulse-slow',
-  shadow: 'shadow-elevation',
-} as const;
 
 export const ChatBox = () => {
   const { isChatOpen, toggleModal, openChat, closeChat } = useStore(
@@ -29,46 +23,32 @@ export const ChatBox = () => {
   const { user, isAuthenticated } = useAuth();
   const socketRef = useRef<Socket | null>(null);
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
-  const [input, setInput] = useState('');
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const [connectionError, setConnectionError] = useState<string | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const sortedMessages = useMemo(() => {
-    return [...messages].sort(
-      (a, b) =>
-        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-    );
-  }, [messages]);
-
-  const scrollToBottom = useCallback(() => {
+  useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({
         top: scrollRef.current.scrollHeight,
         behavior: 'smooth',
       });
     }
-  }, []);
-
-  useEffect(() => {
-    scrollToBottom();
 
     if (isChatOpen && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [sortedMessages, isChatOpen, scrollToBottom]);
+  }, [messages, isChatOpen]);
 
   useEffect(() => {
     if (!isAuthenticated || socketRef.current) return;
-
     setIsConnecting(true);
     setConnectionError(null);
 
     const socket = io(SOCKET_URL, {
       withCredentials: true,
-      transports: ['websocket', 'polling'],
-      timeout: 10000,
     });
 
     socketRef.current = socket;
@@ -92,11 +72,11 @@ export const ChatBox = () => {
       }
     });
 
-    socket.on('chat:history', (history: ChatMessageType[]) => {
-      setMessages(history);
+    socket.on('chat:history', (history) => {
+      setMessages(history.reverse());
     });
 
-    socket.on('chat:message', (msg: ChatMessageType) => {
+    socket.on('chat:message', (msg) => {
       setMessages((prev) => [...prev, msg]);
     });
 
@@ -111,11 +91,18 @@ export const ChatBox = () => {
     const trimmedInput = input.trim();
     if (!trimmedInput || !socketRef.current?.connected) return;
 
+    const tempMsg = {
+      id: `temp-${Date.now()}`,
+      content: trimmedInput,
+      createdAt: new Date().toISOString(),
+      sender: { ...user },
+    };
+
+    setMessages((prev) => [...prev, tempMsg]);
     socketRef.current.emit('chat:message', trimmedInput);
     setInput('');
-
     inputRef.current?.focus();
-  }, [input]);
+  }, [input, user]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -127,99 +114,30 @@ export const ChatBox = () => {
     [handleSend]
   );
 
-  const handleIconClick = useCallback(() => {
+  const handleIconClick = () => {
     if (isAuthenticated) {
       openChat();
     } else {
       toggleModal();
     }
-  }, [isAuthenticated, openChat, toggleModal]);
-
-  const renderMessage = useCallback(
-    (msg: ChatMessageType, index: number) => {
-      const isMe = msg.sender?.id === user?.id;
-      const timestamp = new Date(msg.createdAt).toLocaleTimeString([], {
-        day: '2-digit',
-        month: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-      });
-
-      return (
-        <div
-          key={index}
-          className={cn(
-            'flex items-end gap-2 animate-in fade-in-0 slide-in-from-bottom-2 justify-start',
-            isMe ? 'flex-row-reverse' : ''
-          )}
-        >
-          <div className="flex flex-col items-center gap-1 flex-shrink-0">
-            {msg.sender?.avatarUrl ? (
-              <img
-                width={30}
-                height={30}
-                src={msg.sender.avatarUrl}
-                alt={`${msg.sender.name}'s avatar`}
-                className="object-cover rounded-full ring-2 ring-border"
-                loading="lazy"
-              />
-            ) : (
-              <div className="w-7 h-7 rounded-full bg flex items-center justify-center text-xs font-medium">
-                {msg.sender?.name?.charAt(0).toUpperCase() || '?'}
-              </div>
-            )}
-          </div>
-
-          <div
-            className={cn(
-              'rounded-xl p-3 max-w-[75%] text-sm shadow-elevation',
-              isMe
-                ? 'bg-background text-foreground rounded-br-none'
-                : 'bg text-foreground rounded-bl-none'
-            )}
-          >
-            <div className="text-xs mb-1 flex gap-1">
-              <span className="font-medium max-w-24 truncate">
-                {isMe ? 'You' : msg.sender?.name || 'Unknown'}
-              </span>
-              <span>•</span>
-              <time dateTime={msg.createdAt}>{timestamp}</time>
-            </div>
-            <div>{msg.content}</div>
-          </div>
-        </div>
-      );
-    },
-    [user?.id]
-  );
+  };
 
   return (
-    <aside className="fixed bottom-6 right-6 z-50">
+    <aside className="fixed bottom-6 right-6 z-10">
       {!isChatOpen && (
         <Button
           variant="outline"
           onClick={handleIconClick}
-          className={cn(
-            'rounded-full',
-            chartDimensions.buttonSize,
-            ANIMATION_CLASSES.shadow,
-            ANIMATION_CLASSES.pulse,
-            'hover:scale-105 transition-transform'
-          )}
-          aria-label={isAuthenticated ? 'Open chat' : 'Sign in to chat'}
+          className="rounded-full shadow-elevation w-12 h-12 animate-pulse-slow"
+          aria-label="Toggle chat"
         >
-          <ChatsIcon size={24} weight="duotone" />
+          <ChatsIcon size={32} weight="duotone" />
         </Button>
       )}
 
       {isChatOpen && isAuthenticated && (
-        <div
-          className={cn(
-            'rounded-xl shadow-xl bg-background border',
-            chartDimensions.width
-          )}
-        >
-          <div className="p-3 border-b flex items-center justify-between">
+        <div className="mt-2 w-80 rounded-xl shadow-xl bg-background border">
+          <div className="p-2 border-b flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-sm font-medium">Chat with Matteo</span>
               <span
@@ -235,49 +153,68 @@ export const ChatBox = () => {
                 )}
               />
             </div>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={closeChat}
-              aria-label="Close chat"
-            >
-              <XIcon size={16} />
+            <Button variant="outline" size="icon" onClick={closeChat}>
+              <XIcon size={20} />
             </Button>
           </div>
 
-          <div
-            className={cn(
-              'flex flex-col overflow-hidden',
-              chartDimensions.height
-            )}
-          >
+          <div className="flex flex-col h-72 overflow-hidden">
             <div
-              className="flex-1 overflow-y-auto p-3 space-y-3"
+              className="flex-1 overflow-y-auto p-2 space-y-3"
               ref={scrollRef}
             >
-              {connectionError && (
-                <div className="text-center p-4 text-sm text-foreground bg-error rounded-lg">
-                  {connectionError}
-                </div>
-              )}
+              {messages.map((msg, i) => {
+                const isMe = msg.sender?.id === user?.id;
+                const timestamp = new Date(msg.createdAt).toLocaleTimeString(
+                  [],
+                  {
+                    day: '2-digit',
+                    month: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  }
+                );
 
-              {sortedMessages.length === 0 &&
-                !isConnecting &&
-                !connectionError && (
-                  <div className="text-center p-4 text-sm text-foreground">
-                    No messages yet. Start the conversation!
+                return (
+                  <div
+                    key={i}
+                    className={cn(
+                      'flex items-end gap-2',
+                      isMe ? 'justify-start flex-row-reverse' : 'justify-start'
+                    )}
+                  >
+                    <div className="flex flex-col items-center gap-1">
+                      {msg.sender?.avatarUrl ? (
+                        <img
+                          width={30}
+                          height={30}
+                          src={msg.sender.avatarUrl}
+                          alt={msg.sender.name}
+                          className="object-cover rounded-full"
+                        />
+                      ) : null}
+                    </div>
+
+                    <div
+                      className={`rounded-xl p-3 max-w-[75%] text-sm shadow-elevation ${
+                        isMe
+                          ? 'bg-primary text-foreground rounded-br-none'
+                          : 'bg-background text-foreground rounded-bl-none'
+                      }`}
+                    >
+                      <div className="text-xs mb-1 flex gap-1">
+                        <strong className="max-w-24 truncate">
+                          {isMe ? 'You' : msg.sender?.name || 'Unknown'}
+                        </strong>
+                        <span>•</span>
+                        <time dateTime={msg.createdAt}>{timestamp}</time>
+                      </div>
+                      <div>{msg.content}</div>
+                    </div>
                   </div>
-                )}
-
-              {sortedMessages.map(renderMessage)}
-
-              {isConnecting && (
-                <div className="text-center p-4 text-sm text-foreground">
-                  Connecting to chat...
-                </div>
-              )}
+                );
+              })}
             </div>
-
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -296,12 +233,13 @@ export const ChatBox = () => {
                 maxLength={350}
               />
               <Button
-                size="sm"
+                variant="outline"
+                size="icon"
                 type="submit"
                 disabled={!input.trim() || !socketRef.current?.connected}
                 aria-label="Send message"
               >
-                <PaperPlaneRightIcon size={16} />
+                <PaperPlaneRightIcon size={20} />
               </Button>
             </form>
           </div>

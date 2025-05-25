@@ -1,3 +1,5 @@
+type MessageStatus = 'sent' | 'delivered' | 'seen';
+
 export type ChatSliceType = {
   isChatOpen: boolean;
   openChat: () => void;
@@ -13,4 +15,5 @@ export type ChatMessageType = {
     name: string;
     avatarUrl: string | null;
   };
+  status?: MessageStatus;
 };
