@@ -30,16 +30,12 @@ export const ChatBox = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        top: scrollRef.current.scrollHeight,
-        behavior: 'smooth',
-      });
-    }
+    scrollRef.current?.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: 'smooth',
+    });
 
-    if (isChatOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
+    if (isChatOpen) inputRef.current?.focus();
   }, [messages, isChatOpen]);
 
   useEffect(() => {
@@ -114,13 +110,7 @@ export const ChatBox = () => {
     [handleSend]
   );
 
-  const handleIconClick = () => {
-    if (isAuthenticated) {
-      openChat();
-    } else {
-      toggleModal();
-    }
-  };
+  const handleIconClick = () => (isAuthenticated ? openChat() : toggleModal());
 
   return (
     <aside className="fixed bottom-6 right-6 z-10">
