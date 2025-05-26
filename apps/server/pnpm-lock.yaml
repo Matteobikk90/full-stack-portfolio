@@ -17,6 +17,9 @@ importers:
       '@sentry/profiling-node':
         specifier: ^9.16.1
         version: 9.16.1
+      '@tinyhttp/cookie-parser':
+        specifier: ^2.0.6
+        version: 2.0.6
       '@types/cors':
         specifier: ^2.8.17
         version: 2.8.17
@@ -44,10 +47,16 @@ importers:
       passport:
         specifier: ^0.7.0
         version: 0.7.0
+      passport-facebook:
+        specifier: ^3.0.0
+        version: 3.0.0
       passport-github2:
         specifier: ^0.1.12
         version: 0.1.12
       passport-google-oauth20:
+        specifier: ^2.0.0
+        version: 2.0.0
+      passport-linkedin-oauth2:
         specifier: ^2.0.0
         version: 2.0.0
       passport-oauth2:
@@ -78,12 +87,18 @@ importers:
       '@types/passport':
         specifier: ^1.0.17
         version: 1.0.17
+      '@types/passport-facebook':
+        specifier: ^3.0.3
+        version: 3.0.3
       '@types/passport-github2':
         specifier: ^1.2.9
         version: 1.2.9
       '@types/passport-google-oauth20':
         specifier: ^2.0.16
         version: 2.0.16
+      '@types/passport-linkedin-oauth2':
+        specifier: ^1.5.6
+        version: 1.5.6
       '@types/passport-oauth2':
         specifier: ^1.4.17
         version: 1.4.17
@@ -819,6 +834,18 @@ packages:
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
 
+  '@tinyhttp/cookie-parser@2.0.6':
+    resolution: {integrity: sha512-hLcFr3ml6MBU71URUutvzh8p0PgqGpmTMcorUrRS+Fck0/q3tzScE+ghhocgIoSx/F6GRtS/TYJkJrjL/ickBw==}
+    engines: {node: '>=12.4 || 14.x || >=16'}
+
+  '@tinyhttp/cookie-signature@2.1.1':
+    resolution: {integrity: sha512-VDsSMY5OJfQJIAtUgeQYhqMPSZptehFSfvEEtxr+4nldPA8IImlp3QVcOVuK985g4AFR4Hl1sCbWCXoqBnVWnw==}
+    engines: {node: '>=12.20.0'}
+
+  '@tinyhttp/cookie@2.1.1':
+    resolution: {integrity: sha512-h/kL9jY0e0Dvad+/QU3efKZww0aTvZJslaHj3JTPmIPC9Oan9+kYqmh3M6L5JUQRuTJYFK2nzgL2iJtH2S+6dA==}
+    engines: {node: '>=12.20.0'}
+
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
 
@@ -885,11 +912,17 @@ packages:
   '@types/oauth@0.9.6':
     resolution: {integrity: sha512-H9TRCVKBNOhZZmyHLqFt9drPM9l+ShWiqqJijU1B8P3DX3ub84NjxDuy+Hjrz+fEca5Kwip3qPMKNyiLgNJtIA==}
 
+  '@types/passport-facebook@3.0.3':
+    resolution: {integrity: sha512-4cwyK2bGMo4Di8eMMLjf9JgDbpptRVYmStuy0ETZSaVo6fcY9+BtB9hCUmLEobUtqNHoIoXIWOCdDA2UynCUyg==}
+
   '@types/passport-github2@1.2.9':
     resolution: {integrity: sha512-/nMfiPK2E6GKttwBzwj0Wjaot8eHrM57hnWxu52o6becr5/kXlH/4yE2v2rh234WGvSgEEzIII02Nc5oC5xEHA==}
 
   '@types/passport-google-oauth20@2.0.16':
     resolution: {integrity: sha512-ayXK2CJ7uVieqhYOc6k/pIr5pcQxOLB6kBev+QUGS7oEZeTgIs1odDobXRqgfBPvXzl0wXCQHftV5220czZCPA==}
+
+  '@types/passport-linkedin-oauth2@1.5.6':
+    resolution: {integrity: sha512-LlIwa+GGK8KoUHDxxwO2+5uqB6YmIHysqdLwpn+YJsjfmqFdAH+4YjhXO7riYwfYcpEr/pI+dSEDlwF0Xt+qhg==}
 
   '@types/passport-oauth2@1.4.17':
     resolution: {integrity: sha512-ODiAHvso6JcWJ6ZkHHroVp05EHGhqQN533PtFNBkg8Fy5mERDqsr030AX81M0D69ZcaMvhF92SRckEk2B0HYYg==}
@@ -2022,6 +2055,10 @@ packages:
     resolution: {integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==}
     engines: {node: '>= 0.8'}
 
+  passport-facebook@3.0.0:
+    resolution: {integrity: sha512-K/qNzuFsFISYAyC1Nma4qgY/12V3RSLFdFVsPKXiKZt434wOvthFW1p7zKa1iQihQMRhaWorVE1o3Vi1o+ZgeQ==}
+    engines: {node: '>= 0.4.0'}
+
   passport-github2@0.1.12:
     resolution: {integrity: sha512-3nPUCc7ttF/3HSP/k9sAXjz3SkGv5Nki84I05kSQPo01Jqq1NzJACgMblCK0fGcv9pKCG/KXU3AJRDGLqHLoIw==}
     engines: {node: '>= 0.8.0'}
@@ -2029,6 +2066,9 @@ packages:
   passport-google-oauth20@2.0.0:
     resolution: {integrity: sha512-KSk6IJ15RoxuGq7D1UKK/8qKhNfzbLeLrG3gkLZ7p4A6DBCcv7xpyQwuXtWdpyR0+E0mwkpjY1VfPOhxQrKzdQ==}
     engines: {node: '>= 0.4.0'}
+
+  passport-linkedin-oauth2@2.0.0:
+    resolution: {integrity: sha512-PnSeq2HzFQ/y1/p2RTF/kG2zhJ7kwGVg4xO3E+JNxz2aI0pFJGAqC503FVpUksYbhQdNhL6QYlK9qrEXD7ZYCg==}
 
   passport-oauth2@1.8.0:
     resolution: {integrity: sha512-cjsQbOrXIDE4P8nNb3FQRCCmJJ/utnFKEz2NX209f7KOHPoX18gF7gBzBbLLsj2/je4KrgiwLLGjf0lm9rtTBA==}
@@ -3355,6 +3395,15 @@ snapshots:
 
   '@socket.io/component-emitter@3.1.2': {}
 
+  '@tinyhttp/cookie-parser@2.0.6':
+    dependencies:
+      '@tinyhttp/cookie': 2.1.1
+      '@tinyhttp/cookie-signature': 2.1.1
+
+  '@tinyhttp/cookie-signature@2.1.1': {}
+
+  '@tinyhttp/cookie@2.1.1': {}
+
   '@tsconfig/node10@1.0.11': {}
 
   '@tsconfig/node12@1.0.11': {}
@@ -3428,6 +3477,12 @@ snapshots:
     dependencies:
       '@types/node': 22.15.12
 
+  '@types/passport-facebook@3.0.3':
+    dependencies:
+      '@types/express': 5.0.1
+      '@types/passport': 1.0.17
+      '@types/passport-oauth2': 1.4.17
+
   '@types/passport-github2@1.2.9':
     dependencies:
       '@types/express': 5.0.1
@@ -3439,6 +3494,11 @@ snapshots:
       '@types/express': 5.0.1
       '@types/passport': 1.0.17
       '@types/passport-oauth2': 1.4.17
+
+  '@types/passport-linkedin-oauth2@1.5.6':
+    dependencies:
+      '@types/express': 5.0.1
+      '@types/passport': 1.0.17
 
   '@types/passport-oauth2@1.4.17':
     dependencies:
@@ -4644,11 +4704,19 @@ snapshots:
 
   parseurl@1.3.3: {}
 
+  passport-facebook@3.0.0:
+    dependencies:
+      passport-oauth2: 1.8.0
+
   passport-github2@0.1.12:
     dependencies:
       passport-oauth2: 1.8.0
 
   passport-google-oauth20@2.0.0:
+    dependencies:
+      passport-oauth2: 1.8.0
+
+  passport-linkedin-oauth2@2.0.0:
     dependencies:
       passport-oauth2: 1.8.0
 

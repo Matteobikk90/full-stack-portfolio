@@ -1,18 +1,23 @@
 import { MenuDesktop, MenuMobile } from '@/components/menu';
+import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/lib/ui/button';
 import { useStore } from '@/stores';
-import { ChatCircleDotsIcon, MoonIcon, SunIcon } from '@phosphor-icons/react';
+import { ChatsIcon, MoonIcon, SunIcon } from '@phosphor-icons/react';
 import { useEffect } from 'react';
 import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
-  const { mode, toggle, updateBackground } = useStore(
-    useShallow((state) => ({
-      mode: state.mode,
-      toggle: state.toggle,
-      updateBackground: state.updateBackground,
-    }))
-  );
+  const { isAuthenticated } = useAuth();
+  const { mode, toggleTheme, updateBackground, toggleModal, openChat } =
+    useStore(
+      useShallow((state) => ({
+        mode: state.mode,
+        toggleTheme: state.toggleTheme,
+        updateBackground: state.updateBackground,
+        toggleModal: state.toggleModal,
+        openChat: state.openChat,
+      }))
+    );
 
   useEffect(() => {
     document.documentElement.classList.remove('light', 'dark');
@@ -20,8 +25,16 @@ export const Header = () => {
   }, [mode]);
 
   const handleToggle = () => {
-    toggle();
+    toggleTheme();
     updateBackground();
+  };
+
+  const handleClick = () => {
+    if (isAuthenticated) {
+      openChat();
+    } else {
+      toggleModal();
+    }
   };
 
   return (
@@ -44,9 +57,10 @@ export const Header = () => {
         <Button
           variant="outline"
           size="icon"
-          // aria-label={isLoggedIn ? 'Open chat' : 'Login to chat'}
+          onClick={handleClick}
+          aria-label={isAuthenticated ? 'Open chat' : 'Login to chat'}
         >
-          <ChatCircleDotsIcon size={32} weight="duotone" />
+          <ChatsIcon size={32} weight="duotone" />
         </Button>
       </div>
     </header>

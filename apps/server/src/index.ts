@@ -7,7 +7,10 @@ import jwt from 'jsonwebtoken';
 initSentry();
 
 io.use((socket, next) => {
-  const token = socket.handshake.auth?.token;
+  const token = socket.request.headers.cookie
+    ?.split('; ')
+    .find((row) => row.startsWith('accessToken='))
+    ?.split('=')[1];
 
   if (!token) {
     return next(new Error('Authentication token missing'));

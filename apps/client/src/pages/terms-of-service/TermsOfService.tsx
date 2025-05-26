@@ -11,9 +11,10 @@ export const TermsOfService = () => {
 
       <h2 className="text-xl font-semibold">1. Use of the Contact Form</h2>
       <p>
-        This form is intended solely for legitimate inquiries, collaboration
-        requests, or professional communication. Use of the form for spam,
-        promotions, or abusive content is strictly prohibited.
+        This form and login system are intended solely for legitimate inquiries,
+        collaboration requests, or professional communication. Use of the form
+        or login feature for spam, impersonation, or disruptive behavior is
+        strictly prohibited and may result in access revocation.
       </p>
 
       <h2 className="text-xl font-semibold">2. Data Handling</h2>

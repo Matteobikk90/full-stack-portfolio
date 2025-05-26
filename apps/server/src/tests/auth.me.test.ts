@@ -19,7 +19,7 @@ describe('GET /auth/me', () => {
     });
 
     const token = jwt.sign({ userId: user.id }, JWT_SECRET, {
-      expiresIn: '15m',
+      expiresIn: '30m',
     });
 
     const res = await request(app)

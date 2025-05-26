@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { cornerSketches } from '@/utils/lists';
 
 export const AccentFrame = ({ className }: { className: string }) => (
-  <section className="absolute inset-0 z-10 pointer-events-none">
+  <aside className="fixed inset-0 z-10 pointer-events-none mt-[4.3rem]">
     {Object.entries(cornerSketches).map(([key, { h, v, styleH, styleV }]) => (
       <div key={key}>
         <svg
@@ -33,5 +33,5 @@ export const AccentFrame = ({ className }: { className: string }) => (
         </svg>
       </div>
     ))}
-  </section>
+  </aside>
 );

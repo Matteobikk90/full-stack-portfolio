@@ -1,7 +1,12 @@
 import * as Sentry from '@sentry/node';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
-export function globalErrorHandler(err: unknown, _req: Request, res: Response) {
+export function globalErrorHandler(
+  err: unknown,
+  _req: Request,
+  res: Response,
+  _next: NextFunction
+) {
   console.error('[Global Error Handler]', err);
 
   if (err instanceof Error) {

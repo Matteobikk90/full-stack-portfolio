@@ -59,7 +59,7 @@ export const MenuMobile = () => {
         aria-label="Toggle menu"
       >
         {isOpen ? (
-          <XIcon size={20} />
+          <XIcon size={20} weight="duotone" />
         ) : (
           <DotsThreeOutlineVerticalIcon size={20} weight="duotone" />
         )}

@@ -8,6 +8,7 @@ import experiencesRoute from '@/routes/experiences.route';
 import likeRoutes from '@/routes/likes.route';
 import projectsRoute from '@/routes/projects.route';
 import userRoutes from '@/routes/user.route';
+import { cookieParser } from '@tinyhttp/cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
@@ -22,6 +23,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/auth', authRoutes);
 app.use('/api/user', userRoutes);

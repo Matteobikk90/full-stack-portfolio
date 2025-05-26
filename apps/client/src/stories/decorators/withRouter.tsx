@@ -1,4 +1,3 @@
-// src/stories/decorators/withRouter.tsx
 import type { Decorator } from '@storybook/react';
 import {
   createRootRoute,
