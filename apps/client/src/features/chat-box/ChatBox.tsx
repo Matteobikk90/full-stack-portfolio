@@ -144,7 +144,7 @@ export const ChatBox = () => {
               />
             </div>
             <Button variant="outline" size="icon" onClick={closeChat}>
-              <XIcon size={20} />
+              <XIcon size={20} weight="duotone" />
             </Button>
           </div>
 
@@ -229,7 +229,7 @@ export const ChatBox = () => {
                 disabled={!input.trim() || !socketRef.current?.connected}
                 aria-label="Send message"
               >
-                <PaperPlaneRightIcon size={20} />
+                <PaperPlaneRightIcon size={20} weight="duotone" />
               </Button>
             </form>
           </div>

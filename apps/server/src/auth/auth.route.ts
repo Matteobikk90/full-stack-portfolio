@@ -91,4 +91,43 @@ router.get(
   }
 );
 
+// --- Facebook OAuth ---
+router.get('/facebook', authRateLimiter, (req, res, next) => {
+  passport.authenticate('facebook', {
+    scope: ['email'],
+    session: false,
+    state: req.query.state as string,
+  })(req, res, next);
+});
+
+router.get(
+  '/facebook/callback',
+  authRateLimiter,
+  passport.authenticate('facebook', { session: false, failureRedirect: '/' }),
+  (req, res) => {
+    const user = req.user as { id: string };
+    const redirect = (req.query.state as string) || '/';
+    sendTokensAndRedirect(res, user.id, redirect);
+  }
+);
+
+// --- LinkedIn OAuth ---
+router.get('/linkedin', authRateLimiter, (req, res, next) => {
+  passport.authenticate('linkedin', {
+    session: false,
+    state: req.query.state as string,
+  })(req, res, next);
+});
+
+router.get(
+  '/linkedin/callback',
+  authRateLimiter,
+  passport.authenticate('linkedin', { session: false, failureRedirect: '/' }),
+  (req, res) => {
+    const user = req.user as { id: string };
+    const redirect = (req.query.state as string) || '/';
+    sendTokensAndRedirect(res, user.id, redirect);
+  }
+);
+
 export default router;

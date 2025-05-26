@@ -21,6 +21,8 @@ enum Role {
 enum Provider {
   github
   google
+  facebook
+  linkedin
 }
 
 model User {
