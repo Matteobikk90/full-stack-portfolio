@@ -5,7 +5,7 @@ import { aboutMeList } from '@/utils/lists';
 export const About = () => (
   <main>
     <AccentFrame className="stroke-about animate-fade-up" />
-    <h1 className="text-about animate-fade-up">About me</h1>
+    <h1 className="text-work animate-fade-up">About me</h1>
     <section className="flex flex-col lg:flex-row lg:gap-12 xl:gap-24 max-w-5xl mx-auto mt-4 lg:mt-16 px-4">
       <figure className="animate-rotate-in">
         <img

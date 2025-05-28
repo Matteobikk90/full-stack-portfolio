@@ -15,10 +15,12 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --color-projects: var(--section-projects);
-  --color-experience: var(--section-experience);
-  --color-about: var(--section-about);
+  --color-work: var(--section-work);
+  --color-resume: var(--section-resume);
   --color-contact: var(--section-contact);
+
   --color-error: var(--error);
   --color-success: var(--success);
 
@@ -77,10 +79,12 @@
 
   --background: rgba(255, 255, 255, 1);
   --foreground: rgba(23, 21, 34, 1);
+
   --section-projects: rgba(0, 100, 179, 1);
-  --section-experience: rgba(161, 122, 0, 1);
-  --section-about: rgba(34, 126, 0, 1);
+  --section-work: rgba(161, 122, 0, 1);
+  --section-resume: rgba(34, 126, 0, 1);
   --section-contact: rgba(203, 69, 79, 1);
+
   --error: rgba(139, 0, 0, 1);
   --success: rgba(0, 100, 0, 1);
 
@@ -92,11 +96,13 @@
 /* ---------- Dark theme override ---------- */
 .dark {
   --background: rgba(23, 21, 34, 1);
-  --foreground: rgba(250, 250, 253, 1);
+  --foreground: rgba(255, 255, 255, 1);
+
   --section-projects: rgba(123, 195, 255, 1);
-  --section-experience: rgba(221, 183, 73);
-  --section-about: rgba(131, 214, 112, 1);
+  --section-work: rgba(221, 183, 73);
+  --section-resume: rgba(131, 214, 112, 1);
   --section-contact: rgba(248, 110, 116, 1);
+
   --error: rgba(255, 82, 144);
   --success: rgba(205, 255, 0, 1);
 
@@ -113,19 +119,19 @@
   }
 
   h1 {
-    @apply lg:pt-8 text-3xl sm:text-5xl md:text-7xl text-foreground text-center;
+    @apply text-3xl sm:text-5xl md:text-6xl text-center;
   }
 
   h2 {
-    @apply text-xl sm:text-3xl md:text-4xl text-foreground;
+    @apply text-xl sm:text-3xl md:text-4xl;
   }
 
   h3 {
-    @apply text-sm md:text-lg sm:text-2xl text-foreground;
+    @apply text-sm md:text-lg sm:text-2xl;
   }
 
   p {
-    @apply text-sm md:text-lg text-foreground;
+    @apply text-sm md:text-lg;
   }
 
   main {

@@ -15,6 +15,13 @@ export const aboutMeList = [
   },
 ];
 
+export const resumeItems = [
+  { href: '/resume/experience', label: 'Experience' },
+  { href: '/resume/education', label: 'Education' },
+  { href: '/resume/skills', label: 'Skills' },
+  { href: '/resume/about', label: 'About Me' },
+];
+
 export const cornerSketches = {
   topLeft: {
     h: 'M0 5 C20 0, 40 10, 60 5',
