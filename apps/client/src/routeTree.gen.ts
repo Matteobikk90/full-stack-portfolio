@@ -15,9 +15,10 @@ import { Route as ContactImport } from './routes/contact';
 import { Route as IndexImport } from './routes/index';
 import { Route as PrivacyPolicyImport } from './routes/privacy-policy';
 import { Route as ProjectsImport } from './routes/projects';
+import { Route as ResumeImport } from './routes/resume';
+import { Route as ResumeExperienceImport } from './routes/resume.experience';
+import { Route as ResumeIndexImport } from './routes/resume.index';
 import { Route as ResumeAboutImport } from './routes/resume/about';
-import { Route as ResumeExperienceImport } from './routes/resume/experience';
-import { Route as ResumeIndexImport } from './routes/resume/index';
 import { Route as ResumeTechStackImport } from './routes/resume/tech-stack';
 import { Route as TermsOfServiceImport } from './routes/terms-of-service';
 
@@ -26,6 +27,12 @@ import { Route as TermsOfServiceImport } from './routes/terms-of-service';
 const TermsOfServiceRoute = TermsOfServiceImport.update({
   id: '/terms-of-service',
   path: '/terms-of-service',
+  getParentRoute: () => rootRoute,
+} as any);
+
+const ResumeRoute = ResumeImport.update({
+  id: '/resume',
+  path: '/resume',
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -54,27 +61,27 @@ const IndexRoute = IndexImport.update({
 } as any);
 
 const ResumeIndexRoute = ResumeIndexImport.update({
-  id: '/resume/',
-  path: '/resume/',
-  getParentRoute: () => rootRoute,
+  id: '/',
+  path: '/',
+  getParentRoute: () => ResumeRoute,
 } as any);
 
 const ResumeTechStackRoute = ResumeTechStackImport.update({
-  id: '/resume/tech-stack',
-  path: '/resume/tech-stack',
-  getParentRoute: () => rootRoute,
+  id: '/tech-stack',
+  path: '/tech-stack',
+  getParentRoute: () => ResumeRoute,
 } as any);
 
 const ResumeExperienceRoute = ResumeExperienceImport.update({
-  id: '/resume/experience',
-  path: '/resume/experience',
-  getParentRoute: () => rootRoute,
+  id: '/experience',
+  path: '/experience',
+  getParentRoute: () => ResumeRoute,
 } as any);
 
 const ResumeAboutRoute = ResumeAboutImport.update({
-  id: '/resume/about',
-  path: '/resume/about',
-  getParentRoute: () => rootRoute,
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => ResumeRoute,
 } as any);
 
 // Populate the FileRoutesByPath interface
@@ -109,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsImport;
       parentRoute: typeof rootRoute;
     };
+    '/resume': {
+      id: '/resume';
+      path: '/resume';
+      fullPath: '/resume';
+      preLoaderRoute: typeof ResumeImport;
+      parentRoute: typeof rootRoute;
+    };
     '/terms-of-service': {
       id: '/terms-of-service';
       path: '/terms-of-service';
@@ -118,47 +132,65 @@ declare module '@tanstack/react-router' {
     };
     '/resume/about': {
       id: '/resume/about';
-      path: '/resume/about';
+      path: '/about';
       fullPath: '/resume/about';
       preLoaderRoute: typeof ResumeAboutImport;
-      parentRoute: typeof rootRoute;
+      parentRoute: typeof ResumeImport;
     };
     '/resume/experience': {
       id: '/resume/experience';
-      path: '/resume/experience';
+      path: '/experience';
       fullPath: '/resume/experience';
       preLoaderRoute: typeof ResumeExperienceImport;
-      parentRoute: typeof rootRoute;
+      parentRoute: typeof ResumeImport;
     };
     '/resume/tech-stack': {
       id: '/resume/tech-stack';
-      path: '/resume/tech-stack';
+      path: '/tech-stack';
       fullPath: '/resume/tech-stack';
       preLoaderRoute: typeof ResumeTechStackImport;
-      parentRoute: typeof rootRoute;
+      parentRoute: typeof ResumeImport;
     };
     '/resume/': {
       id: '/resume/';
-      path: '/resume';
-      fullPath: '/resume';
+      path: '/';
+      fullPath: '/resume/';
       preLoaderRoute: typeof ResumeIndexImport;
-      parentRoute: typeof rootRoute;
+      parentRoute: typeof ResumeImport;
     };
   }
 }
 
 // Create and export the route tree
 
+interface ResumeRouteChildren {
+  ResumeAboutRoute: typeof ResumeAboutRoute;
+  ResumeExperienceRoute: typeof ResumeExperienceRoute;
+  ResumeTechStackRoute: typeof ResumeTechStackRoute;
+  ResumeIndexRoute: typeof ResumeIndexRoute;
+}
+
+const ResumeRouteChildren: ResumeRouteChildren = {
+  ResumeAboutRoute: ResumeAboutRoute,
+  ResumeExperienceRoute: ResumeExperienceRoute,
+  ResumeTechStackRoute: ResumeTechStackRoute,
+  ResumeIndexRoute: ResumeIndexRoute,
+};
+
+const ResumeRouteWithChildren =
+  ResumeRoute._addFileChildren(ResumeRouteChildren);
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute;
   '/contact': typeof ContactRoute;
   '/privacy-policy': typeof PrivacyPolicyRoute;
   '/projects': typeof ProjectsRoute;
+  '/resume': typeof ResumeRouteWithChildren;
   '/terms-of-service': typeof TermsOfServiceRoute;
   '/resume/about': typeof ResumeAboutRoute;
   '/resume/experience': typeof ResumeExperienceRoute;
   '/resume/tech-stack': typeof ResumeTechStackRoute;
-  '/resume': typeof ResumeIndexRoute;
+  '/resume/': typeof ResumeIndexRoute;
 }
 
 export interface FileRoutesByTo {
@@ -179,6 +211,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute;
   '/privacy-policy': typeof PrivacyPolicyRoute;
   '/projects': typeof ProjectsRoute;
+  '/resume': typeof ResumeRouteWithChildren;
   '/terms-of-service': typeof TermsOfServiceRoute;
   '/resume/about': typeof ResumeAboutRoute;
   '/resume/experience': typeof ResumeExperienceRoute;
@@ -193,11 +226,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/privacy-policy'
     | '/projects'
+    | '/resume'
     | '/terms-of-service'
     | '/resume/about'
     | '/resume/experience'
     | '/resume/tech-stack'
-    | '/resume';
+    | '/resume/';
   fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
@@ -215,6 +249,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/privacy-policy'
     | '/projects'
+    | '/resume'
     | '/terms-of-service'
     | '/resume/about'
     | '/resume/experience'
@@ -228,11 +263,8 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute;
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute;
   ProjectsRoute: typeof ProjectsRoute;
+  ResumeRoute: typeof ResumeRouteWithChildren;
   TermsOfServiceRoute: typeof TermsOfServiceRoute;
-  ResumeAboutRoute: typeof ResumeAboutRoute;
-  ResumeExperienceRoute: typeof ResumeExperienceRoute;
-  ResumeTechStackRoute: typeof ResumeTechStackRoute;
-  ResumeIndexRoute: typeof ResumeIndexRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -240,11 +272,8 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProjectsRoute: ProjectsRoute,
+  ResumeRoute: ResumeRouteWithChildren,
   TermsOfServiceRoute: TermsOfServiceRoute,
-  ResumeAboutRoute: ResumeAboutRoute,
-  ResumeExperienceRoute: ResumeExperienceRoute,
-  ResumeTechStackRoute: ResumeTechStackRoute,
-  ResumeIndexRoute: ResumeIndexRoute,
 };
 
 export const routeTree = rootRoute
@@ -261,11 +290,8 @@ export const routeTree = rootRoute
         "/contact",
         "/privacy-policy",
         "/projects",
-        "/terms-of-service",
-        "/resume/about",
-        "/resume/experience",
-        "/resume/tech-stack",
-        "/resume/"
+        "/resume",
+        "/terms-of-service"
       ]
     },
     "/": {
@@ -280,20 +306,33 @@ export const routeTree = rootRoute
     "/projects": {
       "filePath": "projects.tsx"
     },
+    "/resume": {
+      "filePath": "resume.tsx",
+      "children": [
+        "/resume/about",
+        "/resume/experience",
+        "/resume/tech-stack",
+        "/resume/"
+      ]
+    },
     "/terms-of-service": {
       "filePath": "terms-of-service.tsx"
     },
     "/resume/about": {
-      "filePath": "resume/about.tsx"
+      "filePath": "resume/about.tsx",
+      "parent": "/resume"
     },
     "/resume/experience": {
-      "filePath": "resume/experience.tsx"
+      "filePath": "resume.experience.tsx",
+      "parent": "/resume"
     },
     "/resume/tech-stack": {
-      "filePath": "resume/tech-stack.tsx"
+      "filePath": "resume/tech-stack.tsx",
+      "parent": "/resume"
     },
     "/resume/": {
-      "filePath": "resume/index.tsx"
+      "filePath": "resume.index.tsx",
+      "parent": "/resume"
     }
   }
 }
