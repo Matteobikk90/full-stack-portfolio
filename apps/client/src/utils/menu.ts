@@ -15,7 +15,7 @@ export const hoverStyles: Record<string, string> = {
   '/work':
     'md:data-[status=active]:text-[var(--section-work)] md:[data-status=active]:text-[var(--section-work)] md:focus:text-[var(--section-work)] md:hover:text-[var(--section-work)] before:bg-[var(--section-work)]',
   '/resume':
-    'md:data-[status=active]:text-[var(--section-resume)] md:focus:text-[var(--section-resume)] md:hover:text-[var(--section-resume)] before:bg-[var(--section-resume)]',
+    'md:data-[status=active]:text-[var(--primary)] md:focus:text-[var(--primary)] md:hover:text-[var(--primary)] before:bg-[var(--primary)]',
   '/contact':
     'md:data-[status=active]:text-[var(--section-contact)] md:focus:text-[var(--section-contact)] md:hover:text-[var(--section-contact)] before:bg-[var(--section-contact)]',
 };

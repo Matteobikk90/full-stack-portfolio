@@ -16,6 +16,11 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+
+  --color-gray: var(--gray);
+
   --color-projects: var(--section-projects);
   --color-work: var(--section-work);
   --color-resume: var(--section-resume);
@@ -80,6 +85,11 @@
   --background: rgba(255, 255, 255, 1);
   --foreground: rgba(23, 21, 34, 1);
 
+  --primary: rgba(0, 110, 201, 1);
+  --secondary: rgba(100, 160, 255, 1);
+
+  --gray: rgba(243, 244, 246, 1);
+
   --section-projects: rgba(0, 100, 179, 1);
   --section-work: rgba(161, 122, 0, 1);
   --section-resume: rgba(34, 126, 0, 1);
@@ -97,6 +107,11 @@
 .dark {
   --background: rgba(23, 21, 34, 1);
   --foreground: rgba(255, 255, 255, 1);
+
+  --primary: rgba(20, 203, 124, 1);
+  --secondary: rgba(9, 254, 155, 1);
+
+  --gray: rgba(32, 31, 38, 1);
 
   --section-projects: rgba(123, 195, 255, 1);
   --section-work: rgba(221, 183, 73);
@@ -135,7 +150,7 @@
   }
 
   main {
-    @apply h-[calc(100dvh_-_4.3rem)] p-4 mt-[4.3rem];
+    @apply h-[calc(100dvh_-_4.3rem)] p-4 mt-[6rem];
   }
 
   input:-webkit-autofill {
