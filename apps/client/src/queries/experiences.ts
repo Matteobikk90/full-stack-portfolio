@@ -1,7 +1,6 @@
 import type { ExperienceTypes } from '@/types/experiences.types';
 import { axiosGet } from '@/utils/api';
 import { URL_ENDPOINTS } from '@/utils/constants';
-import { useQuery } from '@tanstack/react-query';
 
 // Fetch function
 export const fetchExperiences = async (): Promise<ExperienceTypes[]> => {
@@ -15,10 +14,3 @@ export const fetchExperiences = async (): Promise<ExperienceTypes[]> => {
 
   return response;
 };
-
-export const useGetExperiences = (enabled = true) =>
-  useQuery<ExperienceTypes[]>({
-    queryKey: ['getExperiences'],
-    queryFn: fetchExperiences,
-    enabled,
-  });

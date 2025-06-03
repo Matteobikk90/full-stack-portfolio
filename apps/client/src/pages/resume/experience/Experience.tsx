@@ -4,7 +4,7 @@ import { useLoaderData } from '@tanstack/react-router';
 
 export const Experience = () => {
   const data: ExperienceTypes[] = useLoaderData({ from: '/resume/experience' });
-  console.log(data);
+
   return (
     <section className="flex flex-col gap-6 animate-fade-up">
       <h2>My experience</h2>
