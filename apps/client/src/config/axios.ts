@@ -1,7 +1,8 @@
+import { proxyTarget } from '@/utils/constants';
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: proxyTarget,
   withCredentials: true,
 });
 

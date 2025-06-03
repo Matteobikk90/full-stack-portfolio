@@ -77,7 +77,9 @@ const ResumeExperienceRoute = ResumeExperienceImport.update({
   id: '/experience',
   path: '/experience',
   getParentRoute: () => ResumeRoute,
-} as any);
+} as any).lazy(() =>
+  import('./routes/resume.experience.lazy').then((d) => d.Route)
+);
 
 const ResumeEducationRoute = ResumeEducationImport.update({
   id: '/education',

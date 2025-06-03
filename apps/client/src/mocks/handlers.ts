@@ -7,4 +7,9 @@ export const handlers = [
   http.get('/api/experiences', () => {
     return HttpResponse.json(mockExperiences);
   }),
+
+  http.all('*', ({ request }) => {
+    console.warn('[MSW] Unhandled request to', request.url);
+    return new HttpResponse(null, { status: 500 });
+  }),
 ];

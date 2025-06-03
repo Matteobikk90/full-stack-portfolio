@@ -1,6 +1,7 @@
 import { Button } from '@/lib/ui/button';
 import { Dialog, DialogContent, DialogTitle } from '@/lib/ui/dialog';
 import { useStore } from '@/stores';
+import { proxyTarget } from '@/utils/constants';
 import { GithubLogoIcon, GoogleLogoIcon, XIcon } from '@phosphor-icons/react';
 import { Link, useLocation } from '@tanstack/react-router';
 import { useShallow } from 'zustand/shallow';
@@ -33,7 +34,7 @@ export const CustomModal = () => {
         <p className="text-sm">Choose a provider to continue</p>
 
         <div className="grid md:grid-cols-2 gap-3 mb-0">
-          <a href={`http://localhost:4000/auth/github?state=${pathname}`}>
+          <a href={`${proxyTarget}/auth/github?state=${pathname}`}>
             <Button variant="outline" className="w-full" asChild>
               <div className="flex items-center justify-center gap-2">
                 <GithubLogoIcon size={20} weight="duotone" />
@@ -41,7 +42,7 @@ export const CustomModal = () => {
               </div>
             </Button>
           </a>
-          <a href={`http://localhost:4000/auth/google?state=${pathname}`}>
+          <a href={`${proxyTarget}/auth/google?state=${pathname}`}>
             <Button variant="outline" className="w-full" asChild>
               <div className="flex items-center justify-center gap-2">
                 <GoogleLogoIcon size={20} weight="duotone" />
@@ -49,7 +50,7 @@ export const CustomModal = () => {
               </div>
             </Button>
           </a>
-          {/* <a href={`http://localhost:4000/auth/facebook?state=${pathname}`}>
+          {/* <a href={`${proxyTarget}/auth/facebook?state=${pathname}`}>
             <Button variant="outline" className="w-full" asChild>
               <div className="flex items-center justify-center gap-2">
                 <FacebookLogoIcon size={20} weight="duotone" />
@@ -57,7 +58,7 @@ export const CustomModal = () => {
               </div>
             </Button>
           </a>
-          <a href={`http://localhost:4000/auth/linkedin?state=${pathname}`}>
+          <a href={`${proxyTarget}/auth/linkedin?state=${pathname}`}>
             <Button variant="outline" className="w-full" asChild>
               <div className="flex items-center justify-center gap-2">
                 <LinkedinLogoIcon size={20} weight="duotone" />

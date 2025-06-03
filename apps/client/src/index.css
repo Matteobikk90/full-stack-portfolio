@@ -128,9 +128,16 @@
 
 /* ✅ Tailwind base overrides */
 @layer base {
+  * {
+    @apply transition-all duration-350;
+  }
   html,
   body {
-    @apply bg-background text-foreground transition-colors duration-300 font-ibm;
+    @apply bg-background text-foreground transition-colors duration-300 font-epilogue relative;
+  }
+
+  body {
+    @apply flex justify-center items-center flex-col h-screen max-w-6xl mx-auto;
   }
 
   h1 {
@@ -150,7 +157,7 @@
   }
 
   main {
-    @apply h-[calc(100dvh_-_4.3rem)] p-4 mt-[6rem];
+    @apply p-4 h-auto;
   }
 
   input:-webkit-autofill {
