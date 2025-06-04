@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&display=swap');
 @import 'tw-animate-css';
 @import 'tailwindcss';
 
 /* ---------- Theme ---------- */
 @theme inline {
-  --font-ibm: 'IBM Plex Sans', sans-serif;
+  --font-jetmono: 'JetBrains Mono', monospace;
   --font-epilogue: 'Epilogue', sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -129,15 +129,11 @@
 /* ✅ Tailwind base overrides */
 @layer base {
   * {
-    @apply transition-all duration-350;
+    @apply transition-all duration-200;
   }
   html,
   body {
-    @apply bg-background text-foreground transition-colors duration-300 font-epilogue relative;
-  }
-
-  body {
-    @apply flex justify-center items-center flex-col h-screen max-w-6xl mx-auto;
+    @apply bg-background text-foreground font-jetmono relative h-screen;
   }
 
   h1 {

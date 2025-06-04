@@ -38,7 +38,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 flex items-center justify-between p-4 md:py-8 w-full z-10 max-w-6xl left-1/2 -translate-x-1/2">
+    <header className="flex items-center justify-between p-4 md:py-8 w-full z-10 container mx-auto relative">
       <MenuDesktop />
       <MenuMobile />
       <div className="flex items-center gap-4">
