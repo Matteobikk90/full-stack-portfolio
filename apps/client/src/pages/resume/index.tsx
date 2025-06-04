@@ -1,4 +1,4 @@
-import ResumeSidebar from '@/components/resume-sidebar';
+import ResumeSidebar from '@/features/resume-sidebar';
 import { Outlet } from '@tanstack/react-router';
 
 export const Resume = () => {

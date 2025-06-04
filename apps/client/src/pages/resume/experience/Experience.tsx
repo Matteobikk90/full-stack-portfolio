@@ -3,7 +3,7 @@ import type { ExperienceTypes } from '@/types/experiences.types';
 import { formatDateRange } from '@/utils/formatting';
 import { DotIcon } from '@phosphor-icons/react';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import { useLoaderData } from '@tanstack/react-router';
+import { Link, useLoaderData } from '@tanstack/react-router';
 
 export const Experience = () => {
   const data: ExperienceTypes[] = useLoaderData({ from: '/resume/experience' });
@@ -47,9 +47,11 @@ export const Experience = () => {
                       />
                       {title}
                     </h5>
-                    <Button className="flex items-center gap-1 text-xs border animate-pulse-slow">
-                      Info
-                    </Button>
+                    <Link to="/resume/experience/$id" params={{ id }}>
+                      <Button className="flex items-center gap-1 text-xs border animate-pulse-slow">
+                        Info
+                      </Button>
+                    </Link>
                   </div>
                 </article>
               )
