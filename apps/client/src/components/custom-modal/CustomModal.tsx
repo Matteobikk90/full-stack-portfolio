@@ -27,7 +27,7 @@ export const CustomModal = () => {
             onClick={toggleModal}
             className="absolute top-4 right-4"
           >
-            <XIcon size={20} weight="duotone" />
+            <XIcon className="size-5" weight="duotone" />
           </Button>
         </DialogTitle>
 
@@ -37,7 +37,7 @@ export const CustomModal = () => {
           <a href={`${proxyTarget}/auth/github?state=${pathname}`}>
             <Button variant="outline" className="w-full" asChild>
               <div className="flex items-center justify-center gap-2">
-                <GithubLogoIcon size={20} weight="duotone" />
+                <GithubLogoIcon className="size-5" weight="duotone" />
                 GitHub
               </div>
             </Button>
@@ -45,7 +45,7 @@ export const CustomModal = () => {
           <a href={`${proxyTarget}/auth/google?state=${pathname}`}>
             <Button variant="outline" className="w-full" asChild>
               <div className="flex items-center justify-center gap-2">
-                <GoogleLogoIcon size={20} weight="duotone" />
+                <GoogleLogoIcon className="size-5" weight="duotone" />
                 Google
               </div>
             </Button>
@@ -53,7 +53,7 @@ export const CustomModal = () => {
           {/* <a href={`${proxyTarget}/auth/facebook?state=${pathname}`}>
             <Button variant="outline" className="w-full" asChild>
               <div className="flex items-center justify-center gap-2">
-                <FacebookLogoIcon size={20} weight="duotone" />
+                <FacebookLogoIcon className="size-5" weight="duotone" />
                 Facebook
               </div>
             </Button>
@@ -61,7 +61,7 @@ export const CustomModal = () => {
           <a href={`${proxyTarget}/auth/linkedin?state=${pathname}`}>
             <Button variant="outline" className="w-full" asChild>
               <div className="flex items-center justify-center gap-2">
-                <LinkedinLogoIcon size={20} weight="duotone" />
+                <LinkedinLogoIcon className="size-5" weight="duotone" />
                 LinkedIn
               </div>
             </Button>

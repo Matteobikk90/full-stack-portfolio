@@ -121,7 +121,7 @@ export const ChatBox = () => {
           className="rounded-full shadow-elevation w-12 h-12 animate-pulse-slow"
           aria-label="Toggle chat"
         >
-          <ChatsIcon size={32} weight="duotone" />
+          <ChatsIcon className="size-5" weight="duotone" />
         </Button>
       )}
 
@@ -144,7 +144,7 @@ export const ChatBox = () => {
               />
             </div>
             <Button variant="outline" size="icon" onClick={closeChat}>
-              <XIcon size={20} weight="duotone" />
+              <XIcon className="size-5" weight="duotone" />
             </Button>
           </div>
 
@@ -229,7 +229,7 @@ export const ChatBox = () => {
                 disabled={!input.trim() || !socketRef.current?.connected}
                 aria-label="Send message"
               >
-                <PaperPlaneRightIcon size={20} weight="duotone" />
+                <PaperPlaneRightIcon className="size-5" weight="duotone" />
               </Button>
             </form>
           </div>

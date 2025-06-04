@@ -5,10 +5,11 @@ export type ExperienceTypes = {
   id: string;
   company: string;
   title: string;
-  location?: string | null;
+  location: string | null;
+  isRemote: boolean | null;
   startDate: string;
   endDate?: string | null;
-  description?: string | null;
+  description: string | null;
   duties: string[];
   technologies: string[];
   imageUrl?: string | null;

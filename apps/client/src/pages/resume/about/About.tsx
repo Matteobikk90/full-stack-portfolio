@@ -1,21 +1,33 @@
-import { aboutMeItems } from '@/utils/lists';
+import { Button } from '@/lib/ui/button';
+import { handleDownload } from '@/utils/download';
+import { aboutInfo } from '@/utils/lists';
+import { FilePdfIcon } from '@phosphor-icons/react';
+import { Label } from '@radix-ui/react-label';
 
 export const About = () => (
-  <main>
-    <h1 className="animate-fade-up">About me</h1>
-    <section className="flex flex-col lg:flex-row lg:gap-12 xl:gap-24 max-w-5xl mx-auto mt-4 lg:mt-16 px-4">
-      <article className="flex flex-col justify-evenly lg:mb-6 gap-3 mt-4 lg:mt-0">
-        {aboutMeItems.map(({ icon, text }, index) => (
-          <div
-            key={text}
-            style={{ animationDelay: `${index + 1 * 0.25}s` }}
-            className="animate-fade-up flex items-center gap-4 p-4 rounded-xl shadow-elevation hover:shadow-hover-elevation transition-shadow"
-          >
-            <div className="shrink-0">{icon}</div>
-            <p>{text}</p>
-          </div>
-        ))}
-      </article>
-    </section>
-  </main>
+  <section className="flex flex-col gap-6 animate-fade-up">
+    <h2>About me</h2>
+    <p>
+      Built responsive web applications delivering real-time data and
+      projections out to 2030.
+    </p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-3">
+      {aboutInfo.map(({ label, value }) => (
+        <div
+          key={label}
+          className="flex justify-between items-center sm:justify-start gap-2"
+        >
+          <Label className="text-foreground/50">{label}:</Label>
+          <h3 className="font-medium mb-0.5">{value}</h3>
+        </div>
+      ))}
+    </div>
+    <Button
+      onClick={handleDownload}
+      className="flex items-center gap-2 p-4 rounded-md max-w-max animate-bounce"
+    >
+      Download CV
+      <FilePdfIcon className="size-5" weight="duotone" />
+    </Button>
+  </section>
 );

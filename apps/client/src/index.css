@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import 'tw-animate-css';
 @import 'tailwindcss';
 
 /* ---------- Theme ---------- */
 @theme inline {
   --font-jetmono: 'JetBrains Mono', monospace;
-  --font-epilogue: 'Epilogue', sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -21,7 +19,6 @@
 
   --color-gray: var(--gray);
 
-  --color-projects: var(--section-projects);
   --color-work: var(--section-work);
   --color-resume: var(--section-resume);
   --color-contact: var(--section-contact);
@@ -90,9 +87,8 @@
 
   --gray: rgba(243, 244, 246, 1);
 
-  --section-projects: rgba(0, 100, 179, 1);
   --section-work: rgba(161, 122, 0, 1);
-  --section-resume: rgba(34, 126, 0, 1);
+  --section-resume: rgba(0, 110, 201, 1);
   --section-contact: rgba(203, 69, 79, 1);
 
   --error: rgba(139, 0, 0, 1);
@@ -113,9 +109,8 @@
 
   --gray: rgba(32, 31, 38, 1);
 
-  --section-projects: rgba(123, 195, 255, 1);
   --section-work: rgba(221, 183, 73);
-  --section-resume: rgba(131, 214, 112, 1);
+  --section-resume: rgba(20, 203, 124, 1);
   --section-contact: rgba(248, 110, 116, 1);
 
   --error: rgba(255, 82, 144);
@@ -137,19 +132,33 @@
   }
 
   h1 {
-    @apply text-3xl sm:text-5xl md:text-6xl text-center;
+    @apply text-3xl sm:text-4xl text-center;
   }
 
   h2 {
-    @apply text-xl sm:text-3xl md:text-4xl;
+    @apply text-xl sm:text-3xl;
   }
 
-  h3 {
-    @apply text-sm md:text-lg sm:text-2xl;
+  /* h3 {
+    @apply text-sm sm:text-lg md:text-2xl;
+  } */
+
+  h3,
+  h4 {
+    @apply text-xs md:text-sm lg:text-base;
+  }
+
+  h5,
+  h6 {
+    @apply text-xs lg:text-sm;
   }
 
   p {
-    @apply text-sm md:text-lg;
+    @apply text-sm md:text-lg text-foreground/50;
+  }
+
+  label {
+    @apply text-sm lg:text-base text-foreground/50;
   }
 
   main {

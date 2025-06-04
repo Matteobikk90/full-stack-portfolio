@@ -42,10 +42,11 @@ model Experience {
   id           String              @id @default(cuid())
   company      String
   title        String
-  location     String?
+  location     String
+  isRemote     Boolean
   startDate    DateTime
   endDate      DateTime?
-  description  String?
+  description  String
   duties       String[]
   technologies String[]
   imageUrl     String?

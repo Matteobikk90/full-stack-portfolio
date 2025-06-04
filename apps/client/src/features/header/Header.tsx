@@ -38,7 +38,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="flex items-center justify-between p-4 md:py-8 w-full z-10 container mx-auto relative">
+    <header className="flex items-center justify-between p-4 md:py-8 w-full container mx-auto relative">
       <MenuDesktop />
       <MenuMobile />
       <div className="flex items-center gap-4">
@@ -49,9 +49,9 @@ export const Header = () => {
           onClick={handleToggle}
         >
           {mode === 'dark' ? (
-            <SunIcon size={32} weight="duotone" />
+            <SunIcon className="size-5" weight="duotone" />
           ) : (
-            <MoonIcon size={32} weight="duotone" />
+            <MoonIcon className="size-5" weight="duotone" />
           )}
         </Button>
         <Button
@@ -60,7 +60,7 @@ export const Header = () => {
           onClick={handleClick}
           aria-label={isAuthenticated ? 'Open chat' : 'Login to chat'}
         >
-          <ChatsIcon size={32} weight="duotone" />
+          <ChatsIcon className="size-5" weight="duotone" />
         </Button>
       </div>
     </header>

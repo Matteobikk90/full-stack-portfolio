@@ -1,19 +1,5 @@
-import { IslandIcon, LaptopIcon, SoccerBallIcon } from '@phosphor-icons/react';
-
-export const aboutMeItems = [
-  {
-    icon: <IslandIcon size={32} weight="duotone" />,
-    text: 'I love to travel — get lost, eat great food, and pretend I understand local signs.',
-  },
-  {
-    icon: <LaptopIcon size={32} weight="duotone" />,
-    text: 'Enjoy hacking and replacing hardware — but now I also build web apps instead of just breaking stuff. Mostly.',
-  },
-  {
-    icon: <SoccerBallIcon size={32} weight="duotone" />,
-    text: 'I’m Italian — of course I love football. Born in Turin, so I’ll let you guess which of the two teams I support.',
-  },
-];
+import { experience, skillsFontSize } from '@/utils/constants';
+import { Icon } from '@iconify/react';
 
 export const resumeItems = [
   { href: '/resume/experience', label: 'Experience' },
@@ -39,17 +25,50 @@ export const educationItems = [
   },
 ];
 
-// export const skillItems = [
-//   { id: 'html', icon: <HtmlIcon /> },
-//   { id: 'css', icon: <CssIcon /> },
-//   { id: 'js', icon: <JsIcon /> },
-//   { id: 'react', icon: <ReactIcon /> },
-//   { id: 'next', icon: <NextJsIcon /> },
-//   { id: 'tailwind', icon: <TailwindIcon /> },
-//   { id: 'node', icon: <NodeIcon /> },
-//   { id: 'postgres', icon: <PostgresIcon /> },
-//   { id: 'prisma', icon: <PrismaIcon /> },
-//   { id: 'vitest', icon: <VitestIcon /> },
-//   { id: 'playwright', icon: <PlaywrightIcon /> },
-//   { id: 'figma', icon: <FigmaIcon /> },
-// ];
+export const skillItems = [
+  { id: 'html', icon: <Icon fontSize={skillsFontSize} icon="logos:html-5" /> },
+  { id: 'css', icon: <Icon fontSize={skillsFontSize} icon="logos:css-3" /> },
+  {
+    id: 'js',
+    icon: <Icon fontSize={skillsFontSize} icon="logos:javascript" />,
+  },
+  { id: 'react', icon: <Icon fontSize={skillsFontSize} icon="logos:react" /> },
+  {
+    id: 'next',
+    icon: <Icon fontSize={skillsFontSize} icon="logos:typescript-icon" />,
+  },
+  {
+    id: 'tailwind',
+    icon: <Icon fontSize={skillsFontSize} icon="logos:tailwindcss-icon" />,
+  },
+  {
+    id: 'node',
+    icon: <Icon fontSize={skillsFontSize} icon="logos:nodejs-icon" />,
+  },
+  {
+    id: 'postgres',
+    icon: <Icon fontSize={skillsFontSize} icon="logos:postgresql" />,
+  },
+  {
+    id: 'prisma',
+    icon: <Icon fontSize={skillsFontSize} icon="logos:prisma" />,
+  },
+  {
+    id: 'vitest',
+    icon: <Icon fontSize={skillsFontSize} icon="logos:vitest" />,
+  },
+  {
+    id: 'playwright',
+    icon: <Icon fontSize={skillsFontSize} icon="logos:playwright" />,
+  },
+  { id: 'figma', icon: <Icon fontSize={skillsFontSize} icon="logos:figma" /> },
+];
+
+export const aboutInfo = [
+  { label: 'Name', value: 'Matteo Soresini' },
+  { label: 'Phone', value: '(+39) 347 043 8232' },
+  { label: 'Email', value: 'matteo.soresini@hotmail.it' },
+  { label: 'Experience', value: experience },
+  { label: 'Nationality', value: 'Italian' },
+  { label: 'Languages', value: 'English, Spanish' },
+];
