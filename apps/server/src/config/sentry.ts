@@ -1,3 +1,4 @@
+import { PORT } from '@/utils/constants';
 import * as Sentry from '@sentry/node';
 import { nodeProfilingIntegration } from '@sentry/profiling-node';
 
@@ -9,6 +10,7 @@ export function initSentry() {
     tracesSampleRate: 1.0,
     profilesSampleRate: 1.0,
     profileLifecycle: 'trace',
+    environment: String(PORT) === '4000' ? 'development' : 'production',
   });
 }
 

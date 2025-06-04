@@ -7,14 +7,14 @@
     "dev": "ts-node-dev --respawn --transpile-only --require tsconfig-paths/register src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "seed": "tsx prisma/seed.ts",
     "test": "vitest",
     "lint": "eslint . --ext ts,tsx",
     "lint-fix": "eslint --fix .",
     "format": "prettier --write .",
     "db:r": "prisma migrate reset",
     "db:g": "prisma generate",
-    "db:p": "prisma db push"
+    "db:p": "prisma db push",
+    "db:s": "tsx prisma/seed.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,6 +1,6 @@
 import { IslandIcon, LaptopIcon, SoccerBallIcon } from '@phosphor-icons/react';
 
-export const aboutMeList = [
+export const aboutMeItems = [
   {
     icon: <IslandIcon size={32} weight="duotone" />,
     text: 'I love to travel — get lost, eat great food, and pretend I understand local signs.',
@@ -15,29 +15,41 @@ export const aboutMeList = [
   },
 ];
 
-export const cornerSketches = {
-  topLeft: {
-    h: 'M0 5 C20 0, 40 10, 60 5',
-    v: 'M5 0 C0 20, 10 40, 5 60',
-    styleH: 'top-2 left-2 w-20',
-    styleV: 'top-2 left-2 h-20',
+export const resumeItems = [
+  { href: '/resume/experience', label: 'Experience' },
+  { href: '/resume/education', label: 'Education' },
+  { href: '/resume/skills', label: 'Skills' },
+  { href: '/resume/about', label: 'About Me' },
+];
+
+export const educationItems = [
+  {
+    id: 'webDev',
+    year: '2016',
+    title: 'Web Development Bootcamp',
+    institution: 'General Assembly',
+    location: 'London, UK',
   },
-  topRight: {
-    h: 'M0 5 C20 0, 40 10, 60 5',
-    v: 'M5 0 C0 20, 10 40, 5 60',
-    styleH: 'top-2 right-2 w-20 rotate-180',
-    styleV: 'top-2 right-2 h-20 rotate-180',
+  {
+    id: 'highSchool',
+    year: '2011',
+    title: 'High School Diploma',
+    institution: 'Liceo Scientifico',
+    location: 'Turin, IT',
   },
-  bottomLeft: {
-    h: 'M0 5 C20 0, 40 10, 60 5',
-    v: 'M5 0 C0 20, 10 40, 5 60',
-    styleH: 'bottom-2 left-2 w-20 rotate-180',
-    styleV: 'bottom-2 left-2 h-20 rotate-180',
-  },
-  bottomRight: {
-    h: 'M0 5 C20 0, 40 10, 60 5',
-    v: 'M5 0 C0 20, 10 40, 5 60',
-    styleH: 'bottom-2 right-2 w-20',
-    styleV: 'bottom-2 right-2 h-20',
-  },
-};
+];
+
+// export const skillItems = [
+//   { id: 'html', icon: <HtmlIcon /> },
+//   { id: 'css', icon: <CssIcon /> },
+//   { id: 'js', icon: <JsIcon /> },
+//   { id: 'react', icon: <ReactIcon /> },
+//   { id: 'next', icon: <NextJsIcon /> },
+//   { id: 'tailwind', icon: <TailwindIcon /> },
+//   { id: 'node', icon: <NodeIcon /> },
+//   { id: 'postgres', icon: <PostgresIcon /> },
+//   { id: 'prisma', icon: <PrismaIcon /> },
+//   { id: 'vitest', icon: <VitestIcon /> },
+//   { id: 'playwright', icon: <PlaywrightIcon /> },
+//   { id: 'figma', icon: <FigmaIcon /> },
+// ];

@@ -33,13 +33,13 @@ model User {
   role        Role          @default(user)
   avatarUrl   String?
   createdAt   DateTime      @default(now())
-  Comment     Comment[]
-  Like        Like[]
-  ChatMessage ChatMessage[]
+  comments    Comment[]
+  likes       Like[]
+  chatMessage ChatMessage[]
 }
 
 model Experience {
-  id           String    @id @default(cuid())
+  id           String              @id @default(cuid())
   company      String
   title        String
   location     String?
@@ -49,9 +49,18 @@ model Experience {
   duties       String[]
   technologies String[]
   imageUrl     String?
-  createdAt    DateTime  @default(now())
-  Comment      Comment[]
-  Like         Like[]
+  createdAt    DateTime            @default(now())
+  comments     Comment[]
+  likes        Like[]
+  projects     ProjectExperience[]
+}
+
+model ProjectExperience {
+  id           String     @id @default(cuid())
+  title        String
+  url          String
+  experience   Experience @relation(fields: [experienceId], references: [id])
+  experienceId String
 }
 
 model Project {
@@ -66,8 +75,8 @@ model Project {
   isFeatured   Boolean   @default(false)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
-  Comment      Comment[]
-  Like         Like[]
+  comments     Comment[]
+  likes        Like[]
 }
 
 model Comment {

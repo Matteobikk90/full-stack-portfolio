@@ -1,10 +1,8 @@
-import AccentFrame from '@/components/accent-frame';
 import Form from '@/components/form';
 
 export const Contact = () => {
   return (
     <main>
-      <AccentFrame className="stroke-contact animate-fade-up" />
       <section className="max-w-3xl m-auto space-y-12 animate-fade-up">
         <h1 className="text-contact">Contact</h1>
         <p>

@@ -12,11 +12,11 @@ import { useShallow } from 'zustand/shallow';
 
 export const ChatBox = () => {
   const { isChatOpen, toggleModal, openChat, closeChat } = useStore(
-    useShallow((state) => ({
-      isChatOpen: state.isChatOpen,
-      openChat: state.openChat,
-      toggleModal: state.toggleModal,
-      closeChat: state.closeChat,
+    useShallow(({ isChatOpen, openChat, toggleModal, closeChat }) => ({
+      isChatOpen,
+      openChat,
+      toggleModal,
+      closeChat,
     }))
   );
 
@@ -113,7 +113,7 @@ export const ChatBox = () => {
   const handleIconClick = () => (isAuthenticated ? openChat() : toggleModal());
 
   return (
-    <aside className="fixed bottom-6 right-6 z-10">
+    <aside className="absolute bottom-6 right-4 z-10">
       {!isChatOpen && (
         <Button
           variant="outline"
