@@ -1,35 +1,36 @@
-// Info.tsx
-import type { ExperienceTypes } from '@/types/experiences.types';
-import { useLoaderData, useMatches } from '@tanstack/react-router';
+import { HouseIcon } from '@phosphor-icons/react';
+import { Link, useMatches } from '@tanstack/react-router';
 
 export const Breadcrumbs = () => {
-  const data = useLoaderData({
-    from: '/resume/experience/$id',
-  }) as ExperienceTypes;
   const matches = useMatches();
 
-  const breadcrumbs = matches.map((match) => {
-    const label =
-      match.routeId === '/resume/experience/$id'
-        ? data.company
-        : match.routeId?.split('.').pop();
-    return { name: label, href: match.pathname };
-  });
+  const breadcrumbs = matches
+    .map((match) => {
+      const crumb = match.loaderData?.crumb;
+      if (!crumb) return null;
+
+      return {
+        label: crumb,
+        path: match.pathname,
+      };
+    })
+    .filter(Boolean) as { label: string; path: string }[];
 
   return (
-    <div>
-      <nav className="text-sm mb-4 text-muted-foreground">
-        <ul className="flex items-center gap-2">
-          {breadcrumbs.map((crumb, i) => (
-            <li key={crumb.href} className="flex items-center gap-2">
-              <a href={crumb.href} className="hover:underline">
-                {crumb.name}
-              </a>
-              {i < breadcrumbs.length - 1 && <span>/</span>}
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </div>
+    <nav className="text-sm mb-4 text-secondary">
+      <ul className="flex items-center gap-2">
+        <Link to={'/'} className="flex items-center gap-2">
+          <HouseIcon weight="duotone" className="size-5" />/
+        </Link>
+        {breadcrumbs.map(({ label, path }, i) => (
+          <li key={path} className="flex items-center gap-2">
+            <Link to={path} className="hover:underline">
+              {label}
+            </Link>
+            {i < breadcrumbs.length - 1 && <span>/</span>}
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };

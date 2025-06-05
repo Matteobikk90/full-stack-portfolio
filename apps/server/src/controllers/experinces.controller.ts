@@ -7,6 +7,7 @@ export const getAllExperiences = async (_req: Request, res: Response) => {
     select: {
       id: true,
       company: true,
+      slug: true,
       title: true,
       location: true,
       isRemote: true,
@@ -18,9 +19,9 @@ export const getAllExperiences = async (_req: Request, res: Response) => {
 };
 
 export const getExperienceById = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { id: slug } = req.params;
   const experience = await prisma.experience.findUnique({
-    where: { id },
+    where: { slug },
     include: {
       comments: { include: { user: true } },
       likes: true,

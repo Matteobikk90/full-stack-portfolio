@@ -6,6 +6,8 @@ export type ExperienceTypes = {
   company: string;
   title: string;
   location: string | null;
+  slug: string;
+  url: string;
   isRemote: boolean | null;
   startDate: string;
   endDate?: string | null;
@@ -16,4 +18,9 @@ export type ExperienceTypes = {
   createdAt: string;
   Comment: CommentType[];
   Like: LikeType[];
+  projects: {
+    id: string;
+    title: string;
+    url: string;
+  }[];
 };

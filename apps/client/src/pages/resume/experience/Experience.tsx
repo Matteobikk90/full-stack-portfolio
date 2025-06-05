@@ -1,12 +1,13 @@
 import { Button } from '@/lib/ui/button';
-import type { ExperienceTypes } from '@/types/experiences.types';
 import { formatDateRange } from '@/utils/formatting';
 import { DotIcon } from '@phosphor-icons/react';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { Link, useLoaderData } from '@tanstack/react-router';
 
 export const Experience = () => {
-  const data: ExperienceTypes[] = useLoaderData({ from: '/resume/experience' });
+  const { data } = useLoaderData({
+    from: '/resume/experience',
+  });
 
   return (
     <section className="flex flex-col gap-6 animate-fade-up">
@@ -15,13 +16,21 @@ export const Experience = () => {
         Built responsive web applications delivering real-time data and
         projections out to 2030.
       </p>
-
       <ScrollArea.Root type="always">
         <ScrollArea.Viewport className="h-[19rem]">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mr-4">
             {data.map(
               (
-                { id, company, startDate, endDate, title, location, isRemote },
+                {
+                  id,
+                  company,
+                  startDate,
+                  endDate,
+                  title,
+                  location,
+                  isRemote,
+                  slug,
+                },
                 index
               ) => (
                 <article
@@ -47,8 +56,8 @@ export const Experience = () => {
                       />
                       {title}
                     </h5>
-                    <Link to="/resume/experience/$id" params={{ id }}>
-                      <Button className="flex items-center gap-1 text-xs border animate-pulse-slow">
+                    <Link to="/resume/experience/$id" params={{ id: slug }}>
+                      <Button className="flex items-center gap-1 text-xs border rounded-lg hover:-translate-y-1">
                         Info
                       </Button>
                     </Link>

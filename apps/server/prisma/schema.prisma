@@ -40,7 +40,9 @@ model User {
 
 model Experience {
   id           String              @id @default(cuid())
+  slug         String              @unique
   company      String
+  url          String
   title        String
   location     String
   isRemote     Boolean

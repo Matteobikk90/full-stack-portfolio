@@ -149,7 +149,8 @@
   }
 
   h5,
-  h6 {
+  h6,
+  li {
     @apply text-xs lg:text-sm;
   }
 
