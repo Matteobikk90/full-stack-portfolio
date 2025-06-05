@@ -1,4 +1,4 @@
-import { MenuDesktop } from '@/components/menu/desktop';
+import MenuDesktop from '@/components/menu/desktop';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof MenuDesktop> = {

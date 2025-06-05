@@ -1,4 +1,4 @@
-import { MenuMobile } from '@/components/menu/mobile';
+import MenuMobile from '@/components/menu/mobile';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof MenuMobile> = {
