@@ -13,7 +13,7 @@
   "packageManager": "pnpm@10.6.5",
   "devDependencies": {
     "husky": "^8.0.0",
-    "format": "pnpm -r format",
-    "lint-fix": "pnpm -r lint-fix"
+    "format": "pnpm run -r format",
+    "lint-fix": "pnpm run -r lint-fix"
   }
 }
