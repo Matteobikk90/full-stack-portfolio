@@ -12,10 +12,10 @@ export const MenuMobile = () => {
     <>
       <nav
         className={cn(
-          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100dvh_-_4.4rem)] z-10 p-6 flex flex-col items-center justify-evenly gap-6',
+          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100dvh_-_4.4rem)] p-6 flex flex-col items-center justify-evenly gap-6',
           isOpen
-            ? 'opacity-100 bg-background'
-            : 'opacity-0 bg-transparent delay-[800ms]'
+            ? 'opacity-100 bg-background z-12'
+            : 'opacity-0 bg-transparent delay-[800ms] z-10'
         )}
       >
         {menuLinks.map(({ path, label, icon: Icon }, index) => (
@@ -34,7 +34,7 @@ export const MenuMobile = () => {
                 : `${(menuLinks.length - 1 - index) * 200}ms`,
             }}
             activeProps={{
-              className: 'font-semibold',
+              className: 'font-semibold text-background',
             }}
           >
             <span
@@ -44,7 +44,7 @@ export const MenuMobile = () => {
               }}
             />
             <span className="relative z-10 flex items-center gap-2">
-              <Icon size={16} weight="duotone" />
+              <Icon className="size-5" weight="duotone" />
               {label}
             </span>
           </Link>
@@ -54,14 +54,14 @@ export const MenuMobile = () => {
       <Button
         variant="outline"
         size="icon"
-        className="md:hidden"
+        className="md:hidden relative z-10"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Toggle menu"
       >
         {isOpen ? (
-          <XIcon size={20} weight="duotone" />
+          <XIcon className="size-5" weight="duotone" />
         ) : (
-          <DotsThreeOutlineVerticalIcon size={20} weight="duotone" />
+          <DotsThreeOutlineVerticalIcon className="size-5" weight="duotone" />
         )}
       </Button>
     </>

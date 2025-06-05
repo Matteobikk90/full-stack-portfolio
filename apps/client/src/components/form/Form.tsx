@@ -156,11 +156,14 @@ export const ContactForm = () => {
               />
               <Label htmlFor="acceptedTerms">
                 I agree to the
-                <Link to="/privacy-policy" className="underline">
+                <Link to="/privacy-policy" className="underline text-blue-500">
                   privacy policy
                 </Link>
                 and
-                <Link to="/terms-of-service" className="underline">
+                <Link
+                  to="/terms-of-service"
+                  className="underline text-blue-500"
+                >
                   terms of service
                 </Link>
               </Label>
@@ -190,7 +193,7 @@ export const ContactForm = () => {
               {isSubmitting ? (
                 <span className="flex items-center gap-2">
                   <span className="animate-spin">
-                    <SpinnerIcon size={32} weight="duotone" />
+                    <SpinnerIcon className="size-5" weight="duotone" />
                   </span>
                   Sending...
                 </span>

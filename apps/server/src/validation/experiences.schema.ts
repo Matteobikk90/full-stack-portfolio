@@ -16,7 +16,7 @@ export const createExperienceSchema = z.object({
 });
 
 export const idParamSchema = z.object({
-  id: z.string().cuid(),
+  id: z.string(),
 });
 
 export const updateExperienceSchema = createExperienceSchema.partial();

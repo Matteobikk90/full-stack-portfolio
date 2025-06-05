@@ -7,7 +7,10 @@ async function main() {
     data: {
       company: 'World Data Lab',
       title: 'Front End Developer',
-      location: 'Vienna, AT (Remote)',
+      slug: 'world-data-lab',
+      location: 'Vienna, AT',
+      url: 'https://worlddatalab.com/',
+      isRemote: true,
       startDate: new Date('2022-03-01'),
       endDate: new Date('2025-07-01'),
       description:
@@ -77,7 +80,10 @@ async function main() {
       {
         company: 'Hydrogrid',
         title: 'Front End Developer',
+        slug: 'hydrogrid',
         location: 'Vienna, AT',
+        url: 'https://hydrogrid.ai/',
+        isRemote: false,
         startDate: new Date('2020-11-01'),
         endDate: new Date('2022-02-28'),
         description:
@@ -105,9 +111,12 @@ async function main() {
       {
         company: 'Eis World',
         title: 'Front End Developer',
+        slug: 'eis-world',
         location: 'Turin, IT',
-        startDate: new Date('2018-01-01'),
-        endDate: new Date('2019-11-30'),
+        url: 'https://orbyta.it/',
+        isRemote: false,
+        startDate: new Date('2019-01-01'),
+        endDate: new Date('2020-01-01'),
         description:
           'Built websites from scratch, led GIT merging processes, and handled backend tasks using PHP and MySQL.',
         duties: [
@@ -129,9 +138,12 @@ async function main() {
       {
         company: 'Loro Piana',
         title: 'Front End Developer',
+        slug: 'loro-piana',
         location: 'Turin, IT',
+        url: 'https://it.loropiana.com/it/',
+        isRemote: false,
         startDate: new Date('2018-01-01'),
-        endDate: new Date('2019-11-30'),
+        endDate: new Date('2019-01-01'),
         description:
           'Built a new e-commerce platform focused on front-end design and WCAG compliance.',
         duties: [
@@ -152,9 +164,12 @@ async function main() {
       {
         company: 'VideoSmart',
         title: 'Front End Developer',
+        slug: 'videosmart',
         location: 'London, UK',
+        url: 'https://www.videosmart.com/',
+        isRemote: false,
         startDate: new Date('2017-04-01'),
-        endDate: new Date('2017-12-31'),
+        endDate: new Date('2018-01-01'),
         description:
           'Created responsive HTML5 landing pages and email templates. Ensured cross-browser compatibility and responsiveness across devices.',
         duties: [
@@ -166,8 +181,6 @@ async function main() {
       },
     ],
   });
-
-  console.log('Seeded experiences successfully!');
 }
 
 main()

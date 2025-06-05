@@ -1,9 +1,9 @@
-import ResumeSidebar from '@/components/resume-sidebar';
+import ResumeSidebar from '@/features/resume-sidebar';
 import { Outlet } from '@tanstack/react-router';
 
 export const Resume = () => {
   return (
-    <main className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-24 p-4 container mx-auto">
+    <main className="flex flex-col justify-between lg:flex-row gap-12 p-4 container mx-auto relative z-11">
       <ResumeSidebar />
       <Outlet />
     </main>

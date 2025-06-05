@@ -8,6 +8,7 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router';
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root';
@@ -18,10 +19,17 @@ import { Route as ResumeImport } from './routes/resume';
 import { Route as ResumeAboutImport } from './routes/resume.about';
 import { Route as ResumeEducationImport } from './routes/resume.education';
 import { Route as ResumeExperienceImport } from './routes/resume.experience';
+import { Route as ResumeExperienceIdImport } from './routes/resume.experience.$id';
 import { Route as ResumeIndexImport } from './routes/resume.index';
 import { Route as ResumeSkillsImport } from './routes/resume.skills';
 import { Route as TermsOfServiceImport } from './routes/terms-of-service';
 import { Route as WorkImport } from './routes/work';
+
+// Create Virtual Routes
+
+const ResumeExperienceIndexLazyImport = createFileRoute(
+  '/resume/experience/'
+)();
 
 // Create/Update Routes
 
@@ -77,9 +85,7 @@ const ResumeExperienceRoute = ResumeExperienceImport.update({
   id: '/experience',
   path: '/experience',
   getParentRoute: () => ResumeRoute,
-} as any).lazy(() =>
-  import('./routes/resume.experience.lazy').then((d) => d.Route)
-);
+} as any);
 
 const ResumeEducationRoute = ResumeEducationImport.update({
   id: '/education',
@@ -92,6 +98,22 @@ const ResumeAboutRoute = ResumeAboutImport.update({
   path: '/about',
   getParentRoute: () => ResumeRoute,
 } as any);
+
+const ResumeExperienceIndexLazyRoute = ResumeExperienceIndexLazyImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ResumeExperienceRoute,
+} as any).lazy(() =>
+  import('./routes/resume.experience.index.lazy').then((d) => d.Route)
+);
+
+const ResumeExperienceIdRoute = ResumeExperienceIdImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ResumeExperienceRoute,
+} as any).lazy(() =>
+  import('./routes/resume.experience.$id.lazy').then((d) => d.Route)
+);
 
 // Populate the FileRoutesByPath interface
 
@@ -174,15 +196,42 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResumeIndexImport;
       parentRoute: typeof ResumeImport;
     };
+    '/resume/experience/$id': {
+      id: '/resume/experience/$id';
+      path: '/$id';
+      fullPath: '/resume/experience/$id';
+      preLoaderRoute: typeof ResumeExperienceIdImport;
+      parentRoute: typeof ResumeExperienceImport;
+    };
+    '/resume/experience/': {
+      id: '/resume/experience/';
+      path: '/';
+      fullPath: '/resume/experience/';
+      preLoaderRoute: typeof ResumeExperienceIndexLazyImport;
+      parentRoute: typeof ResumeExperienceImport;
+    };
   }
 }
 
 // Create and export the route tree
 
+interface ResumeExperienceRouteChildren {
+  ResumeExperienceIdRoute: typeof ResumeExperienceIdRoute;
+  ResumeExperienceIndexLazyRoute: typeof ResumeExperienceIndexLazyRoute;
+}
+
+const ResumeExperienceRouteChildren: ResumeExperienceRouteChildren = {
+  ResumeExperienceIdRoute: ResumeExperienceIdRoute,
+  ResumeExperienceIndexLazyRoute: ResumeExperienceIndexLazyRoute,
+};
+
+const ResumeExperienceRouteWithChildren =
+  ResumeExperienceRoute._addFileChildren(ResumeExperienceRouteChildren);
+
 interface ResumeRouteChildren {
   ResumeAboutRoute: typeof ResumeAboutRoute;
   ResumeEducationRoute: typeof ResumeEducationRoute;
-  ResumeExperienceRoute: typeof ResumeExperienceRoute;
+  ResumeExperienceRoute: typeof ResumeExperienceRouteWithChildren;
   ResumeSkillsRoute: typeof ResumeSkillsRoute;
   ResumeIndexRoute: typeof ResumeIndexRoute;
 }
@@ -190,7 +239,7 @@ interface ResumeRouteChildren {
 const ResumeRouteChildren: ResumeRouteChildren = {
   ResumeAboutRoute: ResumeAboutRoute,
   ResumeEducationRoute: ResumeEducationRoute,
-  ResumeExperienceRoute: ResumeExperienceRoute,
+  ResumeExperienceRoute: ResumeExperienceRouteWithChildren,
   ResumeSkillsRoute: ResumeSkillsRoute,
   ResumeIndexRoute: ResumeIndexRoute,
 };
@@ -207,9 +256,11 @@ export interface FileRoutesByFullPath {
   '/work': typeof WorkRoute;
   '/resume/about': typeof ResumeAboutRoute;
   '/resume/education': typeof ResumeEducationRoute;
-  '/resume/experience': typeof ResumeExperienceRoute;
+  '/resume/experience': typeof ResumeExperienceRouteWithChildren;
   '/resume/skills': typeof ResumeSkillsRoute;
   '/resume/': typeof ResumeIndexRoute;
+  '/resume/experience/$id': typeof ResumeExperienceIdRoute;
+  '/resume/experience/': typeof ResumeExperienceIndexLazyRoute;
 }
 
 export interface FileRoutesByTo {
@@ -220,9 +271,10 @@ export interface FileRoutesByTo {
   '/work': typeof WorkRoute;
   '/resume/about': typeof ResumeAboutRoute;
   '/resume/education': typeof ResumeEducationRoute;
-  '/resume/experience': typeof ResumeExperienceRoute;
   '/resume/skills': typeof ResumeSkillsRoute;
   '/resume': typeof ResumeIndexRoute;
+  '/resume/experience/$id': typeof ResumeExperienceIdRoute;
+  '/resume/experience': typeof ResumeExperienceIndexLazyRoute;
 }
 
 export interface FileRoutesById {
@@ -235,9 +287,11 @@ export interface FileRoutesById {
   '/work': typeof WorkRoute;
   '/resume/about': typeof ResumeAboutRoute;
   '/resume/education': typeof ResumeEducationRoute;
-  '/resume/experience': typeof ResumeExperienceRoute;
+  '/resume/experience': typeof ResumeExperienceRouteWithChildren;
   '/resume/skills': typeof ResumeSkillsRoute;
   '/resume/': typeof ResumeIndexRoute;
+  '/resume/experience/$id': typeof ResumeExperienceIdRoute;
+  '/resume/experience/': typeof ResumeExperienceIndexLazyRoute;
 }
 
 export interface FileRouteTypes {
@@ -253,7 +307,9 @@ export interface FileRouteTypes {
     | '/resume/education'
     | '/resume/experience'
     | '/resume/skills'
-    | '/resume/';
+    | '/resume/'
+    | '/resume/experience/$id'
+    | '/resume/experience/';
   fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
@@ -263,9 +319,10 @@ export interface FileRouteTypes {
     | '/work'
     | '/resume/about'
     | '/resume/education'
-    | '/resume/experience'
     | '/resume/skills'
-    | '/resume';
+    | '/resume'
+    | '/resume/experience/$id'
+    | '/resume/experience';
   id:
     | '__root__'
     | '/'
@@ -278,7 +335,9 @@ export interface FileRouteTypes {
     | '/resume/education'
     | '/resume/experience'
     | '/resume/skills'
-    | '/resume/';
+    | '/resume/'
+    | '/resume/experience/$id'
+    | '/resume/experience/';
   fileRoutesById: FileRoutesById;
 }
 
@@ -353,7 +412,11 @@ export const routeTree = rootRoute
     },
     "/resume/experience": {
       "filePath": "resume.experience.tsx",
-      "parent": "/resume"
+      "parent": "/resume",
+      "children": [
+        "/resume/experience/$id",
+        "/resume/experience/"
+      ]
     },
     "/resume/skills": {
       "filePath": "resume.skills.tsx",
@@ -362,6 +425,14 @@ export const routeTree = rootRoute
     "/resume/": {
       "filePath": "resume.index.tsx",
       "parent": "/resume"
+    },
+    "/resume/experience/$id": {
+      "filePath": "resume.experience.$id.tsx",
+      "parent": "/resume/experience"
+    },
+    "/resume/experience/": {
+      "filePath": "resume.experience.index.lazy.tsx",
+      "parent": "/resume/experience"
     }
   }
 }
