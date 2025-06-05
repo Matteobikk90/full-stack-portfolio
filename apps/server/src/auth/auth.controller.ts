@@ -40,6 +40,7 @@ export const handleRefreshToken = (req: Request, res: Response): void => {
 
   if (!refreshToken) {
     res.status(400).json({ message: 'Missing refresh token' });
+    return;
   }
 
   try {
@@ -68,7 +69,11 @@ export const handleRefreshToken = (req: Request, res: Response): void => {
 };
 
 export const getMe = async (req: Request, res: Response) => {
-  const userId = (req.user as { userId: string }).userId;
+  const userId = (req.user && (req.user as { userId: string }).userId) || null;
+
+  if (!userId) {
+    return res.status(401).json({ message: 'Not authenticated' });
+  }
 
   try {
     const user = await prisma.user.findUnique({
