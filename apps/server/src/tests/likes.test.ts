@@ -37,6 +37,11 @@ beforeAll(async () => {
       startDate: new Date('2022-01-01'),
       endDate: new Date('2023-01-01'),
       technologies: ['TypeScript'],
+      slug: 'experience-test',
+      description: 'Experience desc',
+      location: 'Remote',
+      isRemote: true,
+      url: 'https://example.com',
     },
   });
 
