@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --require tsconfig-paths/register src/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --require dotenv/config --require tsconfig-paths/register src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node -r dotenv/config dist/index.js",
     "test": "vitest",
     "lint": "eslint . --ext ts,tsx",
     "lint-fix": "eslint --fix .",
