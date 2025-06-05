@@ -28,9 +28,9 @@ jobs:
 
       - name: 🧩 Install dependencies
         run: |
-          pnpm install --frozen-lockfile
-          cd apps/client && pnpm install --frozen-lockfile
-          cd apps/server && pnpm install --frozen-lockfile
+          pnpm install
+          cd apps/client && pnpm install
+          cd apps/server && pnpm install
 
       - name: 🧹 Lint and Prettier checks
         run: |
@@ -58,10 +58,9 @@ jobs:
             git pull origin ${{ github.ref_name }}
 
             # Install dependencies
-            pnpm install --frozen-lockfile
-            cd apps/client && pnpm install --frozen-lockfile
-            cd apps/server && pnpm install --frozen-lockfile
-            cd ..
+            pnpm install
+            cd apps/client && pnpm install && cd ..
+            cd apps/server && pnpm install && cd ..
 
             # Build applications
             cd apps/client && pnpm build && cd ..
