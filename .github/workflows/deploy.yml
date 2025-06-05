@@ -3,48 +3,79 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - main
       - dev
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy to EC2
+      - name: 🟢 Setup Node.js and pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "pnpm"
+
+      - name: 🧩 Install dependencies
+        run: |
+          pnpm install --frozen-lockfile
+          cd apps/client && pnpm install --frozen-lockfile
+          cd apps/server && pnpm install --frozen-lockfile
+
+      - name: 🧹 Lint and Prettier checks
+        run: |
+          cd apps/client && pnpm lint
+          cd apps/server && pnpm lint
+          pnpm prettier --check .
+
+      - name: ⚙️ Build client and server
+        run: |
+          cd apps/client && pnpm build
+          cd apps/server && pnpm build
+
+      - name: 🚀 Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
+            set -e  # Exit on any error
+
             cd full-stack-portfolio
+
+            # Pull latest changes
             git pull origin ${{ github.ref_name }}
 
-            # Setup PNPM
-            export PNPM_HOME="$HOME/.local/share/pnpm"
-            export PATH="$PNPM_HOME:$PATH"
-            corepack enable
+            # Install dependencies
+            pnpm install --frozen-lockfile
+            cd apps/client && pnpm install --frozen-lockfile
+            cd apps/server && pnpm install --frozen-lockfile
+            cd ..
 
-            # Conditionally skip husky on prod
+            # Build applications
+            cd apps/client && pnpm build && cd ..
+            cd apps/server && pnpm build && cd ..
+
+            # Restart appropriate service based on branch
             if [ "${{ github.ref_name }}" = "main" ]; then
-              HUSKY=0 pnpm install
-            else
-              pnpm install
-            fi
-
-            pnpm add -g typescript
-
-            # Build apps
-            pnpm --filter client build
-            pnpm --filter server build
-
-            # Restart backend service
-            if [ "${{ github.ref_name }}" = "main" ]; then
+              echo "Restarting production backend..."
               sudo systemctl restart backend
+              sudo systemctl status backend --no-pager
             elif [ "${{ github.ref_name }}" = "dev" ]; then
+              echo "Restarting development backend..."
               sudo systemctl restart dev-backend
+              sudo systemctl status dev-backend --no-pager
             fi
+
+            echo "Deployment completed successfully!"
