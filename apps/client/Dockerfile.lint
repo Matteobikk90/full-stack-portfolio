@@ -1,0 +1,15 @@
+FROM node:18-alpine3.18
+
+WORKDIR /app
+
+# Enable pnpm globally via corepack
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy only the client app from the monorepo
+COPY apps/client ./
+
+# Install only client dependencies
+RUN pnpm install
+
+# Run linting
+CMD ["pnpm", "run", "lint"]

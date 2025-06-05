@@ -1,0 +1,15 @@
+FROM node:18-alpine3.18
+
+WORKDIR /app
+
+# Enable pnpm globally via corepack
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy only the server app
+COPY apps/server ./
+
+# Install server dependencies
+RUN pnpm install
+
+# Run linting
+CMD ["pnpm", "run", "lint"]

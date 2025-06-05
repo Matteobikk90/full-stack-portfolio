@@ -30,6 +30,11 @@ beforeAll(async () => {
       startDate: new Date('2023-01-01'),
       endDate: new Date('2024-01-01'),
       technologies: ['Node'],
+      slug: 'test',
+      url: 'https://example.com',
+      location: 'Remote',
+      isRemote: true,
+      description: '',
     },
   });
   experienceId = experience.id;

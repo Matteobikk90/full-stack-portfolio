@@ -32,11 +32,16 @@ beforeAll(async () => {
 
   const experience = await prisma.experience.create({
     data: {
-      title: 'Experience Test',
-      company: 'Company',
-      startDate: new Date('2022-01-01'),
-      endDate: new Date('2023-01-01'),
-      technologies: ['TypeScript'],
+      title: 'Test Experience',
+      company: 'Test Co.',
+      startDate: new Date('2023-01-01'),
+      endDate: new Date('2024-01-01'),
+      technologies: ['Node'],
+      slug: 'test',
+      url: 'https://example.com',
+      location: 'Remote',
+      isRemote: true,
+      description: '',
     },
   });
 
