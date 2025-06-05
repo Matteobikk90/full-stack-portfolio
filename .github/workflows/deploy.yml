@@ -24,10 +24,25 @@ jobs:
             cd full-stack-portfolio
             git pull origin ${{ github.ref_name }}
 
-            pnpm install
+            # Setup PNPM
+            export PNPM_HOME="$HOME/.local/share/pnpm"
+            export PATH="$PNPM_HOME:$PATH"
+            corepack enable
+
+            # Conditionally skip husky on prod
+            if [ "${{ github.ref_name }}" = "main" ]; then
+              HUSKY=0 pnpm install
+            else
+              pnpm install
+            fi
+
+            pnpm add -g typescript
+
+            # Build apps
             pnpm --filter client build
             pnpm --filter server build
 
+            # Restart backend service
             if [ "${{ github.ref_name }}" = "main" ]; then
               sudo systemctl restart backend
             elif [ "${{ github.ref_name }}" = "dev" ]; then
