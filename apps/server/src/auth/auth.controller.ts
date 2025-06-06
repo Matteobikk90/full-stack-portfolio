@@ -40,6 +40,7 @@ export const handleRefreshToken = (req: Request, res: Response): void => {
 
   if (!refreshToken) {
     res.status(400).json({ message: 'Missing refresh token' });
+    return;
   }
 
   try {
