@@ -1,6 +1,5 @@
-import { OAuthProfile } from '@/types/oauth.types';
+import { OAuthProfile, ProviderEnum, ProviderTypes } from '@/types/oauth.types';
 import prisma from '@/utils/prisma';
-import { Provider, Provider as ProviderEnum } from '@prisma/client';
 import passport from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
@@ -20,7 +19,7 @@ const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL!;
 // const LINKEDIN_CALLBACK_URL = process.env.LINKEDIN_CALLBACK_URL!;
 
 const handleOAuthCallback =
-  (provider: Provider) =>
+  (provider: ProviderTypes) =>
   async (
     _accessToken: string,
     _refreshToken: string,

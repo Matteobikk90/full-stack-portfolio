@@ -8,3 +8,12 @@ export type OAuthProfile =
   | GoogleProfile
   | FacebookProfile
   | LinkedinProfile;
+
+export const ProviderEnum = {
+  github: 'github',
+  google: 'google',
+  facebook: 'facebook',
+  linkedin: 'linkedin',
+} as const;
+
+export type ProviderTypes = (typeof ProviderEnum)[keyof typeof ProviderEnum];
