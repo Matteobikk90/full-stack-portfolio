@@ -14,7 +14,7 @@ export const Info = () => {
   return (
     <section className="flex flex-col animate-fade-up w-full">
       <Breadcrumbs />
-      <article className="bg-gray p-6 rounded-md space-y-4">
+      <article className="bg-gray p-4 sm:p-6 rounded-md space-y-4">
         <div className="flex items-start justify-between text-primary">
           <h3>{formatDateRange(data.startDate, data.endDate!)}</h3>
           <div>
@@ -42,7 +42,6 @@ export const Info = () => {
             ))}
           </ul>
         </div>
-
         <h4 className="font-semibold mb-2">Technologies</h4>
         <ScrollArea.Root type="auto">
           <ScrollArea.Viewport className="max-h-[6rem]">
@@ -66,16 +65,16 @@ export const Info = () => {
           </ScrollArea.Scrollbar>
         </ScrollArea.Root>
         {data.projects?.length > 0 && (
-          <div>
+          <>
             <h4 className="font-semibold mb-2">Projects</h4>
-            <ul className="text-secondary">
+            <ul className="text-secondary flex flex-wrap gap-4">
               {data.projects.map(({ id, title, url }) => (
                 <li key={id}>
                   <a
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline hover:text-primary flex gap-2 items-center"
+                    className="underline hover:text-primary flex gap-1 items-center"
                   >
                     <DotIcon className="size-5" weight="duotone" />
                     {title}
@@ -83,7 +82,7 @@ export const Info = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </>
         )}
       </article>
     </section>

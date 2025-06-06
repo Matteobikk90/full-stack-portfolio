@@ -128,7 +128,7 @@
   }
   html,
   body {
-    @apply bg-background text-foreground font-jetmono relative h-screen;
+    @apply bg-background text-foreground font-jetmono relative h-[100dvh];
   }
 
   h1 {
