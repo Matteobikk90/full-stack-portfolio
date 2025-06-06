@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import 'tw-animate-css';
+@import 'tailwindcss';
+
+/* ---------- Theme ---------- */
+@theme inline {
+  --font-jetmono: 'JetBrains Mono', monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+
+  --color-gray: var(--gray);
+
+  --color-work: var(--section-work);
+  --color-resume: var(--section-resume);
+  --color-contact: var(--section-contact);
+
+  --color-error: var(--error);
+  --color-success: var(--success);
+
+  --pulse-shadow: var(--pulse-shadow);
+  --shadow-elevation: var(--shadow-elevation);
+  --shadow-hover-elevation: var(--shadow-hover-elevation);
+
+  --animate-rotate-in: rotate-in 1.5s ease-out forwards;
+  --animate-pulse-slow: pulse-slow 1.5s ease-out infinite;
+  --animate-fade-up: fade-up 0.5s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes rotate-in {
+    0% {
+      transform: translateX(-100vw) rotate(720deg);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0) rotate(0deg);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulse-slow {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: 0 0 0 0 var(--pulse-shadow);
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.7;
+      box-shadow: 0 0 0 4px var(--pulse-shadow);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: 0 0 0 0 var(--pulse-shadow);
+    }
+  }
+}
+
+/* ---------- Light theme ---------- */
+:root {
+  --radius: 0.625rem;
+
+  --background: rgba(255, 255, 255, 1);
+  --foreground: rgba(23, 21, 34, 1);
+
+  --primary: rgba(0, 110, 201, 1);
+  --secondary: rgba(100, 160, 255, 1);
+
+  --gray: rgba(243, 244, 246, 1);
+
+  --section-work: rgba(161, 122, 0, 1);
+  --section-resume: rgba(0, 110, 201, 1);
+  --section-contact: rgba(203, 69, 79, 1);
+
+  --error: rgba(139, 0, 0, 1);
+  --success: rgba(0, 100, 0, 1);
+
+  --pulse-shadow: rgba(0, 0, 0, 0.2);
+  --shadow-elevation: 0 1px 3px var(--pulse-shadow);
+  --shadow-hover-elevation: 0 2px 3px var(--pulse-shadow);
+}
+
+/* ---------- Dark theme override ---------- */
+.dark {
+  --background: rgba(23, 21, 34, 1);
+  --foreground: rgba(255, 255, 255, 1);
+
+  --primary: rgba(20, 203, 124, 1);
+  --secondary: rgba(9, 254, 155, 1);
+
+  --gray: rgba(32, 31, 38, 1);
+
+  --section-work: rgba(221, 183, 73);
+  --section-resume: rgba(20, 203, 124, 1);
+  --section-contact: rgba(248, 110, 116, 1);
+
+  --error: rgba(255, 82, 144);
+  --success: rgba(205, 255, 0, 1);
+
+  --pulse-shadow: rgba(255, 255, 255, 0.5);
+  --shadow-elevation: 0 1px 3px var(--pulse-shadow);
+  --shadow-hover-elevation: 0 2px 3px var(--pulse-shadow);
+}
+
+/* ✅ Tailwind base overrides */
+@layer base {
+  * {
+    @apply transition-all duration-200;
+  }
+  html,
+  body {
+    @apply bg-background text-foreground font-jetmono relative h-screen;
+  }
+
+  h1 {
+    @apply text-3xl sm:text-4xl text-center;
+  }
+
+  h2 {
+    @apply text-xl sm:text-3xl;
+  }
+
+  /* h3 {
+    @apply text-sm sm:text-lg md:text-2xl;
+  } */
+
+  h3,
+  h4 {
+    @apply text-xs md:text-sm lg:text-base;
+  }
+
+  h5,
+  h6,
+  li {
+    @apply text-xs lg:text-sm;
+  }
+
+  p {
+    @apply text-sm md:text-lg text-foreground/50;
+  }
+
+  label {
+    @apply text-sm lg:text-base text-foreground/50;
+  }
+
+  main {
+    @apply p-4 h-auto;
+  }
+
+  input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px transparent inset !important;
+    -webkit-text-fill-color: theme('colors.foreground') !important;
+  }
+}

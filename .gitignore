@@ -1,0 +1,43 @@
+# Node modules
+node_modules/
+apps/*/node_modules/
+
+# Output folders
+dist/
+apps/*/dist/
+
+# Build artifacts
+*.tsbuildinfo
+*.log
+
+# Vite cache
+apps/*/.vite/
+
+# Test outputs
+coverage/
+apps/*/test-results/
+apps/*/playwright-report/
+
+# Env files
+.env
+apps/*/.env
+
+# IDE/editor configs
+.idea/
+.vscode/
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Next.js or other build systems (optional)
+.next/
+out/
+
+# pnpm
+pnpm-lock.yaml
+apps/*/pnpm-lock.yaml
+
+# Husky
+.husky/_/

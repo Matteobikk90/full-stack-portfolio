@@ -1,0 +1,23 @@
+# Node modules 
+node_modules/
+
+# Build outputs
+dist/
+.vite/
+
+# Test results
+test-results/
+playwright-report/
+
+# Env
+.env
+
+# Editor files
+.idea/
+.vscode/
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+*storybook.log
