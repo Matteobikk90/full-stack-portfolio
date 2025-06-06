@@ -18,7 +18,12 @@ const app = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: ['http://localhost:5173'],
+    origin: [
+      'http://localhost:5173',
+      'https://dev.matteosoresini.com',
+      'https://matteosoresini.com',
+      'https://www.matteosoresini.com',
+    ],
     credentials: true,
   })
 );
