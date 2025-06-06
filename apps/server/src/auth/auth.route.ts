@@ -25,6 +25,7 @@ const sendTokensAndRedirect = (
   redirect: string
 ) => {
   const { accessToken, refreshToken } = createTokens(userId);
+  const baseRedirect = process.env.FRONTEND_URL || 'http://localhost:5173';
 
   res
     .cookie('accessToken', accessToken, {
@@ -39,7 +40,7 @@ const sendTokensAndRedirect = (
       sameSite: 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     })
-    .redirect(`http://localhost:5173${decodeURIComponent(redirect)}`);
+    .redirect(`${baseRedirect}${decodeURIComponent(redirect)}`);
 };
 
 // --- Protected Routes ---
