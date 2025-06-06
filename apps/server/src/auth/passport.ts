@@ -1,16 +1,9 @@
+import { OAuthProfile } from '@/types/oauth.types';
 import prisma from '@/utils/prisma';
-import { type Provider } from '@prisma/client';
+import { Provider, Provider as ProviderEnum } from '@prisma/client';
 import passport from 'passport';
-import { type Profile as FacebookProfile } from 'passport-facebook';
-import {
-  Strategy as GitHubStrategy,
-  type Profile as GitHubProfile,
-} from 'passport-github2';
-import {
-  Strategy as GoogleStrategy,
-  type Profile as GoogleProfile,
-} from 'passport-google-oauth20';
-import { type Profile as LinkedinProfile } from 'passport-linkedin-oauth2';
+import { Strategy as GitHubStrategy } from 'passport-github2';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import type { VerifyCallback } from 'passport-oauth2';
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
@@ -26,11 +19,6 @@ const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL!;
 // const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET!;
 // const LINKEDIN_CALLBACK_URL = process.env.LINKEDIN_CALLBACK_URL!;
 
-type OAuthProfile =
-  | GitHubProfile
-  | GoogleProfile
-  | FacebookProfile
-  | LinkedinProfile;
 const handleOAuthCallback =
   (provider: Provider) =>
   async (
@@ -71,7 +59,7 @@ passport.use(
       clientSecret: GITHUB_CLIENT_SECRET,
       callbackURL: GITHUB_CALLBACK_URL,
     },
-    handleOAuthCallback('github')
+    handleOAuthCallback(ProviderEnum.github)
   )
 );
 
@@ -82,7 +70,7 @@ passport.use(
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: GOOGLE_CALLBACK_URL,
     },
-    handleOAuthCallback('google')
+    handleOAuthCallback(ProviderEnum.google)
   )
 );
 
@@ -94,7 +82,7 @@ passport.use(
 //       callbackURL: FACEBOOK_CALLBACK_URL,
 //       profileFields: ['id', 'emails', 'name', 'picture.type(large)'],
 //     },
-//     handleOAuthCallback('facebook')
+//     handleOAuthCallback(ProviderEnum.facebook)
 //   )
 // );
 
@@ -106,6 +94,6 @@ passport.use(
 //       callbackURL: LINKEDIN_CALLBACK_URL,
 //       scope: ['r_emailaddress', 'r_liteprofile'],
 //     },
-//     handleOAuthCallback('linkedin')
+//     handleOAuthCallback(ProviderEnum.linkedin)
 //   )
 // );
