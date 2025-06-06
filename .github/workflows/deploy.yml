@@ -61,8 +61,11 @@ jobs:
 
             cd full-stack-portfolio
 
-            # Pull latest changes
-            git pull origin ${{ github.ref_name }}
+            # Ensure branch is checked out and force synced
+            git fetch origin
+            git checkout ${{ github.ref_name }}
+            git reset --hard origin/${{ github.ref_name }}
+            git clean -fd
 
             # Install dependencies
             pnpm install
