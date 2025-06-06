@@ -1,5 +1,5 @@
 import prisma from '@/utils/prisma';
-import { Provider } from '@prisma/client';
+import { type Provider } from '@prisma/client';
 import passport from 'passport';
 import { type Profile as FacebookProfile } from 'passport-facebook';
 import {
