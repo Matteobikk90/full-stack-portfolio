@@ -64,6 +64,6 @@ io.on('connection', async (socket) => {
   });
 });
 
-httpServer.listen(PORT, () => {
-  console.log(`🚀 Server + WebSocket listening on http://localhost:${PORT}`);
+httpServer.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server + WebSocket listening on http://0.0.0.0:${PORT}`);
 });
