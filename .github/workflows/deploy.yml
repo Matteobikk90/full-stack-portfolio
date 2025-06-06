@@ -48,7 +48,7 @@ jobs:
       - name: ⚙️ Build client and server
         run: |
           cd apps/client && pnpm build && cd ../..
-          cd apps/server && pnpm build && cd ../..
+          cd apps/server && pnpm prisma generate && pnpm build && cd ../..
 
       - name: 🚀 Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
@@ -67,7 +67,7 @@ jobs:
             # Install dependencies
             pnpm install
             if [ -d "apps/client" ]; then cd apps/client && pnpm install && cd ..; fi
-            if [ -d "apps/server" ]; then cd apps/server && pnpm install && cd ..; fi
+            if [ -d "apps/server" ]; then cd apps/server && pnpm install && pnpm prisma generate && cd ..; fi
 
             # Build applications
             if [ -d "apps/client" ]; then cd apps/client && pnpm build && cd ..; fi
