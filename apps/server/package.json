@@ -6,9 +6,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "prisma generate && tsc",
     "start": "node -r dotenv/config dist/index.js",
-    "check": "pnpm lint && pnpm build && pnpm prisma generate && tsc --noEmit",
     "test": "vitest",
     "lint": "eslint . --ext ts,tsx",
     "lint-fix": "eslint --fix .",
