@@ -1,11 +1,11 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --require dotenv/config --require tsconfig-paths/register src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node -r dotenv/config dist/index.js",
     "test": "vitest",
