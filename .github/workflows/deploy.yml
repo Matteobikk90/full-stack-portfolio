@@ -6,6 +6,10 @@ on:
       - dev
       - main
 
+concurrency:
+  group: deploy-ec2
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
