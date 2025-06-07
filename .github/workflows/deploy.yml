@@ -38,7 +38,7 @@ jobs:
       - name: ⚙️ Build client and server
         run: |
           cd apps/client
-          pnpm build --mode production
+          pnpm build
           cd ../..
 
           cd apps/server
