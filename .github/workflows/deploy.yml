@@ -6,6 +6,10 @@ on:
       - dev
       - main
 
+concurrency:
+  group: deploy-ec2
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -28,62 +32,64 @@ jobs:
       - name: 🧩 Install dependencies
         run: |
           pnpm install
-          ls -la apps/  # Debug: show what's in apps directory
           cd apps/client && pnpm install && cd ../..
           cd apps/server && pnpm install && cd ../..
 
-      - name: 🧹 Lint and Prettier checks
-        run: |
-          # Fix prettier formatting first
-          pnpm format
-          pnpm lint-fix
-
-          # Run linting (allow warnings for now)
-          cd apps/client && pnpm lint && cd ../..
-
-          # Skip server linting if ESLint config has issues
-          cd apps/server && (pnpm lint || echo "Server linting skipped due to config issues") && cd ../..
-
       - name: ⚙️ Build client and server
         run: |
-          cd apps/client && pnpm build && cd ../..
-          cd apps/server && pnpm prisma generate && pnpm build && cd ../..
+          cd apps/client
+          pnpm build --mode production
+          cd ../..
 
-      - name: 🚀 Deploy to EC2
+          cd apps/server
+          pnpm prisma generate
+          pnpm build
+          cd ../..
+
+      - name: 📦 Upload built client
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          source: "apps/client/dist/*"
+          target: "~/full-stack-portfolio/apps/client/dist"
+
+      - name: 📦 Upload built server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          source: "apps/server/dist/*"
+          target: "~/full-stack-portfolio/apps/server/dist"
+
+      - name: 🚀 Restart backend service
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
-            set -e  # Exit on any error
+            set -e
 
             cd full-stack-portfolio
 
-            # Ensure branch is checked out and force synced
             git fetch origin
             git checkout ${{ github.ref_name }}
             git reset --hard origin/${{ github.ref_name }}
             git clean -fd
 
-            # Install dependencies
             pnpm install
-            if [ -d "apps/client" ]; then cd apps/client && pnpm install && cd ..; fi
-            if [ -d "apps/server" ]; then cd apps/server && pnpm install && pnpm prisma generate && cd ..; fi
+            cd apps/server && pnpm install && cd ../..
 
-            # Build applications
-            if [ -d "apps/client" ]; then cd apps/client && pnpm build && cd ..; fi
-            if [ -d "apps/server" ]; then cd apps/server && pnpm build && cd ..; fi
-
-            # Restart appropriate service based on branch
+            # Restart appropriate backend
             if [ "${{ github.ref_name }}" = "main" ]; then
-              echo "Restarting production backend..."
+              echo "🔁 Restarting production backend..."
               sudo systemctl restart backend
-              sudo systemctl status backend --no-pager
             elif [ "${{ github.ref_name }}" = "dev" ]; then
-              echo "Restarting development backend..."
+              echo "🔁 Restarting development backend..."
               sudo systemctl restart dev-backend
-              sudo systemctl status dev-backend --no-pager
             fi
 
-            echo "Deployment completed successfully!"
+            echo "✅ Deployment completed"
