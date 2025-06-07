@@ -1,5 +1,6 @@
 export const toastDuration = 3000;
-export const proxyTarget = 'http://localhost:4000';
+export const proxyTarget =
+  import.meta.env.VITE_PROXY_TARGET || 'http://localhost:4000';
 export const SOCKET_URL = import.meta.env.DEV ? proxyTarget : undefined;
 
 export const URL_ENDPOINTS = {
