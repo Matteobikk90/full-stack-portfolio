@@ -1,0 +1,95 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+concurrency:
+  group: deploy-ec2
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js and pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: 🧩 Install dependencies
+        run: |
+          pnpm install
+          cd apps/client && pnpm install && cd ../..
+          cd apps/server && pnpm install && cd ../..
+
+      - name: ⚙️ Build client and server
+        run: |
+          cd apps/client
+          pnpm build
+          cd ../..
+
+          cd apps/server
+          pnpm prisma generate
+          pnpm build
+          cd ../..
+
+      - name: 📦 Upload built client
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          source: "apps/client/dist/*"
+          target: "~/full-stack-portfolio/apps/client/dist"
+
+      - name: 📦 Upload built server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          source: "apps/server/dist/*"
+          target: "~/full-stack-portfolio/apps/server/dist"
+
+      - name: 🚀 Restart backend service
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            set -e
+
+            cd full-stack-portfolio
+
+            git fetch origin
+            git checkout ${{ github.ref_name }}
+            git reset --hard origin/${{ github.ref_name }}
+            git clean -fd
+
+            pnpm install
+            cd apps/server && pnpm install && cd ../..
+
+            # Restart appropriate backend
+            if [ "${{ github.ref_name }}" = "main" ]; then
+              echo "🔁 Restarting production backend..."
+              sudo systemctl restart backend
+            elif [ "${{ github.ref_name }}" = "dev" ]; then
+              echo "🔁 Restarting development backend..."
+              sudo systemctl restart dev-backend
+            fi
+
+            echo "✅ Deployment completed"

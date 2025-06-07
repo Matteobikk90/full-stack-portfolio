@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { initSentry } from '@/config/sentry';
 import { httpServer, io } from '@/config/socket';
 import { JWT_SECRET, PORT } from '@/utils/constants';

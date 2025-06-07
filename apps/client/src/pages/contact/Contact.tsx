@@ -2,7 +2,7 @@ import Form from '@/components/form';
 
 export const Contact = () => {
   return (
-    <main>
+    <main className="z-11 relative">
       <section className="max-w-3xl m-auto space-y-12 animate-fade-up">
         <h1 className="text-contact">Contact</h1>
         <p>

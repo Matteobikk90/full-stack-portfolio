@@ -41,7 +41,7 @@ export const Header = () => {
     <header className="flex items-center justify-between p-4 md:py-8 w-full container mx-auto relative">
       <MenuDesktop />
       <MenuMobile />
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 z-11">
         <Button
           variant="outline"
           data-testid="theme-toggle"

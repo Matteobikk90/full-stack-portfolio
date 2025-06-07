@@ -73,7 +73,10 @@ export const ChatBox = () => {
     });
 
     socket.on('chat:message', (msg) => {
-      setMessages((prev) => [...prev, msg]);
+      setMessages((prev) => {
+        const exists = prev.some((m) => m.id === msg.id);
+        return exists ? prev : [...prev, msg];
+      });
     });
 
     return () => {
@@ -113,7 +116,7 @@ export const ChatBox = () => {
   const handleIconClick = () => (isAuthenticated ? openChat() : toggleModal());
 
   return (
-    <aside className="absolute bottom-6 right-4 z-10">
+    <aside className="absolute bottom-6 right-4 z-11">
       {!isChatOpen && (
         <Button
           variant="outline"
