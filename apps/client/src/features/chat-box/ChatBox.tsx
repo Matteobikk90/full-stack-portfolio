@@ -73,7 +73,10 @@ export const ChatBox = () => {
     });
 
     socket.on('chat:message', (msg) => {
-      setMessages((prev) => [...prev, msg]);
+      setMessages((prev) => {
+        const exists = prev.some((m) => m.id === msg.id);
+        return exists ? prev : [...prev, msg];
+      });
     });
 
     return () => {
