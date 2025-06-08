@@ -181,6 +181,71 @@ async function main() {
       },
     ],
   });
+
+  await prisma.project.createMany({
+    data: [
+      {
+        title: 'Full Stack Portfolio',
+        number: '01',
+        description: 'Personal full-stack portfolio project.',
+        slug: 'full-stack-portfolio',
+        technologies: [
+          'React',
+          'Zustand',
+          'Node.js',
+          'Express.js',
+          'TailwindCSS',
+          'TypeScript',
+          'Prisma',
+          'PostgreSQL',
+          'AWS',
+          'Docker',
+          'Sentry',
+          'Vite',
+          'PNPM',
+        ],
+        repoUrl: 'https://github.com/Matteobikk90/full-stack-portfolio',
+        demoUrl: 'https://matteosoresini.com/',
+        imageUrl: null,
+        isFeatured: true,
+        createdAt: new Date('2025-05-01'),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'Blendon Barber Shop',
+        number: '02',
+        description: 'Business website for a local barbershop.',
+        slug: 'blendon-barber-shop',
+        technologies: [
+          'React',
+          'Node.js',
+          'Vercel',
+          'Firebase',
+          'TailwindCSS',
+          'TypeScript',
+        ],
+        repoUrl: 'https://github.com/Matteobikk90/barber-shop',
+        demoUrl: 'https://blendon-barber-shop.it/',
+        imageUrl: null,
+        isFeatured: false,
+        createdAt: new Date('2022-01-01'),
+        updatedAt: new Date(),
+      },
+      {
+        title: 'AGS Ori Illuminazione',
+        number: '03',
+        description: 'Corporate website for lighting company.',
+        slug: 'ags-illuminazione',
+        technologies: ['HTML5', 'CSS3', 'JavaScript'],
+        repoUrl: null,
+        demoUrl: 'https://agsoritilluminazione.com/',
+        imageUrl: null,
+        isFeatured: false,
+        createdAt: new Date('2020-01-01'),
+        updatedAt: new Date(),
+      },
+    ],
+  });
 }
 
 main()

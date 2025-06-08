@@ -44,7 +44,7 @@ export const Info = () => {
         </div>
         <h4 className="font-semibold mb-2">Technologies</h4>
         <ScrollArea.Root type="auto">
-          <ScrollArea.Viewport className="max-h-[6rem]">
+          <ScrollArea.Viewport className="max-h-[5rem]">
             <ul className="flex flex-wrap gap-2 text-xs">
               {data.technologies.map((tech, index) => (
                 <li

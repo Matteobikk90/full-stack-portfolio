@@ -126,9 +126,14 @@
   * {
     @apply transition-all duration-200;
   }
+
+  #root {
+    @apply flex flex-col h-[100dvh];
+  }
+
   html,
   body {
-    @apply bg-background text-foreground font-jetmono relative h-[100dvh];
+    @apply bg-background text-foreground font-jetmono relative;
   }
 
   h1 {
@@ -167,7 +172,12 @@
   }
 
   input:-webkit-autofill {
-    box-shadow: 0 0 0px 1000px transparent inset !important;
+    box-shadow: 0 0 0px 1000px theme('colors.background') inset !important;
     -webkit-text-fill-color: theme('colors.foreground') !important;
+  }
+
+  .text-outline {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
   }
 }
