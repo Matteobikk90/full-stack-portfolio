@@ -72,7 +72,8 @@ export const getMe = async (req: Request, res: Response) => {
   const userId = (req.user && (req.user as { userId: string }).userId) || null;
 
   if (!userId) {
-    return res.status(401).json({ message: 'Not authenticated' });
+    res.status(401).json({ message: 'Not authenticated' });
+    return;
   }
 
   try {
