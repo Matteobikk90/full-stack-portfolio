@@ -37,7 +37,7 @@ const WorkRoute = WorkImport.update({
   id: '/work',
   path: '/work',
   getParentRoute: () => rootRoute,
-} as any);
+} as any).lazy(() => import('./routes/work.lazy').then((d) => d.Route));
 
 const TermsOfServiceRoute = TermsOfServiceImport.update({
   id: '/terms-of-service',
@@ -400,7 +400,7 @@ export const routeTree = rootRoute
       "filePath": "terms-of-service.tsx"
     },
     "/work": {
-      "filePath": "work.tsx"
+      "filePath": "work.ts"
     },
     "/resume/about": {
       "filePath": "resume.about.tsx",
@@ -411,7 +411,7 @@ export const routeTree = rootRoute
       "parent": "/resume"
     },
     "/resume/experience": {
-      "filePath": "resume.experience.tsx",
+      "filePath": "resume.experience.ts",
       "parent": "/resume",
       "children": [
         "/resume/experience/$id",
@@ -423,11 +423,11 @@ export const routeTree = rootRoute
       "parent": "/resume"
     },
     "/resume/": {
-      "filePath": "resume.index.tsx",
+      "filePath": "resume.index.ts",
       "parent": "/resume"
     },
     "/resume/experience/$id": {
-      "filePath": "resume.experience.$id.tsx",
+      "filePath": "resume.experience.$id.ts",
       "parent": "/resume/experience"
     },
     "/resume/experience/": {

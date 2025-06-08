@@ -17,7 +17,7 @@ export const getParticlesOptions = (color: string): ISourceOptions => ({
     modes: { repulse: { distance: 120, duration: 0.4 } },
   },
   particles: {
-    number: { value: 120, density: { enable: true } },
+    number: { value: 130, density: { enable: true } },
     links: {
       enable: true,
       color,
