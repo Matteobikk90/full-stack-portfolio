@@ -52,21 +52,49 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/client/dist/**"
+          source: "apps/client/dist/*"
           target: "~/full-stack-portfolio/apps/client/"
+          strip_components: 3
           overwrite: true
 
+      # SERVER — upload dist
       - name: 📦 Upload server dist
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/**"
-          target: "~/full-stack-portfolio/apps/server/"
+          source: "apps/server/dist/*"
+          target: "~/full-stack-portfolio/apps/server/dist/"
+          strip_components: 3
           overwrite: true
 
-      - name: 🚀 Deploy and restart services
+      # SERVER — upload prisma folder
+      - name: 📦 Upload prisma folder
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          source: "apps/server/prisma/*"
+          target: "~/full-stack-portfolio/apps/server/prisma/"
+          strip_components: 3
+          overwrite: true
+
+      # SERVER — upload package.json
+      - name: 📦 Upload server package.json
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          source: "apps/server/package.json"
+          target: "~/full-stack-portfolio/apps/server/"
+          strip_components: 2
+          overwrite: true
+
+      # 🔁 Restart services and install only what’s needed
+      - name: 🚀 Restart backend and finalize
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -74,28 +102,15 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             set -e
-
-            cd full-stack-portfolio
-
-            # Sync with GitHub to get latest configs, package.json, .env files
-            git fetch origin
-            git checkout ${{ github.ref_name }}
-            git reset --hard origin/${{ github.ref_name }}
-            git clean -fd
-
-            # Install production dependencies on EC2 (ensures platform compatibility)
-            cd apps/server 
-            pnpm install
-            pnpm db:g
+            cd ~/full-stack-portfolio/apps/server
+            echo "📦 Installing only production deps"
             pnpm install --prod
-            cd ../..
-
-            # Restart appropriate backend service
+            echo "🧬 Generating Prisma client"
+            pnpm db:g
+            echo "🔁 Restarting backend service..."
             if [ "${{ github.ref_name }}" = "main" ]; then
-              echo "🔁 Restarting production backend..."
               sudo systemctl restart backend
             elif [ "${{ github.ref_name }}" = "dev" ]; then
-              echo "🔁 Restarting development backend..."
               sudo systemctl restart dev-backend
             fi
 
