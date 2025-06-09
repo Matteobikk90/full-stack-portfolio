@@ -46,18 +46,6 @@ jobs:
           pnpm build
           cd ../..
 
-      - name: 🧹 Reset EC2 repo to clean state
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_KEY }}
-          script: |
-            cd ~/full-stack-portfolio
-            git fetch origin
-            git reset --hard origin/${{ github.ref_name }}
-            git clean -fd
-
       - name: 📦 Replace client dist
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -74,31 +62,11 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/dist/** apps/server/node_modules/** apps/server/package.json"
-          target: "~/full-stack-portfolio/apps/server/"
+          source: "apps/server/dist/*"
+          target: "~/full-stack-portfolio/apps/server/dist/"
           overwrite: true
 
-      - name: 📦 Replace server node_modules
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/node_modules/**"
-          target: "~/full-stack-portfolio/apps/server/node_modules/"
-          overwrite: true
-
-      - name: 📦 Replace server package.json
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/package.json"
-          target: "~/full-stack-portfolio/apps/server/"
-          overwrite: true
-
-      - name: 🚀 Restart backend service
+      - name: 🚀 Sync server files and restart
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -109,7 +77,19 @@ jobs:
 
             cd full-stack-portfolio
 
-            # Only restart the service - no rebuilding needed!
+            # Sync with GitHub to get latest package.json, .env, and other config files
+            git fetch origin
+            git checkout ${{ github.ref_name }}
+            git reset --hard origin/${{ github.ref_name }}
+            git clean -fd
+
+            # Install/update dependencies (in case package.json changed)
+            cd apps/server && pnpm install --prod && cd ../..
+
+            # Generate Prisma client (in case schema changed)
+            cd apps/server && pnpm prisma generate && cd ../..
+
+            # Restart appropriate backend
             if [ "${{ github.ref_name }}" = "main" ]; then
               echo "🔁 Restarting production backend..."
               sudo systemctl restart backend
