@@ -46,27 +46,27 @@ jobs:
           pnpm build
           cd ../..
 
-      - name: 📦 Replace client dist
+      - name: 📦 Upload client dist
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/client/dist/*"
-          target: "~/full-stack-portfolio/apps/client/dist/"
+          source: "apps/client/dist"
+          target: "~/full-stack-portfolio/apps/client/"
           overwrite: true
 
-      - name: 📦 Replace server dist
+      - name: 📦 Upload server dist
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/dist/*"
-          target: "~/full-stack-portfolio/apps/server/dist/"
+          source: "apps/server/dist"
+          target: "~/full-stack-portfolio/apps/server/"
           overwrite: true
 
-      - name: 🚀 Sync server files and restart
+      - name: 🚀 Deploy and restart services
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -77,19 +77,19 @@ jobs:
 
             cd full-stack-portfolio
 
-            # Sync with GitHub to get latest package.json, .env, and other config files
+            # Sync with GitHub to get latest configs, package.json, .env files
             git fetch origin
             git checkout ${{ github.ref_name }}
             git reset --hard origin/${{ github.ref_name }}
             git clean -fd
 
-            # Install/update dependencies (in case package.json changed)
-            cd apps/server && pnpm install --prod && cd ../..
+            # Install production dependencies on EC2 (ensures platform compatibility)
+            cd apps/server 
+            pnpm install --prod --frozen-lockfile
+            pnpm prisma generate
+            cd ../..
 
-            # Generate Prisma client (in case schema changed)
-            cd apps/server && pnpm prisma generate && cd ../..
-
-            # Restart appropriate backend
+            # Restart appropriate backend service
             if [ "${{ github.ref_name }}" = "main" ]; then
               echo "🔁 Restarting production backend..."
               sudo systemctl restart backend
@@ -98,4 +98,4 @@ jobs:
               sudo systemctl restart dev-backend
             fi
 
-            echo "✅ Deployment completed"
+            echo "✅ Deployment completed successfully!"
