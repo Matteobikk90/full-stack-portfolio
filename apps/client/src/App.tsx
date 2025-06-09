@@ -4,6 +4,7 @@ import ChatBox from '@/features/chat-box';
 import Header from '@/features/header';
 import { Toaster } from '@/lib/ui/sonner';
 import { Outlet } from '@tanstack/react-router';
+import AnimatedCursor from 'react-animated-cursor';
 
 export default function App() {
   return (
@@ -14,6 +15,19 @@ export default function App() {
       <Toaster position="bottom-right" richColors closeButton />
       <CustomModal />
       <ChatBox />
+      <AnimatedCursor
+        innerSize={6}
+        outerSize={30}
+        innerScale={1}
+        outerScale={3}
+        outerAlpha={0}
+        outerStyle={{
+          border: '2px solid var(--foreground)',
+        }}
+        innerStyle={{
+          backgroundColor: 'var(--foreground)',
+        }}
+      />
     </>
   );
 }

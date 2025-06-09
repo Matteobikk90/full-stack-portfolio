@@ -10,11 +10,11 @@ export const Experience = () => {
   });
 
   return (
-    <section className="flex flex-col gap-6 animate-fade-up">
-      <h2>My experience</h2>
+    <section className="flex flex-col gap-6 animate-fade-up w-full">
+      <h2>Professional Experience</h2>
       <p>
-        Built responsive web applications delivering real-time data and
-        projections out to 2030.
+        From UI to database, I’ve worked across the stack to build fast, modern
+        web apps that users enjoy.
       </p>
       <ScrollArea.Root type="always">
         <ScrollArea.Viewport className="h-[19rem]">

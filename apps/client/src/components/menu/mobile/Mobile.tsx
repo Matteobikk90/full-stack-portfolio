@@ -1,3 +1,4 @@
+import PopUpInfo from '@/components/pop-up-info';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 import { hoverStyles, menuLinks } from '@/utils/menu';
@@ -51,19 +52,25 @@ export const MenuMobile = () => {
         ))}
       </nav>
 
-      <Button
-        variant="outline"
-        size="icon"
-        className="md:hidden relative z-10"
-        onClick={() => setIsOpen((prev) => !prev)}
-        aria-label="Toggle menu"
+      <PopUpInfo
+        hoverText={`${isOpen ? 'Close' : 'Open'} menu`}
+        position="bottom"
+        align="right"
       >
-        {isOpen ? (
-          <XIcon className="size-5" weight="duotone" />
-        ) : (
-          <DotsThreeOutlineVerticalIcon className="size-5" weight="duotone" />
-        )}
-      </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          className="md:hidden relative z-10"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+        >
+          {isOpen ? (
+            <XIcon className="size-5" weight="duotone" />
+          ) : (
+            <DotsThreeOutlineVerticalIcon className="size-5" weight="duotone" />
+          )}
+        </Button>
+      </PopUpInfo>
     </>
   );
 };
