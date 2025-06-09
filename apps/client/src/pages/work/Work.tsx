@@ -1,3 +1,4 @@
+import PopUpInfo from '@/components/pop-up-info';
 import {
   Carousel,
   CarouselContent,
@@ -24,7 +25,7 @@ export const Work = () => {
   return (
     <main className="flex flex-col gap-4 md:gap-12 container mx-auto relative z-11 animate-fade-up flex-1">
       <h1 className="text-work">Work</h1>
-      <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:grid-cols-[40%_60%] gap-12">
+      <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-center lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12">
         <AnimatePresence mode="wait">
           <motion.article
             key={activeSlide}
@@ -32,7 +33,7 @@ export const Work = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1, ease: 'easeInOut' }}
-            className="p-4 space-y-2"
+            className="space-y-2"
           >
             <h2 className="lg:text-9xl text-5xl leading-none text-outline font-medium">
               {activeWork.number}
@@ -57,7 +58,9 @@ export const Work = () => {
                   href={activeWork.demoUrl}
                   className="bg-gray hover:text-work max-w-max p-3 flex rounded-full"
                 >
-                  <ArrowUpRightIcon className="size-5" weight="duotone" />
+                  <PopUpInfo hoverText="Live demo" align="right">
+                    <ArrowUpRightIcon className="size-5" weight="duotone" />
+                  </PopUpInfo>
                 </a>
               )}
               {activeWork.repoUrl && (
@@ -65,7 +68,9 @@ export const Work = () => {
                   href={activeWork.repoUrl}
                   className="bg-gray hover:text-work max-w-max p-3 flex rounded-full"
                 >
-                  <GithubLogoIcon className="size-5" weight="duotone" />
+                  <PopUpInfo hoverText="View on GitHub" align="center">
+                    <GithubLogoIcon className="size-5" weight="duotone" />
+                  </PopUpInfo>
                 </a>
               )}
             </div>
@@ -76,7 +81,7 @@ export const Work = () => {
             <CarouselContent>
               {data.map(({ slug, title }) => (
                 <CarouselItem key={title}>
-                  <figure className="w-full overflow-hidden rounded-md border flex items-center justify-center">
+                  <figure className="overflow-hidden rounded-md border flex items-center justify-center">
                     <img
                       loading="lazy"
                       src={imageMap[slug!]}

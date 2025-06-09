@@ -69,6 +69,8 @@ export const aboutInfo = [
   { label: 'Phone', value: '(+39) 347 043 8232' },
   { label: 'Email', value: 'matteo.soresini@hotmail.it' },
   { label: 'Experience', value: experience },
+  { label: 'GitHub', value: '/Matteobikk90' },
+  { label: 'LinkedIn', value: '/in/matteosoresini90/' },
   { label: 'Nationality', value: 'Italian' },
   { label: 'Languages', value: 'English, Spanish' },
 ];

@@ -4,7 +4,9 @@ import { Link } from '@tanstack/react-router';
 export const ResumeSidebar = () => (
   <aside className="space-y-6">
     <h1 className="text-left">Why hire me?</h1>
-    <p>Built responsive web applications delivering</p>
+    <p>
+      Building performant and responsive web applications for the modern web.
+    </p>
     <nav className="grid grid-cols-2 lg:flex flex-col gap-4">
       {resumeItems.map(({ href, label }) => (
         <Link

@@ -1,4 +1,5 @@
 import { MenuDesktop, MenuMobile } from '@/components/menu';
+import PopUpInfo from '@/components/pop-up-info';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/lib/ui/button';
 import { useStore } from '@/stores';
@@ -42,26 +43,36 @@ export const Header = () => {
       <MenuDesktop />
       <MenuMobile />
       <div className="flex items-center gap-4 z-11">
-        <Button
-          variant="outline"
-          data-testid="theme-toggle"
-          size="icon"
-          onClick={handleToggle}
+        <PopUpInfo hoverText="Switch theme" position="bottom">
+          <Button
+            variant="outline"
+            data-testid="theme-toggle"
+            size="icon"
+            onClick={handleToggle}
+            aria-label="Switch theme"
+          >
+            {mode === 'dark' ? (
+              <SunIcon className="size-5" weight="duotone" />
+            ) : (
+              <MoonIcon className="size-5" weight="duotone" />
+            )}
+          </Button>
+        </PopUpInfo>
+
+        <PopUpInfo
+          hoverText={isAuthenticated ? 'Open chat' : 'Log in to chat'}
+          position="bottom"
+          align="left"
         >
-          {mode === 'dark' ? (
-            <SunIcon className="size-5" weight="duotone" />
-          ) : (
-            <MoonIcon className="size-5" weight="duotone" />
-          )}
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={handleClick}
-          aria-label={isAuthenticated ? 'Open chat' : 'Login to chat'}
-        >
-          <ChatsIcon className="size-5" weight="duotone" />
-        </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={handleClick}
+            aria-label={isAuthenticated ? 'Open chat' : 'Login to chat'}
+          >
+            <ChatsIcon className="size-5" weight="duotone" />
+          </Button>
+        </PopUpInfo>
       </div>
     </header>
   );

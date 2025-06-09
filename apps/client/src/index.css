@@ -177,7 +177,13 @@
   }
 
   .text-outline {
+    color: var(--foreground);
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: var(--foreground);
+  }
+
+  .text-outline:hover {
+    -webkit-text-fill-color: var(--section-work);
   }
 }
