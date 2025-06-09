@@ -46,23 +46,27 @@ jobs:
           pnpm build
           cd ../..
 
-      - name: 📦 Upload built client
+      - name: 📦 Replace client dist
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/client/dist/*"
-          target: "~/full-stack-portfolio/apps/client/dist"
+          source: "apps/client/dist"
+          target: "~/full-stack-portfolio/apps/client/"
+          overwrite: true
+          rm: true
 
-      - name: 📦 Upload built server
+      - name: 📦 Replace server dist
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/dist/*"
-          target: "~/full-stack-portfolio/apps/server/dist"
+          source: "apps/server/dist"
+          target: "~/full-stack-portfolio/apps/server/"
+          overwrite: true
+          rm: true
 
       - name: 🚀 Restart backend service
         uses: appleboy/ssh-action@v1.0.3
@@ -75,15 +79,7 @@ jobs:
 
             cd full-stack-portfolio
 
-            git fetch origin
-            git checkout ${{ github.ref_name }}
-            git reset --hard origin/${{ github.ref_name }}
-            git clean -fd
-
-            pnpm install
-            cd apps/server && pnpm install && cd ../..
-
-            # Restart appropriate backend
+            # Only restart the service - no rebuilding needed!
             if [ "${{ github.ref_name }}" = "main" ]; then
               echo "🔁 Restarting production backend..."
               sudo systemctl restart backend
