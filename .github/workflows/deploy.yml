@@ -42,7 +42,7 @@ jobs:
           cd ../..
 
           cd apps/server
-          pnpm prisma generate
+          pnpm db:g
           pnpm build
           cd ../..
 
@@ -85,8 +85,9 @@ jobs:
 
             # Install production dependencies on EC2 (ensures platform compatibility)
             cd apps/server 
-            pnpm install --prod --frozen-lockfile
-            pnpm prisma generate
+            pnpm install
+            pnpm db:g
+            pnpm install --prod
             cd ../..
 
             # Restart appropriate backend service
