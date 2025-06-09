@@ -52,7 +52,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/client/dist"
+          source: "apps/client/dist/**"
           target: "~/full-stack-portfolio/apps/client/"
           overwrite: true
 
@@ -62,7 +62,10 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/dist"
+          source: |
+            apps/server/dist/**
+            apps/server/package.json
+            apps/server/prisma/**
           target: "~/full-stack-portfolio/apps/server/"
           overwrite: true
 
