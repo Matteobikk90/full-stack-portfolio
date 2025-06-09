@@ -46,6 +46,16 @@ jobs:
           pnpm build
           cd ../..
 
+      - name: 🧹 Clean client and server folders
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            rm -rf ~/full-stack-portfolio/apps/client/*
+            rm -rf ~/full-stack-portfolio/apps/server/*
+
       - name: 📦 Upload client dist
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -54,46 +64,20 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           source: "apps/client/dist/*"
           target: "~/full-stack-portfolio/apps/client/dist/"
-          strip_components: 3
+          strip_components: 2
           overwrite: true
 
-      # SERVER — upload dist
       - name: 📦 Upload server dist
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/dist/*"
-          target: "~/full-stack-portfolio/apps/server/dist/"
-          strip_components: 3
-          overwrite: true
-
-      # SERVER — upload prisma folder
-      - name: 📦 Upload prisma folder
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/prisma/*"
-          target: "~/full-stack-portfolio/apps/server/prisma/"
-          strip_components: 3
-          overwrite: true
-
-      # SERVER — upload package.json
-      - name: 📦 Upload server package.json
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/package.json"
+          source: "apps/server/**"
           target: "~/full-stack-portfolio/apps/server/"
           strip_components: 2
           overwrite: true
 
-      # 🔁 Restart services and install only what’s needed
       - name: 🚀 Restart backend and finalize
         uses: appleboy/ssh-action@v1.0.3
         with:
