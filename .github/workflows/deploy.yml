@@ -53,7 +53,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
-            rm -rf ~/full-stack-portfolio/apps/client/*
+            rm -rf ~/full-stack-portfolio/apps/client/* && mkdir -p ~/full-stack-portfolio/apps/client/dist
             rm -rf ~/full-stack-portfolio/apps/server/*
 
       - name: 📦 Upload client dist
