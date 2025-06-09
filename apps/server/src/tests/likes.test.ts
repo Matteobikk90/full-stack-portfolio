@@ -23,10 +23,14 @@ beforeAll(async () => {
 
   const project = await prisma.project.create({
     data: {
-      title: 'Project Test',
-      description: 'Project desc',
+      title: 'Test Project',
+      number: '1',
+      demoUrl: 'https://example.com/demo',
+      repoUrl: 'https://example.com/demo',
+      imageUrl: 'https://example.com/image.png',
+      description: 'Test Desc',
       slug: `project-${Date.now()}`,
-      technologies: ['Node.js'],
+      technologies: ['React'],
     },
   });
 

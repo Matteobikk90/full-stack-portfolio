@@ -2,11 +2,12 @@ import { skillItems } from '@/utils/lists';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 
 export const Skills = () => (
-  <section className="flex flex-col gap-6 animate-fade-up">
-    <h2>My skills</h2>
+  <section className="flex flex-col gap-6 animate-fade-up w-full">
+    <h2>Tech Stack</h2>
     <p>
-      Built responsive web applications delivering real-time data and
-      projections out to 2030.
+      I build fast, responsive UIs with React and Tailwind, handle backend logic
+      with Node.js and PostgreSQL, and cover auth, testing, and deployment with
+      tools like JWT, Vitest, and AWS.
     </p>
     <ScrollArea.Root type="always">
       <ScrollArea.Viewport className="h-[14rem] lg:h-[22rem]">

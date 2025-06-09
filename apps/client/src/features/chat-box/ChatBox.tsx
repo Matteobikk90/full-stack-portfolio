@@ -1,3 +1,4 @@
+import PopUpInfo from '@/components/pop-up-info';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/lib/ui/button';
 import { Input } from '@/lib/ui/input';
@@ -124,7 +125,12 @@ export const ChatBox = () => {
           className="rounded-full shadow-elevation w-12 h-12 animate-pulse-slow"
           aria-label="Toggle chat"
         >
-          <ChatsIcon className="size-5" weight="duotone" />
+          <PopUpInfo
+            hoverText={isAuthenticated ? 'Open chat' : 'Log in to chat'}
+            align="left"
+          >
+            <ChatsIcon className="size-5" weight="duotone" />
+          </PopUpInfo>
         </Button>
       )}
 
@@ -147,7 +153,9 @@ export const ChatBox = () => {
               />
             </div>
             <Button variant="outline" size="icon" onClick={closeChat}>
-              <XIcon className="size-5" weight="duotone" />
+              <PopUpInfo hoverText="Close chat" align="left">
+                <XIcon className="size-5" weight="duotone" />
+              </PopUpInfo>
             </Button>
           </div>
 
@@ -232,7 +240,9 @@ export const ChatBox = () => {
                 disabled={!input.trim() || !socketRef.current?.connected}
                 aria-label="Send message"
               >
-                <PaperPlaneRightIcon className="size-5" weight="duotone" />
+                <PopUpInfo hoverText="Send message" align="left">
+                  <PaperPlaneRightIcon className="size-5" weight="duotone" />
+                </PopUpInfo>
               </Button>
             </form>
           </div>

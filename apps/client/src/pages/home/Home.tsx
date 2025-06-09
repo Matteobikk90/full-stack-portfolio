@@ -3,7 +3,7 @@ import TypedText from '@/components/typed-text';
 
 export const Home = () => {
   return (
-    <main className="flex flex-col items-center justify-center gap-5">
+    <main className="flex flex-col items-center justify-center gap-5 flex-1 mt-[-68px] md:mt-[-100px]">
       <ParticlesBackground />
       <h1 className="p-0 text-foreground">
         Hello, I’m{' '}

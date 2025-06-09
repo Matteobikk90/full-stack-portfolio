@@ -2,11 +2,11 @@ import { educationItems } from '@/utils/lists';
 import { DotIcon } from '@phosphor-icons/react';
 
 export const Education = () => (
-  <section className="flex flex-col gap-6 animate-fade-up">
+  <section className="flex flex-col gap-6 animate-fade-up w-full">
     <h2>My education</h2>
     <p>
-      Built responsive web applications delivering real-time data and
-      projections out to 2030.
+      Studied science in high school, then jumped into web dev through a
+      bootcamp.
     </p>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
       {educationItems.map(
