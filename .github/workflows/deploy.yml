@@ -62,9 +62,9 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/client/dist/*"
-          target: "~/full-stack-portfolio/apps/client/"
-          strip_components: 3
+          source: "apps/client/dist/**"
+          target: "~/full-stack-portfolio/apps/client/dist"
+          strip_components: 2
           overwrite: true
 
       - name: 📦 Upload server dist
@@ -75,6 +75,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           source: "apps/server/**"
           target: "~/full-stack-portfolio/apps/server/"
+          strip_components: 2
           overwrite: true
 
       - name: 🚀 Restart backend and finalize
@@ -85,12 +86,6 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             set -e
-            cd ~/full-stack-portfolio/apps/server
-            echo "📦 Installing only production deps"
-            pnpm install
-            echo "🧬 Generating Prisma client"
-            pnpm db:g
-            echo "🔁 Restarting backend service..."
             if [ "${{ github.ref_name }}" = "main" ]; then
               sudo systemctl restart backend
             elif [ "${{ github.ref_name }}" = "dev" ]; then
