@@ -104,7 +104,7 @@ jobs:
             set -e
             cd ~/full-stack-portfolio/apps/server
             echo "📦 Installing only production deps"
-            pnpm install --prod
+            pnpm install
             echo "🧬 Generating Prisma client"
             pnpm db:g
             echo "🔁 Restarting backend service..."
