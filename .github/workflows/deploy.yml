@@ -64,7 +64,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           source: "apps/client/dist/**"
           target: "~/full-stack-portfolio/apps/client/dist"
-          strip_components: 2
+          strip_components: 3
           overwrite: true
 
       - name: 📦 Upload server dist
