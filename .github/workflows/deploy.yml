@@ -53,7 +53,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           source: "apps/client/dist/*"
-          target: "~/full-stack-portfolio/apps/client/"
+          target: "~/full-stack-portfolio/apps/client/dist/"
           strip_components: 3
           overwrite: true
 
