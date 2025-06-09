@@ -63,8 +63,8 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           source: "apps/client/dist/*"
-          target: "~/full-stack-portfolio/apps/client/dist/"
-          strip_components: 2
+          target: "~/full-stack-portfolio/apps/client/"
+          strip_components: 3
           overwrite: true
 
       - name: 📦 Upload server dist
@@ -75,7 +75,6 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           source: "apps/server/**"
           target: "~/full-stack-portfolio/apps/server/"
-          strip_components: 2
           overwrite: true
 
       - name: 🚀 Restart backend and finalize
