@@ -42,31 +42,43 @@ jobs:
           cd ../..
 
           cd apps/server
-          pnpm prisma generate
+          pnpm db:g
           pnpm build
           cd ../..
 
-      - name: 📦 Replace client dist
+      - name: 🧹 Clean client and server folders
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            rm -rf ~/full-stack-portfolio/apps/client/dist/*
+            rm -rf ~/full-stack-portfolio/apps/server/*
+
+      - name: 📦 Upload client dist
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/client/dist/*"
-          target: "~/full-stack-portfolio/apps/client/dist/"
+          source: "apps/client/dist/**"
+          target: "~/full-stack-portfolio/apps/client/dist"
+          strip_components: 3
           overwrite: true
 
-      - name: 📦 Replace server dist
+      - name: 📦 Upload server dist
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/dist/*"
-          target: "~/full-stack-portfolio/apps/server/dist/"
+          source: "apps/server/**"
+          target: "~/full-stack-portfolio/apps/server/"
+          strip_components: 2
           overwrite: true
 
-      - name: 🚀 Restart backend service
+      - name: 🚀 Restart backend and finalize
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -74,16 +86,10 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             set -e
-
-            cd full-stack-portfolio
-
-            # Only restart the service - no rebuilding needed!
             if [ "${{ github.ref_name }}" = "main" ]; then
-              echo "🔁 Restarting production backend..."
               sudo systemctl restart backend
             elif [ "${{ github.ref_name }}" = "dev" ]; then
-              echo "🔁 Restarting development backend..."
               sudo systemctl restart dev-backend
             fi
 
-            echo "✅ Deployment completed"
+            echo "✅ Deployment completed successfully!"
