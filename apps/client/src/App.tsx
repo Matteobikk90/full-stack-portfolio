@@ -1,27 +1,33 @@
-import { Button } from '@/lib/ui/button';
-import useStore from '@/stores';
-import { useEffect } from 'react';
-import { useShallow } from 'zustand/react/shallow';
+// import Footer from '@/features/footer';
+import CustomModal from '@/components/custom-modal';
+import ChatBox from '@/features/chat-box';
+import Header from '@/features/header';
+import { Toaster } from '@/lib/ui/sonner';
+import { Outlet } from '@tanstack/react-router';
+import AnimatedCursor from 'react-animated-cursor';
 
 export default function App() {
-  const { mode, toggle } = useStore(
-    useShallow((state) => ({
-      mode: state.mode,
-      toggle: state.toggle,
-    }))
-  );
-
-  useEffect(() => {
-    document.documentElement.classList.remove('light', 'dark');
-    document.documentElement.classList.add(mode);
-  }, [mode]);
-
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">Full Stack Portfolio</h1>
-      <Button onClick={toggle} className="mt-4 px-4 py-2 border">
-        Toggle theme
-      </Button>
-    </div>
+    <>
+      <Header />
+      <Outlet />
+      {/* <Footer /> */}
+      <Toaster position="bottom-right" richColors closeButton />
+      <CustomModal />
+      <ChatBox />
+      <AnimatedCursor
+        innerSize={6}
+        outerSize={30}
+        innerScale={1}
+        outerScale={3}
+        outerAlpha={0}
+        outerStyle={{
+          border: '2px solid var(--foreground)',
+        }}
+        innerStyle={{
+          backgroundColor: 'var(--foreground)',
+        }}
+      />
+    </>
   );
 }

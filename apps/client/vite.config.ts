@@ -1,13 +1,20 @@
 // Include below line for test configuration
 /// <reference types="vitest" />
-
 import path from 'path';
+import tailwindcss from '@tailwindcss/vite';
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig, type PluginOption } from 'vite';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    TanStackRouterVite({
+      target: 'react',
+      autoCodeSplitting: true,
+    }) as PluginOption,
+    tailwindcss(),
+    react(),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
@@ -19,5 +26,14 @@ export default defineConfig({
     setupFiles: './src/tests/vitest/setup.ts',
     include: ['./src/tests/vitest/*.test.{ts,tsx}'],
     exclude: ['node_modules', 'dist'],
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '/api'),
+      },
+    },
   },
 });

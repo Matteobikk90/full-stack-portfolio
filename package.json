@@ -4,10 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky",
+    "format": "pnpm -r format",
+    "lint-fix": "pnpm -r lint-fix"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matteo Soresini",
   "license": "ISC",
-  "packageManager": "pnpm@10.6.5"
+  "packageManager": "pnpm@10.6.5",
+  "devDependencies": {
+    "husky": "^8.0.0"
+  }
 }

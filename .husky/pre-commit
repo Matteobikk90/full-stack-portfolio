@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "→ Linting client"
+cd apps/client && pnpm lint-staged 
+
+echo "→ Linting server"
+cd ../server && pnpm lint-staged 
