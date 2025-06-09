@@ -62,8 +62,8 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/dist/*"
-          target: "~/full-stack-portfolio/apps/server/dist/"
+          source: "apps/server/dist/** apps/server/node_modules/** apps/server/package.json"
+          target: "~/full-stack-portfolio/apps/server/"
           overwrite: true
 
       - name: 🚀 Restart backend service
