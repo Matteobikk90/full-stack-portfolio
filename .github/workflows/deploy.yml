@@ -52,10 +52,9 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/client/dist"
-          target: "~/full-stack-portfolio/apps/client/"
+          source: "apps/client/dist/*"
+          target: "~/full-stack-portfolio/apps/client/dist/"
           overwrite: true
-          rm: true
 
       - name: 📦 Replace server dist
         uses: appleboy/scp-action@v0.1.4
@@ -63,10 +62,9 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/dist"
-          target: "~/full-stack-portfolio/apps/server/"
+          source: "apps/server/dist/*"
+          target: "~/full-stack-portfolio/apps/server/dist/"
           overwrite: true
-          rm: true
 
       - name: 🚀 Restart backend service
         uses: appleboy/ssh-action@v1.0.3
