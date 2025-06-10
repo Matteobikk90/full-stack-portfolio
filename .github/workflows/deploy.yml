@@ -11,42 +11,51 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
-      # 1️⃣ We still need the checkout so GitHub provides us a REF
       - uses: actions/checkout@v4
 
-      # 2️⃣ Pull the latest code on the server instead of scp
-      - name: 🔄 Pull latest on EC2
+      - name: 🔄 Pull latest code on EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
+          timeout: 300s
           script: |
             set -e
             cd ~/full-stack-portfolio
-            git fetch --all
+
+            # Backup current state
+            git stash push -m "backup-$(date +%Y%m%d-%H%M%S)" || true
+
+            # Pull latest changes
+            git fetch --all --prune
             git reset --hard origin/${{ github.ref_name }}
 
-      # 3️⃣ Build & deploy the correct service via Docker Compose
+            echo "✅ Code updated successfully"
+
       - name: 🚀 Build & deploy correct service
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
+          timeout: 600s
           script: |
             set -e
             cd ~/full-stack-portfolio
 
             if [ "${{ github.ref_name }}" = "main" ]; then
               SERVICE_NAME="server-prod"
+              PORT="4000"
             elif [ "${{ github.ref_name }}" = "dev" ]; then
               SERVICE_NAME="server-dev"
+              PORT="4001"
             else
-              echo "Unknown branch. Skipping."
-              exit 0
+              echo "❌ Unknown branch '${{ github.ref_name }}'. Skipping deployment."
+              exit 1
             fi
 
             docker compose pull "$SERVICE_NAME" || true
