@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   server-prod:
     image: ghcr.io/matteobikk90/full-stack-portfolio-server-prod:${GITHUB_SHA:-latest}

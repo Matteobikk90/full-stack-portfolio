@@ -76,8 +76,8 @@ jobs:
             docker pull $REGISTRY/$FOLDER-$SERVICE_NAME:$TAG
 
             echo "🚀 Starting containers..."
-            export GITHUB_SHA=$TAG
-            docker compose -f ~/full-stack-portfolio/docker-compose.yml up -d $SERVICE_NAME client
+            cd ~/full-stack-portfolio
+            GITHUB_SHA=$TAG docker compose up -d $SERVICE_NAME client
 
             echo "🧹 Cleaning unused Docker resources..."
             docker system prune -af --volumes
