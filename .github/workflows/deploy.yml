@@ -15,7 +15,7 @@ jobs:
 
     env:
       IMAGE_TAG: ${{ github.sha }}
-      REGISTRY: ghcr.io/${{ github.repository_owner }}
+      REGISTRY: ghcr.io/matteobikk90
 
     steps:
       - name: 📥 Checkout repository
@@ -56,7 +56,13 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             set -e
-            REGISTRY=ghcr.io/${{ github.repository_owner }}
+
+            echo "🧹 Cleaning up old Docker resources..."
+            docker container prune -f
+            docker image prune -af
+            docker volume prune -f
+
+            REGISTRY=ghcr.io/matteobikk90
             TAG=${{ github.sha }}
 
             if [ "${{ github.ref_name }}" = "main" ]; then
