@@ -23,6 +23,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
+          envs: GITHUB_TOKEN
           script: |
             set -e
             cd ~/full-stack-portfolio
