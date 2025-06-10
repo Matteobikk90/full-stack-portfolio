@@ -14,7 +14,7 @@ dist/
 *.log
 
 # Env
-.env
+.env*
 
 # Editor files
 .idea/

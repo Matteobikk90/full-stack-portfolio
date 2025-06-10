@@ -2,9 +2,7 @@ name: Deploy to EC2
 
 on:
   push:
-    branches:
-      - dev
-      - main
+    branches: [main, dev]
 
 concurrency:
   group: deploy-ec2
@@ -15,70 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: 🟢 Setup Node.js and pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
-
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: 🧩 Install dependencies
-        run: |
-          pnpm install
-          cd apps/client && pnpm install && cd ../..
-          cd apps/server && pnpm install && cd ../..
-
-      - name: ⚙️ Build client and server
-        run: |
-          cd apps/client
-          pnpm build
-          cd ../..
-
-          cd apps/server
-          pnpm db:g
-          pnpm build
-          cd ../..
-
-      - name: 🧹 Clean client and server folders
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_KEY }}
-          script: |
-            rm -rf ~/full-stack-portfolio/apps/client/dist/*
-            rm -rf ~/full-stack-portfolio/apps/server/*
-
-      - name: 📦 Upload client dist
+      - name: 📦 Sync code to EC2
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/client/dist/**"
-          target: "~/full-stack-portfolio/apps/client/dist"
-          strip_components: 3
+          source: "."
+          target: "~/full-stack-portfolio"
+          strip_components: 0
           overwrite: true
 
-      - name: 📦 Upload server dist
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/**"
-          target: "~/full-stack-portfolio/apps/server/"
-          strip_components: 2
-          overwrite: true
-
-      - name: 🚀 Restart backend and finalize
+      - name: 🚀 Build & deploy correct service
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -86,10 +34,20 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             set -e
+            cd ~/full-stack-portfolio
+
+            SERVICE_NAME=""
             if [ "${{ github.ref_name }}" = "main" ]; then
-              sudo systemctl restart backend
+              SERVICE_NAME="server-prod"
             elif [ "${{ github.ref_name }}" = "dev" ]; then
-              sudo systemctl restart dev-backend
+              SERVICE_NAME="server-dev"
+            else
+              echo "Unknown branch. Skipping deployment."
+              exit 0
             fi
 
-            echo "✅ Deployment completed successfully!"
+            docker compose pull $SERVICE_NAME || true
+            docker compose build --pull $SERVICE_NAME
+            docker compose up -d $SERVICE_NAME
+
+            echo "✅ Deployed $SERVICE_NAME for branch ${{ github.ref_name }}"
