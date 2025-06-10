@@ -45,11 +45,9 @@ jobs:
       - name: 📤 Push images to registry
         run: |
           docker push $REGISTRY/$FOLDER-client:$IMAGE_TAG
-          docker push $REGISTRY/$FOLDER-client:latest
 
           SERVER_SUFFIX=$( [ "${{ github.ref_name }}" = "main" ] && echo "prod" || echo "dev" )
           docker push $REGISTRY/$FOLDER-server-$SERVER_SUFFIX:$IMAGE_TAG
-          docker push $REGISTRY/$FOLDER-server-$SERVER_SUFFIX:latest
 
       - name: 🚀 Deploy on EC2 via SSH
         uses: appleboy/ssh-action@v1.0.3
