@@ -73,8 +73,17 @@ jobs:
 
             echo "🚀 Starting containers..."
             cd ~/full-stack-portfolio
+
+            echo "DEBUG: TAG=$TAG"
+            echo "DEBUG: GITHUB_SHA will be set to: $TAG"
+
             export GITHUB_SHA=$TAG
-            docker compose up -d $SERVICE_NAME client
+            echo "DEBUG: GITHUB_SHA is now: $GITHUB_SHA"
+
+            # Show what images Docker Compose will try to use
+            docker compose config
+
+            docker compose up -d --force-recreate $SERVICE_NAME client
 
             echo "🧹 Cleaning unused Docker resources..."
             docker system prune -af --volumes
