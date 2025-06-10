@@ -73,7 +73,8 @@ jobs:
 
             echo "🚀 Starting containers..."
             cd ~/full-stack-portfolio
-            GITHUB_SHA=$TAG docker compose up -d $SERVICE_NAME client
+            export GITHUB_SHA=$TAG
+            docker compose up -d $SERVICE_NAME client
 
             echo "🧹 Cleaning unused Docker resources..."
             docker system prune -af --volumes
