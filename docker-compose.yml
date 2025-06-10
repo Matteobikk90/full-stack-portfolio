@@ -2,21 +2,21 @@ version: "3.9"
 
 services:
   server-prod:
-    image: ghcr.io/matteobikk90/server-prod:${GITHUB_SHA:-latest}
+    image: ghcr.io/matteobikk90/full-stack-portfolio-server-prod:${GITHUB_SHA:-latest}
     env_file: ./apps/server/.env.production
     ports:
       - "4000:4000"
     restart: unless-stopped
 
   server-dev:
-    image: ghcr.io/matteobikk90/server-dev:${GITHUB_SHA:-latest}
+    image: ghcr.io/matteobikk90/full-stack-portfolio-server-dev:${GITHUB_SHA:-latest}
     env_file: ./apps/server/.env.development
     ports:
       - "4001:4000"
     restart: unless-stopped
 
   client:
-    image: ghcr.io/matteobikk90/client:${GITHUB_SHA:-latest}
+    image: ghcr.io/matteobikk90/full-stack-portfolio-client:${GITHUB_SHA:-latest}
     ports:
       - "80:80"
     restart: unless-stopped
