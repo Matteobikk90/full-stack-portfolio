@@ -36,13 +36,11 @@ jobs:
       - name: 🐳 Build client image
         run: |
           docker build -t $REGISTRY/$FOLDER-client:$IMAGE_TAG -f apps/client/Dockerfile apps/client
-          docker tag $REGISTRY/$FOLDER-client:$IMAGE_TAG $REGISTRY/$FOLDER-client:latest
 
       - name: 🐳 Build server image
         run: |
           SERVER_SUFFIX=$( [ "${{ github.ref_name }}" = "main" ] && echo "prod" || echo "dev" )
           docker build -t $REGISTRY/$FOLDER-server-$SERVER_SUFFIX:$IMAGE_TAG -f apps/server/Dockerfile apps/server
-          docker tag $REGISTRY/$FOLDER-server-$SERVER_SUFFIX:$IMAGE_TAG $REGISTRY/$FOLDER-server-$SERVER_SUFFIX:latest
 
       - name: 📤 Push images to registry
         run: |

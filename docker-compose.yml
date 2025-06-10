@@ -1,9 +1,8 @@
 services:
-  server-prod:
-    image: ghcr.io/matteobikk90/full-stack-portfolio-server-prod:${GITHUB_SHA:-latest}
-    env_file: ./apps/server/.env.production
+  client:
+    image: ghcr.io/matteobikk90/full-stack-portfolio-client:${GITHUB_SHA:-latest}
     ports:
-      - "4000:4000"
+      - "80:80"
     restart: unless-stopped
 
   server-dev:
@@ -13,8 +12,9 @@ services:
       - "4001:4000"
     restart: unless-stopped
 
-  client:
-    image: ghcr.io/matteobikk90/full-stack-portfolio-client:${GITHUB_SHA:-latest}
+  server-prod:
+    image: ghcr.io/matteobikk90/full-stack-portfolio-server-prod:${GITHUB_SHA:-latest}
+    env_file: ./apps/server/.env.production
     ports:
-      - "80:80"
+      - "4000:4000"
     restart: unless-stopped
