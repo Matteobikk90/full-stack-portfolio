@@ -6,7 +6,7 @@ services:
       context: ./apps/server
       dockerfile: Dockerfile
       target: runner
-    image: portfolio/server-prod
+    image: portfolio/server-prod:${GITHUB_SHA:-latest}
     env_file: ./apps/server/.env.production
     ports:
       - "4000:4000"
@@ -17,7 +17,7 @@ services:
       context: ./apps/server
       dockerfile: Dockerfile
       target: runner
-    image: portfolio/server-dev
+    image: portfolio/server-dev:${GITHUB_SHA:-latest}
     env_file: ./apps/server/.env.development
     ports:
       - "4001:4000"
@@ -28,7 +28,7 @@ services:
       context: ./apps/client
       dockerfile: Dockerfile
       target: runner
-    image: portfolio/client:latest
+    image: portfolio/client::${GITHUB_SHA:-latest}
     ports:
       - "80:80"
     restart: unless-stopped
