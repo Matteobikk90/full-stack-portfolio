@@ -13,19 +13,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ We still need the checkout so GitHub provides us a REF
       - uses: actions/checkout@v4
 
-      - name: 📦 Sync code to EC2
-        uses: appleboy/scp-action@v0.1.4
+      # 2️⃣ Pull the latest code on the server instead of scp
+      - name: 🔄 Pull latest on EC2
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "."
-          target: "~/full-stack-portfolio"
-          strip_components: 0
-          overwrite: true
+          script: |
+            set -e
+            cd ~/full-stack-portfolio
+            git fetch --all
+            git reset --hard origin/${{ github.ref_name }}
 
+      # 3️⃣ Build & deploy the correct service via Docker Compose
       - name: 🚀 Build & deploy correct service
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -36,18 +40,17 @@ jobs:
             set -e
             cd ~/full-stack-portfolio
 
-            SERVICE_NAME=""
             if [ "${{ github.ref_name }}" = "main" ]; then
               SERVICE_NAME="server-prod"
             elif [ "${{ github.ref_name }}" = "dev" ]; then
               SERVICE_NAME="server-dev"
             else
-              echo "Unknown branch. Skipping deployment."
+              echo "Unknown branch. Skipping."
               exit 0
             fi
 
-            docker compose pull $SERVICE_NAME || true
-            docker compose build --pull $SERVICE_NAME
-            docker compose up -d $SERVICE_NAME
+            docker compose pull "$SERVICE_NAME" || true
+            docker compose build --pull "$SERVICE_NAME"
+            docker compose up -d "$SERVICE_NAME"
 
-            echo "✅ Deployed $SERVICE_NAME for branch ${{ github.ref_name }}"
+            echo "✅ Deployed $SERVICE_NAME for branch '${{ github.ref_name }}'"
