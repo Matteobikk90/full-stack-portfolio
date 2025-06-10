@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  server-prod:
+    build:
+      context: ./apps/server
+      dockerfile: Dockerfile
+      target: runner
+    image: portfolio/server-prod
+    env_file: ./apps/server/.env.production
+    ports:
+      - "4000:4000"
+    restart: unless-stopped
+
+  server-dev:
+    build:
+      context: ./apps/server
+      dockerfile: Dockerfile
+      target: runner
+    image: portfolio/server-dev
+    env_file: ./apps/server/.env.development
+    ports:
+      - "4001:4000"
+    restart: unless-stopped
+
+  client:
+    build:
+      context: ./apps/client
+      dockerfile: Dockerfile
+      target: runner
+    image: portfolio/client:latest
+    ports:
+      - "80:80"
+    restart: unless-stopped
