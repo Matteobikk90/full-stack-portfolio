@@ -26,6 +26,9 @@ jobs:
           script: |
             set -e
             cd ~/full-stack-portfolio
+
+            git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/Matteobikk90/full-stack-portfolio.git
+            
             git fetch --all
             git reset --hard origin/${{ github.ref_name }}
 
