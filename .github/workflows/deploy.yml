@@ -71,8 +71,13 @@ jobs:
             docker pull $REGISTRY/$FOLDER-client:$TAG
             docker pull $REGISTRY/$FOLDER-$SERVICE_NAME:$TAG
 
-            echo "🚀 Starting containers..."
+            echo "🛑 Stopping existing containers..."
             cd ~/full-stack-portfolio
+            docker compose down || true
+            CONTAINERS=$(docker ps -q --filter "publish=80" --filter "publish=4000" --filter "publish=4001")
+            [ -n "$CONTAINERS" ] && docker stop $CONTAINERS || true
+
+            echo "🚀 Starting containers..."
             export GITHUB_SHA=$TAG
             docker compose up -d $SERVICE_NAME client
 
