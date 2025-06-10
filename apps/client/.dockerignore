@@ -23,3 +23,11 @@ Thumbs.db
 storybook-static
 playwright-report
 test-results
+src
+public
+*.ts
+*.tsx
+*.json
+pnpm-lock.yaml
+.vscode
+*.md

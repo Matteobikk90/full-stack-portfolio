@@ -15,7 +15,7 @@ COPY pnpm-lock.yaml* ./
 COPY prisma ./prisma/
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile
+RUN pnpm install 
 
 # Rebuild the source code only when needed
 FROM base AS builder
