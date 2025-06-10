@@ -7,7 +7,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Enable corepack for pnpm
-RUN corepack enable && corepack prepare pnpm@8.0.0 --activate
+RUN corepack enable && corepack prepare pnpm@9.13.2 --activate
 
 # Copy package files
 COPY package.json pnpm-lock.yaml* ./
@@ -20,7 +20,7 @@ FROM base AS builder
 WORKDIR /app
 
 # Enable corepack for pnpm
-RUN corepack enable && corepack prepare pnpm@8.0.0 --activate
+RUN corepack enable && corepack prepare pnpm@9.13.2 --activate
 
 # Copy dependencies
 COPY --from=deps /app/node_modules ./node_modules
