@@ -2,10 +2,6 @@ version: "3.9"
 
 services:
   server-prod:
-    build:
-      context: ./apps/server
-      dockerfile: Dockerfile
-      target: runner
     image: portfolio/server-prod:${GITHUB_SHA:-latest}
     env_file: ./apps/server/.env.production
     ports:
@@ -13,10 +9,6 @@ services:
     restart: unless-stopped
 
   server-dev:
-    build:
-      context: ./apps/server
-      dockerfile: Dockerfile
-      target: runner
     image: portfolio/server-dev:${GITHUB_SHA:-latest}
     env_file: ./apps/server/.env.development
     ports:
@@ -24,11 +16,7 @@ services:
     restart: unless-stopped
 
   client:
-    build:
-      context: ./apps/client
-      dockerfile: Dockerfile
-      target: runner
-    image: portfolio/client::${GITHUB_SHA:-latest}
+    image: portfolio/client:${GITHUB_SHA:-latest}
     ports:
       - "80:80"
     restart: unless-stopped
