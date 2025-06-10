@@ -55,13 +55,14 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
+          envs: GITHUB_SHA,GITHUB_REF_NAME
           script: |
             set -e
             REGISTRY=ghcr.io/matteobikk90
             FOLDER=full-stack-portfolio
-            TAG=${{ github.sha }}
+            TAG=$GITHUB_SHA
 
-            if [ "${{ github.ref_name }}" = "main" ]; then
+            if [ "$GITHUB_REF_NAME" = "main" ]; then
               SERVICE_NAME="server-prod"
             else
               SERVICE_NAME="server-dev"
@@ -74,10 +75,12 @@ jobs:
             echo "🛑 Stopping existing containers..."
             cd ~/full-stack-portfolio
             docker compose down || true
+
             CONTAINERS=$(docker ps -q --filter "publish=80" --filter "publish=4000" --filter "publish=4001")
             [ -n "$CONTAINERS" ] && docker stop $CONTAINERS || true
 
             echo "🚀 Starting containers..."
+            cd ~/full-stack-portfolio
             export GITHUB_SHA=$TAG
             docker compose up -d $SERVICE_NAME client
 
@@ -86,3 +89,6 @@ jobs:
             docker image prune -af
             docker container prune -f
             docker volume prune -f
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
