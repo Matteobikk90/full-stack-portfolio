@@ -27,11 +27,8 @@ jobs:
             set -e
             cd ~/full-stack-portfolio
 
-            # Backup current state
-            git stash push -m "backup-$(date +%Y%m%d-%H%M%S)" || true
-
             # Pull latest changes
-            git fetch --all --prune
+            git fetch --all
             git reset --hard origin/${{ github.ref_name }}
 
             echo "✅ Code updated successfully"
