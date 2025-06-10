@@ -10,19 +10,16 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@9.13.2 --activate
 
 # Copy package files (if you have a root workspace, copy those too)
-COPY package.json ./
-COPY pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml* ./
 COPY prisma ./prisma/
 
+
 # Install dependencies
-RUN pnpm install 
+RUN pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-
-# Enable corepack for pnpm
-RUN corepack enable && corepack prepare pnpm@9.13.2 --activate
 
 # Copy dependencies
 COPY --from=deps /app/node_modules ./node_modules
