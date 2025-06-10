@@ -21,6 +21,9 @@ RUN pnpm install --frozen-lockfile
 FROM base AS builder
 WORKDIR /app
 
+# Build stage
+RUN corepack enable && corepack prepare pnpm@9.13.2 --activate
+
 # Copy dependencies
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
