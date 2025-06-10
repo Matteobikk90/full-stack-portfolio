@@ -14,49 +14,65 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
 
-      - name: 🔄 Pull latest code on EC2
+      - name: 🔧 Set Docker metadata
+        id: meta
+        run: echo "TAG=${GITHUB_SHA}" >> "$GITHUB_ENV"
+
+      - name: 🐳 Build Docker image (client)
+        run: docker build -t portfolio/client:${{ env.TAG }} -f apps/client/Dockerfile apps/client
+
+      - name: 🐳 Build Docker image (server)
+        run: docker build -t portfolio/server-${{ github.ref_name }}:${{ env.TAG }} -f apps/server/Dockerfile apps/server
+
+      - name: 📦 Save Docker images
+        run: |
+          docker save portfolio/client:${{ env.TAG }} | gzip > client.tar.gz
+          docker save portfolio/server-${{ github.ref_name }}:${{ env.TAG }} | gzip > server.tar.gz
+
+      - name: 🧹 Cleanup local Docker images
+        run: docker image prune -af
+
+      - name: 🚀 Copy images to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          source: "client.tar.gz,server.tar.gz"
+          target: "~/docker-images"
+
+      - name: 🔄 Load & deploy on EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          timeout: 300s
           script: |
             set -e
-            cd ~/full-stack-portfolio
+            cd ~/docker-images
 
-            # Pull latest changes
-            git fetch --all
-            git reset --hard origin/${{ github.ref_name }}
+            docker load < server.tar.gz
+            docker load < client.tar.gz
 
-            echo "✅ Code updated successfully"
+            rm -f server.tar.gz client.tar.gz
 
-      - name: 🚀 Build & deploy correct service
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_KEY }}
-          timeout: 600s
-          script: |
-            set -e
             cd ~/full-stack-portfolio
 
             if [ "${{ github.ref_name }}" = "main" ]; then
               SERVICE_NAME="server-prod"
-              PORT="4000"
             elif [ "${{ github.ref_name }}" = "dev" ]; then
               SERVICE_NAME="server-dev"
-              PORT="4001"
             else
-              echo "❌ Unknown branch '${{ github.ref_name }}'. Skipping deployment."
+              echo "❌ Unknown branch '${{ github.ref_name }}'"
               exit 1
             fi
 
-            docker compose pull "$SERVICE_NAME" || true
-            docker compose build --pull "$SERVICE_NAME"
-            docker compose up -d "$SERVICE_NAME"
+            docker compose up -d $SERVICE_NAME client
 
-            echo "✅ Deployed $SERVICE_NAME for branch '${{ github.ref_name }}'"
+            echo "✅ Images deployed and containers started"
+
+            echo "🧹 Cleaning up unused Docker resources..."
+            docker system prune -af --volumes
