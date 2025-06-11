@@ -65,6 +65,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           source: nginx/conf.d/${{ env.CONFIG_FILE }}
           target: /home/ubuntu/full-stack-portfolio/nginx/conf.d/
+          strip_components: 2
 
       - name: 🚀 Deploy on EC2 via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -110,7 +111,7 @@ jobs:
             docker compose up -d
 
             echo "🧹 Cleaning unused Docker resources..."
-            docker image prune -af --filter "until=72h"
+            docker image prune -af 
             docker container prune -f
         env:
           GITHUB_SHA: ${{ github.sha }}
