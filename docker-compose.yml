@@ -5,7 +5,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - /home/ubuntu/full-stack-portfolio/nginx/conf.d:/etc/nginx/conf.d:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - client
@@ -18,8 +18,8 @@ services:
       - "80"
 
   server:
-    image: >-
-      ghcr.io/matteobikk90/full-stack-portfolio-server-${IMAGE_ENV}:${GITHUB_SHA}
+    container_name: server
+    image: ghcr.io/matteobikk90/full-stack-portfolio-server-${IMAGE_ENV}:${GITHUB_SHA}
     expose:
       - "${SERVER_PORT}"
     env_file: ./apps/server/.env.${ENV}
