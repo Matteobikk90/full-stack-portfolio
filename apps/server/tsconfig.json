@@ -15,5 +15,13 @@
     },
     "types": ["vitest/globals"]
   },
+  "tsc-alias": {
+    "verbose": false,
+    "resolveFullPaths": true,
+    "fileExtensions": {
+      "inputGlob": "{js,jsx,mjs,ts,tsx,json}",
+      "outputCheck": ["js", "json", "jsx", "mjs", "ts", "tsx"]
+    }
+  },
   "include": ["src", "src/types"]
 }
