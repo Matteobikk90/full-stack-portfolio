@@ -35,7 +35,11 @@ jobs:
 
       - name: 🐳 Build client image
         run: |
-          docker build -t $REGISTRY/$FOLDER-client:$IMAGE_TAG -f apps/client/Dockerfile apps/client
+          VITE_PROXY_TARGET=$([ "${{ github.ref_name }}" = "main" ] && echo "https://matteosoresini.com" || echo "http://localhost:4001")
+          docker build \
+            --build-arg VITE_PROXY_TARGET=$VITE_PROXY_TARGET \
+            -t $REGISTRY/$FOLDER-client:$IMAGE_TAG \
+            -f apps/client/Dockerfile apps/clients
 
       - name: 🐳 Build server image
         run: |
@@ -87,10 +91,10 @@ jobs:
 
             echo "🚀 Starting containers..."
             cd ~/full-stack-portfolio
-            export GITHUB_SHA=$TAG
-            export ENV=$ENV
-            export IMAGE_ENV=$IMAGE_ENV
-            export SERVER_PORT=$SERVER_PORT
+            echo "GITHUB_SHA=$TAG" > .env
+            echo "ENV=$ENV" >> .env
+            echo "IMAGE_ENV=$IMAGE_ENV" >> .env
+            echo "SERVER_PORT=$SERVER_PORT" >> .env
             docker compose up -d
 
             echo "🧹 Cleaning unused Docker resources..."
