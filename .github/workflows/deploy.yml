@@ -64,7 +64,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           source: nginx/conf.d/${{ env.CONFIG_FILE }}
-          target: /home/ubuntu/full-stack-portfolio/nginx/conf.d/default.conf
+          target: /home/ubuntu/full-stack-portfolio/nginx/conf.d/
 
       - name: 🚀 Deploy on EC2 via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -72,7 +72,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          envs: GITHUB_SHA,GITHUB_REF_NAME
+          envs: GITHUB_SHA,GITHUB_REF_NAME,CONFIG_FILE
           script: |
             set -e
             REGISTRY=ghcr.io/matteobikk90
@@ -94,6 +94,7 @@ jobs:
             docker pull $REGISTRY/$FOLDER-server-$IMAGE_ENV:$TAG
 
             echo "🛑 Stopping existing containers..."
+            mv ~/full-stack-portfolio/nginx/conf.d/${CONFIG_FILE} ~/full-stack-portfolio/nginx/conf.d/default.conf
             cd ~/full-stack-portfolio
             docker compose down || true
 
