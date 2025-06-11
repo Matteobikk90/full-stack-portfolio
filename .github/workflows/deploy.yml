@@ -78,6 +78,8 @@ jobs:
               cp ~/full-stack-portfolio/nginx/conf.d/dev.conf ~/full-stack-portfolio/nginx/conf.d/default.conf
             fi
 
+            rm -f ~/full-stack-portfolio/nginx/conf.d/dev.conf ~/full-stack-portfolio/nginx/conf.d/prod.conf
+
             echo "📥 Pulling images from GHCR..."
             docker pull $REGISTRY/$FOLDER-client:$TAG
             docker pull $REGISTRY/$FOLDER-server-$IMAGE_ENV:$TAG
