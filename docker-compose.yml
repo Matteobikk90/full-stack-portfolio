@@ -1,20 +1,26 @@
 services:
-  client:
-    image: ghcr.io/matteobikk90/full-stack-portfolio-client:${GITHUB_SHA}
+  nginx:
+    image: nginx:alpine
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - client
+      - server
     restart: unless-stopped
 
-  server-dev:
-    image: ghcr.io/matteobikk90/full-stack-portfolio-server-dev:${GITHUB_SHA}
-    env_file: ./apps/server/.env.development
-    ports:
-      - "4001:4000"
-    restart: unless-stopped
+  client:
+    image: ghcr.io/matteobikk90/full-stack-portfolio-client:${GITHUB_SHA}
+    expose:
+      - "80"
 
-  server-prod:
-    image: ghcr.io/matteobikk90/full-stack-portfolio-server-prod:${GITHUB_SHA}
-    env_file: ./apps/server/.env.production
-    ports:
-      - "4000:4000"
+  server:
+    image: >-
+      ghcr.io/matteobikk90/full-stack-portfolio-server-${IMAGE_ENV}:${GITHUB_SHA}
+    expose:
+      - "${SERVER_PORT}"
+    env_file: ./apps/server/.env.${ENV}
     restart: unless-stopped

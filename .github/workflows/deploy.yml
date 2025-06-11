@@ -63,14 +63,20 @@ jobs:
             TAG=$GITHUB_SHA
 
             if [ "$GITHUB_REF_NAME" = "main" ]; then
-              SERVICE_NAME="server-prod"
+              IMAGE_ENV="prod"        
+              ENV="production"        
+              SERVER_PORT="4000"
+              cp ~/full-stack-portfolio/nginx/conf.d/prod.conf ~/full-stack-portfolio/nginx/conf.d/default.conf
             else
-              SERVICE_NAME="server-dev"
+              IMAGE_ENV="dev"         
+              ENV="development"       
+              SERVER_PORT="4001"
+              cp ~/full-stack-portfolio/nginx/conf.d/dev.conf ~/full-stack-portfolio/nginx/conf.d/default.conf
             fi
 
             echo "📥 Pulling images from GHCR..."
             docker pull $REGISTRY/$FOLDER-client:$TAG
-            docker pull $REGISTRY/$FOLDER-$SERVICE_NAME:$TAG
+            docker pull $REGISTRY/$FOLDER-server-$IMAGE_ENV:$TAG
 
             echo "🛑 Stopping existing containers..."
             cd ~/full-stack-portfolio
@@ -82,12 +88,14 @@ jobs:
             echo "🚀 Starting containers..."
             cd ~/full-stack-portfolio
             export GITHUB_SHA=$TAG
-            docker compose up -d $SERVICE_NAME client
+            export ENV=$ENV
+            export IMAGE_ENV=$IMAGE_ENV
+            export SERVER_PORT=$SERVER_PORT
+            docker compose up -d
 
             echo "🧹 Cleaning unused Docker resources..."
-            docker image prune -f
+            docker image prune -af --filter "until=72h"
             docker container prune -f
-            docker volume prune -f
         env:
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_REF_NAME: ${{ github.ref_name }}
