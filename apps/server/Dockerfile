@@ -29,7 +29,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Generate Prisma client and build
-RUN pnpm db:g && pnpm build
+RUN pnpm build
 
 # Production image, copy all the files and run the server
 FROM base AS runner
@@ -57,4 +57,4 @@ EXPOSE 4000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD node -e "require('http').get('http://localhost:4000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"
 
-CMD ["node", "-r", "dotenv/config", "dist/index.js"]
+CMD ["node", "dist/index.js"]
