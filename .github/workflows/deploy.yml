@@ -39,7 +39,7 @@ jobs:
           docker build \
             --build-arg VITE_PROXY_TARGET=$VITE_PROXY_TARGET \
             -t $REGISTRY/$FOLDER-client:$IMAGE_TAG \
-            -f apps/client/Dockerfile apps/clients
+            -f apps/client/Dockerfile apps/client
 
       - name: 🐳 Build server image
         run: |
