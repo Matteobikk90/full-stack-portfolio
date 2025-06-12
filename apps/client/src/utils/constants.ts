@@ -7,6 +7,7 @@ export const URL_ENDPOINTS = {
   getExperiences: '/api/experiences',
   getExperience: (id: string) => `/api/experiences/${id}`,
   getWorks: '/api/projects',
+  toggleLike: `/api/like`,
 };
 
 export const skillsFontSize = 60;
