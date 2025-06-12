@@ -35,7 +35,7 @@ jobs:
 
       - name: 🐳 Build client image
         run: |
-          VITE_PROXY_TARGET=$([ "${{ github.ref_name }}" = "main" ] && echo "https://matteosoresini.com" || echo "http://localhost:4001")
+          VITE_PROXY_TARGET=$([ "${{ github.ref_name }}" = "main" ] && echo "https://matteosoresini.com" || echo "https://dev.matteosoresini.com")
           docker build \
             --build-arg VITE_PROXY_TARGET=$VITE_PROXY_TARGET \
             -t $REGISTRY/$FOLDER-client:$IMAGE_TAG \
@@ -95,6 +95,7 @@ jobs:
             docker pull $REGISTRY/$FOLDER-server-$IMAGE_ENV:$TAG
 
             echo "🛑 Stopping existing containers..."
+            mv ~/full-stack-portfolio/nginx/conf.d/${CONFIG_FILE} ~/full-stack-portfolio/nginx/conf.d/default.conf
             cd ~/full-stack-portfolio
             docker compose down || true
 
