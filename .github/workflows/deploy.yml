@@ -95,7 +95,6 @@ jobs:
             docker pull $REGISTRY/$FOLDER-server-$IMAGE_ENV:$TAG
 
             echo "🛑 Stopping existing containers..."
-            mv ~/full-stack-portfolio/nginx/conf.d/${CONFIG_FILE} ~/full-stack-portfolio/nginx/conf.d/default.conf
             cd ~/full-stack-portfolio
             docker compose down || true
 

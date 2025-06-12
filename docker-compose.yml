@@ -1,21 +1,16 @@
 services:
-  nginx:
-    image: nginx:alpine
+  web:
+    image: ghcr.io/matteobikk90/full-stack-portfolio-client:${GITHUB_SHA}
     ports:
       - "80:80"
       - "443:443"
+
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./nginx/conf.d/${CONFIG_FILE}:/etc/nginx/conf.d/default.conf:ro
     depends_on:
-      - client
       - server
     restart: unless-stopped
-
-  client:
-    image: ghcr.io/matteobikk90/full-stack-portfolio-client:${GITHUB_SHA}
-    expose:
-      - "80"
 
   server:
     container_name: server
