@@ -1,7 +1,10 @@
 import PopUpInfo from '@/components/pop-up-info';
+import { queryClient } from '@/config/queryClient';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/lib/ui/button';
-import { toggleLike } from '@/queries/likes';
+import { getLikes, toggleLike } from '@/queries/likes';
+import { useStore } from '@/stores';
+import type { LikeType } from '@/types/likes.types';
 import type { WorkTypes } from '@/types/works.types';
 import { toastDuration } from '@/utils/constants';
 import {
@@ -9,8 +12,9 @@ import {
   GithubLogoIcon,
   HeartIcon,
 } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
+import { useShallow } from 'zustand/shallow';
 
 export const Actions = ({
   activeWork,
@@ -18,10 +22,22 @@ export const Actions = ({
   activeWork: Pick<WorkTypes, 'id' | 'demoUrl' | 'repoUrl'>;
 }) => {
   const { isAuthenticated } = useAuth();
+  const { toggleModal } = useStore(
+    useShallow(({ toggleModal }) => ({
+      toggleModal,
+    }))
+  );
+  const { data: likeStatus } = useQuery({
+    queryKey: ['likeStatus', activeWork.id],
+    queryFn: () => getLikes(activeWork.id),
+    enabled: !!activeWork.id,
+  });
   const { data: likeData, mutate } = useMutation({
     mutationKey: ['toggleLike', activeWork.id],
     mutationFn: toggleLike,
-    onSuccess: ({ hasLiked }) => {
+    onSuccess: (serverData, projectId) => {
+      queryClient.setQueryData<LikeType>(['likeStatus', projectId], serverData);
+
       toast.success(hasLiked ? 'Thanks for the ❤️' : 'Like removed', {
         description: hasLiked
           ? 'Your appreciation has been recorded.'
@@ -36,6 +52,12 @@ export const Actions = ({
       });
     },
   });
+
+  const handleIconClick = () =>
+    isAuthenticated ? mutate(activeWork.id) : toggleModal();
+
+  const likesCount = likeStatus?.likesCount ?? likeData?.likesCount ?? 0;
+  const hasLiked = likeStatus?.hasLiked ?? likeData?.hasLiked ?? false;
 
   return (
     <div className="flex gap-2 w-full">
@@ -64,15 +86,15 @@ export const Actions = ({
         className="ml-auto"
       >
         <Button
-          onClick={() => mutate(activeWork.id)}
+          onClick={handleIconClick}
           className="flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
           variant="ghost"
         >
           <HeartIcon
-            weight={likeData?.hasLiked ? 'fill' : 'regular'}
+            weight={hasLiked ? 'fill' : 'regular'}
             className="text-work size-5"
           />
-          {likeData?.likesCount}
+          {likesCount}
         </Button>
       </PopUpInfo>
     </div>

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const toggleLikeSchema = z
+export const likeSchema = z
   .object({
     projectId: z.string().cuid().optional(),
   })
@@ -8,4 +8,4 @@ export const toggleLikeSchema = z
     message: 'projectId is required',
   });
 
-export type ToggleLikeInput = z.infer<typeof toggleLikeSchema>;
+export type ToggleLikeInput = z.infer<typeof likeSchema>;

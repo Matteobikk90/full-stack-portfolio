@@ -1,7 +1,7 @@
 import {
   getAllExperiences,
   getExperienceById,
-} from '@/controllers/experinces.controller';
+} from '@/controllers/experieces.controller';
 import { validateParams } from '@/middleware/validate.middleware';
 import { asyncHandler } from '@/utils/async-handlers';
 import { idParamSchema } from '@/validation/experiences.schema';

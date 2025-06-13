@@ -23,8 +23,6 @@ export const getExperienceById = async (req: Request, res: Response) => {
   const experience = await prisma.experience.findUnique({
     where: { slug },
     include: {
-      comments: { include: { user: true } },
-      likes: true,
       projects: true,
     },
   });

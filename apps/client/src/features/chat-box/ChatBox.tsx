@@ -7,7 +7,13 @@ import { useStore } from '@/stores';
 import type { ChatMessageType } from '@/types/chat.types';
 import { SOCKET_URL } from '@/utils/constants';
 import { ChatsIcon, PaperPlaneRightIcon, XIcon } from '@phosphor-icons/react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { io, type Socket } from 'socket.io-client';
 import { useShallow } from 'zustand/shallow';
 
@@ -20,7 +26,6 @@ export const ChatBox = () => {
       closeChat,
     }))
   );
-
   const { user, isAuthenticated } = useAuth();
   const socketRef = useRef<Socket | null>(null);
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
@@ -30,7 +35,7 @@ export const ChatBox = () => {
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     scrollRef.current?.scrollTo({
       top: scrollRef.current.scrollHeight,
       behavior: 'smooth',
@@ -51,7 +56,6 @@ export const ChatBox = () => {
     socketRef.current = socket;
 
     socket.on('connect', () => {
-      console.log('✅ Socket connected:', socket.id);
       setIsConnecting(false);
       setConnectionError(null);
     });
@@ -91,18 +95,10 @@ export const ChatBox = () => {
     const trimmedInput = input.trim();
     if (!trimmedInput || !socketRef.current?.connected) return;
 
-    const tempMsg = {
-      id: `temp-${Date.now()}`,
-      content: trimmedInput,
-      createdAt: new Date().toISOString(),
-      sender: { ...user },
-    };
-
-    setMessages((prev) => [...prev, tempMsg]);
     socketRef.current.emit('chat:message', trimmedInput);
     setInput('');
     inputRef.current?.focus();
-  }, [input, user]);
+  }, [input]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -164,7 +160,7 @@ export const ChatBox = () => {
               className="flex-1 overflow-y-auto p-2 space-y-3"
               ref={scrollRef}
             >
-              {messages.map((msg, i) => {
+              {messages.map((msg) => {
                 const isMe = msg.sender?.id === user?.id;
                 const timestamp = new Date(msg.createdAt).toLocaleTimeString(
                   [],
@@ -178,7 +174,7 @@ export const ChatBox = () => {
 
                 return (
                   <div
-                    key={i}
+                    key={msg.id}
                     className={cn(
                       'flex items-end gap-2',
                       isMe ? 'justify-start flex-row-reverse' : 'justify-start'
@@ -237,7 +233,9 @@ export const ChatBox = () => {
                 variant="outline"
                 size="icon"
                 type="submit"
-                disabled={!input.trim() || !socketRef.current?.connected}
+                disabled={
+                  !input.trim() || !socketRef.current?.connected || isConnecting
+                }
                 aria-label="Send message"
               >
                 <PopUpInfo hoverText="Send message" align="left">
