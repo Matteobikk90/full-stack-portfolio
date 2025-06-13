@@ -87,7 +87,7 @@ export const Actions = ({
       >
         <Button
           onClick={handleIconClick}
-          className="flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed !p-0"
           variant="ghost"
         >
           <HeartIcon
