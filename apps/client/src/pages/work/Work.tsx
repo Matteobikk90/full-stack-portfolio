@@ -1,4 +1,3 @@
-import PopUpInfo from '@/components/pop-up-info';
 import {
   Carousel,
   CarouselContent,
@@ -6,9 +5,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/lib/ui/carousel';
+import { Actions } from '@/pages/work/Actions';
 import { useStore } from '@/stores';
 import { imageMap } from '@/utils/slider';
-import { ArrowUpRightIcon, GithubLogoIcon } from '@phosphor-icons/react';
 import { useLoaderData } from '@tanstack/react-router';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useShallow } from 'zustand/shallow';
@@ -52,28 +51,7 @@ export const Work = () => {
               ))}
             </ul>
             <hr className="my-4 border-work" />
-            <div className="flex gap-2">
-              {activeWork.demoUrl && (
-                <a
-                  href={activeWork.demoUrl}
-                  className="bg-gray hover:text-work max-w-max p-3 flex rounded-full"
-                >
-                  <PopUpInfo hoverText="Live demo" align="right">
-                    <ArrowUpRightIcon className="size-5" weight="duotone" />
-                  </PopUpInfo>
-                </a>
-              )}
-              {activeWork.repoUrl && (
-                <a
-                  href={activeWork.repoUrl}
-                  className="bg-gray hover:text-work max-w-max p-3 flex rounded-full"
-                >
-                  <PopUpInfo hoverText="View on GitHub" align="center">
-                    <GithubLogoIcon className="size-5" weight="duotone" />
-                  </PopUpInfo>
-                </a>
-              )}
-            </div>
+            <Actions activeWork={activeWork} />
           </motion.article>
         </AnimatePresence>
         <article>

@@ -28,8 +28,6 @@ io.use((socket, next) => {
 });
 
 io.on('connection', async (socket) => {
-  console.log('✅ User connected:', socket.data.userId, socket.id);
-
   socket.emit(
     'chat:history',
     await prisma.chatMessage.findMany({
