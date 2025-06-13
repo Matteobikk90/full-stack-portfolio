@@ -73,7 +73,7 @@ export const MenuMobile = () => {
         </Button>
       </PopUpInfo>
 
-      <Link to="/" className="absolute left-1/2 -translate-x-1/2">
+      <Link to="/" className="md:hidden absolute left-1/2 -translate-x-1/2">
         <Logo />
       </Link>
     </>

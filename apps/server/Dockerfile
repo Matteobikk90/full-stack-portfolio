@@ -9,10 +9,9 @@ WORKDIR /app
 # Enable corepack for pnpm
 RUN corepack enable && corepack prepare pnpm@9.13.2 --activate
 
-# Copy package files (if you have a root workspace, copy those too)
+# Copy package files
 COPY package.json pnpm-lock.yaml* ./
 COPY prisma ./prisma/
-
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
@@ -24,16 +23,19 @@ WORKDIR /app
 # Build stage
 RUN corepack enable && corepack prepare pnpm@9.13.2 --activate
 
-# Copy dependencies
+# Copy dependencies and source
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Generate Prisma client and build
 RUN pnpm build
 
-# Production image, copy all the files and run the server
+# Production image
 FROM base AS runner
 WORKDIR /app
+
+# ✅ Enable PNPM in runner too (fix for pnpm not found)
+RUN corepack enable && corepack prepare pnpm@9.13.2 --activate
 
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs

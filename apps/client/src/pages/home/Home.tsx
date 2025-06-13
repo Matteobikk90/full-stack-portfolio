@@ -10,7 +10,7 @@ export const Home = () => {
         <article className="space-y-4 sm:space-y-6">
           <h1 className="p-0 text-left">
             Hello, I’m{' '}
-            <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-transparent [background-clip:text] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
               Matteo
             </span>{' '}
             👋
