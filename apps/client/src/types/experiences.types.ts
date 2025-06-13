@@ -1,6 +1,3 @@
-import type { CommentType } from '@/types/comments.types';
-import type { LikeType } from '@/types/likes.types';
-
 export type ExperienceTypes = {
   id: string;
   company: string;
@@ -16,8 +13,7 @@ export type ExperienceTypes = {
   technologies: string[];
   imageUrl?: string | null;
   createdAt: string;
-  Comment: CommentType[];
-  Like: LikeType[];
+
   projects: {
     id: string;
     title: string;

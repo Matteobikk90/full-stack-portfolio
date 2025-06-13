@@ -3,14 +3,12 @@ import { Request, Response } from 'express';
 
 export const createComment = async (req: Request, res: Response) => {
   const userId = (req.user as { userId: string }).userId;
-  const { content, experienceId, projectId } = req.body;
+  const { content } = req.body;
 
   const comment = await prisma.comment.create({
     data: {
       content,
       userId,
-      experienceId,
-      projectId,
     },
   });
 
