@@ -7,13 +7,13 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "pnpm db:g && tsc && tsc-alias",
-    "start:setup": "pnpm db:p && pnpm db:s && node dist/index.js",
+    "start:setup": "pnpm db:r && pnpm db:p && pnpm db:s && node dist/index.js",
     "start": "node -r dotenv/config dist/index.js",
     "test": "vitest",
     "lint": "eslint . --ext ts,tsx",
     "lint-fix": "eslint --fix .",
     "format": "prettier --write .",
-    "db:r": "prisma migrate reset",
+    "db:r": "prisma migrate reset --force",
     "db:g": "prisma generate",
     "db:p": "prisma db push",
     "db:s": "tsx prisma/seed.ts"
