@@ -28,7 +28,7 @@ export const Home = () => {
             />
           </div>
         </article>
-        <article className="relative m-auto z-12">
+        <article className="relative m-auto z-11">
           <img src={avatar} alt="Avatar" className="sm:w-[250px] w-[200px]" />
           <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[65px] sm:top-[99px] sm:left-[82px]"></span>
           <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[121px] sm:top-[99px] sm:left-[151px]"></span>

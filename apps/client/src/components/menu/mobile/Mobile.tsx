@@ -1,4 +1,5 @@
 import PopUpInfo from '@/components/pop-up-info';
+import { Logo } from '@/features/header/Logo';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 import { hoverStyles, menuLinks } from '@/utils/menu';
@@ -19,7 +20,7 @@ export const MenuMobile = () => {
             : 'opacity-0 bg-transparent delay-[800ms] z-10'
         )}
       >
-        {menuLinks.map(({ path, label, icon: Icon }, index) => (
+        {menuLinks.slice(1, 4).map(({ path, label, icon: Icon }, index) => (
           <Link
             key={path}
             to={path}
@@ -71,6 +72,10 @@ export const MenuMobile = () => {
           )}
         </Button>
       </PopUpInfo>
+
+      <Link to="/" className="absolute left-1/2 -translate-x-1/2">
+        <Logo />
+      </Link>
     </>
   );
 };
