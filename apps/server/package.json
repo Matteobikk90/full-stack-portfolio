@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "prisma generate && tsc && tsc-alias",
+    "build": "pnpm db:g && pnpm db:p && pnpm db:s && tsc && tsc-alias",
     "start": "node -r dotenv/config dist/index.js",
     "test": "vitest",
     "lint": "eslint . --ext ts,tsx",
