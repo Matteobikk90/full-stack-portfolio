@@ -3,4 +3,4 @@
 
 import PersonalLogo from '@/assets/images/logo2.svg?react';
 
-export const Logo = () => <PersonalLogo />;
+export const Logo = () => <PersonalLogo className="fill-foreground" />;
