@@ -58,7 +58,6 @@ export const Header = () => {
             )}
           </Button>
         </PopUpInfo>
-
         <PopUpInfo
           hoverText={isAuthenticated ? 'Open chat' : 'Log in to chat'}
           position="bottom"

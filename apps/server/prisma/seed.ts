@@ -3,6 +3,12 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.$transaction([
+    prisma.projectExperience.deleteMany(),
+    prisma.project.deleteMany(),
+    prisma.experience.deleteMany(),
+  ]);
+
   await prisma.experience.create({
     data: {
       company: 'World Data Lab',
