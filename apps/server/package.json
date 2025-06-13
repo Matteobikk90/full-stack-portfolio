@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "pnpm db:g && pnpm db:p && pnpm db:s && tsc && tsc-alias",
+    "build": "pnpm db:g && tsc && tsc-alias",
+    "start:setup": "pnpm db:p && pnpm db:s && node dist/index.js",
     "start": "node -r dotenv/config dist/index.js",
     "test": "vitest",
     "lint": "eslint . --ext ts,tsx",

@@ -53,4 +53,4 @@ USER serverjs
 ENV NODE_ENV=production
 EXPOSE 4000
 
-CMD ["node", "dist/index.js"]
+CMD ["pnpm", "start:setup"]
