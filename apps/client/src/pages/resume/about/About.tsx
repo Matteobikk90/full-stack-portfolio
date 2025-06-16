@@ -5,7 +5,7 @@ import { FilePdfIcon } from '@phosphor-icons/react';
 import { Label } from '@radix-ui/react-label';
 
 export const About = () => (
-  <section className="flex flex-col gap-6 animate-fade-up w-full">
+  <section className="flex flex-col gap-6 w-full">
     <h2>About me</h2>
     <p>
       I’ve been passionate about technology since childhood; I always loved

@@ -1,6 +1,7 @@
 // import Footer from '@/features/footer';
 import CustomModal from '@/components/custom-modal';
 import ChatBox from '@/features/chat-box';
+import Footer from '@/features/footer';
 import Header from '@/features/header';
 import { Toaster } from '@/lib/ui/sonner';
 import { Outlet } from '@tanstack/react-router';
@@ -11,15 +12,15 @@ export default function App() {
     <>
       <Header />
       <Outlet />
-      {/* <Footer /> */}
+      <Footer />
       <Toaster position="bottom-right" richColors closeButton />
       <CustomModal />
       <ChatBox />
       <AnimatedCursor
         innerSize={6}
         outerSize={30}
-        innerScale={1}
-        outerScale={3}
+        innerScale={0}
+        outerScale={0}
         outerAlpha={0}
         outerStyle={{
           border: '2px solid var(--foreground)',
