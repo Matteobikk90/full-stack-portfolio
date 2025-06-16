@@ -4,7 +4,7 @@ import TypedText from '@/components/typed-text';
 
 export const Home = () => {
   return (
-    <main className="flex flex-col items-center justify-center gap-5 flex-1 mt-[-68px] md:mt-[-100px]">
+    <main className="flex flex-col items-center justify-center gap-5 flex-1">
       <ParticlesBackground />
       <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-center lg:grid-cols-2">
         <article className="space-y-4 sm:space-y-6">
