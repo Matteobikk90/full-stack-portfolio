@@ -14,7 +14,7 @@ export const MenuMobile = () => {
     <>
       <nav
         className={cn(
-          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100dvh_-_4.4rem)] p-6 flex flex-col items-center justify-evenly gap-6',
+          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100dvh_-_4.4rem)] p-4 flex flex-col items-center',
           isOpen
             ? 'opacity-100 bg-background z-12'
             : 'opacity-0 bg-transparent delay-[800ms] z-10'
@@ -26,7 +26,7 @@ export const MenuMobile = () => {
             to={path}
             onClick={() => setIsOpen(false)}
             className={cn(
-              'relative group flex flex-1 items-center justify-center gap-2 w-full overflow-hidden transition-transform duration-300 ease-in-out -translate-x-[100vw] outline-0',
+              'relative group flex items-center justify-center gap-2 w-full overflow-hidden transition-transform duration-300 ease-in-out -translate-x-[100vw] outline-0 border-b p-6',
               isOpen && 'translate-x-0',
               hoverStyles[path]
             )}

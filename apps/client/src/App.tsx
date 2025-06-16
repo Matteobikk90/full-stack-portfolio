@@ -18,11 +18,10 @@ export default function App() {
       <AnimatedCursor
         innerSize={6}
         outerSize={30}
-        innerScale={1}
-        outerScale={3}
-        outerAlpha={0}
+        outerScale={1.5}
         outerStyle={{
-          border: '2px solid var(--foreground)',
+          border: '1px solid var(--foreground)',
+          backgroundColor: 'var(--background)',
         }}
         innerStyle={{
           backgroundColor: 'var(--foreground)',
