@@ -7,8 +7,12 @@ export const URL_ENDPOINTS = {
   getExperiences: '/api/experiences',
   getExperience: (id: string) => `/api/experiences/${id}`,
   getWorks: '/api/projects',
+  getLikes: (projectId: string) => `/api/likes/${projectId}`,
+  toggleLike: '/api/likes',
 };
 
 export const skillsFontSize = 60;
 
-export const experience = `${new Date().getFullYear() - 2017}+ Years`;
+export const currentYear = new Date().getFullYear();
+
+export const experience = `${currentYear - 2017}+ Years`;

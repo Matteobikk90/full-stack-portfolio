@@ -1,10 +1,12 @@
-name: Deploy to EC2
+name: Deploy to EC2 via Registry
 
 on:
   push:
-    branches:
-      - dev
-      - main
+    branches: [main, dev]
+
+permissions:
+  contents: read
+  packages: write
 
 concurrency:
   group: deploy-ec2
@@ -13,83 +15,104 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      IMAGE_TAG: ${{ github.sha }}
+      REGISTRY: ghcr.io/matteobikk90
+      FOLDER: full-stack-portfolio
 
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🟢 Setup Node.js and pnpm
-        uses: pnpm/action-setup@v2
+      - name: 🔐 Login to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
-          version: 8
-          run_install: false
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: 🧩 Install dependencies
+      - name: 🐳 Build client image
         run: |
-          pnpm install
-          cd apps/client && pnpm install && cd ../..
-          cd apps/server && pnpm install && cd ../..
+          VITE_PROXY_TARGET=$([ "${{ github.ref_name }}" = "main" ] && echo "https://matteosoresini.com" || echo "https://dev.matteosoresini.com")
+          docker build \
+            --build-arg VITE_PROXY_TARGET=$VITE_PROXY_TARGET \
+            -t $REGISTRY/$FOLDER-client:$IMAGE_TAG \
+            -f apps/client/Dockerfile apps/client
 
-      - name: ⚙️ Build client and server
+      - name: 🐳 Build server image
         run: |
-          cd apps/client
-          pnpm build
-          cd ../..
+          SERVER_SUFFIX=$( [ "${{ github.ref_name }}" = "main" ] && echo "prod" || echo "dev" )
+          docker build -t $REGISTRY/$FOLDER-server-$SERVER_SUFFIX:$IMAGE_TAG -f apps/server/Dockerfile apps/server
 
-          cd apps/server
-          pnpm prisma generate
-          pnpm build
-          cd ../..
+      - name: 📤 Push images to registry
+        run: |
+          docker push $REGISTRY/$FOLDER-client:$IMAGE_TAG
+          SERVER_SUFFIX=$( [ "${{ github.ref_name }}" = "main" ] && echo "prod" || echo "dev" )
+          docker push $REGISTRY/$FOLDER-server-$SERVER_SUFFIX:$IMAGE_TAG
 
-      - name: 📦 Upload built client
-        uses: appleboy/scp-action@v0.1.4
+      - name: 🧠 Set Nginx config filename
+        run: |
+          CONFIG_FILE=$([ "${{ github.ref_name }}" = "main" ] && echo "prod.conf" || echo "dev.conf")
+          echo "CONFIG_FILE=$CONFIG_FILE" >> $GITHUB_ENV
+
+      - name: 📤 Copy Nginx config to EC2
+        uses: appleboy/scp-action@v0.1.5
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          source: "apps/client/dist/*"
-          target: "~/full-stack-portfolio/apps/client/dist"
+          source: nginx/conf.d/${{ env.CONFIG_FILE }}
+          target: /home/ubuntu/full-stack-portfolio/nginx/conf.d/
+          strip_components: 2
 
-      - name: 📦 Upload built server
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_KEY }}
-          source: "apps/server/dist/*"
-          target: "~/full-stack-portfolio/apps/server/dist"
-
-      - name: 🚀 Restart backend service
+      - name: 🚀 Deploy on EC2 via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
+          envs: GITHUB_SHA,GITHUB_REF_NAME,CONFIG_FILE
           script: |
             set -e
+            REGISTRY=ghcr.io/matteobikk90
+            FOLDER=full-stack-portfolio
+            TAG=$GITHUB_SHA
 
-            cd full-stack-portfolio
-
-            git fetch origin
-            git checkout ${{ github.ref_name }}
-            git reset --hard origin/${{ github.ref_name }}
-            git clean -fd
-
-            pnpm install
-            cd apps/server && pnpm install && cd ../..
-
-            # Restart appropriate backend
-            if [ "${{ github.ref_name }}" = "main" ]; then
-              echo "🔁 Restarting production backend..."
-              sudo systemctl restart backend
-            elif [ "${{ github.ref_name }}" = "dev" ]; then
-              echo "🔁 Restarting development backend..."
-              sudo systemctl restart dev-backend
+            if [ "$GITHUB_REF_NAME" = "main" ]; then
+              IMAGE_ENV="prod"
+              ENV="production"
+              SERVER_PORT="4000"
+            else
+              IMAGE_ENV="dev"
+              ENV="development"
+              SERVER_PORT="4001"
             fi
 
-            echo "✅ Deployment completed"
+            echo "📥 Pulling images from GHCR..."
+            docker pull $REGISTRY/$FOLDER-client:$TAG
+            docker pull $REGISTRY/$FOLDER-server-$IMAGE_ENV:$TAG
+
+            echo "🛑 Stopping existing containers..."
+            mv ~/full-stack-portfolio/nginx/conf.d/${CONFIG_FILE} ~/full-stack-portfolio/nginx/conf.d/default.conf
+            cd ~/full-stack-portfolio
+            docker compose down || true
+
+            CONTAINERS=$(docker ps -q --filter "publish=80" --filter "publish=4000" --filter "publish=4001")
+            [ -n "$CONTAINERS" ] && docker stop $CONTAINERS || true
+
+            echo "🚀 Starting containers..."
+            cd ~/full-stack-portfolio
+            echo "GITHUB_SHA=$TAG" > .env
+            echo "ENV=$ENV" >> .env
+            echo "IMAGE_ENV=$IMAGE_ENV" >> .env
+            echo "SERVER_PORT=$SERVER_PORT" >> .env
+            docker compose up -d
+
+            echo "🧹 Cleaning unused Docker resources..."
+            docker image prune -af 
+            docker container prune -f
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}

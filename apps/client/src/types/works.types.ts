@@ -1,4 +1,3 @@
-import type { CommentType } from '@/types/comments.types';
 import type { LikeType } from '@/types/likes.types';
 
 export type WorkTypes = {
@@ -14,8 +13,7 @@ export type WorkTypes = {
   technologies: string[];
   imageUrl?: string | null;
   createdAt: string;
-  Comment: CommentType[];
-  Like: LikeType[];
+  likes: LikeType[];
 };
 
 export type WorkSliceType = {

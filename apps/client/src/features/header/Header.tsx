@@ -39,7 +39,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="flex items-center justify-between p-4 md:py-8 w-full container mx-auto relative flex-1 max-h-max">
+    <header className="flex items-center justify-between p-4 md:py-8 w-full container mx-auto relative max-h-max flex-1 animate-fade-up">
       <MenuDesktop />
       <MenuMobile />
       <div className="flex items-center gap-4 z-11">
@@ -58,7 +58,6 @@ export const Header = () => {
             )}
           </Button>
         </PopUpInfo>
-
         <PopUpInfo
           hoverText={isAuthenticated ? 'Open chat' : 'Log in to chat'}
           position="bottom"

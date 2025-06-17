@@ -1,7 +1,7 @@
 import Form from '@/components/form';
 
 export const Contact = () => (
-  <main className="z-11 relative flex-1 animate-fade-up">
+  <main className="z-11 relative flex-1">
     <section className="max-w-3xl m-auto space-y-12">
       <h1 className="text-contact">Contact</h1>
       <p>

@@ -2,7 +2,7 @@ import { educationItems } from '@/utils/lists';
 import { DotIcon } from '@phosphor-icons/react';
 
 export const Education = () => (
-  <section className="flex flex-col gap-6 animate-fade-up w-full">
+  <section className="flex flex-col gap-6 w-full">
     <h2>My education</h2>
     <p>
       Studied science in high school, then jumped into web dev through a

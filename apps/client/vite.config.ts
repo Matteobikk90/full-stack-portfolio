@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig, type PluginOption } from 'vite';
+import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
   plugins: [
@@ -14,6 +15,7 @@ export default defineConfig({
     }) as PluginOption,
     tailwindcss(),
     react(),
+    svgr(),
   ],
   resolve: {
     alias: {
@@ -33,6 +35,19 @@ export default defineConfig({
         target: 'http://localhost:4000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '/api'),
+      },
+      '/auth': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+      },
+      '/me': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+      },
+      '/socket.io': {
+        target: 'http://localhost:4000',
+        ws: true,
+        changeOrigin: true,
       },
     },
   },

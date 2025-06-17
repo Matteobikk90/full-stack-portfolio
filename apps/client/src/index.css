@@ -11,6 +11,8 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
+  --color-skin: var(--skin);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -33,6 +35,7 @@
   --animate-rotate-in: rotate-in 1.5s ease-out forwards;
   --animate-pulse-slow: pulse-slow 1.5s ease-out infinite;
   --animate-fade-up: fade-up 0.5s ease-out both;
+  --animate-blink: blink 4s infinite;
 
   @keyframes fade-up {
     from {
@@ -73,10 +76,23 @@
       box-shadow: 0 0 0 0 var(--pulse-shadow);
     }
   }
+
+  @keyframes blink {
+    0%,
+    47%,
+    53%,
+    100% {
+      height: 0;
+    }
+    50% {
+      height: 32px;
+    }
+  }
 }
 
 /* ---------- Light theme ---------- */
 :root {
+  --skin: #facca9;
   --radius: 0.625rem;
 
   --background: rgba(255, 255, 255, 1);
@@ -101,6 +117,7 @@
 
 /* ---------- Dark theme override ---------- */
 .dark {
+  --skin: #facca9;
   --background: rgba(23, 21, 34, 1);
   --foreground: rgba(255, 255, 255, 1);
 
@@ -168,7 +185,7 @@
   }
 
   main {
-    @apply p-4 h-auto;
+    @apply p-4 h-auto animate-fade-up;
   }
 
   input:-webkit-autofill {
