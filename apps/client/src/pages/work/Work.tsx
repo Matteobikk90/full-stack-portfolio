@@ -22,7 +22,7 @@ export const Work = () => {
   const activeWork = data[activeSlide];
 
   return (
-    <main className="flex flex-col gap-4 md:gap-12 container mx-auto relative z-11 flex-1">
+    <main className="flex flex-col gap-4 md:gap-12 container mx-auto relative flex-1">
       <h1 className="text-work">Work</h1>
       <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-center lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12">
         <AnimatePresence mode="wait">
