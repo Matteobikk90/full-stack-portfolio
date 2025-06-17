@@ -185,7 +185,7 @@
   }
 
   main {
-    @apply p-4 h-auto animate-fade-up z-11;
+    @apply p-4 h-auto animate-fade-up z-11 flex-1 container mx-auto;
   }
 
   input:-webkit-autofill {

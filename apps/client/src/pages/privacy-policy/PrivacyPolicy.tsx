@@ -1,6 +1,6 @@
 export const PrivacyPolicy = () => {
   return (
-    <main className="flex flex-col gap-6 text-foreground max-w-3xl mx-auto py-12 px-4">
+    <main className="flex flex-col gap-6 py-12 px-4">
       <h1>Privacy Policy</h1>
       <p>
         This Privacy Policy explains how your personal data is collected, used,

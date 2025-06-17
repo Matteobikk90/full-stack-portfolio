@@ -16,7 +16,7 @@ export const MenuMobile = () => {
     <>
       <nav
         className={cn(
-          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100dvh_-_4.4rem)] p-4 flex flex-col justify-between gap-6',
+          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100dvh_-_4.4rem)] p-4 pt-0 flex flex-col justify-between gap-6',
           isOpen
             ? 'opacity-100 bg-background z-12'
             : 'opacity-0 bg-transparent delay-[800ms] z-10'
@@ -57,8 +57,11 @@ export const MenuMobile = () => {
         </div>
         <div className="flex flex-wrap items-center gap-4 justify-center md:justify-start">
           {actions.map(
-            ({ onClick, isLink, href, className, label, icon }, index) => (
-              <PopUpInfo key={label} hoverText={label} align="right">
+            (
+              { onClick, isLink, href, className, label, icon, align },
+              index
+            ) => (
+              <PopUpInfo key={label} hoverText={label} align={align}>
                 <Button
                   variant="outline"
                   size="icon"

@@ -1,7 +1,7 @@
 import Form from '@/components/form';
 
 export const Contact = () => (
-  <main className="relative flex-1">
+  <main>
     <section className="max-w-3xl m-auto space-y-12">
       <h1 className="text-contact">Contact</h1>
       <p>

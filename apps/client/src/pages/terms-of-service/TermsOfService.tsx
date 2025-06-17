@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 
 export const TermsOfService = () => {
   return (
-    <main className="flex flex-col gap-6 text-foreground max-w-3xl mx-auto py-12 px-4">
+    <main className="flex flex-col gap-6 py-12 px-4">
       <h1>Terms of Service</h1>
       <p>
         By using the contact form on this website, you agree to the following

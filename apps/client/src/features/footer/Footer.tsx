@@ -5,7 +5,7 @@ import { actions } from '@/utils/lists';
 import { Link } from '@tanstack/react-router';
 
 export const Footer = () => (
-  <footer className="w-full container mx-auto p-4 md:py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+  <footer className="w-full container mx-auto p-4 md:py-8 flex flex-col md:flex-row items-center justify-between gap-4 z-11">
     <div className="flex flex-wrap items-center gap-4 justify-center md:justify-start">
       {actions.map(
         ({ align, label, className, onClick, href, isLink, icon }) => (
