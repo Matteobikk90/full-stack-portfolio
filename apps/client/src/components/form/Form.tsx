@@ -146,28 +146,30 @@ export const ContactForm = () => {
       <form.Field name="acceptedTerms">
         {({ state, handleChange }) => (
           <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-2">
+            <label className="flex items-start gap-2">
               <Input
                 id="acceptedTerms"
                 type="checkbox"
                 checked={state.value}
                 onChange={(e) => handleChange(e.target.checked)}
-                className="h-3"
+                className="mt-1 h-4 shrink-0"
               />
-              <Label htmlFor="acceptedTerms">
-                I agree to the
+
+              <span className="text-sm leading-relaxed flex flex-wrap">
+                I agree to the&nbsp;
                 <Link to="/privacy-policy" className="underline text-blue-500">
                   privacy policy
                 </Link>
-                and
+                &nbsp;and&nbsp;
                 <Link
                   to="/terms-of-service"
                   className="underline text-blue-500"
                 >
                   terms of service
                 </Link>
-              </Label>
-            </div>
+              </span>
+            </label>
+
             {state.meta.errors?.[0] && (
               <p className="text-xs text-error">
                 {state.meta.errors?.[0].message || ''}

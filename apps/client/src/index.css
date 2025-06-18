@@ -185,7 +185,7 @@
   }
 
   main {
-    @apply p-4 h-auto animate-fade-up;
+    @apply px-4 animate-fade-up z-11 container mx-auto flex-1 min-h-0 overflow-hidden;
   }
 
   input:-webkit-autofill {

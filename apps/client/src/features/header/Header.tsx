@@ -39,10 +39,10 @@ export const Header = () => {
   };
 
   return (
-    <header className="flex items-center justify-between p-4 md:py-8 w-full container mx-auto relative max-h-max flex-1 animate-fade-up">
+    <header className="flex items-center justify-between p-4 md:py-8 w-full container mx-auto relative max-h-max flex-1">
       <MenuDesktop />
       <MenuMobile />
-      <div className="flex items-center gap-4 z-11">
+      <div className="flex items-center gap-4 z-12">
         <PopUpInfo hoverText="Switch theme" position="bottom">
           <Button
             variant="outline"

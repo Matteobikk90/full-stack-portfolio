@@ -66,7 +66,7 @@ export const CustomModal = () => {
             </Button>
           </a> */}
         </div>
-        <p className="text-xs text-muted-foreground text-center px-4 leading-relaxed">
+        <p className="text-xs text-center px-4 leading-relaxed">
           By continuing, you agree to the{' '}
           <Link
             onClick={toggleModal}
