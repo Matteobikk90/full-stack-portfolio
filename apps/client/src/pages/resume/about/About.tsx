@@ -26,7 +26,7 @@ export const About = () => (
       </div>
       <Button
         onClick={handleDownload}
-        className="flex items-center gap-2 p-4 rounded-md max-w-max animate-bounce mt-4"
+        className="flex items-center gap-2 p-4 rounded-md max-w-max animate-bounce mt-4 ml-0.5"
       >
         Download CV
         <FilePdfIcon className="size-5" weight="duotone" />
