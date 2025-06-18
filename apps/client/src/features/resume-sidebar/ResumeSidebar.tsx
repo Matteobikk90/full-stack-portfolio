@@ -2,7 +2,7 @@ import { resumeItems } from '@/utils/lists';
 import { Link } from '@tanstack/react-router';
 
 export const ResumeSidebar = () => (
-  <aside className="space-y-6">
+  <aside className="space-y-6 lg:max-w-[25rem] w-full">
     <h1 className="text-left">Why hire me?</h1>
     <p>
       Building performant and responsive web applications for the modern web.

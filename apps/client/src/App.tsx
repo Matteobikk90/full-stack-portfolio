@@ -1,4 +1,3 @@
-// import Footer from '@/features/footer';
 import CustomModal from '@/components/custom-modal';
 import ChatBox from '@/features/chat-box';
 import Footer from '@/features/footer';
