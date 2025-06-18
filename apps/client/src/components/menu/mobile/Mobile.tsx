@@ -127,6 +127,7 @@ export const MenuMobile = () => {
         to="/"
         className="md:hidden absolute left-1/2 -translate-x-1/2"
         onClick={() => setIsOpen(false)}
+        aria-label="Homepage"
       >
         <Logo />
       </Link>

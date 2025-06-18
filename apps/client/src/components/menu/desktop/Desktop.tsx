@@ -16,6 +16,7 @@ export const MenuDesktop = () => (
         activeProps={{
           className: cn('font-semibold before:w-full', hoverStyles[path]),
         }}
+        aria-label={label || 'Homepage'}
       >
         <Icon className="size-5" weight="duotone" />
         {label}

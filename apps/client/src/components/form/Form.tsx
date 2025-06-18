@@ -71,7 +71,7 @@ export const ContactForm = () => {
         >
           {({ state, handleChange }) => (
             <div className="flex flex-col gap-1">
-              <Label htmlFor="email">Name</Label>
+              <Label htmlFor="name">Name</Label>
               <Input
                 id="name"
                 placeholder="Your name"
@@ -128,9 +128,9 @@ export const ContactForm = () => {
       >
         {({ state, handleChange }) => (
           <div className="flex flex-col gap-1">
-            <Label htmlFor="Message">Message</Label>
+            <Label htmlFor="message">Message</Label>
             <Textarea
-              id="Message"
+              id="message"
               placeholder="Your message"
               value={state.value}
               onChange={(e) => handleChange(e.target.value)}

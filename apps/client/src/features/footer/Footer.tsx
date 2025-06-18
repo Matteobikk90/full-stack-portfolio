@@ -19,7 +19,9 @@ export const Footer = () => (
               aria-label={label}
             >
               {isLink ? (
-                <Link to={href}>{icon}</Link>
+                <Link to={href} aria-label={label}>
+                  {icon}
+                </Link>
               ) : href ? (
                 <a
                   href={href}
