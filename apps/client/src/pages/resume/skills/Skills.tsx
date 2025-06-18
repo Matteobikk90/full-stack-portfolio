@@ -15,7 +15,7 @@ export const Skills = () => (
           <article
             key={id}
             style={{ animationDelay: `${index * 0.35}s` }}
-            className="bg-gray p-4 rounded-md flex justify-center animate-fade-up"
+            className="bg-gray p-4 rounded-md flex justify-center animate-fade-up border border-secondary"
           >
             {icon}
           </article>

@@ -35,7 +35,7 @@ export const Experience = () => {
               <article
                 key={id}
                 style={{ animationDelay: `${index * 0.35}s` }}
-                className="flex flex-col bg-gray p-4 rounded-md space-y-2 animate-fade-up"
+                className="flex flex-col bg-gray p-4 rounded-md space-y-2 animate-fade-up border-secondary border"
               >
                 <div className="flex items-start justify-between text-primary">
                   <h3>{formatDateRange(startDate, endDate!)}</h3>

@@ -16,7 +16,7 @@ export const Education = () => (
             <article
               key={id}
               style={{ animationDelay: `${index * 0.35}s` }}
-              className="flex flex-col bg-gray p-4 rounded-md space-y-2 animate-fade-up"
+              className="flex flex-col bg-gray p-4 rounded-md space-y-2 animate-fade-up border border-secondary"
             >
               <div className="flex items-center justify-between text-primary">
                 <h3>{year}</h3>

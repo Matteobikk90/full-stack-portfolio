@@ -14,7 +14,7 @@ export const Info = () => {
   return (
     <section className="flex flex-col animate-fade-up w-full flex-1 min-h-0">
       <Breadcrumbs />
-      <article className="flex flex-col bg-gray p-4 sm:p-6 rounded-md flex-1 min-h-0">
+      <article className="flex flex-col bg-gray p-4 sm:p-6 rounded-md flex-1 min-h-0 max-h-max border border-secondary">
         <ScrollContainer className="flex-1 min-h-0 pr-4">
           <div className="space-y-4">
             <div className="flex items-start justify-between text-primary mb-0">
