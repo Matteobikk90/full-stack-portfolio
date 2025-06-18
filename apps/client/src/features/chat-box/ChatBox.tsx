@@ -113,7 +113,7 @@ export const ChatBox = () => {
   const handleIconClick = () => (isAuthenticated ? openChat() : toggleModal());
 
   return (
-    <aside className="absolute bottom-6 right-4 z-11">
+    <aside className="fixed bottom-16 lg:bottom-20 right-4 z-11">
       {!isChatOpen && (
         <Button
           variant="outline"

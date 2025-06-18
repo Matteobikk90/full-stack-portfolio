@@ -9,13 +9,14 @@ export const MenuDesktop = () => (
         key={path}
         to={path}
         className={cn(
-          'relative z-10 flex items-center gap-2 transition-all before:content-[""] before:absolute before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:transition-all before:duration-300',
+          'relative flex items-center gap-2 transition-all before:content-[""] before:absolute before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:transition-all before:duration-300',
           'hover:before:w-full focus:before:w-full outline-0',
           hoverStyles[path]
         )}
         activeProps={{
           className: cn('font-semibold before:w-full', hoverStyles[path]),
         }}
+        aria-label={label || 'Homepage'}
       >
         <Icon className="size-5" weight="duotone" />
         {label}

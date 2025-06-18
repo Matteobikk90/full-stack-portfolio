@@ -1,5 +1,10 @@
 import { Button } from '@/lib/ui/button';
-import { Dialog, DialogContent, DialogTitle } from '@/lib/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from '@/lib/ui/dialog';
 import { useStore } from '@/stores';
 import { GithubLogoIcon, GoogleLogoIcon, XIcon } from '@phosphor-icons/react';
 import { Link, useLocation } from '@tanstack/react-router';
@@ -25,28 +30,27 @@ export const CustomModal = () => {
             size="icon"
             onClick={toggleModal}
             className="absolute top-4 right-4"
+            aria-label="Close dialog"
           >
             <XIcon className="size-5" weight="duotone" />
           </Button>
         </DialogTitle>
 
-        <p className="text-sm">Choose a provider to continue</p>
+        <DialogDescription className="text-sm">
+          Choose a provider to continue
+        </DialogDescription>
 
         <div className="grid md:grid-cols-2 gap-3 mb-0">
           <a href={`https://matteosoresini.com/auth/github?state=${pathname}`}>
-            <Button variant="outline" className="w-full" asChild>
-              <div className="flex items-center justify-center gap-2">
-                <GithubLogoIcon className="size-5" weight="duotone" />
-                GitHub
-              </div>
+            <Button variant="outline" className="w-full">
+              <GithubLogoIcon className="size-5" weight="duotone" />
+              GitHub
             </Button>
           </a>
           <a href={`https://matteosoresini.com/auth/google?state=${pathname}`}>
-            <Button variant="outline" className="w-full" asChild>
-              <div className="flex items-center justify-center gap-2">
-                <GoogleLogoIcon className="size-5" weight="duotone" />
-                Google
-              </div>
+            <Button variant="outline" className="w-full">
+              <GoogleLogoIcon className="size-5" weight="duotone" />
+              Google
             </Button>
           </a>
           {/* <a href={`https://matteosoresini.com/auth/facebook?state=${pathname}`}>
@@ -66,7 +70,7 @@ export const CustomModal = () => {
             </Button>
           </a> */}
         </div>
-        <p className="text-xs text-muted-foreground text-center px-4 leading-relaxed">
+        <p className="text-xs text-center px-4 leading-relaxed">
           By continuing, you agree to the{' '}
           <Link
             onClick={toggleModal}
