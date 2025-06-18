@@ -17,10 +17,10 @@ export const Info = () => {
       <article className="flex flex-col bg-gray p-4 sm:p-6 rounded-md flex-1 min-h-0 max-h-max border border-secondary">
         <ScrollContainer className="flex-1 min-h-0 pr-4">
           <div className="space-y-4">
-            <div className="flex items-start justify-between text-primary mb-0">
-              <h3>{formatDateRange(data.startDate, data.endDate!)}</h3>
-              <div>
-                <h3>{data.location}</h3>
+            <div className="flex items-start justify-between text-primary mb-0 text-xs md:text-sm lg:text-base">
+              <span>{formatDateRange(data.startDate, data.endDate!)}</span>
+              <div className="flex flex-col">
+                <span>{data.location}</span>
                 {data.isRemote && <span className="text-xs">(Remote)</span>}
               </div>
             </div>
