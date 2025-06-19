@@ -196,11 +196,7 @@ export const ContactForm = () => {
           const canSubmit = allTouched && allValid;
 
           return (
-            <Button
-              onClick={() => play('click')}
-              type="submit"
-              disabled={!canSubmit || isSubmitting}
-            >
+            <Button type="submit" disabled={!canSubmit || isSubmitting}>
               {isSubmitting ? (
                 <span className="flex items-center gap-2">
                   <span className="animate-spin">

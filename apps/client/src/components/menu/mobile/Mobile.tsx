@@ -1,6 +1,5 @@
 import PopUpInfo from '@/components/pop-up-info';
 import { Logo } from '@/features/header/Logo';
-import { useUISound } from '@/hooks/useUISound';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 import { currentYear } from '@/utils/constants';
@@ -12,12 +11,6 @@ import { useState } from 'react';
 
 export const MenuMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { play } = useUISound();
-
-  const handleClick = () => {
-    setIsOpen((prev) => !prev);
-    play('menu');
-  };
 
   return (
     <>
@@ -119,8 +112,9 @@ export const MenuMobile = () => {
           variant="outline"
           size="icon"
           className="md:hidden relative"
-          onClick={handleClick}
+          onClick={() => setIsOpen((prev) => !prev)}
           aria-label="Toggle menu"
+          sound="menu"
         >
           {isOpen ? (
             <XIcon className="size-5" weight="duotone" />
