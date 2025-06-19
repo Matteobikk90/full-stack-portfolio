@@ -2,7 +2,7 @@ import { ScrollContainer } from '@/components/scroll-container';
 import { skillItems } from '@/utils/lists';
 
 export const Skills = () => (
-  <section className="flex flex-col gap-6 animate-fade-up w-full flex-1 min-h-0">
+  <section className="flex flex-col gap-4 md:gap-6 animate-fade-up w-full flex-1 min-h-0">
     <h2>Tech Stack</h2>
     <p>
       I build fast, responsive UIs with React and Tailwind, handle backend logic

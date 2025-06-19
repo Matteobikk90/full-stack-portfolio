@@ -6,12 +6,14 @@ interface ScrollContainerProps {
   children: ReactNode;
   className?: string;
   type?: 'auto' | 'always';
+  backgroundColor?: string;
 }
 
 export const ScrollContainer = ({
   children,
   className,
   type = 'auto',
+  backgroundColor = 'bg-secondary',
 }: ScrollContainerProps) => (
   <ScrollArea.Root type={type} className={cn('relative w-full', className)}>
     <ScrollArea.Viewport className="w-full h-full">
@@ -22,7 +24,9 @@ export const ScrollContainer = ({
       orientation="vertical"
       className="w-2 absolute !-right-2"
     >
-      <ScrollArea.Thumb className="bg-secondary flex-1 rounded-full" />
+      <ScrollArea.Thumb
+        className={cn(backgroundColor, 'flex-1 rounded-full')}
+      />
     </ScrollArea.Scrollbar>
   </ScrollArea.Root>
 );
