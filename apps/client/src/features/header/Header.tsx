@@ -50,6 +50,7 @@ export const Header = () => {
             size="icon"
             onClick={handleToggle}
             aria-label="Switch theme"
+            sound="theme"
           >
             {mode === 'dark' ? (
               <SunIcon className="size-5" weight="duotone" />

@@ -114,6 +114,7 @@ export const MenuMobile = () => {
           className="md:hidden relative"
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label="Toggle menu"
+          sound="menu"
         >
           {isOpen ? (
             <XIcon className="size-5" weight="duotone" />

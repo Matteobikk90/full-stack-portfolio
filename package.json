@@ -1,7 +1,7 @@
 {
   "name": "full-stack-portfolio",
   "version": "1.0.0",
-  "description": "",
+  "description": "A modern full-stack portfolio built with React, Vite, Express, Prisma, and TypeScript. Includes real-time chat, authentication, and CI/CD-ready monorepo architecture.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,9 +9,18 @@
     "format": "pnpm -r format",
     "lint-fix": "pnpm -r lint-fix"
   },
-  "keywords": [],
+  "keywords": [
+    "portfolio",
+    "fullstack",
+    "vite",
+    "react",
+    "typescript",
+    "express",
+    "prisma",
+    "monorepo"
+  ],
   "author": "Matteo Soresini",
-  "license": "ISC",
+  "license": "MIT",
   "packageManager": "pnpm@10.6.5",
   "devDependencies": {
     "husky": "^8.0.0"

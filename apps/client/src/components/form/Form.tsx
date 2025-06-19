@@ -1,3 +1,4 @@
+import { useUISound } from '@/hooks/useUISound';
 import { Button } from '@/lib/ui/button';
 import { Input } from '@/lib/ui/input';
 import { Label } from '@/lib/ui/label';
@@ -17,6 +18,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 export const ContactForm = () => {
+  const { play } = useUISound();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm({
@@ -151,7 +153,10 @@ export const ContactForm = () => {
                 id="acceptedTerms"
                 type="checkbox"
                 checked={state.value}
-                onChange={(e) => handleChange(e.target.checked)}
+                onChange={(e) => {
+                  handleChange(e.target.checked);
+                  play(e.target.checked ? 'checkOn' : 'checkOff');
+                }}
                 className="mt-1 h-4 shrink-0"
               />
 
