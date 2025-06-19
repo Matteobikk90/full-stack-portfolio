@@ -1,6 +1,7 @@
 import PopUpInfo from '@/components/pop-up-info';
 import { queryClient } from '@/config/queryClient';
 import { useAuth } from '@/hooks/useAuth';
+import { useUISound } from '@/hooks/useUISound';
 import { Button } from '@/lib/ui/button';
 import { getLikes, toggleLike } from '@/queries/likes';
 import { useStore } from '@/stores';
@@ -22,6 +23,7 @@ export const Actions = ({
   activeWork: Pick<WorkTypes, 'id' | 'demoUrl' | 'repoUrl'>;
 }) => {
   const { isAuthenticated } = useAuth();
+  const { play } = useUISound();
   const { toggleModal } = useStore(
     useShallow(({ toggleModal }) => ({
       toggleModal,
@@ -53,8 +55,14 @@ export const Actions = ({
     },
   });
 
-  const handleIconClick = () =>
-    isAuthenticated ? mutate(activeWork.id) : toggleModal();
+  const handleClick = () => {
+    if (isAuthenticated) {
+      mutate(activeWork.id);
+      play('like');
+    } else {
+      toggleModal();
+    }
+  };
 
   const likesCount = likeStatus?.likesCount ?? likeData?.likesCount ?? 0;
   const hasLiked = likeStatus?.hasLiked ?? likeData?.hasLiked ?? false;
@@ -86,7 +94,7 @@ export const Actions = ({
         className="ml-auto"
       >
         <Button
-          onClick={handleIconClick}
+          onClick={handleClick}
           className="flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed !p-0"
           variant="ghost"
         >

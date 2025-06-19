@@ -30,7 +30,7 @@ export const Header = () => {
   const handleToggle = () => {
     toggleTheme();
     updateBackground();
-    play('tap');
+    play('theme');
   };
 
   const handleClick = () => {

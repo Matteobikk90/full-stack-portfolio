@@ -1,3 +1,4 @@
+import { useUISound } from '@/hooks/useUISound';
 import { cn } from '@/lib/utils';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -39,15 +40,23 @@ function Button({
   variant,
   size,
   asChild = false,
+  onClick,
   ...props
 }: React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
   }) {
   const Comp = asChild ? Slot : 'button';
+  const { play } = useUISound();
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    play('click');
+    if (onClick) onClick(e);
+  };
 
   return (
     <Comp
+      onClick={handleClick}
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}

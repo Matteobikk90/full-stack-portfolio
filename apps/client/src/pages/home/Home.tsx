@@ -1,8 +1,34 @@
+import avatarMask from '@/assets/images/avatar-aku.png';
 import avatar from '@/assets/images/avatar.png';
 import ParticlesBackground from '@/components/particles';
 import TypedText from '@/components/typed-text';
+import { useUISound } from '@/hooks/useUISound';
+import { useStore } from '@/stores';
+import { toastDuration } from '@/utils/constants';
+import { toast } from 'sonner';
+import { useShallow } from 'zustand/shallow';
 
 export const Home = () => {
+  const { discovered, setDiscovered } = useStore(
+    useShallow((state) => ({
+      discovered: state.discovered,
+      setDiscovered: state.setDiscovered,
+    }))
+  );
+  const { play } = useUISound();
+
+  const handleClick = () => {
+    if (discovered) return;
+
+    play('crash');
+    setDiscovered();
+
+    toast.success('🥚 You found the Easter Egg!', {
+      description: 'Well done, you clicked the right spot 😎',
+      duration: toastDuration,
+    });
+  };
+
   return (
     <main className="flex flex-col items-center justify-center gap-5">
       <ParticlesBackground />
@@ -28,10 +54,21 @@ export const Home = () => {
             />
           </div>
         </article>
-        <article className="relative m-auto z-11">
-          <img src={avatar} alt="Avatar" className="sm:w-[250px] w-[200px]" />
-          <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[65px] sm:top-[99px] sm:left-[82px]"></span>
-          <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[121px] sm:top-[99px] sm:left-[151px]"></span>
+        <article
+          className="relative m-auto z-11 cursor-pointer"
+          onClick={handleClick}
+        >
+          <img
+            src={discovered ? avatarMask : avatar}
+            alt="Avatar"
+            className="sm:w-[250px] w-[200px] transition duration-300"
+          />
+          {!discovered && (
+            <>
+              <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[65px] sm:top-[99px] sm:left-[82px]"></span>
+              <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[121px] sm:top-[99px] sm:left-[151px]"></span>
+            </>
+          )}
         </article>
       </section>
     </main>
