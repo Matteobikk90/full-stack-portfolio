@@ -1,6 +1,7 @@
 import { MenuDesktop, MenuMobile } from '@/components/menu';
 import PopUpInfo from '@/components/pop-up-info';
 import { useAuth } from '@/hooks/useAuth';
+import { useUISound } from '@/hooks/useUISound';
 import { Button } from '@/lib/ui/button';
 import { useStore } from '@/stores';
 import { ChatsIcon, MoonIcon, SunIcon } from '@phosphor-icons/react';
@@ -9,6 +10,7 @@ import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
   const { isAuthenticated } = useAuth();
+  const { play } = useUISound();
   const { mode, toggleTheme, updateBackground, toggleModal, openChat } =
     useStore(
       useShallow((state) => ({
@@ -28,6 +30,7 @@ export const Header = () => {
   const handleToggle = () => {
     toggleTheme();
     updateBackground();
+    play('theme');
   };
 
   const handleClick = () => {
