@@ -12,26 +12,55 @@ import { createFileRoute } from '@tanstack/react-router';
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root';
-import { Route as ContactImport } from './routes/contact';
-import { Route as IndexImport } from './routes/index';
-import { Route as PrivacyPolicyImport } from './routes/privacy-policy';
 import { Route as ResumeImport } from './routes/resume';
-import { Route as ResumeAboutImport } from './routes/resume.about';
-import { Route as ResumeEducationImport } from './routes/resume.education';
 import { Route as ResumeExperienceImport } from './routes/resume.experience';
 import { Route as ResumeExperienceIdImport } from './routes/resume.experience.$id';
 import { Route as ResumeIndexImport } from './routes/resume.index';
-import { Route as ResumeSkillsImport } from './routes/resume.skills';
-import { Route as TermsOfServiceImport } from './routes/terms-of-service';
 import { Route as WorkImport } from './routes/work';
 
 // Create Virtual Routes
 
+const TermsOfServiceLazyImport = createFileRoute('/terms-of-service')();
+const PrivacyPolicyLazyImport = createFileRoute('/privacy-policy')();
+const DeleteDataLazyImport = createFileRoute('/delete-data')();
+const ContactLazyImport = createFileRoute('/contact')();
+const IndexLazyImport = createFileRoute('/')();
+const ResumeSkillsLazyImport = createFileRoute('/resume/skills')();
+const ResumeEducationLazyImport = createFileRoute('/resume/education')();
+const ResumeAboutLazyImport = createFileRoute('/resume/about')();
 const ResumeExperienceIndexLazyImport = createFileRoute(
   '/resume/experience/'
 )();
 
 // Create/Update Routes
+
+const TermsOfServiceLazyRoute = TermsOfServiceLazyImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/terms-of-service.lazy').then((d) => d.Route)
+);
+
+const PrivacyPolicyLazyRoute = PrivacyPolicyLazyImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/privacy-policy.lazy').then((d) => d.Route)
+);
+
+const DeleteDataLazyRoute = DeleteDataLazyImport.update({
+  id: '/delete-data',
+  path: '/delete-data',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/delete-data.lazy').then((d) => d.Route));
+
+const ContactLazyRoute = ContactLazyImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/contact.lazy').then((d) => d.Route));
 
 const WorkRoute = WorkImport.update({
   id: '/work',
@@ -39,35 +68,17 @@ const WorkRoute = WorkImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/work.lazy').then((d) => d.Route));
 
-const TermsOfServiceRoute = TermsOfServiceImport.update({
-  id: '/terms-of-service',
-  path: '/terms-of-service',
-  getParentRoute: () => rootRoute,
-} as any);
-
 const ResumeRoute = ResumeImport.update({
   id: '/resume',
   path: '/resume',
   getParentRoute: () => rootRoute,
 } as any);
 
-const PrivacyPolicyRoute = PrivacyPolicyImport.update({
-  id: '/privacy-policy',
-  path: '/privacy-policy',
-  getParentRoute: () => rootRoute,
-} as any);
-
-const ContactRoute = ContactImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRoute,
-} as any);
-
-const IndexRoute = IndexImport.update({
+const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any);
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route));
 
 const ResumeIndexRoute = ResumeIndexImport.update({
   id: '/',
@@ -75,27 +86,31 @@ const ResumeIndexRoute = ResumeIndexImport.update({
   getParentRoute: () => ResumeRoute,
 } as any);
 
-const ResumeSkillsRoute = ResumeSkillsImport.update({
+const ResumeSkillsLazyRoute = ResumeSkillsLazyImport.update({
   id: '/skills',
   path: '/skills',
   getParentRoute: () => ResumeRoute,
-} as any);
+} as any).lazy(() =>
+  import('./routes/resume.skills.lazy').then((d) => d.Route)
+);
+
+const ResumeEducationLazyRoute = ResumeEducationLazyImport.update({
+  id: '/education',
+  path: '/education',
+  getParentRoute: () => ResumeRoute,
+} as any).lazy(() =>
+  import('./routes/resume.education.lazy').then((d) => d.Route)
+);
+
+const ResumeAboutLazyRoute = ResumeAboutLazyImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => ResumeRoute,
+} as any).lazy(() => import('./routes/resume.about.lazy').then((d) => d.Route));
 
 const ResumeExperienceRoute = ResumeExperienceImport.update({
   id: '/experience',
   path: '/experience',
-  getParentRoute: () => ResumeRoute,
-} as any);
-
-const ResumeEducationRoute = ResumeEducationImport.update({
-  id: '/education',
-  path: '/education',
-  getParentRoute: () => ResumeRoute,
-} as any);
-
-const ResumeAboutRoute = ResumeAboutImport.update({
-  id: '/about',
-  path: '/about',
   getParentRoute: () => ResumeRoute,
 } as any);
 
@@ -123,21 +138,7 @@ declare module '@tanstack/react-router' {
       id: '/';
       path: '/';
       fullPath: '/';
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    '/contact': {
-      id: '/contact';
-      path: '/contact';
-      fullPath: '/contact';
-      preLoaderRoute: typeof ContactImport;
-      parentRoute: typeof rootRoute;
-    };
-    '/privacy-policy': {
-      id: '/privacy-policy';
-      path: '/privacy-policy';
-      fullPath: '/privacy-policy';
-      preLoaderRoute: typeof PrivacyPolicyImport;
+      preLoaderRoute: typeof IndexLazyImport;
       parentRoute: typeof rootRoute;
     };
     '/resume': {
@@ -147,13 +148,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResumeImport;
       parentRoute: typeof rootRoute;
     };
-    '/terms-of-service': {
-      id: '/terms-of-service';
-      path: '/terms-of-service';
-      fullPath: '/terms-of-service';
-      preLoaderRoute: typeof TermsOfServiceImport;
-      parentRoute: typeof rootRoute;
-    };
     '/work': {
       id: '/work';
       path: '/work';
@@ -161,19 +155,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkImport;
       parentRoute: typeof rootRoute;
     };
-    '/resume/about': {
-      id: '/resume/about';
-      path: '/about';
-      fullPath: '/resume/about';
-      preLoaderRoute: typeof ResumeAboutImport;
-      parentRoute: typeof ResumeImport;
+    '/contact': {
+      id: '/contact';
+      path: '/contact';
+      fullPath: '/contact';
+      preLoaderRoute: typeof ContactLazyImport;
+      parentRoute: typeof rootRoute;
     };
-    '/resume/education': {
-      id: '/resume/education';
-      path: '/education';
-      fullPath: '/resume/education';
-      preLoaderRoute: typeof ResumeEducationImport;
-      parentRoute: typeof ResumeImport;
+    '/delete-data': {
+      id: '/delete-data';
+      path: '/delete-data';
+      fullPath: '/delete-data';
+      preLoaderRoute: typeof DeleteDataLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/privacy-policy': {
+      id: '/privacy-policy';
+      path: '/privacy-policy';
+      fullPath: '/privacy-policy';
+      preLoaderRoute: typeof PrivacyPolicyLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/terms-of-service': {
+      id: '/terms-of-service';
+      path: '/terms-of-service';
+      fullPath: '/terms-of-service';
+      preLoaderRoute: typeof TermsOfServiceLazyImport;
+      parentRoute: typeof rootRoute;
     };
     '/resume/experience': {
       id: '/resume/experience';
@@ -182,11 +190,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResumeExperienceImport;
       parentRoute: typeof ResumeImport;
     };
+    '/resume/about': {
+      id: '/resume/about';
+      path: '/about';
+      fullPath: '/resume/about';
+      preLoaderRoute: typeof ResumeAboutLazyImport;
+      parentRoute: typeof ResumeImport;
+    };
+    '/resume/education': {
+      id: '/resume/education';
+      path: '/education';
+      fullPath: '/resume/education';
+      preLoaderRoute: typeof ResumeEducationLazyImport;
+      parentRoute: typeof ResumeImport;
+    };
     '/resume/skills': {
       id: '/resume/skills';
       path: '/skills';
       fullPath: '/resume/skills';
-      preLoaderRoute: typeof ResumeSkillsImport;
+      preLoaderRoute: typeof ResumeSkillsLazyImport;
       parentRoute: typeof ResumeImport;
     };
     '/resume/': {
@@ -229,18 +251,18 @@ const ResumeExperienceRouteWithChildren =
   ResumeExperienceRoute._addFileChildren(ResumeExperienceRouteChildren);
 
 interface ResumeRouteChildren {
-  ResumeAboutRoute: typeof ResumeAboutRoute;
-  ResumeEducationRoute: typeof ResumeEducationRoute;
   ResumeExperienceRoute: typeof ResumeExperienceRouteWithChildren;
-  ResumeSkillsRoute: typeof ResumeSkillsRoute;
+  ResumeAboutLazyRoute: typeof ResumeAboutLazyRoute;
+  ResumeEducationLazyRoute: typeof ResumeEducationLazyRoute;
+  ResumeSkillsLazyRoute: typeof ResumeSkillsLazyRoute;
   ResumeIndexRoute: typeof ResumeIndexRoute;
 }
 
 const ResumeRouteChildren: ResumeRouteChildren = {
-  ResumeAboutRoute: ResumeAboutRoute,
-  ResumeEducationRoute: ResumeEducationRoute,
   ResumeExperienceRoute: ResumeExperienceRouteWithChildren,
-  ResumeSkillsRoute: ResumeSkillsRoute,
+  ResumeAboutLazyRoute: ResumeAboutLazyRoute,
+  ResumeEducationLazyRoute: ResumeEducationLazyRoute,
+  ResumeSkillsLazyRoute: ResumeSkillsLazyRoute,
   ResumeIndexRoute: ResumeIndexRoute,
 };
 
@@ -248,30 +270,32 @@ const ResumeRouteWithChildren =
   ResumeRoute._addFileChildren(ResumeRouteChildren);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute;
-  '/contact': typeof ContactRoute;
-  '/privacy-policy': typeof PrivacyPolicyRoute;
+  '/': typeof IndexLazyRoute;
   '/resume': typeof ResumeRouteWithChildren;
-  '/terms-of-service': typeof TermsOfServiceRoute;
   '/work': typeof WorkRoute;
-  '/resume/about': typeof ResumeAboutRoute;
-  '/resume/education': typeof ResumeEducationRoute;
+  '/contact': typeof ContactLazyRoute;
+  '/delete-data': typeof DeleteDataLazyRoute;
+  '/privacy-policy': typeof PrivacyPolicyLazyRoute;
+  '/terms-of-service': typeof TermsOfServiceLazyRoute;
   '/resume/experience': typeof ResumeExperienceRouteWithChildren;
-  '/resume/skills': typeof ResumeSkillsRoute;
+  '/resume/about': typeof ResumeAboutLazyRoute;
+  '/resume/education': typeof ResumeEducationLazyRoute;
+  '/resume/skills': typeof ResumeSkillsLazyRoute;
   '/resume/': typeof ResumeIndexRoute;
   '/resume/experience/$id': typeof ResumeExperienceIdRoute;
   '/resume/experience/': typeof ResumeExperienceIndexLazyRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute;
-  '/contact': typeof ContactRoute;
-  '/privacy-policy': typeof PrivacyPolicyRoute;
-  '/terms-of-service': typeof TermsOfServiceRoute;
+  '/': typeof IndexLazyRoute;
   '/work': typeof WorkRoute;
-  '/resume/about': typeof ResumeAboutRoute;
-  '/resume/education': typeof ResumeEducationRoute;
-  '/resume/skills': typeof ResumeSkillsRoute;
+  '/contact': typeof ContactLazyRoute;
+  '/delete-data': typeof DeleteDataLazyRoute;
+  '/privacy-policy': typeof PrivacyPolicyLazyRoute;
+  '/terms-of-service': typeof TermsOfServiceLazyRoute;
+  '/resume/about': typeof ResumeAboutLazyRoute;
+  '/resume/education': typeof ResumeEducationLazyRoute;
+  '/resume/skills': typeof ResumeSkillsLazyRoute;
   '/resume': typeof ResumeIndexRoute;
   '/resume/experience/$id': typeof ResumeExperienceIdRoute;
   '/resume/experience': typeof ResumeExperienceIndexLazyRoute;
@@ -279,16 +303,17 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute;
-  '/': typeof IndexRoute;
-  '/contact': typeof ContactRoute;
-  '/privacy-policy': typeof PrivacyPolicyRoute;
+  '/': typeof IndexLazyRoute;
   '/resume': typeof ResumeRouteWithChildren;
-  '/terms-of-service': typeof TermsOfServiceRoute;
   '/work': typeof WorkRoute;
-  '/resume/about': typeof ResumeAboutRoute;
-  '/resume/education': typeof ResumeEducationRoute;
+  '/contact': typeof ContactLazyRoute;
+  '/delete-data': typeof DeleteDataLazyRoute;
+  '/privacy-policy': typeof PrivacyPolicyLazyRoute;
+  '/terms-of-service': typeof TermsOfServiceLazyRoute;
   '/resume/experience': typeof ResumeExperienceRouteWithChildren;
-  '/resume/skills': typeof ResumeSkillsRoute;
+  '/resume/about': typeof ResumeAboutLazyRoute;
+  '/resume/education': typeof ResumeEducationLazyRoute;
+  '/resume/skills': typeof ResumeSkillsLazyRoute;
   '/resume/': typeof ResumeIndexRoute;
   '/resume/experience/$id': typeof ResumeExperienceIdRoute;
   '/resume/experience/': typeof ResumeExperienceIndexLazyRoute;
@@ -298,14 +323,15 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/'
-    | '/contact'
-    | '/privacy-policy'
     | '/resume'
-    | '/terms-of-service'
     | '/work'
+    | '/contact'
+    | '/delete-data'
+    | '/privacy-policy'
+    | '/terms-of-service'
+    | '/resume/experience'
     | '/resume/about'
     | '/resume/education'
-    | '/resume/experience'
     | '/resume/skills'
     | '/resume/'
     | '/resume/experience/$id'
@@ -313,10 +339,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
+    | '/work'
     | '/contact'
+    | '/delete-data'
     | '/privacy-policy'
     | '/terms-of-service'
-    | '/work'
     | '/resume/about'
     | '/resume/education'
     | '/resume/skills'
@@ -326,14 +353,15 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/contact'
-    | '/privacy-policy'
     | '/resume'
-    | '/terms-of-service'
     | '/work'
+    | '/contact'
+    | '/delete-data'
+    | '/privacy-policy'
+    | '/terms-of-service'
+    | '/resume/experience'
     | '/resume/about'
     | '/resume/education'
-    | '/resume/experience'
     | '/resume/skills'
     | '/resume/'
     | '/resume/experience/$id'
@@ -342,21 +370,23 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  ContactRoute: typeof ContactRoute;
-  PrivacyPolicyRoute: typeof PrivacyPolicyRoute;
+  IndexLazyRoute: typeof IndexLazyRoute;
   ResumeRoute: typeof ResumeRouteWithChildren;
-  TermsOfServiceRoute: typeof TermsOfServiceRoute;
   WorkRoute: typeof WorkRoute;
+  ContactLazyRoute: typeof ContactLazyRoute;
+  DeleteDataLazyRoute: typeof DeleteDataLazyRoute;
+  PrivacyPolicyLazyRoute: typeof PrivacyPolicyLazyRoute;
+  TermsOfServiceLazyRoute: typeof TermsOfServiceLazyRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  ContactRoute: ContactRoute,
-  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  IndexLazyRoute: IndexLazyRoute,
   ResumeRoute: ResumeRouteWithChildren,
-  TermsOfServiceRoute: TermsOfServiceRoute,
   WorkRoute: WorkRoute,
+  ContactLazyRoute: ContactLazyRoute,
+  DeleteDataLazyRoute: DeleteDataLazyRoute,
+  PrivacyPolicyLazyRoute: PrivacyPolicyLazyRoute,
+  TermsOfServiceLazyRoute: TermsOfServiceLazyRoute,
 };
 
 export const routeTree = rootRoute
@@ -370,45 +400,41 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/contact",
-        "/privacy-policy",
         "/resume",
-        "/terms-of-service",
-        "/work"
+        "/work",
+        "/contact",
+        "/delete-data",
+        "/privacy-policy",
+        "/terms-of-service"
       ]
     },
     "/": {
-      "filePath": "index.tsx"
-    },
-    "/contact": {
-      "filePath": "contact.tsx"
-    },
-    "/privacy-policy": {
-      "filePath": "privacy-policy.tsx"
+      "filePath": "index.lazy.tsx"
     },
     "/resume": {
       "filePath": "resume.tsx",
       "children": [
+        "/resume/experience",
         "/resume/about",
         "/resume/education",
-        "/resume/experience",
         "/resume/skills",
         "/resume/"
       ]
     },
-    "/terms-of-service": {
-      "filePath": "terms-of-service.tsx"
-    },
     "/work": {
       "filePath": "work.ts"
     },
-    "/resume/about": {
-      "filePath": "resume.about.tsx",
-      "parent": "/resume"
+    "/contact": {
+      "filePath": "contact.lazy.tsx"
     },
-    "/resume/education": {
-      "filePath": "resume.education.tsx",
-      "parent": "/resume"
+    "/delete-data": {
+      "filePath": "delete-data.lazy.tsx"
+    },
+    "/privacy-policy": {
+      "filePath": "privacy-policy.lazy.tsx"
+    },
+    "/terms-of-service": {
+      "filePath": "terms-of-service.lazy.tsx"
     },
     "/resume/experience": {
       "filePath": "resume.experience.ts",
@@ -418,8 +444,16 @@ export const routeTree = rootRoute
         "/resume/experience/"
       ]
     },
+    "/resume/about": {
+      "filePath": "resume.about.lazy.tsx",
+      "parent": "/resume"
+    },
+    "/resume/education": {
+      "filePath": "resume.education.lazy.tsx",
+      "parent": "/resume"
+    },
     "/resume/skills": {
-      "filePath": "resume.skills.tsx",
+      "filePath": "resume.skills.lazy.tsx",
       "parent": "/resume"
     },
     "/resume/": {
