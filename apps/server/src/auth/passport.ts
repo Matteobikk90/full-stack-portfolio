@@ -1,6 +1,7 @@
 import { OAuthProfile, ProviderEnum, ProviderTypes } from '@/types/oauth.types';
 import prisma from '@/utils/prisma';
 import passport from 'passport';
+import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import type { VerifyCallback } from 'passport-oauth2';
@@ -11,9 +12,9 @@ const GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL!;
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL!;
-// const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID!;
-// const FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_CLIENT_SECRET!;
-// const FACEBOOK_CALLBACK_URL = process.env.FACEBOOK_CALLBACK_URL!;
+const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID!;
+const FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_CLIENT_SECRET!;
+const FACEBOOK_CALLBACK_URL = process.env.FACEBOOK_CALLBACK_URL!;
 // const LINKEDIN_CLIENT_ID = process.env.LINKEDIN_CLIENT_ID!;
 // const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET!;
 // const LINKEDIN_CALLBACK_URL = process.env.LINKEDIN_CALLBACK_URL!;
@@ -73,17 +74,17 @@ passport.use(
   )
 );
 
-// passport.use(
-//   new FacebookStrategy(
-//     {
-//       clientID: FACEBOOK_CLIENT_ID,
-//       clientSecret: FACEBOOK_CLIENT_SECRET,
-//       callbackURL: FACEBOOK_CALLBACK_URL,
-//       profileFields: ['id', 'emails', 'name', 'picture.type(large)'],
-//     },
-//     handleOAuthCallback(ProviderEnum.facebook)
-//   )
-// );
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: FACEBOOK_CLIENT_ID,
+      clientSecret: FACEBOOK_CLIENT_SECRET,
+      callbackURL: FACEBOOK_CALLBACK_URL,
+      profileFields: ['id', 'emails', 'name', 'picture.type(large)'],
+    },
+    handleOAuthCallback(ProviderEnum.facebook)
+  )
+);
 
 // passport.use(
 //   new LinkedInStrategy(
