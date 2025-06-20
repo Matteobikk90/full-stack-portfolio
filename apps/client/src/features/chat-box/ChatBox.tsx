@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
 import type { ChatMessageType } from '@/types/chat.types';
 import { SOCKET_URL } from '@/utils/constants';
-import { ChatsIcon, PaperPlaneRightIcon, XIcon } from '@phosphor-icons/react';
+import { PaperPlaneRightIcon, XIcon } from '@phosphor-icons/react';
 import {
   useCallback,
   useEffect,
@@ -18,7 +18,7 @@ import { io, type Socket } from 'socket.io-client';
 import { useShallow } from 'zustand/shallow';
 
 export const ChatBox = () => {
-  const { isChatOpen, toggleModal, openChat, closeChat } = useStore(
+  const { isChatOpen, closeChat } = useStore(
     useShallow(({ isChatOpen, openChat, toggleModal, closeChat }) => ({
       isChatOpen,
       openChat,
@@ -110,26 +110,8 @@ export const ChatBox = () => {
     [handleSend]
   );
 
-  const handleIconClick = () => (isAuthenticated ? openChat() : toggleModal());
-
   return (
-    <aside className="fixed bottom-16 lg:bottom-20 right-4 z-11">
-      {!isChatOpen && (
-        <Button
-          variant="outline"
-          onClick={handleIconClick}
-          className="rounded-full shadow-elevation w-12 h-12 animate-pulse-slow"
-          aria-label="Toggle chat"
-        >
-          <PopUpInfo
-            hoverText={isAuthenticated ? 'Open chat' : 'Log in to chat'}
-            align="left"
-          >
-            <ChatsIcon className="size-5" weight="duotone" />
-          </PopUpInfo>
-        </Button>
-      )}
-
+    <aside className="fixed bottom-16 lg:bottom-20 -right-0.5 rounded-md z-11">
       {isChatOpen && isAuthenticated && (
         <div className="mt-2 w-80 rounded-xl shadow-xl bg-background border">
           <div className="p-2 border-b flex items-center justify-between">
@@ -154,7 +136,6 @@ export const ChatBox = () => {
               </PopUpInfo>
             </Button>
           </div>
-
           <div className="flex flex-col h-72 overflow-hidden">
             <div
               className="flex-1 overflow-y-auto p-2 space-y-3"
@@ -191,7 +172,6 @@ export const ChatBox = () => {
                         />
                       ) : null}
                     </div>
-
                     <div
                       className={`rounded-xl p-3 max-w-[75%] text-sm shadow-elevation ${
                         isMe

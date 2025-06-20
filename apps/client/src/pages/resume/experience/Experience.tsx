@@ -10,7 +10,7 @@ export const Experience = () => {
   });
 
   return (
-    <section className="flex flex-col gap-6 animate-fade-up w-full flex-1 min-h-0">
+    <section className="flex flex-col gap-4 md:gap-6 animate-fade-up w-full flex-1 min-h-0">
       <h2>Professional Experience</h2>
       <p>
         From UI to database, I’ve worked across the stack to build fast, modern

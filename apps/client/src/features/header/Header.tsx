@@ -68,6 +68,7 @@ export const Header = () => {
             variant="outline"
             size="icon"
             onClick={handleClick}
+            className="animate-pulse-slow"
             aria-label={isAuthenticated ? 'Open chat' : 'Login to chat'}
           >
             <ChatsIcon className="size-5" weight="duotone" />
