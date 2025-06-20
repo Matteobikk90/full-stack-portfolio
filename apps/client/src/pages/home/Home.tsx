@@ -1,5 +1,5 @@
 import avatarMask from '@/assets/images/avatar-aku.png';
-import avatar from '@/assets/images/avatar-aku.png';
+import avatar from '@/assets/images/avatar.png';
 import ParticlesBackground from '@/components/particles';
 import TypedText from '@/components/typed-text';
 import { useUISound } from '@/hooks/useUISound';
