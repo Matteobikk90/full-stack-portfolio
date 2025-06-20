@@ -32,7 +32,6 @@ const handleOAuthCallback =
       const email = profile.emails?.[0]?.value;
       const name = profile.displayName || profile.username || '';
       const avatarUrl = profile.photos?.[0]?.value;
-
       if (!email) {
         return done(null, false, {
           message: `${provider} account has no public email`,
@@ -93,7 +92,6 @@ passport.use(
       clientID: LINKEDIN_CLIENT_ID,
       clientSecret: LINKEDIN_CLIENT_SECRET,
       callbackURL: LINKEDIN_CALLBACK_URL,
-      scope: ['r_emailaddress', 'r_liteprofile'],
     },
     handleOAuthCallback(ProviderEnum.linkedin)
   )
