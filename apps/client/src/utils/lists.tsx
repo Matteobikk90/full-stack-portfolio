@@ -4,8 +4,9 @@ import { Icon } from '@iconify/react';
 import {
   FilePdfIcon,
   GithubLogoIcon,
+  HandshakeIcon,
   LinkedinLogoIcon,
-  PaperPlaneTiltIcon,
+  WhatsappLogoIcon,
 } from '@phosphor-icons/react';
 
 export const resumeItems = [
@@ -98,6 +99,13 @@ export const actions = [
     align: 'center' as const,
   },
   {
+    label: 'WhatsApp',
+    icon: <WhatsappLogoIcon className="size-5" weight="duotone" />,
+    href: 'https://wa.me/+393470438232',
+    external: true,
+    align: 'center' as const,
+  },
+  {
     label: 'Download CV',
     icon: <FilePdfIcon className="size-5" weight="duotone" />,
     onClick: handleDownload,
@@ -105,7 +113,7 @@ export const actions = [
   },
   {
     label: 'Hire Me',
-    icon: <PaperPlaneTiltIcon className="size-5" weight="duotone" />,
+    icon: <HandshakeIcon className="size-5" weight="duotone" />,
     href: '/contact',
     isLink: true,
     className: 'animate-bounce',
