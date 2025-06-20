@@ -4,6 +4,7 @@ import passport from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { Strategy as LinkedInStrategy } from 'passport-linkedin-oauth2';
 import type { VerifyCallback } from 'passport-oauth2';
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
@@ -15,9 +16,9 @@ const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL!;
 const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID!;
 const FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_CLIENT_SECRET!;
 const FACEBOOK_CALLBACK_URL = process.env.FACEBOOK_CALLBACK_URL!;
-// const LINKEDIN_CLIENT_ID = process.env.LINKEDIN_CLIENT_ID!;
-// const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET!;
-// const LINKEDIN_CALLBACK_URL = process.env.LINKEDIN_CALLBACK_URL!;
+const LINKEDIN_CLIENT_ID = process.env.LINKEDIN_CLIENT_ID!;
+const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET!;
+const LINKEDIN_CALLBACK_URL = process.env.LINKEDIN_CALLBACK_URL!;
 
 const handleOAuthCallback =
   (provider: ProviderTypes) =>
@@ -86,14 +87,14 @@ passport.use(
   )
 );
 
-// passport.use(
-//   new LinkedInStrategy(
-//     {
-//       clientID: LINKEDIN_CLIENT_ID,
-//       clientSecret: LINKEDIN_CLIENT_SECRET,
-//       callbackURL: LINKEDIN_CALLBACK_URL,
-//       scope: ['r_emailaddress', 'r_liteprofile'],
-//     },
-//     handleOAuthCallback(ProviderEnum.linkedin)
-//   )
-// );
+passport.use(
+  new LinkedInStrategy(
+    {
+      clientID: LINKEDIN_CLIENT_ID,
+      clientSecret: LINKEDIN_CLIENT_SECRET,
+      callbackURL: LINKEDIN_CALLBACK_URL,
+      scope: ['r_emailaddress', 'r_liteprofile'],
+    },
+    handleOAuthCallback(ProviderEnum.linkedin)
+  )
+);
