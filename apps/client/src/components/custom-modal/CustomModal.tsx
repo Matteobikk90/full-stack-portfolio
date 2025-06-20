@@ -10,6 +10,7 @@ import {
   FacebookLogoIcon,
   GithubLogoIcon,
   GoogleLogoIcon,
+  LinkedinLogoIcon,
   XIcon,
 } from '@phosphor-icons/react';
 import { Link, useLocation } from '@tanstack/react-router';
@@ -67,14 +68,15 @@ export const CustomModal = () => {
               Facebook
             </Button>
           </a>
-          {/* <a href={`https://matteosoresini.com/auth/linkedin?state=${pathname}`}>
-            <Button variant="outline" className="w-full" asChild>
-              <div className="flex items-center justify-center gap-2">
-                <LinkedinLogoIcon className="size-5" weight="duotone" />
-                LinkedIn
-              </div>
+          <a
+            href={`https://matteosoresini.com/auth/linkedin?state=${pathname}`}
+            className="w-full"
+          >
+            <Button variant="outline" className="w-full">
+              <LinkedinLogoIcon className="size-5" weight="duotone" />
+              LinkedIn
             </Button>
-          </a> */}
+          </a>
         </div>
         <p className="text-xs leading-relaxed">
           By continuing, you agree to the{' '}
