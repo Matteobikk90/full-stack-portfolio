@@ -28,7 +28,7 @@ export const CustomModal = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={toggleModal}>
-      <DialogContent className="flex flex-col gap-6 max-w-lg w-full rounded-lg border shadow-elevation bg-background p-6 [&>button]:hidden">
+      <DialogContent className="flex flex-col gap-6 max-w-lg w-[calc(100%_-_2rem)] rounded-lg border shadow-elevation bg-background p-6 [&>button]:hidden">
         <DialogTitle className="text-lg font-semibold">
           Login to chat
           <Button
@@ -46,7 +46,7 @@ export const CustomModal = () => {
           Choose a provider to continue
         </DialogDescription>
 
-        <div className="grid md:grid-cols-2 gap-4 mb-0">
+        <div className="grid grid-cols-2 gap-4 mb-0">
           <a href={`https://matteosoresini.com/auth/github?state=${pathname}`}>
             <Button variant="outline" className="w-full">
               <GithubLogoIcon className="size-5" weight="duotone" />

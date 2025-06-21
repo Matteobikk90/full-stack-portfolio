@@ -1,4 +1,9 @@
-import { OAuthProfile, ProviderEnum, ProviderTypes } from '@/types/oauth.types';
+import {
+  OAuthProfile,
+  ProviderEnum,
+  ProviderTypes,
+  type LinkedInOpenIDProfile,
+} from '@/types/oauth.types';
 import prisma from '@/utils/prisma';
 import passport from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
@@ -29,9 +34,19 @@ const handleOAuthCallback =
     done: VerifyCallback
   ) => {
     try {
-      const email = profile.emails?.[0]?.value;
-      const name = profile.displayName || profile.username || '';
-      const avatarUrl = profile.photos?.[0]?.value;
+      console.log('OAuth profile:', profile);
+      const email =
+        provider === ProviderEnum.linkedin
+          ? (profile as LinkedInOpenIDProfile).email
+          : profile.emails?.[0]?.value;
+      const name =
+        profile.displayName ||
+        profile.username ||
+        (typeof profile.name === 'string' ? profile.name : '') ||
+        '';
+      const avatarUrl =
+        profile.photos?.[0]?.value ||
+        (profile as LinkedInOpenIDProfile).picture;
       if (!email) {
         return done(null, false, {
           message: `${provider} account has no public email`,
@@ -41,8 +56,16 @@ const handleOAuthCallback =
       let user = await prisma.user.findUnique({ where: { email } });
 
       if (!user) {
+        const isAdmin = email === 'matteo.soresini@hotmail.it';
+
         user = await prisma.user.create({
-          data: { email, name, provider, avatarUrl },
+          data: {
+            email,
+            name,
+            provider,
+            avatarUrl,
+            role: isAdmin ? 'admin' : 'user',
+          },
         });
       }
 
