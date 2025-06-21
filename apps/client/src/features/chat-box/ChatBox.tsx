@@ -110,6 +110,8 @@ export const ChatBox = () => {
     [handleSend]
   );
 
+  console.log(messages);
+
   return (
     <aside className="fixed bottom-16 lg:bottom-20 -right-0.5 rounded-md z-11">
       {isChatOpen && isAuthenticated && (

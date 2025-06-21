@@ -26,16 +26,18 @@ enum Provider {
 }
 
 model User {
-  id          String        @id @default(cuid())
-  name        String
-  email       String        @unique
-  provider    Provider
-  role        Role          @default(user)
-  avatarUrl   String?
-  createdAt   DateTime      @default(now())
-  comments    Comment[]
-  likes       Like[]
-  chatMessage ChatMessage[]
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  provider  Provider
+  role      Role      @default(user)
+  avatarUrl String?
+  createdAt DateTime  @default(now())
+  comments  Comment[]
+  likes     Like[]
+
+  sentMessages     ChatMessage[] @relation("SentMessages")
+  receivedMessages ChatMessage[] @relation("ReceivedMessages")
 }
 
 model Experience {
@@ -106,9 +108,11 @@ model ContactMessage {
 }
 
 model ChatMessage {
-  id        String   @id @default(cuid())
-  content   String
-  senderId  String
-  sender    User     @relation(fields: [senderId], references: [id])
-  createdAt DateTime @default(now())
+  id         String   @id @default(cuid())
+  content    String
+  senderId   String
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id])
+  receiverId String
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  createdAt  DateTime @default(now())
 }

@@ -29,6 +29,7 @@ const handleOAuthCallback =
     done: VerifyCallback
   ) => {
     try {
+      console.log('OAuth profile:', profile);
       const email = profile.emails?.[0]?.value;
       const name = profile.displayName || profile.username || '';
       const avatarUrl = profile.photos?.[0]?.value;
@@ -41,8 +42,16 @@ const handleOAuthCallback =
       let user = await prisma.user.findUnique({ where: { email } });
 
       if (!user) {
+        const isAdmin = email === 'matteo.soresini@hotmail.it';
+
         user = await prisma.user.create({
-          data: { email, name, provider, avatarUrl },
+          data: {
+            email,
+            name,
+            provider,
+            avatarUrl,
+            role: isAdmin ? 'admin' : 'user',
+          },
         });
       }
 
@@ -92,6 +101,7 @@ passport.use(
       clientID: LINKEDIN_CLIENT_ID,
       clientSecret: LINKEDIN_CLIENT_SECRET,
       callbackURL: LINKEDIN_CALLBACK_URL,
+      scope: ['r_emailaddress', 'r_liteprofile'],
     },
     handleOAuthCallback(ProviderEnum.linkedin)
   )
