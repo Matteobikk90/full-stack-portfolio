@@ -115,6 +115,7 @@ router.get(
 // --- LinkedIn OAuth ---
 router.get('/linkedin', authRateLimiter, (req, res, next) => {
   passport.authenticate('linkedin', {
+    scope: ['openid', 'profile', 'email'],
     session: false,
     state: req.query.state as string,
   })(req, res, next);
