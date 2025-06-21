@@ -148,6 +148,13 @@
     @apply flex flex-col h-[100dvh];
   }
 
+  @media (orientation: landscape) {
+    #root {
+      height: auto;
+      min-height: 100vh;
+    }
+  }
+
   html,
   body {
     @apply bg-background text-foreground font-jetmono relative;
