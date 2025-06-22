@@ -30,11 +30,15 @@ const handleOAuthCallback =
     done: VerifyCallback
   ) => {
     try {
+      console.log(`[OAuth] Provider: ${provider}`);
+      console.log('[OAuth] Raw profile:', profile);
+      console.log('[OAuth] Access token:', accessToken);
       let email: string | undefined;
       let name: string = '';
       let avatarUrl: string | undefined;
 
       if (provider === ProviderEnum.linkedin) {
+        console.log('[LinkedIn] Fetching userinfo from LinkedIn API');
         const { data } = await axios.get(
           'https://api.linkedin.com/v2/userinfo',
           {
@@ -43,12 +47,14 @@ const handleOAuthCallback =
             },
           }
         );
+        console.log('[LinkedIn] Response from /userinfo:', data);
 
         email = data.email;
         name =
           data.name ||
           `${data.given_name ?? ''} ${data.family_name ?? ''}`.trim();
         avatarUrl = data.picture;
+        console.log('[LinkedIn] Extracted:', { email, name, avatarUrl });
       } else {
         email = profile.emails?.[0]?.value;
         name =
@@ -68,6 +74,7 @@ const handleOAuthCallback =
       let user = await prisma.user.findUnique({ where: { email } });
 
       if (!user) {
+        console.log(`[OAuth] Creating new user with email: ${email}`);
         const isAdmin = email === 'matteo.soresini@hotmail.it';
         user = await prisma.user.create({
           data: {
@@ -78,6 +85,8 @@ const handleOAuthCallback =
             role: isAdmin ? 'admin' : 'user',
           },
         });
+      } else {
+        console.log(`[OAuth] Existing user found: ${email}`);
       }
 
       return done(null, user);

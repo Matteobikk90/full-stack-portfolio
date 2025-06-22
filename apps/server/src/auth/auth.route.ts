@@ -114,6 +114,7 @@ router.get(
 
 // --- LinkedIn OAuth ---
 router.get('/linkedin', (req, res, next) => {
+  console.log('[LinkedIn] Initiating OAuth flow');
   passport.authenticate('linkedin', {
     scope: ['openid', 'profile', 'email'],
     session: false,
@@ -123,6 +124,10 @@ router.get('/linkedin', (req, res, next) => {
 
 router.get(
   '/linkedin/callback',
+  (req, _, next) => {
+    console.log('[LinkedIn] Callback hit, query params:', req.query);
+    next();
+  },
   passport.authenticate('linkedin', { session: false, failureRedirect: '/' }),
   (req, res) => {
     const user = req.user as { id: string };
