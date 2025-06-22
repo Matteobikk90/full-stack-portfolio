@@ -9,8 +9,7 @@ import { PaperPlaneRightIcon } from '@phosphor-icons/react';
 import { useLayoutEffect, useRef, useState } from 'react';
 
 export const Messages = () => {
-  const { isAdmin, activeUserId, socket, messages, sendMessage } =
-    useChatSocket();
+  const { activeUserId, socket, messages, sendMessage } = useChatSocket();
   const { user } = useAuth();
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,6 +34,7 @@ export const Messages = () => {
     <div className="flex flex-col h-72 overflow-hidden">
       <div className="flex-1 overflow-y-auto p-2 space-y-3" ref={scrollRef}>
         {messages.map((msg) => {
+          const isOwnMessage = msg.sender?.id === user.id;
           const timestamp = new Date(msg.createdAt).toLocaleTimeString([], {
             day: '2-digit',
             month: '2-digit',
@@ -46,7 +46,9 @@ export const Messages = () => {
               key={msg.id}
               className={cn(
                 'flex items-end gap-2',
-                isAdmin ? 'justify-start flex-row-reverse' : 'justify-start'
+                isOwnMessage
+                  ? 'justify-start flex-row-reverse'
+                  : 'justify-start'
               )}
             >
               <div className="flex flex-col items-center gap-1">
@@ -63,14 +65,14 @@ export const Messages = () => {
               <div
                 className={cn(
                   'rounded-xl p-3 max-w-[75%] text-sm shadow-elevation',
-                  isAdmin
+                  isOwnMessage
                     ? 'bg-primary rounded-br-none'
                     : 'bg-background rounded-bl-none'
                 )}
               >
                 <div className="text-xs mb-1 flex gap-1">
                   <strong className="max-w-24 truncate">
-                    {isAdmin ? 'You' : msg.sender?.name || 'Unknown'}
+                    {isOwnMessage ? 'You' : msg.sender?.name || 'Unknown'}
                   </strong>
                   <span>•</span>
                   <time dateTime={msg.createdAt}>{timestamp}</time>
