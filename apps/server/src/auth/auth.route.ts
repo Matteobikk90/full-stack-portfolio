@@ -113,9 +113,8 @@ router.get(
 );
 
 // --- LinkedIn OAuth ---
-router.get('/linkedin', (req, res, next) => {
+router.get('/linkedin', authRateLimiter, (req, res, next) => {
   passport.authenticate('linkedin', {
-    scope: ['openid', 'profile', 'email'],
     session: false,
     state: req.query.state as string,
   })(req, res, next);
@@ -123,15 +122,7 @@ router.get('/linkedin', (req, res, next) => {
 
 router.get(
   '/linkedin/callback',
-  (req, res, next) => {
-    if (req.query.error) {
-      console.warn('[LinkedIn] User cancelled authorization');
-      return res.redirect(
-        `${process.env.FRONTEND_URL}/?error=linkedin_cancelled`
-      );
-    }
-    next();
-  },
+  authRateLimiter,
   passport.authenticate('linkedin', { session: false, failureRedirect: '/' }),
   (req, res) => {
     const user = req.user as { id: string };

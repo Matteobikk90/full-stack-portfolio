@@ -1,6 +1,10 @@
-import { OAuthProfile, ProviderEnum, ProviderTypes } from '@/types/oauth.types';
+import {
+  OAuthProfile,
+  ProviderEnum,
+  ProviderTypes,
+  type LinkedInOpenIDProfile,
+} from '@/types/oauth.types';
 import prisma from '@/utils/prisma';
-import axios from 'axios';
 import passport from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { Strategy as GitHubStrategy } from 'passport-github2';
@@ -24,50 +28,25 @@ const LINKEDIN_CALLBACK_URL = process.env.LINKEDIN_CALLBACK_URL!;
 const handleOAuthCallback =
   (provider: ProviderTypes) =>
   async (
-    accessToken: string,
+    _accessToken: string,
     _refreshToken: string,
     profile: OAuthProfile,
     done: VerifyCallback
   ) => {
     try {
-      let email: string | undefined;
-      let name: string = '';
-      let avatarUrl: string | undefined;
-
-      if (provider === ProviderEnum.linkedin) {
-        email = profile.emails?.[0]?.value;
-        name =
-          profile.displayName ||
-          (typeof profile.name === 'string'
-            ? profile.name
-            : `${profile.name?.givenName ?? ''} ${profile.name?.familyName ?? ''}`.trim());
-        avatarUrl = profile.photos?.[0]?.value;
-
-        if (!email) {
-          const { data } = await axios.get(
-            'https://api.linkedin.com/v2/userinfo',
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            }
-          );
-          email = data.email;
-          name =
-            data.name ||
-            `${data.given_name ?? ''} ${data.family_name ?? ''}`.trim();
-          avatarUrl = data.picture;
-        }
-      } else {
-        email = profile.emails?.[0]?.value;
-        name =
-          profile.displayName ||
-          profile.username ||
-          (typeof profile.name === 'string' ? profile.name : '') ||
-          '';
-        avatarUrl = profile.photos?.[0]?.value;
-      }
-
+      console.log('OAuth profile:', profile);
+      const email =
+        provider === ProviderEnum.linkedin
+          ? (profile as LinkedInOpenIDProfile).email
+          : profile.emails?.[0]?.value;
+      const name =
+        profile.displayName ||
+        profile.username ||
+        (typeof profile.name === 'string' ? profile.name : '') ||
+        '';
+      const avatarUrl =
+        profile.photos?.[0]?.value ||
+        (profile as LinkedInOpenIDProfile).picture;
       if (!email) {
         return done(null, false, {
           message: `${provider} account has no public email`,
@@ -78,6 +57,7 @@ const handleOAuthCallback =
 
       if (!user) {
         const isAdmin = email === 'matteo.soresini@hotmail.it';
+
         user = await prisma.user.create({
           data: {
             email,
@@ -91,7 +71,6 @@ const handleOAuthCallback =
 
       return done(null, user);
     } catch (err) {
-      console.error('OAuth error:', err);
       return done(err);
     }
   };
