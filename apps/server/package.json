@@ -40,7 +40,7 @@
     "passport-facebook": "^3.0.0",
     "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^2.0.0",
-    "passport-linkedin-oauth2": "^2.0.0",
+    "passport-linkedin-oauth2": "github:auth0/passport-linkedin-oauth2#v3.0.0",
     "passport-oauth2": "^1.8.0",
     "socket.io": "^4.8.1",
     "zod": "^3.24.4"

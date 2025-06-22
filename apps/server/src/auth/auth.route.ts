@@ -114,7 +114,6 @@ router.get(
 
 // --- LinkedIn OAuth ---
 router.get('/linkedin', (req, res, next) => {
-  console.log('[LinkedIn] Initiating OAuth flow');
   passport.authenticate('linkedin', {
     scope: ['openid', 'profile', 'email'],
     session: false,
@@ -124,8 +123,13 @@ router.get('/linkedin', (req, res, next) => {
 
 router.get(
   '/linkedin/callback',
-  (req, _, next) => {
-    console.log('[LinkedIn] Callback hit, query params:', req.query);
+  (req, res, next) => {
+    if (req.query.error) {
+      console.warn('[LinkedIn] User cancelled authorization');
+      return res.redirect(
+        `${process.env.FRONTEND_URL}/?error=linkedin_cancelled`
+      );
+    }
     next();
   },
   passport.authenticate('linkedin', { session: false, failureRedirect: '/' }),
