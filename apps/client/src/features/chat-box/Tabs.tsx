@@ -12,6 +12,7 @@ export const Tabs = () => {
       {Object.entries(threads).map(([uid, msgs]) => {
         const other =
           msgs[0]?.sender?.id === user.id ? msgs[0]?.receiver : msgs[0]?.sender;
+
         return (
           <Button
             key={uid}
