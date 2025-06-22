@@ -122,6 +122,10 @@ io.on('connection', async (socket) => {
       });
 
       if (user.email !== adminEmail) {
+        const adminSockets = sockets.filter((s) => s.data.userId === admin.id);
+        adminSockets.forEach((s) => {
+          s.emit('admin:new-message', saved);
+        });
         await transporter.sendMail({
           from: `"Portfolio Chat" <${process.env.SMTP_USER}>`,
           to: process.env.CONTACT_EMAIL,
