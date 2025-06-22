@@ -132,9 +132,9 @@ export const ChatBox = () => {
   };
 
   return (
-    <aside className="fixed bottom-16 lg:bottom-20 -right-0.5 rounded-md z-11">
+    <aside className="fixed bottom-16 lg:bottom-20 -right-0.5 rounded-md z-11 max-w-96 w-full">
       {isChatOpen && isAuthenticated && (
-        <div className="mt-2 max-w-96 rounded-bl-md rounded-tl-md shadow-xl bg-background border">
+        <div className="ml-4 rounded-bl-md rounded-tl-md shadow-xl bg-background border">
           <div className="p-2 border-b flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-sm font-medium">
