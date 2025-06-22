@@ -15,5 +15,10 @@ export type ChatMessageType = {
     name: string;
     avatarUrl: string | null;
   };
+  receiver: {
+    id: string;
+    name: string;
+    avatarUrl: string | null;
+  };
   status?: MessageStatus;
 };

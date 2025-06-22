@@ -5,7 +5,7 @@ import { Input } from '@/lib/ui/input';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
 import type { ChatMessageType } from '@/types/chat.types';
-import { SOCKET_URL } from '@/utils/constants';
+import { adminEmail, SOCKET_URL } from '@/utils/constants';
 import { PaperPlaneRightIcon, XIcon } from '@phosphor-icons/react';
 import {
   useCallback,
@@ -28,19 +28,22 @@ export const ChatBox = () => {
   );
   const { user, isAuthenticated } = useAuth();
   const socketRef = useRef<Socket | null>(null);
-  const [messages, setMessages] = useState<ChatMessageType[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const [connectionError, setConnectionError] = useState<string | null>(null);
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const [messages, setMessages] = useState<ChatMessageType[]>([]);
+  const [threads, setThreads] = useState<Record<string, ChatMessageType[]>>({});
+  const [activeUserId, setActiveUserId] = useState<string | null>(null);
+
+  const isAdmin = user?.email === adminEmail;
 
   useLayoutEffect(() => {
     scrollRef.current?.scrollTo({
       top: scrollRef.current.scrollHeight,
       behavior: 'smooth',
     });
-
     if (isChatOpen) inputRef.current?.focus();
   }, [messages, isChatOpen]);
 
@@ -49,10 +52,7 @@ export const ChatBox = () => {
     setIsConnecting(true);
     setConnectionError(null);
 
-    const socket = io(SOCKET_URL, {
-      withCredentials: true,
-    });
-
+    const socket = io(SOCKET_URL, { withCredentials: true });
     socketRef.current = socket;
 
     socket.on('connect', () => {
@@ -68,14 +68,24 @@ export const ChatBox = () => {
 
     socket.on('disconnect', (reason) => {
       console.log('🔌 Socket disconnected:', reason);
-      if (reason === 'io server disconnect') {
-        socket.connect();
-      }
+      if (reason === 'io server disconnect') socket.connect();
     });
 
-    socket.on('chat:history', (history) => {
-      setMessages(history.reverse());
-    });
+    if (isAdmin) {
+      socket.on('admin:all-conversations', (data) => {
+        setThreads(data);
+        const first = Object.keys(data)[0];
+        if (first) {
+          setActiveUserId(first);
+          socket.emit('admin:set-partner', first);
+          setMessages(data[first] || []);
+        }
+      });
+    } else {
+      socket.on('chat:history', (history) => {
+        setMessages(history.reverse());
+      });
+    }
 
     socket.on('chat:message', (msg) => {
       setMessages((prev) => {
@@ -89,12 +99,11 @@ export const ChatBox = () => {
       socketRef.current = null;
       setIsConnecting(false);
     };
-  }, [isAuthenticated]);
+  }, [isAuthenticated, isAdmin]);
 
   const handleSend = useCallback(() => {
     const trimmedInput = input.trim();
     if (!trimmedInput || !socketRef.current?.connected) return;
-
     socketRef.current.emit('chat:message', trimmedInput);
     setInput('');
     inputRef.current?.focus();
@@ -110,15 +119,22 @@ export const ChatBox = () => {
     [handleSend]
   );
 
-  console.log(messages);
+  const handleSelectUser = (userId: string) => {
+    if (!socketRef.current) return;
+    socketRef.current.emit('admin:set-partner', userId);
+    setActiveUserId(userId);
+    setMessages(threads[userId] || []);
+  };
 
   return (
     <aside className="fixed bottom-16 lg:bottom-20 -right-0.5 rounded-md z-11">
       {isChatOpen && isAuthenticated && (
-        <div className="mt-2 w-80 rounded-xl shadow-xl bg-background border">
+        <div className="mt-2 w-96 rounded-xl shadow-xl bg-background border">
           <div className="p-2 border-b flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium">Chat with Matteo</span>
+              <span className="text-sm font-medium">
+                {isAdmin ? 'Admin Chat' : 'Chat with Matteo'}
+              </span>
               <span
                 className={cn(
                   'w-2 h-2  rounded-full ',
@@ -138,6 +154,32 @@ export const ChatBox = () => {
               </PopUpInfo>
             </Button>
           </div>
+
+          {isAdmin && (
+            <div className="border-b overflow-x-auto p-2 whitespace-nowrap">
+              {Object.entries(threads).map(([uid, msgs]) => {
+                const other =
+                  msgs[0]?.sender?.id === user?.id
+                    ? msgs[0]?.receiver
+                    : msgs[0]?.sender;
+                return (
+                  <Button
+                    key={uid}
+                    onClick={() => handleSelectUser(uid)}
+                    className={cn(
+                      'px-3 py-1 rounded-md text-sm mr-2',
+                      activeUserId === uid
+                        ? 'bg-primary text-white'
+                        : 'bg-muted'
+                    )}
+                  >
+                    {other?.name || 'User'}
+                  </Button>
+                );
+              })}
+            </div>
+          )}
+
           <div className="flex flex-col h-72 overflow-hidden">
             <div
               className="flex-1 overflow-y-auto p-2 space-y-3"
@@ -154,7 +196,6 @@ export const ChatBox = () => {
                     minute: '2-digit',
                   }
                 );
-
                 return (
                   <div
                     key={msg.id}
@@ -164,7 +205,7 @@ export const ChatBox = () => {
                     )}
                   >
                     <div className="flex flex-col items-center gap-1">
-                      {msg.sender?.avatarUrl ? (
+                      {msg.sender?.avatarUrl && (
                         <img
                           width={30}
                           height={30}
@@ -172,7 +213,7 @@ export const ChatBox = () => {
                           alt={msg.sender.name}
                           className="object-cover rounded-full"
                         />
-                      ) : null}
+                      )}
                     </div>
                     <div
                       className={`rounded-xl p-3 max-w-[75%] text-sm shadow-elevation ${
@@ -194,6 +235,7 @@ export const ChatBox = () => {
                 );
               })}
             </div>
+
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -208,7 +250,9 @@ export const ChatBox = () => {
                 onKeyDown={handleKeyDown}
                 className="flex-1"
                 placeholder="Type your message..."
-                disabled={!socketRef.current?.connected}
+                disabled={
+                  !socketRef.current?.connected || (isAdmin && !activeUserId)
+                }
                 maxLength={350}
               />
               <Button
@@ -216,7 +260,10 @@ export const ChatBox = () => {
                 size="icon"
                 type="submit"
                 disabled={
-                  !input.trim() || !socketRef.current?.connected || isConnecting
+                  !input.trim() ||
+                  !socketRef.current?.connected ||
+                  isConnecting ||
+                  (isAdmin && !activeUserId)
                 }
                 aria-label="Send message"
               >
