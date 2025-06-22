@@ -51,6 +51,21 @@ export const useChatSocket = () => {
       });
     };
 
+    const onAllConversations = (
+      serverThreads: Record<string, ChatMessageType[]>
+    ) => {
+      setThreads(serverThreads);
+
+      const firstUserId = Object.keys(serverThreads)[0];
+      if (firstUserId) {
+        setActiveUserId(firstUserId);
+        socket.emit('admin:set-partner', firstUserId);
+        setMessages(serverThreads[firstUserId]);
+      }
+    };
+
+    socket.on('admin:all-conversations', onAllConversations);
+
     socket.on('connect', onConnect);
     socket.on('connect_error', onConnectError);
     socket.on('disconnect', onDisconnect);
@@ -63,6 +78,7 @@ export const useChatSocket = () => {
       socket.off('disconnect', onDisconnect);
       socket.off('chat:history', onChatHistory);
       socket.off('chat:message', onChatMessage);
+      socket.off('admin:all-conversations', onAllConversations);
       socket.disconnect();
       socketRef.current = null;
     };
@@ -91,9 +107,25 @@ export const useChatSocket = () => {
       }
     };
 
+    const onAllConversations = (
+      serverThreads: Record<string, ChatMessageType[]>
+    ) => {
+      setThreads(serverThreads);
+
+      const firstUserId = Object.keys(serverThreads)[0];
+      if (firstUserId) {
+        setActiveUserId(firstUserId);
+        socket.emit('admin:set-partner', firstUserId);
+        setMessages(serverThreads[firstUserId]);
+      }
+    };
+
+    socket.on('admin:all-conversations', onAllConversations);
     socket.on('admin:new-message', onAdminNewMessage);
+
     return () => {
       socket.off('admin:new-message', onAdminNewMessage);
+      socket.off('admin:all-conversations', onAllConversations);
     };
   }, [isAdmin, user?.id, activeUserId]);
 
