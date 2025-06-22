@@ -1,3 +1,4 @@
+import { authenticateToken } from '@/auth/auth.middleware';
 import { getLikes, toggleLike } from '@/controllers/like.controller';
 import { validateBody, validateParams } from '@/middleware/validate.middleware';
 import { asyncHandler } from '@/utils/async-handlers';
@@ -6,8 +7,18 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('/:projectId', validateParams(likeSchema), asyncHandler(getLikes));
+router.get(
+  '/:projectId',
+  authenticateToken,
+  validateParams(likeSchema),
+  asyncHandler(getLikes)
+);
 
-router.post('/', validateBody(likeSchema), asyncHandler(toggleLike));
+router.post(
+  '/',
+  authenticateToken,
+  validateBody(likeSchema),
+  asyncHandler(toggleLike)
+);
 
 export default router;

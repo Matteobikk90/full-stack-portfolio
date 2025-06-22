@@ -2,8 +2,8 @@ import prisma from '@/utils/prisma';
 import { Request, Response } from 'express';
 
 export const getLikes = async (req: Request, res: Response) => {
+  const userId = (req.user as { userId: string }).userId;
   const { projectId } = req.params;
-  const userId = (req.user as { userId: string } | undefined)?.userId;
 
   const likesCount = await prisma.like.count({ where: { projectId } });
 

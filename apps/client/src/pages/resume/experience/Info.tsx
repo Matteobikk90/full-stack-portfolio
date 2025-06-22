@@ -15,7 +15,7 @@ export const Info = () => {
     <section className="flex flex-col animate-fade-up w-full flex-1 min-h-0">
       <Breadcrumbs />
       <article className="flex flex-col bg-gray p-4 sm:p-6 rounded-md flex-1 min-h-0 max-h-max border border-secondary">
-        <ScrollContainer className="flex-1 min-h-0 pr-4">
+        <ScrollContainer className="flex-1 min-h-0">
           <div className="space-y-4">
             <div className="flex items-start justify-between text-primary mb-0 text-xs md:text-sm lg:text-base">
               <span>{formatDateRange(data.startDate, data.endDate!)}</span>

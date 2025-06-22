@@ -38,16 +38,19 @@ export const Actions = ({
     onSuccess: (serverData, projectId) => {
       queryClient.setQueryData<LikeType>(['likeStatus', projectId], serverData);
 
-      toast.success(hasLiked ? 'Thanks for the ❤️' : 'Like removed', {
-        description: hasLiked
-          ? 'Your appreciation has been recorded.'
-          : 'You can like it again any time.',
-        duration: toastDuration,
-      });
+      toast.success(
+        serverData.hasLiked ? 'Thanks for the ❤️' : 'Ohh nooo, ❤️ removed',
+        {
+          description: serverData.hasLiked
+            ? 'Your appreciation has been recorded.'
+            : 'You can like it again any time.',
+          duration: toastDuration,
+        }
+      );
     },
-    onError: () => {
+    onError: (err) => {
       toast.error('Couldn’t send like', {
-        description: 'Check your connection and try again.',
+        description: err?.message || 'Please try again later.',
         duration: toastDuration,
       });
     },
@@ -56,8 +59,8 @@ export const Actions = ({
   const handleClick = () =>
     isAuthenticated ? mutate(activeWork.id) : toggleModal();
 
-  const likesCount = likeStatus?.likesCount ?? likeData?.likesCount ?? 0;
-  const hasLiked = likeStatus?.hasLiked ?? likeData?.hasLiked ?? false;
+  const likesCount = likeData?.likesCount ?? likeStatus?.likesCount ?? 0;
+  const hasLiked = likeData?.hasLiked ?? likeStatus?.hasLiked ?? false;
 
   return (
     <div className="flex gap-2 w-full">
@@ -84,6 +87,7 @@ export const Actions = ({
       <PopUpInfo
         hoverText={isAuthenticated ? 'Like this project' : 'Login to like'}
         className="ml-auto"
+        align="left"
       >
         <Button
           onClick={handleClick}

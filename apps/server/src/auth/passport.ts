@@ -115,6 +115,7 @@ passport.use(
       clientID: LINKEDIN_CLIENT_ID,
       clientSecret: LINKEDIN_CLIENT_SECRET,
       callbackURL: LINKEDIN_CALLBACK_URL,
+      scope: ['openid', 'profile', 'email'],
     },
     handleOAuthCallback(ProviderEnum.linkedin)
   )

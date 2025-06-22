@@ -13,7 +13,7 @@ export const About = () => (
       exploring, hacking and repairing all kinds of devices.
     </p>
     <ScrollContainer className="flex-1 min-h-0">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 space-y-3 mr-4 md:m-0">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 space-y-3">
         {aboutInfo.map(({ label, value }) => (
           <div
             key={label}

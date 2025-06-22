@@ -4,7 +4,7 @@ import { Sentry } from '@/config/sentry';
 import { globalErrorHandler } from '@/middleware/error.middleware';
 import commentRoutes from '@/routes/comments.route';
 import contactRoutes from '@/routes/contact.route';
-import experiencesRoute from '@/routes/experieces';
+import experiencesRoute from '@/routes/experieces.route';
 import likeRoutes from '@/routes/likes.route';
 import projectsRoute from '@/routes/projects.route';
 import userRoutes from '@/routes/user.route';

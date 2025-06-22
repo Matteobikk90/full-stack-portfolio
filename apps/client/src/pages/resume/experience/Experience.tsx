@@ -17,7 +17,7 @@ export const Experience = () => {
         web apps that users enjoy.
       </p>
       <ScrollContainer className="flex-1 min-h-0">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mr-4 md:m-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           {data.map(
             (
               {
