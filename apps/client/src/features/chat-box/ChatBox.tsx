@@ -72,18 +72,23 @@ export const ChatBox = () => {
     });
 
     if (isAdmin) {
-      socket.on('admin:all-conversations', (data) => {
-        setThreads(data);
-        const first = Object.keys(data)[0];
-        if (first) {
-          setActiveUserId(first);
-          socket.emit('admin:set-partner', first);
-          setMessages(data[first] || []);
+      socket.on('admin:new-message', (msg) => {
+        setThreads((prev) => {
+          const other = msg.sender?.id === user?.id ? msg.receiver : msg.sender;
+          if (!other) return prev;
+
+          const updated = { ...prev };
+          if (!updated[other.id]) updated[other.id] = [];
+          updated[other.id] = [...(updated[other.id] || []), msg];
+
+          return updated;
+        });
+
+        if (!activeUserId) {
+          setActiveUserId(msg.sender.id);
+          socket.emit('admin:set-partner', msg.sender.id);
+          setMessages([msg]);
         }
-      });
-    } else {
-      socket.on('chat:history', (history) => {
-        setMessages(history.reverse());
       });
     }
 
@@ -99,7 +104,7 @@ export const ChatBox = () => {
       socketRef.current = null;
       setIsConnecting(false);
     };
-  }, [isAuthenticated, isAdmin]);
+  }, [isAuthenticated, isAdmin, activeUserId, user?.id]);
 
   const handleSend = useCallback(() => {
     const trimmedInput = input.trim();
@@ -129,7 +134,7 @@ export const ChatBox = () => {
   return (
     <aside className="fixed bottom-16 lg:bottom-20 -right-0.5 rounded-md z-11">
       {isChatOpen && isAuthenticated && (
-        <div className="mt-2 w-96 rounded-xl shadow-xl bg-background border">
+        <div className="mt-2 max-w-96 rounded-bl-md rounded-tl-md shadow-xl bg-background border">
           <div className="p-2 border-b flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-sm font-medium">
