@@ -38,12 +38,15 @@ export const Actions = ({
     onSuccess: (serverData, projectId) => {
       queryClient.setQueryData<LikeType>(['likeStatus', projectId], serverData);
 
-      toast.success(hasLiked ? 'Thanks for the ❤️' : 'Ohh nooo, ❤️ removed', {
-        description: hasLiked
-          ? 'Your appreciation has been recorded.'
-          : 'You can like it again any time.',
-        duration: toastDuration,
-      });
+      toast.success(
+        serverData.hasLiked ? 'Thanks for the ❤️' : 'Ohh nooo, ❤️ removed',
+        {
+          description: serverData.hasLiked
+            ? 'Your appreciation has been recorded.'
+            : 'You can like it again any time.',
+          duration: toastDuration,
+        }
+      );
     },
     onError: (err) => {
       toast.error('Couldn’t send like', {
@@ -56,8 +59,8 @@ export const Actions = ({
   const handleClick = () =>
     isAuthenticated ? mutate(activeWork.id) : toggleModal();
 
-  const likesCount = likeStatus?.likesCount ?? likeData?.likesCount ?? 0;
-  const hasLiked = likeStatus?.hasLiked ?? likeData?.hasLiked ?? false;
+  const likesCount = likeData?.likesCount ?? likeStatus?.likesCount ?? 0;
+  const hasLiked = likeData?.hasLiked ?? likeStatus?.hasLiked ?? false;
 
   return (
     <div className="flex gap-2 w-full">
