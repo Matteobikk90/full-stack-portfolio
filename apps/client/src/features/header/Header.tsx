@@ -9,16 +9,15 @@ import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
   const { isAuthenticated } = useAuth();
-  const { mode, toggleTheme, updateBackground, toggleModal, openChat } =
-    useStore(
-      useShallow((state) => ({
-        mode: state.mode,
-        toggleTheme: state.toggleTheme,
-        updateBackground: state.updateBackground,
-        toggleModal: state.toggleModal,
-        openChat: state.openChat,
-      }))
-    );
+  const { mode, toggleTheme, updateBackground, openChat } = useStore(
+    useShallow((state) => ({
+      mode: state.mode,
+      toggleTheme: state.toggleTheme,
+      updateBackground: state.updateBackground,
+      toggleModal: state.toggleModal,
+      openChat: state.openChat,
+    }))
+  );
 
   useEffect(() => {
     document.documentElement.classList.remove('light', 'dark');
@@ -31,11 +30,12 @@ export const Header = () => {
   };
 
   const handleClick = () => {
-    if (isAuthenticated) {
-      openChat();
-    } else {
-      toggleModal();
-    }
+    // if (isAuthenticated) {
+    //   openChat();
+    // } else {
+    //   toggleModal();
+    // }
+    openChat();
   };
 
   return (
