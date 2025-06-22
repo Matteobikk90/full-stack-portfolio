@@ -1,4 +1,9 @@
-import { OAuthProfile, ProviderEnum, ProviderTypes } from '@/types/oauth.types';
+import {
+  OAuthProfile,
+  ProviderEnum,
+  ProviderTypes,
+  type LinkedInOpenIDProfile,
+} from '@/types/oauth.types';
 import prisma from '@/utils/prisma';
 import passport from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
@@ -30,9 +35,18 @@ const handleOAuthCallback =
   ) => {
     try {
       console.log('OAuth profile:', profile);
-      const email = profile.emails?.[0]?.value;
-      const name = profile.displayName || profile.username || '';
-      const avatarUrl = profile.photos?.[0]?.value;
+      const email =
+        provider === ProviderEnum.linkedin
+          ? (profile as LinkedInOpenIDProfile).email
+          : profile.emails?.[0]?.value;
+      const name =
+        profile.displayName ||
+        profile.username ||
+        (typeof profile.name === 'string' ? profile.name : '') ||
+        '';
+      const avatarUrl =
+        profile.photos?.[0]?.value ||
+        (profile as LinkedInOpenIDProfile).picture;
       if (!email) {
         return done(null, false, {
           message: `${provider} account has no public email`,
@@ -101,7 +115,7 @@ passport.use(
       clientID: LINKEDIN_CLIENT_ID,
       clientSecret: LINKEDIN_CLIENT_SECRET,
       callbackURL: LINKEDIN_CALLBACK_URL,
-      scope: ['r_emailaddress', 'r_liteprofile'],
+      scope: ['openid', 'profile', 'email'],
     },
     handleOAuthCallback(ProviderEnum.linkedin)
   )
