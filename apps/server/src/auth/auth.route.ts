@@ -113,7 +113,7 @@ router.get(
 );
 
 // --- LinkedIn OAuth ---
-router.get('/linkedin', authRateLimiter, (req, res, next) => {
+router.get('/linkedin', (req, res, next) => {
   passport.authenticate('linkedin', {
     scope: ['openid', 'profile', 'email'],
     session: false,
@@ -123,7 +123,6 @@ router.get('/linkedin', authRateLimiter, (req, res, next) => {
 
 router.get(
   '/linkedin/callback',
-  authRateLimiter,
   passport.authenticate('linkedin', { session: false, failureRedirect: '/' }),
   (req, res) => {
     const user = req.user as { id: string };
