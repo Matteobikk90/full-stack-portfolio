@@ -18,6 +18,8 @@ export const getLikes = async (req: Request, res: Response) => {
 };
 
 export const toggleLike = async (req: Request, res: Response) => {
+  console.log(req);
+  console.log(req.user);
   const userId = (req.user as { userId: string }).userId;
   const { projectId } = req.body;
 

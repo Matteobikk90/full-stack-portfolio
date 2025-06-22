@@ -38,16 +38,16 @@ export const Actions = ({
     onSuccess: (serverData, projectId) => {
       queryClient.setQueryData<LikeType>(['likeStatus', projectId], serverData);
 
-      toast.success(hasLiked ? 'Thanks for the ❤️' : 'Like removed', {
+      toast.success(hasLiked ? 'Thanks for the ❤️' : 'Ohh nooo, ❤️ removed', {
         description: hasLiked
           ? 'Your appreciation has been recorded.'
           : 'You can like it again any time.',
         duration: toastDuration,
       });
     },
-    onError: () => {
+    onError: (err) => {
       toast.error('Couldn’t send like', {
-        description: 'Check your connection and try again.',
+        description: err?.message || 'Please try again later.',
         duration: toastDuration,
       });
     },
