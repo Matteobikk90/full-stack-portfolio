@@ -84,6 +84,7 @@ export const Actions = ({
       <PopUpInfo
         hoverText={isAuthenticated ? 'Like this project' : 'Login to like'}
         className="ml-auto"
+        align="left"
       >
         <Button
           onClick={handleClick}

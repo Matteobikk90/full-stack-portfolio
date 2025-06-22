@@ -26,7 +26,7 @@ export const Work = () => {
     <main className="flex flex-col gap-4 md:gap-12">
       <h1 className="text-work">Work</h1>
       <ScrollContainer className="flex-1 min-h-0" backgroundColor="bg-work">
-        <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-center lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12 flex-1 min-h-0 mr-4 lg:m-0">
+        <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-center lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12 flex-1 min-h-0">
           <AnimatePresence mode="wait">
             <motion.article
               key={activeSlide}

@@ -10,10 +10,7 @@ export const Contact = () => (
         collaborate, or just want to say hi — fill out the form below and I’ll
         get back to you shortly.
       </p>
-      <ScrollContainer
-        className="flex-1 min-h-0 pr-4"
-        backgroundColor="bg-contact"
-      >
+      <ScrollContainer className="flex-1 min-h-0" backgroundColor="bg-contact">
         <Form />
       </ScrollContainer>
     </section>
