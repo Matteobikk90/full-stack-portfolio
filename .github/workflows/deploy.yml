@@ -33,6 +33,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: 📦 Install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@9.13.2 --activate
+
       - name: 🌐 Fetch translations
         working-directory: apps/client
         run: |
