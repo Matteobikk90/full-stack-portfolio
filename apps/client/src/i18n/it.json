@@ -102,7 +102,15 @@
       "four": "i termini di servizio"
     },
     "sending": "Invio in corso...",
-    "send": "Invia messaggio"
+    "send": "Invia messaggio",
+    "success": {
+      "title": "Messaggio inviato con successo!",
+      "description": "Ti risponderò al più presto."
+    },
+    "error": {
+      "title": "Qualcosa è andato storto",
+      "description": "Se il problema persiste, contattami direttamente."
+    }
   },
   "modal": {
     "subtitle": "Seleziona un provider per continuare",
@@ -229,5 +237,9 @@
       "afterLink": "e segui le istruzioni indicate."
     },
     "effectiveDate": "Data di entrata in vigore"
+  },
+  "easter": {
+    "title": "🥚 Hai trovato l’Easter Egg!",
+    "description": "Ben fatto, hai cliccato nel punto giusto 😎"
   }
 }
