@@ -74,10 +74,28 @@
       "description": "Portfolio personale sviluppato con tecnologie full-stack."
     },
     "blendon-barber-shop": {
-      "description": "Sito professionale con prenotazione per una barberia locale."
+      "description": "Sito web professionale con sistema di prenotazione per una barberia locale."
     },
     "ags-illuminazione": {
-      "description": "Sito aziendale per un'azienda di illuminazione."
+      "description": "Sito aziendale per un'impresa di illuminazione."
+    },
+    "world-emissions-clock": {
+      "description": "Uno strumento interattivo che prevede le emissioni settoriali di gas serra in 182 paesi, secondo tre scenari globali: andamento attuale, piena attuazione degli NDC e obiettivo di 1,5°C. Visualizza percorsi futuri per paese e settore, facilitando confronti trasparenti e basati sui dati per orientare l’azione climatica."
+    },
+    "internet-poverty-index": {
+      "description": "Uno strumento basato sui dati che misura la disuguaglianza digitale globale in base a tre fattori: accessibilità, quantità e qualità di internet mobile. Mostra quante persone non possono permettersi 1GB di dati al mese con una velocità di 10 Mbps, evidenziando l’accesso a Internet come bisogno fondamentale."
+    },
+    "africa-youth-clock": {
+      "description": "Realizzato con World Data Lab e Mastercard Foundation, è il primo strumento del suo genere che monitora e prevede le tendenze dell’occupazione giovanile in 54 paesi africani fino al 2030."
+    },
+    "africa-social-protection": {
+      "description": "Uno strumento interattivo che proietta la copertura della protezione sociale in Africa, monitorando i progressi verso l'obiettivo del 40% dell'Unione Africana entro il 2025. Visualizza tre scenari—status quo, pessimista e raggiungimento dell’obiettivo—per supportare decisioni politiche e investimenti."
+    },
+    "water-crisis-clock": {
+      "description": "Una piattaforma interattiva che mostra la scarsità d'acqua e il degrado degli ecosistemi a livello globale, proiettando le tendenze fino al 2050 e mettendo in evidenza i legami tra acqua, clima e biodiversità."
+    },
+    "categories-clock": {
+      "description": "Uno strumento basato sui dati che prevede la domanda globale dei consumatori in oltre 240 categorie—dal cibo alla cosmetica—fino al 2034. Sviluppato per aziende come Coca-Cola e L’Oréal, consente una stima precisa del mercato per demografia e località."
     }
   },
   "contact": {
