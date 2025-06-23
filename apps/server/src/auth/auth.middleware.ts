@@ -8,7 +8,6 @@ export function authenticateToken(
   next: NextFunction
 ): void {
   const token = req.cookies?.accessToken;
-  console.log('Token:', req.cookies);
 
   if (!token) {
     res.status(401).json({ message: 'Missing token' });

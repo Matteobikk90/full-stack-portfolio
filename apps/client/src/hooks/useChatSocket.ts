@@ -36,7 +36,6 @@ export const useChatSocket = () => {
     };
 
     const onDisconnect = (reason: string) => {
-      console.log('🔌 Socket disconnected:', reason);
       if (reason === 'io server disconnect') socket.connect();
     };
 

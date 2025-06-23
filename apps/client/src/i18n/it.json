@@ -23,10 +23,11 @@
   "chat_me": "Chatta con Matteo",
   "like": {
     "popup": "Metti like a questo progetto",
+    "remove_popup": "Rimuovi il like",
     "success": "Grazie per il ❤️",
-    "success_description": "Il tuo apprezzamento è stato registrato.",
+    "success_description": "Lo apprezzo molto!",
     "removed": "Oh nooo, ❤️ rimosso",
-    "removed_description": "Puoi metterlo di nuovo quando vuoi.",
+    "removed_description": "Puoi mettere like di nuovo quando vuoi.",
     "error": "Impossibile inviare il like",
     "error_description": "Riprova più tardi, per favore."
   },

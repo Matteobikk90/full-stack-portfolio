@@ -34,7 +34,6 @@ const handleOAuthCallback =
     done: VerifyCallback
   ) => {
     try {
-      console.log('OAuth profile:', profile);
       const email =
         provider === ProviderEnum.linkedin
           ? (profile as LinkedInOpenIDProfile).email

@@ -89,7 +89,13 @@ export const Actions = ({
         </PopUpInfo>
       )}
       <PopUpInfo
-        hoverText={isAuthenticated ? t('like.popup') : t('login_like')}
+        hoverText={
+          isAuthenticated
+            ? hasLiked
+              ? t('like.remove_popup')
+              : t('like.popup')
+            : t('login_like')
+        }
         className="ml-auto"
         align="left"
       >
@@ -97,7 +103,7 @@ export const Actions = ({
           onClick={handleClick}
           className="flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed !p-0"
           variant="ghost"
-          sound={hasLiked ? 'like' : 'click'}
+          sound={hasLiked ? 'click' : 'like'}
         >
           <HeartIcon
             weight={hasLiked ? 'fill' : 'regular'}

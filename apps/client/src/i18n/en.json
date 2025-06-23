@@ -23,6 +23,7 @@
   "chat_me": "Chat with Matteo",
   "like": {
     "popup": "Like this project",
+    "remove_popup": "Remove like",
     "success": "Thanks for the ❤️",
     "success_description": "Your appreciation has been recorded.",
     "removed": "Ohh nooo, ❤️ removed",

@@ -139,7 +139,7 @@ io.on('connection', async (socket) => {
   });
 
   socket.on('disconnect', () => {
-    console.log('🚪 User disconnected:', userId, socket.id);
+    console.log('🚪 User disconnected');
   });
 });
 
