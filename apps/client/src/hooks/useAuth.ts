@@ -8,8 +8,6 @@ export const useAuth = () => {
       const { data } = await api.get('/auth/me');
       return data;
     },
-    retry: false,
-    refetchOnWindowFocus: false,
   });
 
   return {
