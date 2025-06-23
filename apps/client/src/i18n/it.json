@@ -1,0 +1,245 @@
+{
+  "menu": {
+    "Home": "",
+    "Resume": "Curriculum",
+    "Work": "Progetti",
+    "Contact": "Contatto"
+  },
+  "home": {
+    "title": "Ciao, sono ",
+    "name": "Matteo",
+    "subtitle": "Creo eleganti",
+    "subtitle2": "full-stack",
+    "subtitle3": "web app."
+  },
+  "footer": {
+    "text": "Tutti i diritti riservati."
+  },
+  "lang": "Cambia lingua in",
+  "cv": "Scarica il CV",
+  "hire": "Assumimi",
+  "login_chat": "Accedi alla chat",
+  "chat": "Chatta con me",
+  "chat_me": "Chatta con Matteo",
+  "like": {
+    "popup": "Metti like a questo progetto",
+    "success": "Grazie per il ❤️",
+    "success_description": "Il tuo apprezzamento è stato registrato.",
+    "removed": "Oh nooo, ❤️ rimosso",
+    "removed_description": "Puoi metterlo di nuovo quando vuoi.",
+    "error": "Impossibile inviare il like",
+    "error_description": "Riprova più tardi, per favore."
+  },
+  "login_like": "Accedi per mettere mi piace",
+  "live": "Demo online",
+  "source": "Vedi su GitHub",
+  "theme": "Cambia tema",
+  "resume": {
+    "title": "Perché assumermi?",
+    "subtitle": "Sviluppo applicazioni web performanti e responsive per il web.",
+    "menu": {
+      "experience": "Esperienza",
+      "education": "Formazione",
+      "skills": "Competenze",
+      "about": "Chi sono"
+    },
+    "experience": {
+      "title": "Esperienza professionale",
+      "subtitle": "Dal frontend al database, ho lavorato su tutto lo stack per creare web app moderne e veloci, apprezzate dagli utenti."
+    },
+    "education": {
+      "title": "La mia formazione",
+      "subtitle": "Ho studiato scienze al liceo, poi ho intrapreso lo sviluppo web tramite un bootcamp."
+    },
+    "skills": {
+      "title": "Stack Tecnologico",
+      "subtitle": "Creo interfacce responsive e veloci con React e Tailwind, gestisco la logica backend con Node.js e PostgreSQL e mi occupo di autenticazione, test e deployment con strumenti come JWT, Vitest e AWS."
+    },
+    "about": {
+      "title": "Chi sono",
+      "subtitle": "Sono appassionato di tecnologia fin da bambino; ho sempre amato esplorare, smanettare e riparare ogni tipo di dispositivo.",
+      "Name": "Nome",
+      "Phone": "Telefono",
+      "Email": "Email",
+      "LinkedIn": "LinkedIn",
+      "GitHub": "GitHub",
+      "Experience": "Esperienza",
+      "Nationality": "Nazionalità",
+      "Languages": "Lingue"
+    }
+  },
+  "work": {
+    "title": "Progetti",
+    "full-stack-portfolio": {
+      "description": "Portfolio personale sviluppato con tecnologie full-stack."
+    },
+    "blendon-barber-shop": {
+      "description": "Sito professionale con prenotazione per una barberia locale."
+    },
+    "ags-illuminazione": {
+      "description": "Sito aziendale per un'azienda di illuminazione."
+    }
+  },
+  "contact": {
+    "title": "Contatti",
+    "subtitle": "Sarei felice di sentirti! Che tu abbia una domanda, voglia proporre una collaborazione o semplicemente dire ciao, compila il modulo qui sotto: ti risponderò al più presto.",
+    "name": {
+      "label": "Nome",
+      "placeholder": "Inserisci il tuo nome"
+    },
+    "message": {
+      "label": "Messaggio",
+      "placeholder": "Scrivi il tuo messaggio"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Inserisci la tua email"
+    },
+    "privacy": {
+      "one": "Accetto la",
+      "two": "privacy policy",
+      "three": "e",
+      "four": "i termini di servizio"
+    },
+    "sending": "Invio in corso...",
+    "send": "Invia messaggio",
+    "success": {
+      "title": "Messaggio inviato con successo!",
+      "description": "Ti risponderò al più presto."
+    },
+    "error": {
+      "title": "Qualcosa è andato storto",
+      "description": "Se il problema persiste, contattami direttamente."
+    }
+  },
+  "modal": {
+    "subtitle": "Seleziona un provider per continuare",
+    "privacy": {
+      "one": "Proseguendo, accetti i ",
+      "two": "Termini di Servizio",
+      "three": "l'Informativa sulla Privacy",
+      "four": "Per gli utenti Facebook, consulta",
+      "five": "come rimuovere i tuoi dati",
+      "six": "e"
+    }
+  },
+  "info": {
+    "duties": "Responsabilità principali",
+    "tech": "Tecnologie",
+    "projects": "Progetti",
+    "world-data-lab": {
+      "duties": [
+        "Sviluppato applicazioni web responsive per la visualizzazione di dati e proiezioni fino al 2030",
+        "Creato modelli per la visualizzazione di dati su temi globali come popolazione, fame, povertà e scarsità d’acqua"
+      ]
+    },
+    "hydrogrid": {
+      "duties": [
+        "Progettato e mantenuto due dashboard principali per Hydrogrid:",
+        "Una dashboard forniva ai clienti dati in tempo reale sulla produzione idroelettrica, con parametri modificabili per massimizzare i profitti",
+        "L’altra era un prodotto interno per simulazioni e onboarding di nuovi clienti",
+        "Utilizzato React.js con Hooks per garantire interattività, sicurezza e prestazioni elevate"
+      ]
+    },
+    "eis-world": {
+      "duties": [
+        "Sviluppato siti web da zero utilizzando tecnologie web moderne",
+        "Gestito merge Git come team lead",
+        "Gestito il backend con PHP e MySQL, inclusa la generazione di PDF"
+      ]
+    },
+    "loro-piana": {
+      "duties": [
+        "Contribuito allo sviluppo di una nuova piattaforma e-commerce, concentrandomi su design frontend e interazioni",
+        "Focalizzato su UI/UX e standard di accessibilità WCAG"
+      ]
+    },
+    "videosmart": {
+      "duties": [
+        "Creato landing page HTML5 responsive e template email basati su design forniti",
+        "Garantita compatibilità tra browser e adattabilità su diversi dispositivi"
+      ]
+    }
+  },
+  "delete": {
+    "title": "Guida alla cancellazione dei dati Facebook",
+    "instructions": "Se hai effettuato l’accesso con Facebook e desideri rimuovere i tuoi dati dal nostro sistema, invia un’email a",
+    "emailSubject": "con oggetto",
+    "alternative": "Oppure puoi utilizzare il",
+    "finalNote": "sul nostro sito. Gestiremo la tua richiesta e rimuoveremo i dati associati."
+  },
+  "terms": {
+    "title": "Termini di Servizio",
+    "intro": "Utilizzando il modulo di contatto su questo sito, accetti i seguenti termini e condizioni.",
+    "section1": {
+      "title": "1. Uso del modulo di contatto",
+      "content": "Il modulo e il sistema di login sono riservati a comunicazioni autentiche, richieste di collaborazione o contatti professionali. L’uso per spam, impersonificazione o abusi è vietato e può comportare la revoca dell’accesso."
+    },
+    "section2": {
+      "title": "2. Gestione dei dati",
+      "content1": "Inviando il modulo, acconsenti alla raccolta del tuo nome, email e messaggio per fini di comunicazione. I dati verranno archiviati in modo sicuro e inviati alla mia casella email personale.",
+      "content2": "Per maggiori dettagli, consulta la nostra"
+    },
+    "section3": {
+      "title": "3. Limitazioni d’uso",
+      "content": "Mi riservo il diritto di non rispondere o eliminare messaggi fuori tema, offensivi o non pertinenti allo scopo del sito."
+    },
+    "section4": {
+      "title": "4. Modifiche ai termini",
+      "content": "I termini possono essere aggiornati in qualsiasi momento. La versione più recente sarà disponibile su questa pagina."
+    },
+    "section5": {
+      "title": "5. Accesso tramite Facebook",
+      "content": "Gli utenti che accedono con Facebook possono richiedere la cancellazione dei dati accedendo alla"
+    },
+    "privacyLink": "privacy policy",
+    "deleteLink": "pagina di cancellazione dati",
+    "effective": "Data di entrata in vigore"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "Questa informativa spiega come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali quando visiti questo sito portfolio.",
+    "section1": {
+      "title": "1. Quali dati raccogliamo",
+      "description": "Raccogliamo le seguenti informazioni:",
+      "list": [
+        "Quando invii il modulo di contatto: nome, email e messaggio.",
+        "Quando accedi tramite provider (es. GitHub, Google): email, nome utente e immagine profilo.",
+        "Dati opzionali come messaggi in chat o like ai progetti durante l’interazione."
+      ]
+    },
+    "section2": {
+      "title": "2. Finalità della raccolta",
+      "description": "Usiamo i tuoi dati solo per:",
+      "list": [
+        "Rispondere ai messaggi inviati dal modulo",
+        "Verificare che tu sia un utente autentico (prima di chattare o mettere like)",
+        "Prevenire spam e garantire interazioni corrette"
+      ],
+      "disclaimer": "I dati non vengono condivisi con terzi né utilizzati a scopo pubblicitario."
+    },
+    "section3": {
+      "title": "3. Conservazione dei dati",
+      "description": "I messaggi vengono salvati in un database sicuro e inoltrati alla mia email personale. I dati di login servono solo per autenticarti sul sito. Non usiamo cookie né sistemi di tracciamento."
+    },
+    "section4": {
+      "title": "4. I tuoi diritti",
+      "description": "Puoi in qualsiasi momento richiedere accesso, correzione o cancellazione dei tuoi dati tramite il modulo di contatto."
+    },
+    "section5": {
+      "title": "5. Contatti",
+      "description": "Per qualsiasi dubbio sui tuoi dati o sulla privacy, contattami tramite il modulo."
+    },
+    "section6": {
+      "title": "6. Eliminazione dati",
+      "description": "Se hai effettuato l’accesso con Facebook e desideri eliminare i tuoi dati, visita la nostra",
+      "link": "pagina di cancellazione dati",
+      "afterLink": "e segui le istruzioni indicate."
+    },
+    "effectiveDate": "Data di entrata in vigore"
+  },
+  "easter": {
+    "title": "🥚 Hai trovato l’Easter Egg!",
+    "description": "Ben fatto, hai cliccato nel punto giusto 😎"
+  }
+}

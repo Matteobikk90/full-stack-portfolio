@@ -1,10 +1,12 @@
 import createChatSlice from '@/stores/slices/chatSlice';
 import createEasterEggSlice from '@/stores/slices/easterEggSlice';
+import createLangSlice from '@/stores/slices/langSlice';
 import createModalSlice from '@/stores/slices/modalSlice';
 import createThemeSlice from '@/stores/slices/themeSlice';
 import createWorkSlice from '@/stores/slices/workSlice';
 import type { ChatSliceType } from '@/types/chat.types';
 import type { EasterEggSliceType } from '@/types/easter-egg.types';
+import type { LangSliceType } from '@/types/lang.types';
 import type { ModalSliceType } from '@/types/modal-store.types';
 import type { ThemeSliceType } from '@/types/theme-store.types';
 import type { WorkSliceType } from '@/types/works.types';
@@ -15,7 +17,8 @@ type StoreState = ModalSliceType &
   ThemeSliceType &
   ChatSliceType &
   WorkSliceType &
-  EasterEggSliceType;
+  EasterEggSliceType &
+  LangSliceType;
 
 export const useStore = create<StoreState>()(
   persist(
@@ -25,12 +28,14 @@ export const useStore = create<StoreState>()(
       ...createChatSlice(set, get, store),
       ...createWorkSlice(set, get, store),
       ...createEasterEggSlice(set, get, store),
+      ...createLangSlice(set, get, store),
     })),
     {
       name: 'global-store',
       partialize: (state) => ({
         mode: state.mode,
         discovered: state.discovered,
+        lang: state.lang,
       }),
     }
   )

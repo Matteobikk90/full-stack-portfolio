@@ -33,6 +33,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: 📦 Install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@9.13.2 --activate
+
+      - name: 🌐 Fetch translations
+        working-directory: apps/client
+        run: |
+          echo "VITE_LOCO_API_KEY=${{ secrets.VITE_LOCO_API_KEY }}" > .env
+          pnpm install --frozen-lockfile
+          node -r dotenv/config scripts/fetchTranslation.mjs
+
       - name: 🐳 Build client image
         run: |
           VITE_PROXY_TARGET=$([ "${{ github.ref_name }}" = "main" ] && echo "https://matteosoresini.com" || echo "https://dev.matteosoresini.com")

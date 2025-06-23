@@ -4,6 +4,7 @@ import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
 import { XIcon } from '@phosphor-icons/react';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
@@ -11,12 +12,13 @@ export const Header = () => {
   const { closeChat } = useStore(
     useShallow(({ closeChat }) => ({ closeChat }))
   );
+  const { t } = useTranslation();
 
   return (
     <div className="p-2 border-b flex items-center justify-between">
       <div className="flex items-center gap-2">
         <span className="text-sm font-medium">
-          {isAdmin ? 'Admin Chat' : 'Chat with Matteo'}
+          {isAdmin ? 'Admin Chat' : t('chat_me')}
         </span>
         <span
           className={cn(

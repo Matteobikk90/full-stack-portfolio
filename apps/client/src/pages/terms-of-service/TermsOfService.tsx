@@ -1,68 +1,51 @@
 import { ScrollContainer } from '@/components/scroll-container';
 import { Link } from '@tanstack/react-router';
+import { t } from 'i18next';
 
 export const TermsOfService = () => (
   <main className="flex flex-col gap-6 py-8 px-4">
-    <h1>Terms of Service</h1>
-    <p>
-      By using the contact form on this website, you agree to the following
-      terms and conditions.
-    </p>
+    <h1>{t('terms.title')}</h1>
+    <p>{t('terms.intro')}</p>
+
     <section className="flex flex-col flex-1 min-h-0">
       <ScrollContainer className="flex-1 min-h-0">
         <article className="flex flex-col gap-4">
-          <h2 className="text-xl font-semibold">1. Use of the Contact Form</h2>
+          <h2 className="text-xl font-semibold">{t('terms.section1.title')}</h2>
+          <p>{t('terms.section1.content')}</p>
+
+          <h2 className="text-xl font-semibold">{t('terms.section2.title')}</h2>
+          <p>{t('terms.section2.content1')}</p>
           <p>
-            This form and login system are intended solely for legitimate
-            inquiries, collaboration requests, or professional communication.
-            Use of the form or login feature for spam, impersonation, or
-            disruptive behavior is strictly prohibited and may result in access
-            revocation.
-          </p>
-          <h2 className="text-xl font-semibold">2. Data Handling</h2>
-          <p>
-            By submitting the form, you consent to the collection and processing
-            of your name, email address, and message for the purpose of
-            communication. Your data will be stored securely and also forwarded
-            to my personal email inbox.
-          </p>
-          <p>
-            For more details, see our{' '}
+            {t('terms.section2.content2')}{' '}
             <Link to="/privacy-policy" className="underline text-blue-600">
-              privacy policy
+              {t('terms.privacyLink')}
             </Link>
             .
           </p>
-          <h2 className="text-xl font-semibold">3. Limitation of Use</h2>
+
+          <h2 className="text-xl font-semibold">{t('terms.section3.title')}</h2>
+          <p>{t('terms.section3.content')}</p>
+
+          <h2 className="text-xl font-semibold">{t('terms.section4.title')}</h2>
+          <p>{t('terms.section4.content')}</p>
+
+          <h2 className="text-xl font-semibold">{t('terms.section5.title')}</h2>
           <p>
-            I reserve the right to ignore, delete, or decline to respond to any
-            message that is irrelevant, inappropriate, or outside the scope of
-            this site's purpose.
-          </p>
-          <h2 className="text-xl font-semibold">4. Changes to These Terms</h2>
-          <p>
-            These terms may be updated at any time. The most recent version will
-            always be available on this page.
-          </p>
-          <h2 className="text-xl font-semibold">
-            5. Facebook Login and Data Removal
-          </h2>
-          <p>
-            Users who sign in using Facebook may request removal of their data
-            by visiting the{' '}
+            {t('terms.section5.content')}{' '}
             <Link to="/delete-data" className="underline text-blue-600">
-              Data Deletion page
+              {t('terms.deleteLink')}
             </Link>
             .
           </p>
+
           <p className="text-sm">
-            Effective Date:{' '}
+            {t('terms.effective')}:&nbsp;
             {new Date().toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
             })}
-          </p>{' '}
+          </p>
         </article>
       </ScrollContainer>
     </section>

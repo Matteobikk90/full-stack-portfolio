@@ -10,10 +10,10 @@ import {
 } from '@phosphor-icons/react';
 
 export const resumeItems = [
-  { href: '/resume/experience', label: 'Experience' },
-  { href: '/resume/education', label: 'Education' },
-  { href: '/resume/skills', label: 'Skills' },
-  { href: '/resume/about', label: 'About Me' },
+  { href: '/resume/experience', id: 'experience' },
+  { href: '/resume/education', id: 'education' },
+  { href: '/resume/skills', id: 'skills' },
+  { href: '/resume/about', id: 'about' },
 ];
 
 export const educationItems = [
@@ -85,13 +85,15 @@ export const aboutInfo = [
 
 export const actions = [
   {
+    id: 'GitHub',
     label: 'GitHub',
     icon: <GithubLogoIcon className="size-5" weight="duotone" />,
     href: 'https://github.com/Matteobikk90',
     external: true,
-    align: 'right' as const,
+    align: 'center' as const,
   },
   {
+    id: 'LinkedIn',
     label: 'LinkedIn',
     icon: <LinkedinLogoIcon className="size-5" weight="duotone" />,
     href: 'https://www.linkedin.com/in/matteosoresini90/',
@@ -99,6 +101,7 @@ export const actions = [
     align: 'center' as const,
   },
   {
+    id: 'WhatsApp',
     label: 'WhatsApp',
     icon: <WhatsappLogoIcon className="size-5" weight="duotone" />,
     href: 'https://wa.me/+393470438232',
@@ -106,12 +109,14 @@ export const actions = [
     align: 'center' as const,
   },
   {
+    id: 'cv',
     label: 'Download CV',
     icon: <FilePdfIcon className="size-5" weight="duotone" />,
     onClick: handleDownload,
     align: 'center' as const,
   },
   {
+    id: 'hire',
     label: 'Hire Me',
     icon: <HandshakeIcon className="size-5" weight="duotone" />,
     href: '/contact',

@@ -3,20 +3,26 @@ import { ScrollContainer } from '@/components/scroll-container';
 import { formatDateRange } from '@/utils/formatting';
 import { DotIcon } from '@phosphor-icons/react';
 import { useLoaderData } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 
 export const Info = () => {
+  const { t } = useTranslation();
   const { data } = useLoaderData({
     from: '/resume/experience/$id',
   });
 
   if (!data) return null;
 
+  const duties = t(`info.${data.slug}.duties`, {
+    returnObjects: true,
+  }) as string[];
+
   return (
     <section className="flex flex-col animate-fade-up w-full flex-1 min-h-0">
       <Breadcrumbs />
-      <article className="flex flex-col bg-gray p-4 sm:p-6 rounded-md flex-1 min-h-0 max-h-max border border-secondary">
+      <article className="flex flex-col flex-1 min-h-0">
         <ScrollContainer className="flex-1 min-h-0">
-          <div className="space-y-4">
+          <div className="space-y-4 bg-gray border border-secondary p-4 sm:p-6 rounded-md">
             <div className="flex items-start justify-between text-primary mb-0 text-xs md:text-sm lg:text-base">
               <span>{formatDateRange(data.startDate, data.endDate!)}</span>
               <div className="flex flex-col">
@@ -32,9 +38,9 @@ export const Info = () => {
               </h3>
             </div>
             <div>
-              <h4 className="font-semibold mb-2">Key Duties</h4>
+              <h4 className="font-semibold mb-2">{t('info.duties')}</h4>
               <ul className="space-y-2">
-                {data.duties.map((duty, index) => (
+                {duties.map((duty: string, index: number) => (
                   <li key={index} className="flex gap-2 items-center">
                     <DotIcon
                       className="text-secondary size-5"
@@ -45,7 +51,7 @@ export const Info = () => {
                 ))}
               </ul>
             </div>
-            <h4 className="font-semibold mb-2">Technologies</h4>
+            <h4 className="font-semibold mb-2">{t('info.tech')}</h4>
             <ul className="flex flex-wrap gap-2 text-xs">
               {data.technologies.map((tech, index) => (
                 <li
@@ -59,7 +65,7 @@ export const Info = () => {
             </ul>
             {data.projects?.length > 0 && (
               <>
-                <h4 className="font-semibold mb-2">Projects</h4>
+                <h4 className="font-semibold mb-2">{t('info.projects')}</h4>
                 <ul className="text-secondary flex flex-wrap gap-4">
                   {data.projects.map(({ id, title, url }) => (
                     <li key={id}>

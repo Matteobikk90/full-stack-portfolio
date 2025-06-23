@@ -1,20 +1,13 @@
 import { cn } from '@/lib/utils';
+import type { ScrollContainerTypes } from '@/types/scroll-container.types';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import type { ReactNode } from 'react';
-
-interface ScrollContainerProps {
-  children: ReactNode;
-  className?: string;
-  type?: 'auto' | 'always';
-  backgroundColor?: string;
-}
 
 export const ScrollContainer = ({
   children,
   className,
   type = 'auto',
   backgroundColor = 'bg-secondary',
-}: ScrollContainerProps) => (
+}: ScrollContainerTypes) => (
   <ScrollArea.Root
     type={type}
     className={cn('relative w-full flex', className)}
@@ -27,9 +20,7 @@ export const ScrollContainer = ({
       orientation="vertical"
       className="w-2 !-right-2 !relative"
     >
-      <ScrollArea.Thumb
-        className={cn(backgroundColor, 'flex-1 rounded-full')}
-      />
+      <ScrollArea.Thumb className={cn(backgroundColor, 'rounded-full')} />
     </ScrollArea.Scrollbar>
   </ScrollArea.Root>
 );
