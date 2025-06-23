@@ -20,6 +20,10 @@
   "hire": "Assumimi",
   "login_chat": "Accedi alla chat",
   "chat": "Chatta con me",
+  "like": "Metti mi piace a questo progetto",
+  "login_like": "Accedi per mettere mi piace",
+  "live": "Demo online",
+  "source": "Vedi su GitHub",
   "theme": "Cambia tema",
   "resume": {
     "title": "Perché assumermi?",

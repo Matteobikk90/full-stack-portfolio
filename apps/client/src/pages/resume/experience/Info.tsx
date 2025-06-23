@@ -13,9 +13,9 @@ export const Info = () => {
 
   if (!data) return null;
 
-  const duties = Object.values(
-    t(`info.${data.slug}.duties`, { returnObjects: true })
-  ) as string[];
+  const duties = t(`info.${data.slug}.duties`, {
+    returnObjects: true,
+  }) as string[];
 
   return (
     <section className="flex flex-col animate-fade-up w-full flex-1 min-h-0">
