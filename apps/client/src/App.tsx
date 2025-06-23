@@ -2,11 +2,14 @@ import CustomModal from '@/components/custom-modal';
 import ChatBox from '@/features/chat-box';
 import Footer from '@/features/footer';
 import Header from '@/features/header';
+import { useTheme } from '@/hooks/useTheme';
 import { Toaster } from '@/lib/ui/sonner';
 import { Outlet } from '@tanstack/react-router';
 import AnimatedCursor from 'react-animated-cursor';
 
 export default function App() {
+  useTheme();
+
   return (
     <>
       <Header />

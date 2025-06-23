@@ -4,14 +4,14 @@ import type { StateCreator } from 'zustand';
 
 const createThemeSlice: StateCreator<ThemeSliceType> = (set) => ({
   mode: 'light' as 'light' | 'dark',
-  background: getCSSVariable('--foreground'),
+  background: '',
   toggleTheme: () =>
     set((state) => ({
       mode: state.mode === 'light' ? 'dark' : 'light',
     })),
   updateBackground: () =>
     set(() => ({
-      background: getCSSVariable('--background'),
+      background: getCSSVariable('--foreground'),
     })),
 });
 
