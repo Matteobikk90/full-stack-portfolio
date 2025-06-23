@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "fetch:translations": "node scripts/fetchTranslation.mjs",
-    "prebuild": "pnpm fetch:translations",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx",
