@@ -90,7 +90,7 @@ export const actions = [
     icon: <GithubLogoIcon className="size-5" weight="duotone" />,
     href: 'https://github.com/Matteobikk90',
     external: true,
-    align: 'right' as const,
+    align: 'center' as const,
   },
   {
     id: 'LinkedIn',

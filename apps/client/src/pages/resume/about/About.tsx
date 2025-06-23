@@ -21,7 +21,7 @@ export const About = () => {
               className="flex justify-between items-center sm:justify-start gap-2"
             >
               <Label className="text-foreground/50">
-                {t(`resume.about.${label}`)}
+                {t(`resume.about.${label}`)}:
               </Label>
               <h3 className="font-medium mb-0.5 break-all">{value}</h3>
             </div>
