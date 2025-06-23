@@ -7,16 +7,17 @@ const api = axios.create({
 });
 
 let isRefreshing = false;
-let requestQueue: ((tokenRefreshed: boolean) => void)[] = [];
+let subscribers: (() => void)[] = [];
 
-const processQueue = (success: boolean) => {
-  requestQueue.forEach((callback) => callback(success));
-  requestQueue = [];
+const onRefreshed = () => {
+  subscribers.forEach((callback) => callback());
+  subscribers = [];
 };
 
-const handleLogout = () => {
-  window.location.href = '/';
-};
+api.interceptors.request.use(
+  (config) => config,
+  (error) => Promise.reject(error)
+);
 
 api.interceptors.response.use(
   (response) => response,
@@ -24,34 +25,24 @@ api.interceptors.response.use(
     const originalRequest = error.config;
     const status = error.response?.status;
 
-    if (!originalRequest._retryCount) originalRequest._retryCount = 0;
-
-    if (status === 401 && originalRequest._retryCount < 1) {
-      originalRequest._retryCount++;
+    if (status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
 
       if (!isRefreshing) {
         isRefreshing = true;
 
         try {
           await api.post('/auth/refresh');
-          processQueue(true);
-        } catch (refreshError) {
-          processQueue(false);
-          handleLogout();
-          return Promise.reject(refreshError);
-        } finally {
           isRefreshing = false;
+          onRefreshed();
+        } catch (refreshError) {
+          isRefreshing = false;
+          return Promise.reject(refreshError);
         }
       }
 
-      return new Promise((resolve, reject) => {
-        requestQueue.push((success) => {
-          if (success) {
-            resolve(api(originalRequest));
-          } else {
-            reject(error);
-          }
-        });
+      return new Promise((resolve) => {
+        subscribers.push(() => resolve(api(originalRequest)));
       });
     }
 

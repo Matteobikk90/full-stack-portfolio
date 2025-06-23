@@ -14,9 +14,11 @@ import {
   XIcon,
 } from '@phosphor-icons/react';
 import { Link, useLocation } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 export const CustomModal = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const pathname = encodeURIComponent(location.pathname);
   const { isOpen, toggleModal } = useStore(
@@ -30,7 +32,7 @@ export const CustomModal = () => {
     <Dialog open={isOpen} onOpenChange={toggleModal}>
       <DialogContent className="flex flex-col gap-6 max-w-lg w-[calc(100%_-_2rem)] rounded-lg border shadow-elevation bg-background p-6 [&>button]:hidden">
         <DialogTitle className="text-lg font-semibold">
-          Login to chat
+          {t('login_chat')}
           <Button
             variant="outline"
             size="icon"
@@ -43,7 +45,7 @@ export const CustomModal = () => {
         </DialogTitle>
 
         <DialogDescription className="text-sm">
-          Choose a provider to continue
+          {t('modal.subtitle')}
         </DialogDescription>
 
         <div className="grid grid-cols-2 gap-4 mb-0">
@@ -79,34 +81,33 @@ export const CustomModal = () => {
           </a>
         </div>
         <p className="text-xs leading-relaxed">
-          By continuing, you agree to the{' '}
+          {t('modal.privacy.one')}{' '}
           <Link
             onClick={toggleModal}
             to="/terms-of-service"
             className="underline hover:text-primary"
           >
-            Terms of Service
+            {t('modal.privacy.two')}
           </Link>{' '}
-          and{' '}
+          {t('modal.privacy.six')}{' '}
           <Link
             onClick={toggleModal}
             to="/privacy-policy"
             className="underline hover:text-primary"
           >
-            Privacy Policy
+            {t('modal.privacy.three')}
           </Link>
           .
           <br />
           <span className="text-muted-foreground">
-            For Facebook users, see{' '}
+            {t('modal.privacy.four')}{' '}
             <Link
               onClick={toggleModal}
               to="/delete-data"
               className="underline hover:text-primary"
             >
-              how to delete your data
+              {t('modal.privacy.five')}
             </Link>
-            .
           </span>
         </p>
       </DialogContent>

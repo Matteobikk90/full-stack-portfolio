@@ -11,9 +11,11 @@ import { useStore } from '@/stores';
 import { imageMap } from '@/utils/slider';
 import { useLoaderData } from '@tanstack/react-router';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 export const Work = () => {
+  const { t } = useTranslation();
   const { data } = useLoaderData({ from: '/work' });
   const { activeSlide } = useStore(
     useShallow((state) => ({
@@ -24,7 +26,7 @@ export const Work = () => {
 
   return (
     <main className="flex flex-col gap-4 md:gap-12">
-      <h1 className="text-work">Work</h1>
+      <h1 className="text-work">{t('work.title')}</h1>
       <ScrollContainer className="flex-1 min-h-0" backgroundColor="bg-work">
         <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-center lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12 flex-1 min-h-0">
           <AnimatePresence mode="wait">
@@ -40,7 +42,7 @@ export const Work = () => {
                 {activeWork.number}
               </h2>
               <h3 className="font-medium">{activeWork.title}</h3>
-              <p>{activeWork.description}</p>
+              <p>{t(`work.${activeWork.slug}.description`)}</p>
               <ul key={activeSlide} className="flex flex-wrap gap-2 text-xs">
                 {activeWork.technologies.map((tech, index) => (
                   <li

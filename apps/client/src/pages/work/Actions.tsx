@@ -13,6 +13,7 @@ import {
   HeartIcon,
 } from '@phosphor-icons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { useShallow } from 'zustand/shallow';
 
@@ -22,6 +23,7 @@ export const Actions = ({
   activeWork: Pick<WorkTypes, 'id' | 'demoUrl' | 'repoUrl'>;
 }) => {
   const { isAuthenticated } = useAuth();
+  const { t } = useTranslation();
   const { toggleModal } = useStore(
     useShallow(({ toggleModal }) => ({
       toggleModal,
@@ -39,18 +41,18 @@ export const Actions = ({
       queryClient.setQueryData<LikeType>(['likeStatus', projectId], serverData);
 
       toast.success(
-        serverData.hasLiked ? 'Thanks for the ❤️' : 'Ohh nooo, ❤️ removed',
+        serverData.hasLiked ? t('like.success') : t('like.removed'),
         {
           description: serverData.hasLiked
-            ? 'Your appreciation has been recorded.'
-            : 'You can like it again any time.',
+            ? t('like.success_description')
+            : t('like.removed_description'),
           duration: toastDuration,
         }
       );
     },
     onError: (err) => {
-      toast.error('Couldn’t send like', {
-        description: err?.message || 'Please try again later.',
+      toast.error(t('like.error'), {
+        description: err?.message || t('like.error_description'),
         duration: toastDuration,
       });
     },
@@ -65,27 +67,29 @@ export const Actions = ({
   return (
     <div className="flex gap-2 w-full">
       {activeWork.demoUrl && (
-        <a
-          href={activeWork.demoUrl}
-          className="bg-gray hover:text-work max-w-max p-3 flex rounded-full"
-        >
-          <PopUpInfo hoverText="Live demo" align="right">
+        <PopUpInfo hoverText={t('live')} align="right">
+          <a
+            target="_blank"
+            href={activeWork.demoUrl}
+            className="bg-gray hover:text-work max-w-max p-3 flex rounded-full"
+          >
             <ArrowUpRightIcon className="size-5" weight="duotone" />
-          </PopUpInfo>
-        </a>
+          </a>
+        </PopUpInfo>
       )}
       {activeWork.repoUrl && (
-        <a
-          href={activeWork.repoUrl}
-          className="bg-gray hover:text-work max-w-max p-3 flex rounded-full"
-        >
-          <PopUpInfo hoverText="View on GitHub" align="center">
+        <PopUpInfo hoverText={t('source')} align="center">
+          <a
+            target="_blank"
+            href={activeWork.repoUrl}
+            className="bg-gray hover:text-work max-w-max p-3 flex rounded-full"
+          >
             <GithubLogoIcon className="size-5" weight="duotone" />
-          </PopUpInfo>
-        </a>
+          </a>
+        </PopUpInfo>
       )}
       <PopUpInfo
-        hoverText={isAuthenticated ? 'Like this project' : 'Login to like'}
+        hoverText={isAuthenticated ? t('like.popup') : t('login_like')}
         className="ml-auto"
         align="left"
       >

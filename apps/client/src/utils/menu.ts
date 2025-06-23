@@ -6,7 +6,7 @@ import {
 } from '@phosphor-icons/react';
 
 export const menuLinks = [
-  { path: '/', label: '', icon: Logo },
+  { path: '/', label: 'Home', icon: Logo },
   { path: '/resume', label: 'Resume', icon: BriefcaseIcon },
   { path: '/work', label: 'Work', icon: StackOverflowLogoIcon },
   { path: '/contact', label: 'Contact', icon: PenIcon },

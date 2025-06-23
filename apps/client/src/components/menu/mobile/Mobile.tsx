@@ -8,8 +8,10 @@ import { hoverStyles, menuLinks } from '@/utils/menu';
 import { DotsThreeOutlineVerticalIcon, XIcon } from '@phosphor-icons/react';
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const MenuMobile = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -50,7 +52,7 @@ export const MenuMobile = () => {
               />
               <span className="relative flex items-center gap-2">
                 <Icon className="size-5" weight="duotone" />
-                {label}
+                {t(`menu.${label}`)}
               </span>
             </Link>
           ))}
@@ -61,7 +63,7 @@ export const MenuMobile = () => {
               { onClick, isLink, href, className, label, icon, align },
               index
             ) => (
-              <PopUpInfo key={label} hoverText={label} align={align}>
+              <PopUpInfo key={label} hoverText={t(label)} align={align}>
                 <Button
                   variant="outline"
                   size="icon"

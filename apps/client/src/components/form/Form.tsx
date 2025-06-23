@@ -13,11 +13,13 @@ import { asyncDebounceMs, getValidationClass } from '@/utils/form';
 import { SpinnerIcon } from '@phosphor-icons/react';
 import { useForm } from '@tanstack/react-form';
 import { Link } from '@tanstack/react-router';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 export const ContactForm = () => {
+  const { t } = useTranslation();
   const { play } = useUISound();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -32,22 +34,20 @@ export const ContactForm = () => {
       const { name, email, message } = value;
 
       try {
-        const res = await axios.post('/api/contact', {
+        await axios.post('/api/contact', {
           name,
           email,
           message,
         });
 
         form.reset();
-        toast.success(res.data.message, {
-          description: 'I’ll get back to you soon.',
+        toast.success(t('contact.success.title'), {
+          description: t('contact.success.description'),
           duration: toastDuration,
         });
-      } catch (error: unknown) {
-        const axiosError = error as AxiosError<{ message?: string }>;
-
-        toast.error(axiosError.response?.data?.message, {
-          description: 'If the issue persists, contact me directly.',
+      } catch {
+        toast.error(t('contact.error.title'), {
+          description: t('contact.error.description'),
           duration: toastDuration,
         });
       } finally {
@@ -73,10 +73,10 @@ export const ContactForm = () => {
         >
           {({ state, handleChange }) => (
             <div className="flex flex-col gap-1">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">{t('contact.name.label')}</Label>
               <Input
                 id="name"
-                placeholder="Your name"
+                placeholder={t('contact.name.placeholder')}
                 value={state.value}
                 onChange={(e) => handleChange(e.target.value)}
                 className={cn(
@@ -100,10 +100,10 @@ export const ContactForm = () => {
         >
           {({ state, handleChange }) => (
             <div className="flex flex-col gap-1">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('contact.email.label')}</Label>
               <Input
                 id="email"
-                placeholder="Your email"
+                placeholder={t('contact.email.placeholder')}
                 type="email"
                 value={state.value}
                 onChange={(e) => handleChange(e.target.value)}
@@ -130,10 +130,10 @@ export const ContactForm = () => {
       >
         {({ state, handleChange }) => (
           <div className="flex flex-col gap-1">
-            <Label htmlFor="message">Message</Label>
+            <Label htmlFor="message">{t('contact.message.label')}</Label>
             <Textarea
               id="message"
-              placeholder="Your message"
+              placeholder={t('contact.message.placeholder')}
               value={state.value}
               onChange={(e) => handleChange(e.target.value)}
               className={cn(
@@ -161,16 +161,16 @@ export const ContactForm = () => {
               />
 
               <span className="text-sm leading-relaxed flex flex-wrap">
-                I agree to the&nbsp;
+                {t('contact.privacy.one')}&nbsp;
                 <Link to="/privacy-policy" className="underline text-blue-500">
-                  privacy policy
+                  {t('contact.privacy.two')}
                 </Link>
-                &nbsp;and&nbsp;
+                &nbsp;{t('contact.privacy.three')}&nbsp;
                 <Link
                   to="/terms-of-service"
                   className="underline text-blue-500"
                 >
-                  terms of service
+                  {t('contact.privacy.four')}
                 </Link>
               </span>
             </label>
@@ -202,10 +202,10 @@ export const ContactForm = () => {
                   <span className="animate-spin">
                     <SpinnerIcon className="size-5" weight="duotone" />
                   </span>
-                  Sending...
+                  {t('contact.sending')}
                 </span>
               ) : (
-                'Send message'
+                t('contact.send')
               )}
             </Button>
           );

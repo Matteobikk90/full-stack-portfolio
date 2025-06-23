@@ -5,10 +5,12 @@ import { Button } from '@/lib/ui/button';
 import { useStore } from '@/stores';
 import { ChatsIcon, MoonIcon, SunIcon } from '@phosphor-icons/react';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
   const { isAuthenticated } = useAuth();
+  const { t } = useTranslation();
   const { mode, toggleTheme, updateBackground, toggleModal, openChat } =
     useStore(
       useShallow((state) => ({
@@ -43,13 +45,13 @@ export const Header = () => {
       <MenuDesktop />
       <MenuMobile />
       <div className="flex items-center gap-4 z-12">
-        <PopUpInfo hoverText="Switch theme" position="bottom">
+        <PopUpInfo hoverText={t('theme')} position="bottom">
           <Button
             variant="outline"
             data-testid="theme-toggle"
             size="icon"
             onClick={handleToggle}
-            aria-label="Switch theme"
+            aria-label={t('theme')}
             sound="theme"
           >
             {mode === 'dark' ? (
@@ -60,7 +62,7 @@ export const Header = () => {
           </Button>
         </PopUpInfo>
         <PopUpInfo
-          hoverText={isAuthenticated ? 'Open chat' : 'Log in to chat'}
+          hoverText={isAuthenticated ? t('chat') : t('login_chat')}
           position="bottom"
           align="left"
         >
@@ -69,7 +71,7 @@ export const Header = () => {
             size="icon"
             onClick={handleClick}
             className="animate-pulse-slow"
-            aria-label={isAuthenticated ? 'Open chat' : 'Login to chat'}
+            aria-label={isAuthenticated ? t('chat') : t('login_chat')}
           >
             <ChatsIcon className="size-5" weight="duotone" />
           </Button>
