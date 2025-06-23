@@ -48,7 +48,7 @@ router.get('/protected', authenticateToken, (_req, res) => {
   res.json({ message: 'Protected content' });
 });
 
-router.get('/me', authenticateToken, getMe);
+router.get('/me', authenticateToken, authRateLimiter, getMe);
 
 router.post('/refresh', authRateLimiter, handleRefreshToken);
 
