@@ -3,19 +3,18 @@ import { Button } from '@/lib/ui/button';
 import { formatDateRange } from '@/utils/formatting';
 import { DotIcon } from '@phosphor-icons/react';
 import { Link, useLoaderData } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 
 export const Experience = () => {
+  const { t } = useTranslation();
   const { data } = useLoaderData({
     from: '/resume/experience',
   });
 
   return (
     <section className="flex flex-col gap-4 md:gap-6 animate-fade-up w-full flex-1 min-h-0">
-      <h2>Professional Experience</h2>
-      <p>
-        From UI to database, I’ve worked across the stack to build fast, modern
-        web apps that users enjoy.
-      </p>
+      <h2>{t('resume.experience.title')}</h2>
+      <p>{t('resume.experience.subtitle')}</p>
       <ScrollContainer className="flex-1 min-h-0">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           {data.map(

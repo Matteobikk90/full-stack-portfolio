@@ -6,6 +6,7 @@ import { useUISound } from '@/hooks/useUISound';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
 import { toastDuration } from '@/utils/constants';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { useShallow } from 'zustand/shallow';
 
@@ -17,6 +18,7 @@ export const Home = () => {
     }))
   );
   const { play } = useUISound();
+  const { t } = useTranslation();
 
   const handleClick = () => {
     if (discovered) return;
@@ -36,14 +38,15 @@ export const Home = () => {
       <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-center lg:grid-cols-2">
         <article className="space-y-4 sm:space-y-6">
           <h1 className="p-0 text-left">
-            Hello, I’m{' '}
+            {t('home.title')}
             <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-transparent [background-clip:text] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
               Matteo
             </span>{' '}
             👋
           </h1>
           <h2>
-            I build elegant <strong>full-stack</strong> apps.
+            {t('home.subtitle')} <strong>{t('home.subtitle2')}</strong>{' '}
+            {t('home.subtitle3')}
           </h2>
           <div className="text-lg sm:text-xxl">
             <TypedText

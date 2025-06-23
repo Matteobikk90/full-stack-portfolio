@@ -4,9 +4,11 @@ import { useStore } from '@/stores';
 import { currentYear } from '@/utils/constants';
 import { actions } from '@/utils/lists';
 import { Link } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 export const Footer = () => {
+  const { t } = useTranslation();
   const { lang, toggleLang } = useStore(
     useShallow((state) => ({
       lang: state.lang,
@@ -18,7 +20,7 @@ export const Footer = () => {
     <footer className="w-full container mx-auto px-4 py-2 md:py-8 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4 z-11">
       <div className="flex flex-wrap items-center gap-3 sm:gap-4 justify-center md:justify-start">
         <PopUpInfo
-          hoverText={`Swap language to ${lang === 'en' ? 'ENG' : 'ITA'}`}
+          hoverText={`${t('lang')} ${lang === 'en' ? 'ITA' : 'ENG'}`}
           align="right"
         >
           <Button
@@ -30,15 +32,15 @@ export const Footer = () => {
             <span
               role="img"
               className="text-xl"
-              aria-label={lang === 'en' ? 'Italian flag' : 'UK flag'}
+              aria-label={lang === 'en' ? 'UK flag' : 'Italian flag'}
             >
-              {lang === 'en' ? '🇮🇹' : '🇬🇧'}
+              {lang === 'en' ? '🇬🇧' : '🇮🇹'}
             </span>
           </Button>
         </PopUpInfo>
         {actions.map(
-          ({ align, label, className, onClick, href, isLink, icon }) => (
-            <PopUpInfo key={label} hoverText={label} align={align}>
+          ({ align, label, className, onClick, href, isLink, icon, id }) => (
+            <PopUpInfo key={label} hoverText={t(id)} align={align}>
               <Button
                 variant="outline"
                 size="icon"
@@ -70,7 +72,7 @@ export const Footer = () => {
       </div>
 
       <p className="text-xs text-center md:text-sm md:text-right">
-        © {currentYear} Matteo Soresini. All rights reserved.
+        © {currentYear} Matteo Soresini. {t('footer.text')}
       </p>
     </footer>
   );

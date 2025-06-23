@@ -1,1 +1,219 @@
-{}
+{
+  "menu": {
+    "Home": "",
+    "Resume": "Resume",
+    "Work": "Work",
+    "Contact": "Contact"
+  },
+  "home": {
+    "title": "Hello, I'm ",
+    "name": "Matteo",
+    "subtitle": "I build elegant",
+    "subtitle2": "full-stack",
+    "subtitle3": "apps."
+  },
+  "footer": {
+    "text": "All rights reserved."
+  },
+  "lang": "Swap language to",
+  "cv": "Download CV",
+  "hire": "Hire me",
+  "login_chat": "Login to chat",
+  "chat": "Chat with me",
+  "theme": "Switch theme",
+  "resume": {
+    "title": "Why hire me?",
+    "subtitle": "Building performant and responsive web applications for the modern web.",
+    "menu": {
+      "experience": "Experience",
+      "education": "Education",
+      "skills": "Skills",
+      "about": "About Me"
+    },
+    "experience": {
+      "title": "Professional Experience",
+      "subtitle": "From UI to database, I’ve worked across the stack to build fast, modern web apps that users enjoy."
+    },
+    "education": {
+      "title": "My education",
+      "subtitle": "Studied science in high school, then jumped into web dev through a bootcamp."
+    },
+    "skills": {
+      "title": "Tech Stack",
+      "subtitle": "I build fast, responsive UIs with React and Tailwind, handle backend logic with Node.js and PostgreSQL, and cover auth, testing, and deployment with tools like JWT, Vitest, and AWS."
+    },
+    "about": {
+      "title": "About Me",
+      "subtitle": "I’ve been passionate about technology since childhood; I always loved exploring, hacking and repairing all kinds of devices.",
+      "Name": "Name",
+      "Phone": "Phone",
+      "Email": "Email",
+      "LinkedIn": "LinkedIn",
+      "GitHub": "GitHub",
+      "Experience": "Experience",
+      "Nationality": "Nationality",
+      "Languages": "Languages"
+    }
+  },
+  "work": {
+    "title": "Work",
+    "full-stack-portfolio": {
+      "description": "Personal full-stack portfolio project."
+    },
+    "blendon-barber-shop": {
+      "description": "Business website for a local barbershop."
+    },
+    "ags-illuminazione": {
+      "description": "Corporate website for lighting company."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "I’d love to hear from you! Whether you have a question, want to collaborate, or just want to say hi — fill out the form below and I’ll get back to you shortly.",
+    "name": {
+      "label": "Name",
+      "placeholder": "Your name"
+    },
+    "message": {
+      "label": "Message",
+      "placeholder": "Your message"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Your email"
+    },
+    "privacy": {
+      "one": "I agree to the",
+      "two": "privacy policy",
+      "three": "and",
+      "four": "terms of service"
+    },
+    "sending": "Sending...",
+    "send": "Send message"
+  },
+  "modal": {
+    "subtitle": "Choose a provider to continue",
+    "privacy": {
+      "one": "By continuing, you agree to the ",
+      "two": "Terms of Service",
+      "three": "Privacy Policy",
+      "four": "For Facebook users, see",
+      "five": "how to delete your data",
+      "six": "and"
+    }
+  },
+  "info": {
+    "duties": "Key Duties",
+    "tech": "Technologies",
+    "projects": "Projects",
+    "world-data-lab": {
+      "duties": [
+        "Developed a custom e-commerce frontend",
+        "Focused on UI/UX and WCAG accessibility standards"
+      ]
+    },
+    "hydrogrid": {
+      "duties": [
+        "Designed and maintained real-time electricity dashboards",
+        "Used React.js with Hooks for fast, secure, and interactive UIs",
+        "Developed internal dashboard for simulation and onboarding"
+      ]
+    },
+    "eis-world": {
+      "duties": [
+        "Developed websites using modern web technologies",
+        "Managed Git merges as team lead",
+        "Handled backend with PHP and MySQL, including PDF generation"
+      ]
+    },
+    "loro-piana": {
+      "duties": [
+        "Developed a custom e-commerce frontend",
+        "Focused on UI/UX and WCAG accessibility standards"
+      ]
+    },
+    "videosmart": {
+      "duties": [
+        "Created responsive HTML5 landing pages and email templates based on specified designs",
+        "Ensured cross-browser compatibility and responsiveness on various devices"
+      ]
+    }
+  },
+  "delete": {
+    "title": "Facebook Data Deletion Instructions",
+    "instructions": "If you signed in using Facebook and would like to request deletion of your data from our system, please send an email to",
+    "emailSubject": "with the subject",
+    "alternative": "Alternatively, you can use the",
+    "finalNote": "on our website. We will process your request and remove all associated data from our records."
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "intro": "By using the contact form on this website, you agree to the following terms and conditions.",
+    "section1": {
+      "title": "1. Use of the Contact Form",
+      "content": "This form and login system are intended solely for legitimate inquiries, collaboration requests, or professional communication. Use of the form or login feature for spam, impersonation, or disruptive behavior is strictly prohibited and may result in access revocation."
+    },
+    "section2": {
+      "title": "2. Data Handling",
+      "content1": "By submitting the form, you consent to the collection and processing of your name, email address, and message for the purpose of communication. Your data will be stored securely and also forwarded to my personal email inbox.",
+      "content2": "For more details, see our"
+    },
+    "section3": {
+      "title": "3. Limitation of Use",
+      "content": "I reserve the right to ignore, delete, or decline to respond to any message that is irrelevant, inappropriate, or outside the scope of this site's purpose."
+    },
+    "section4": {
+      "title": "4. Changes to These Terms",
+      "content": "These terms may be updated at any time. The most recent version will always be available on this page."
+    },
+    "section5": {
+      "title": "5. Facebook Login and Data Removal",
+      "content": "Users who sign in using Facebook may request removal of their data by visiting the"
+    },
+    "privacyLink": "privacy policy",
+    "deleteLink": "Data Deletion page",
+    "effective": "Effective Date"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "This Privacy Policy explains how your personal data is collected, used, and protected when you interact with this portfolio website.",
+    "section1": {
+      "title": "1. What We Collect",
+      "description": "We collect the following types of information:",
+      "list": [
+        "When submitting the contact form: your name, email, and message.",
+        "When logging in via a provider (e.g., GitHub, Google): your email, display name, and profile picture.",
+        "Optional chat or project like data you submit while using the chat or liking a project."
+      ]
+    },
+    "section2": {
+      "title": "2. Why We Collect It",
+      "description": "Your data is collected solely to:",
+      "list": [
+        "Respond to your contact messages",
+        "Authenticate you as a real user (e.g., before you can like or chat)",
+        "Prevent spam and ensure respectful interactions"
+      ],
+      "disclaimer": "Your data is not shared with third parties and is not used for marketing purposes."
+    },
+    "section3": {
+      "title": "3. How Your Data Is Stored",
+      "description": "Contact messages are securely stored in a private database and also sent to my personal email address. Login data is used only to create or access your user identity on this site. No cookies or analytics are used to track your activity."
+    },
+    "section4": {
+      "title": "4. Your Rights",
+      "description": "You may request access to, correction of, or deletion of your data at any time by using the contact form."
+    },
+    "section5": {
+      "title": "5. Contact",
+      "description": "For any questions about this Privacy Policy or your data, feel free to reach out using the contact form."
+    },
+    "section6": {
+      "title": "6. Data Deletion",
+      "description": "If you signed in with Facebook and would like your account data deleted from this website, please visit our",
+      "link": "Data Deletion page",
+      "afterLink": "and follow the instructions."
+    },
+    "effectiveDate": "Effective Date"
+  }
+}
