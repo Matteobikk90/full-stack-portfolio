@@ -107,37 +107,37 @@
     "tech": "Tecnologie",
     "projects": "Progetti",
     "world-data-lab": {
-      "duties": {
-        "0": "Sviluppato applicazioni web responsive per la visualizzazione di dati e proiezioni fino al 2030",
-        "1": "Creato modelli per la visualizzazione di dati su temi globali come popolazione, fame, povertà e scarsità d’acqua"
-      }
+      "duties": [
+        "Sviluppato applicazioni web responsive per la visualizzazione di dati e proiezioni fino al 2030",
+        "Creato modelli per la visualizzazione di dati su temi globali come popolazione, fame, povertà e scarsità d’acqua"
+      ]
     },
     "hydrogrid": {
-      "duties": {
-        "0": "Progettato e mantenuto due dashboard principali per Hydrogrid:",
-        "1": "Una dashboard forniva ai clienti dati in tempo reale sulla produzione idroelettrica, con parametri modificabili per massimizzare i profitti",
-        "2": "L’altra era un prodotto interno per simulazioni e onboarding di nuovi clienti",
-        "3": "Utilizzato React.js con Hooks per garantire interattività, sicurezza e prestazioni elevate"
-      }
+      "duties": [
+        "Progettato e mantenuto due dashboard principali per Hydrogrid:",
+        "Una dashboard forniva ai clienti dati in tempo reale sulla produzione idroelettrica, con parametri modificabili per massimizzare i profitti",
+        "L’altra era un prodotto interno per simulazioni e onboarding di nuovi clienti",
+        "Utilizzato React.js con Hooks per garantire interattività, sicurezza e prestazioni elevate"
+      ]
     },
     "eis-world": {
-      "duties": {
-        "0": "Sviluppato siti web da zero utilizzando tecnologie web moderne",
-        "1": "Gestito merge Git come team lead",
-        "2": "Gestito il backend con PHP e MySQL, inclusa la generazione di PDF"
-      }
+      "duties": [
+        "Sviluppato siti web da zero utilizzando tecnologie web moderne",
+        "Gestito merge Git come team lead",
+        "Gestito il backend con PHP e MySQL, inclusa la generazione di PDF"
+      ]
     },
     "loro-piana": {
-      "duties": {
-        "0": "Contribuito allo sviluppo di una nuova piattaforma e-commerce, concentrandomi su design frontend e interazioni",
-        "1": "Focalizzato su UI/UX e standard di accessibilità WCAG"
-      }
+      "duties": [
+        "Contribuito allo sviluppo di una nuova piattaforma e-commerce, concentrandomi su design frontend e interazioni",
+        "Focalizzato su UI/UX e standard di accessibilità WCAG"
+      ]
     },
     "videosmart": {
-      "duties": {
-        "0": "Creato landing page HTML5 responsive e template email basati su design forniti",
-        "1": "Garantita compatibilità tra browser e adattabilità su diversi dispositivi"
-      }
+      "duties": [
+        "Creato landing page HTML5 responsive e template email basati su design forniti",
+        "Garantita compatibilità tra browser e adattabilità su diversi dispositivi"
+      ]
     }
   },
   "delete": {

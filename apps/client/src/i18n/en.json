@@ -107,37 +107,37 @@
     "tech": "Technologies",
     "projects": "Projects",
     "world-data-lab": {
-      "duties": {
-        "0": "Built responsive web applications delivering real-time data and projections out to 2030",
-        "1": "Developed models for data visualization on various global issues such as population, hunger, poverty, and water shortage"
-      }
+      "duties": [
+        "Built responsive web applications delivering real-time data and projections out to 2030",
+        "Developed models for data visualization on various global issues such as population, hunger, poverty, and water shortage"
+      ]
     },
     "hydrogrid": {
-      "duties": {
-        "0": "Designed and continually maintained Hydrogrid’s two dashboards:",
-        "1": "One dashboard provided clients with real-time electricity production data of their hydropower assets in a graphical format. Clients could edit parameters to maximize their profit",
-        "2": "The other dashboard was an internal company product for staging new customers or simulation plants",
-        "3": "Used the latest version of React.js with Hooks to ensure the dashboards were interactive, secure, and fast"
-      }
+      "duties": [
+        "Designed and continually maintained Hydrogrid’s two dashboards:",
+        "One dashboard provided clients with real-time electricity production data of their hydropower assets in a graphical format. Clients could edit parameters to maximize their profit",
+        "The other dashboard was an internal company product for staging new customers or simulation plants",
+        "Used the latest version of React.js with Hooks to ensure the dashboards were interactive, secure, and fast"
+      ]
     },
     "eis-world": {
-      "duties": {
-        "0": "Developed websites from scratch using modern web technologies",
-        "1": "Managed Git merges as team lead",
-        "2": "Handled backend with PHP and MySQL, including PDF generation"
-      }
+      "duties": [
+        "Developed websites from scratch using modern web technologies",
+        "Managed Git merges as team lead",
+        "Handled backend with PHP and MySQL, including PDF generation"
+      ]
     },
     "loro-piana": {
-      "duties": {
-        "0": "Contributed to building a new e-commerce platform from scratch, focusing on front-end design changes and interactions",
-        "1": "Focused on UI/UX and WCAG accessibility standards"
-      }
+      "duties": [
+        "Contributed to building a new e-commerce platform from scratch, focusing on front-end design changes and interactions",
+        "Focused on UI/UX and WCAG accessibility standards"
+      ]
     },
     "videosmart": {
-      "duties": {
-        "0": "Created responsive HTML5 landing pages and email templates based on specified designs",
-        "1": "Ensured cross-browser compatibility and responsiveness on various devices"
-      }
+      "duties": [
+        "Created responsive HTML5 landing pages and email templates based on specified designs",
+        "Ensured cross-browser compatibility and responsiveness on various devices"
+      ]
     }
   },
   "delete": {
@@ -181,20 +181,20 @@
     "section1": {
       "title": "1. What We Collect",
       "description": "We collect the following types of information:",
-      "list": {
-        "0": "When submitting the contact form: your name, email, and message.",
-        "1": "When logging in via a provider (e.g., GitHub, Google): your email, display name, and profile picture.",
-        "2": "Optional chat or project like data you submit while using the chat or liking a project."
-      }
+      "list": [
+        "When submitting the contact form: your name, email, and message.",
+        "When logging in via a provider (e.g., GitHub, Google): your email, display name, and profile picture.",
+        "Optional chat or project like data you submit while using the chat or liking a project."
+      ]
     },
     "section2": {
       "title": "2. Why We Collect It",
       "description": "Your data is collected solely to:",
-      "list": {
-        "0": "Respond to your contact messages",
-        "1": "Authenticate you as a real user (e.g., before you can like or chat)",
-        "2": "Prevent spam and ensure respectful interactions"
-      },
+      "list": [
+        "Respond to your contact messages",
+        "Authenticate you as a real user (e.g., before you can like or chat)",
+        "Prevent spam and ensure respectful interactions"
+      ],
       "disclaimer": "Your data is not shared with third parties and is not used for marketing purposes."
     },
     "section3": {

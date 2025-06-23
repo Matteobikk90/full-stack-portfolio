@@ -4,7 +4,7 @@ import 'dotenv/config';
 const languages = ['en', 'it'];
 
 for (const lng of languages) {
-  const LOCO_URL = `https://localise.biz/api/export/locale/${lng}.json?format=nested-json&key=${process.env.VITE_LOCO_API_KEY}`;
+  const LOCO_URL = `https://localise.biz/api/export/locale/${lng}.json?key=${process.env.VITE_LOCO_API_KEY}`;
   const TARGET_PATH = `./src/i18n/${lng}.json`;
 
   try {
