@@ -1,4 +1,3 @@
-import '@/config/i18n';
 import '@/index.css';
 import i18n from '@/config/i18n';
 import { queryClient } from '@/config/queryClient';
