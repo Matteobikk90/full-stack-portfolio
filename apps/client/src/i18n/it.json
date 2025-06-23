@@ -20,7 +20,16 @@
   "hire": "Assumimi",
   "login_chat": "Accedi alla chat",
   "chat": "Chatta con me",
-  "like": "Metti mi piace a questo progetto",
+  "chat_me": "Chatta con Matteo",
+  "like": {
+    "popup": "Metti like a questo progetto",
+    "success": "Grazie per il ❤️",
+    "success_description": "Il tuo apprezzamento è stato registrato.",
+    "removed": "Oh nooo, ❤️ rimosso",
+    "removed_description": "Puoi metterlo di nuovo quando vuoi.",
+    "error": "Impossibile inviare il like",
+    "error_description": "Riprova più tardi, per favore."
+  },
   "login_like": "Accedi per mettere mi piace",
   "live": "Demo online",
   "source": "Vedi su GitHub",

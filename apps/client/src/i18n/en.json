@@ -20,7 +20,16 @@
   "hire": "Hire me",
   "login_chat": "Login to chat",
   "chat": "Chat with me",
-  "like": "Like this project",
+  "chat_me": "Chat with Matteo",
+  "like": {
+    "popup": "Like this project",
+    "success": "Thanks for the ❤️",
+    "success_description": "Your appreciation has been recorded.",
+    "removed": "Ohh nooo, ❤️ removed",
+    "removed_description": "You can like it again any time.",
+    "error": "Couldn’t send like",
+    "error_description": "Please try again later."
+  },
   "login_like": "Login to like",
   "live": "Live demo",
   "source": "View on GitHub",
@@ -93,7 +102,15 @@
       "four": "terms of service"
     },
     "sending": "Sending...",
-    "send": "Send message"
+    "send": "Send message",
+    "success": {
+      "title": "Message sent successfully!",
+      "description": "I’ll get back to you soon."
+    },
+    "error": {
+      "title": "Something went wrong",
+      "description": "If the issue persists, contact me directly."
+    }
   },
   "modal": {
     "subtitle": "Choose a provider to continue",
@@ -220,5 +237,9 @@
       "afterLink": "and follow the instructions."
     },
     "effectiveDate": "Effective Date"
+  },
+  "easter": {
+    "title": "🥚 You found the Easter Egg!",
+    "description": "Well done, you clicked the right spot 😎"
   }
 }

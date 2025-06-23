@@ -13,7 +13,7 @@ import { asyncDebounceMs, getValidationClass } from '@/utils/form';
 import { SpinnerIcon } from '@phosphor-icons/react';
 import { useForm } from '@tanstack/react-form';
 import { Link } from '@tanstack/react-router';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -34,22 +34,20 @@ export const ContactForm = () => {
       const { name, email, message } = value;
 
       try {
-        const res = await axios.post('/api/contact', {
+        await axios.post('/api/contact', {
           name,
           email,
           message,
         });
 
         form.reset();
-        toast.success(res.data.message, {
-          description: 'I’ll get back to you soon.',
+        toast.success(t('contact.success.title'), {
+          description: t('contact.success.description'),
           duration: toastDuration,
         });
-      } catch (error: unknown) {
-        const axiosError = error as AxiosError<{ message?: string }>;
-
-        toast.error(axiosError.response?.data?.message, {
-          description: 'If the issue persists, contact me directly.',
+      } catch {
+        toast.error(t('contact.error.title'), {
+          description: t('contact.error.description'),
           duration: toastDuration,
         });
       } finally {

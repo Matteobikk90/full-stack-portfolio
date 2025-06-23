@@ -41,18 +41,18 @@ export const Actions = ({
       queryClient.setQueryData<LikeType>(['likeStatus', projectId], serverData);
 
       toast.success(
-        serverData.hasLiked ? 'Thanks for the ❤️' : 'Ohh nooo, ❤️ removed',
+        serverData.hasLiked ? t('like.success') : t('like.removed'),
         {
           description: serverData.hasLiked
-            ? 'Your appreciation has been recorded.'
-            : 'You can like it again any time.',
+            ? t('like.success_description')
+            : t('like.removed_description'),
           duration: toastDuration,
         }
       );
     },
     onError: (err) => {
-      toast.error('Couldn’t send like', {
-        description: err?.message || 'Please try again later.',
+      toast.error(t('like.error'), {
+        description: err?.message || t('like.error_description'),
         duration: toastDuration,
       });
     },
@@ -89,7 +89,7 @@ export const Actions = ({
         </PopUpInfo>
       )}
       <PopUpInfo
-        hoverText={isAuthenticated ? t('like') : t('login_like')}
+        hoverText={isAuthenticated ? t('like.popup') : t('login_like')}
         className="ml-auto"
         align="left"
       >

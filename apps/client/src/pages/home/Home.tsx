@@ -26,8 +26,8 @@ export const Home = () => {
     play('crash');
     setDiscovered();
 
-    toast.success('🥚 You found the Easter Egg!', {
-      description: 'Well done, you clicked the right spot 😎',
+    toast.success(t('easter.title'), {
+      description: t('easter.description'),
       duration: toastDuration,
     });
   };
