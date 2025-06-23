@@ -78,6 +78,24 @@
     },
     "ags-illuminazione": {
       "description": "Corporate website for a lighting company."
+    },
+    "world-emissions-clock": {
+      "description": "An interactive tool forecasting sectoral greenhouse gas emissions across 182 countries under three global scenarios: business as usual, full NDC implementation, and a 1.5°C goal. It visualizes future pathways by country and sector, enabling transparent, data-driven comparisons to inform climate action."
+    },
+    "internet-poverty-index": {
+      "description": "A data-driven tool measuring global digital inequality based on affordability, quantity, and quality of mobile internet. It highlights how many people cannot afford 1GB of data per month at 10 Mbps speed, raising awareness about internet access as a basic need."
+    },
+    "africa-youth-clock": {
+      "description": "Built with the World Data Lab and Mastercard Foundation, is a first-of-its-kind tool that monitors and forecasts youth employment trends across 54 African countries through 2030."
+    },
+    "africa-social-protection": {
+      "description": "An interactive tool that projects social protection coverage across Africa, tracking progress toward the AU’s 40% target by 2025. It visualizes three scenarios—status quo, pessimistic, and goal-achieving—to guide policy and investment decisions."
+    },
+    "water-crisis-clock": {
+      "description": "An interactive platform showing global water scarcity and ecosystem decline, projecting trends to 2050 and highlighting links between water, climate, and biodiversity."
+    },
+    "categories-clock": {
+      "description": "A data-driven tool that forecasts global consumer demand across 240+ categories—from food to beauty—up to 2034. Built for companies like Coca-Cola and L’Oréal, it enables precise market sizing by demographic and location."
     }
   },
   "contact": {

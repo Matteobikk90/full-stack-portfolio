@@ -2,6 +2,7 @@ import PopUpInfo from '@/components/pop-up-info';
 import { Logo } from '@/features/header/Logo';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
+import { useStore } from '@/stores';
 import { currentYear } from '@/utils/constants';
 import { actions } from '@/utils/lists';
 import { hoverStyles, menuLinks } from '@/utils/menu';
@@ -9,16 +10,23 @@ import { DotsThreeOutlineVerticalIcon, XIcon } from '@phosphor-icons/react';
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
 
 export const MenuMobile = () => {
   const { t } = useTranslation();
+  const { lang, toggleLang } = useStore(
+    useShallow((state) => ({
+      lang: state.lang,
+      toggleLang: state.toggleLang,
+    }))
+  );
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <nav
         className={cn(
-          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100dvh_-_4.4rem)] p-4 pt-0 flex flex-col justify-between gap-6',
+          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100dvh_-_4.4rem)] px-4 py-2 pt-0 flex flex-col justify-between container mx-auto',
           isOpen
             ? 'opacity-100 bg-background z-12'
             : 'opacity-0 bg-transparent delay-[800ms] z-10'
@@ -57,49 +65,72 @@ export const MenuMobile = () => {
             </Link>
           ))}
         </div>
-        <div className="flex flex-wrap items-center gap-4 justify-center md:justify-start">
-          {actions.map(
-            (
-              { onClick, isLink, href, className, label, icon, align },
-              index
-            ) => (
-              <PopUpInfo key={label} hoverText={t(label)} align={align}>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  asChild={!onClick && !isLink}
-                  onClick={onClick}
-                  className={cn(
-                    'transition-transform duration-300 ease-in-out -translate-x-[100vw]',
-                    isOpen && 'translate-x-0',
-                    className
-                  )}
-                  aria-label={label}
-                  style={{
-                    transitionDelay: isOpen
-                      ? `${index * 200}ms`
-                      : `${(menuLinks.length - 1 - index) * 200}ms`,
-                  }}
+        <div className="flex flex-col items-center gap-2 md:gap-4">
+          <div className="flex items-center gap-3 sm:gap-4 justify-center md:justify-start">
+            <PopUpInfo
+              hoverText={`${t('lang')} ${lang === 'en' ? 'ITA' : 'ENG'}`}
+              align="right"
+            >
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => toggleLang(lang === 'en' ? 'it' : 'en')}
+                aria-label="Toggle language"
+              >
+                <span
+                  role="img"
+                  className="text-xl"
+                  aria-label={lang === 'en' ? 'UK flag' : 'Italian flag'}
                 >
-                  {isLink ? (
-                    <Link to={href}>{icon}</Link>
-                  ) : href ? (
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                    >
-                      {icon}
-                    </a>
-                  ) : (
-                    icon
-                  )}
-                </Button>
-              </PopUpInfo>
-            )
-          )}
-          <p className="text-sm text-center md:text-right">
+                  {lang === 'en' ? '🇬🇧' : '🇮🇹'}
+                </span>
+              </Button>
+            </PopUpInfo>
+            {actions.map(
+              (
+                { align, label, className, onClick, href, isLink, icon, id },
+                index
+              ) => (
+                <PopUpInfo key={label} hoverText={t(id)} align={align}>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    asChild={!onClick && !isLink}
+                    onClick={onClick}
+                    className={cn(
+                      'transition-transform duration-300 ease-in-out -translate-x-[100vw]',
+                      isOpen && 'translate-x-0',
+                      className
+                    )}
+                    aria-label={label}
+                    style={{
+                      transitionDelay: isOpen
+                        ? `${index * 200}ms`
+                        : `${(menuLinks.length - 1 - index) * 200}ms`,
+                    }}
+                  >
+                    {isLink ? (
+                      <Link to={href} aria-label={label}>
+                        {icon}
+                      </Link>
+                    ) : href ? (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={label}
+                      >
+                        {icon}
+                      </a>
+                    ) : (
+                      icon
+                    )}
+                  </Button>
+                </PopUpInfo>
+              )
+            )}
+          </div>
+          <p className="text-xs text-center md:text-right">
             © {currentYear} Matteo Soresini. All rights reserved.
           </p>
         </div>
