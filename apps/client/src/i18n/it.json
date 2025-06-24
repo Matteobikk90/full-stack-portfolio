@@ -260,5 +260,23 @@
   "easter": {
     "title": "🥚 Hai trovato l’Easter Egg!",
     "description": "Ben fatto, hai cliccato nel punto giusto 😎"
-  }
+  },
+  "not_found": {
+    "title": "Perso nello spazio 🧭",
+    "description": "Questa pagina non esiste. Forse hai preso la strada sbagliata?",
+    "suggestion": "Non preoccuparti — ti riportiamo subito sulla retta via.",
+    "contact": "Se pensi che si tratti di un errore, per favore ",
+    "contact_me": "contattami",
+    "button": "Torna alla homepage"
+  },
+  "error": {
+    "title": "Oh no, qualcosa è andato storto",
+    "working": "I nostri sviluppatori",
+    "emoji": "🧑‍💻🧑‍💻🧑‍💻",
+    "message": "stanno lavorando duramente per risolvere il problema.",
+    "suggestion": "Se il problema persiste, ",
+    "contact_me": "contattami",
+    "button": "Vai alla homepage"
+  },
+  "loading": "Caricamento..."
 }
