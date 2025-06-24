@@ -3,7 +3,7 @@
     "Home": "",
     "Resume": "Curriculum",
     "Work": "Progetti",
-    "Contact": "Contatto"
+    "Contact": "Contatti"
   },
   "home": {
     "title": "Ciao, sono ",
@@ -65,8 +65,11 @@
       "LinkedIn": "LinkedIn",
       "GitHub": "GitHub",
       "Experience": "Esperienza",
+      "Experience_value": "{{years}}+ anni",
       "Nationality": "Nazionalità",
-      "Languages": "Lingue"
+      "Languages": "Lingue",
+      "Nationality_value": "Italiana",
+      "Languages_value": "Inglese, Spagnolo"
     }
   },
   "work": {

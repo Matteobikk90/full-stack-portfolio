@@ -17,7 +17,7 @@ export const Footer = () => {
   );
 
   return (
-    <footer className="w-full container mx-auto px-4 py-2 md:py-8 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4 z-11">
+    <footer className="w-full container mx-auto px-4 py-2 md:py-6 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4 z-11">
       <div className="flex flex-wrap items-center gap-3 sm:gap-4 justify-center md:justify-start">
         <PopUpInfo
           hoverText={`${t('lang')} ${lang === 'en' ? 'ITA' : 'ENG'}`}

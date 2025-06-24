@@ -26,6 +26,7 @@ export default function App() {
         innerStyle={{
           backgroundColor: 'var(--foreground)',
         }}
+        trailingSpeed={7}
       />
     </>
   );

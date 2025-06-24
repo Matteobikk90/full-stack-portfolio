@@ -66,8 +66,11 @@
       "LinkedIn": "LinkedIn",
       "GitHub": "GitHub",
       "Experience": "Experience",
+      "Experience_value": "{{years}}+ years",
       "Nationality": "Nationality",
-      "Languages": "Languages"
+      "Languages": "Languages",
+      "Nationality_value": "Italian",
+      "Languages_value": "English, Spanish"
     }
   },
   "work": {

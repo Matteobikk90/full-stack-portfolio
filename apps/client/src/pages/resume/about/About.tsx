@@ -15,7 +15,7 @@ export const About = () => {
       <p>{t('resume.about.subtitle')}</p>
       <ScrollContainer className="flex-1 min-h-0">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 space-y-3">
-          {aboutInfo.map(({ label, value }) => (
+          {aboutInfo.map(({ label, value, i18nKey, args }) => (
             <div
               key={label}
               className="flex justify-between items-center sm:justify-start gap-2"
@@ -23,7 +23,9 @@ export const About = () => {
               <Label className="text-foreground/50">
                 {t(`resume.about.${label}`)}:
               </Label>
-              <h3 className="font-medium mb-0.5 break-all">{value}</h3>
+              <h3 className="font-medium mb-0.5 break-all">
+                {i18nKey ? t(`resume.about.${i18nKey}_value`, args) : value}
+              </h3>
             </div>
           ))}
         </div>

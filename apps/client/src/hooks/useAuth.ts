@@ -1,4 +1,5 @@
 import api from '@/config/axios';
+import { adminEmail } from '@/utils/constants';
 import { useQuery } from '@tanstack/react-query';
 
 export const useAuth = () => {
@@ -9,11 +10,13 @@ export const useAuth = () => {
       return data;
     },
   });
+  const isAdmin = data?.email === adminEmail;
 
   return {
     user: data,
     isAuthenticated: !!data,
     isLoading: isLoading,
     isError: isError,
+    isAdmin,
   };
 };
