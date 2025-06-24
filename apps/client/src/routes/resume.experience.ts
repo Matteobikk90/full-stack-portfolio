@@ -3,7 +3,7 @@ import { fetchExperiences } from '@/queries/experiences';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/resume/experience')({
-  async loader() {
+  loader: async () => {
     const data = await queryClient.ensureQueryData({
       queryKey: ['getExperiences'],
       queryFn: fetchExperiences,

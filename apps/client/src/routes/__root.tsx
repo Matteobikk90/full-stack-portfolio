@@ -1,12 +1,22 @@
 import App from '@/App';
-import { Pending } from '@/components/pending/Pending';
-import { ErrorFallbackUI } from '@/features/error-boundary/ErrorFallbackUI';
+import PageShell from '@/components/page-shell';
+import { Pending } from '@/components/pending';
+import { ErrorFallbackUI } from '@/features/error-boundary';
 import NotFound from '@/pages/not-found';
 import { createRootRoute } from '@tanstack/react-router';
 
 export const Route = createRootRoute({
-  component: App,
-  errorComponent: ErrorFallbackUI,
+  loader: () => void 0,
+  component: () => (
+    <PageShell>
+      <App />
+    </PageShell>
+  ),
+  errorComponent: () => (
+    <PageShell>
+      <ErrorFallbackUI />
+    </PageShell>
+  ),
   notFoundComponent: NotFound,
   pendingComponent: Pending,
 });

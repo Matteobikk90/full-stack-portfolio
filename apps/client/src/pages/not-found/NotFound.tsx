@@ -1,11 +1,13 @@
 import avatar from '@/assets/images/avatar-404.png';
 import ParticlesBackground from '@/components/particles';
+import { useTheme } from '@/hooks/useTheme';
 import { Button } from '@/lib/ui/button';
 import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 export const NotFound = () => {
   const { t } = useTranslation();
+  useTheme();
 
   return (
     <main>
