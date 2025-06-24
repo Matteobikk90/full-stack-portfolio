@@ -1,11 +1,11 @@
 import 'dotenv/config';
+import { transporter } from '@/config/mailer';
 import { initSentry } from '@/config/sentry';
 import { httpServer, io } from '@/config/socket';
 import { adminEmail, JWT_SECRET, PORT } from '@/utils/constants';
 import prisma from '@/utils/prisma';
 import type { ChatMessage } from '@prisma/client';
 import jwt from 'jsonwebtoken';
-import { transporter } from './config/mailer';
 
 initSentry();
 
@@ -97,6 +97,7 @@ io.on('connection', async (socket) => {
       user.email === adminEmail ? socket.data.chatPartnerId : admin.id;
 
     if (!receiverId) {
+      console.warn(`❌ admin socket ${socket.id} has no partner set`);
       return console.warn('❌ No chat partner selected for admin');
     }
 

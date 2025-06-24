@@ -8,7 +8,7 @@ export const Tabs = () => {
   const { user } = useAuth();
 
   return (
-    <div className="border-b overflow-x-auto p-2 whitespace-nowrap">
+    <div className="border-b overflow-x-auto p-2 whitespace-nowrap flex gap-2">
       {Object.entries(threads).map(([uid, msgs]) => {
         const other =
           msgs[0]?.sender?.id === user.id ? msgs[0]?.receiver : msgs[0]?.sender;
@@ -17,10 +17,7 @@ export const Tabs = () => {
           <Button
             key={uid}
             onClick={() => selectUser(uid)}
-            className={cn(
-              'px-3 py-1 rounded-md text-sm mr-2',
-              activeUserId === uid ? 'bg-primary text-white' : 'bg-muted'
-            )}
+            className={cn(activeUserId === uid && 'bg-primary text-white')}
           >
             {other?.name || 'User'}
           </Button>

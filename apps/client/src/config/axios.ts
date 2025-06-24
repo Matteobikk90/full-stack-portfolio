@@ -7,12 +7,6 @@ const api = axios.create({
 });
 
 let isRefreshing = false;
-let subscribers: (() => void)[] = [];
-
-const onRefreshed = () => {
-  subscribers.forEach((callback) => callback());
-  subscribers = [];
-};
 
 api.interceptors.request.use(
   (config) => config,
@@ -20,33 +14,25 @@ api.interceptors.request.use(
 );
 
 api.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-    const status = error.response?.status;
-
-    if (status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+  (r) => r,
+  async (err) => {
+    const original = err.config;
+    if (err.response?.status === 401 && !original._retry) {
+      original._retry = true;
 
       if (!isRefreshing) {
         isRefreshing = true;
-
         try {
           await api.post('/auth/refresh');
+        } finally {
           isRefreshing = false;
-          onRefreshed();
-        } catch (refreshError) {
-          isRefreshing = false;
-          return Promise.reject(refreshError);
         }
       }
 
-      return new Promise((resolve) => {
-        subscribers.push(() => resolve(api(originalRequest)));
-      });
+      return api(original);
     }
 
-    return Promise.reject(error);
+    return Promise.reject(err);
   }
 );
 
