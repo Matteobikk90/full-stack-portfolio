@@ -22,7 +22,6 @@ import { Route as WorkImport } from './routes/work';
 
 const TermsOfServiceLazyImport = createFileRoute('/terms-of-service')();
 const PrivacyPolicyLazyImport = createFileRoute('/privacy-policy')();
-const ErrorLazyImport = createFileRoute('/error')();
 const DeleteDataLazyImport = createFileRoute('/delete-data')();
 const ContactLazyImport = createFileRoute('/contact')();
 const IndexLazyImport = createFileRoute('/')();
@@ -50,12 +49,6 @@ const PrivacyPolicyLazyRoute = PrivacyPolicyLazyImport.update({
 } as any).lazy(() =>
   import('./routes/privacy-policy.lazy').then((d) => d.Route)
 );
-
-const ErrorLazyRoute = ErrorLazyImport.update({
-  id: '/error',
-  path: '/error',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/error.lazy').then((d) => d.Route));
 
 const DeleteDataLazyRoute = DeleteDataLazyImport.update({
   id: '/delete-data',
@@ -176,13 +169,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeleteDataLazyImport;
       parentRoute: typeof rootRoute;
     };
-    '/error': {
-      id: '/error';
-      path: '/error';
-      fullPath: '/error';
-      preLoaderRoute: typeof ErrorLazyImport;
-      parentRoute: typeof rootRoute;
-    };
     '/privacy-policy': {
       id: '/privacy-policy';
       path: '/privacy-policy';
@@ -289,7 +275,6 @@ export interface FileRoutesByFullPath {
   '/work': typeof WorkRoute;
   '/contact': typeof ContactLazyRoute;
   '/delete-data': typeof DeleteDataLazyRoute;
-  '/error': typeof ErrorLazyRoute;
   '/privacy-policy': typeof PrivacyPolicyLazyRoute;
   '/terms-of-service': typeof TermsOfServiceLazyRoute;
   '/resume/experience': typeof ResumeExperienceRouteWithChildren;
@@ -306,7 +291,6 @@ export interface FileRoutesByTo {
   '/work': typeof WorkRoute;
   '/contact': typeof ContactLazyRoute;
   '/delete-data': typeof DeleteDataLazyRoute;
-  '/error': typeof ErrorLazyRoute;
   '/privacy-policy': typeof PrivacyPolicyLazyRoute;
   '/terms-of-service': typeof TermsOfServiceLazyRoute;
   '/resume/about': typeof ResumeAboutLazyRoute;
@@ -324,7 +308,6 @@ export interface FileRoutesById {
   '/work': typeof WorkRoute;
   '/contact': typeof ContactLazyRoute;
   '/delete-data': typeof DeleteDataLazyRoute;
-  '/error': typeof ErrorLazyRoute;
   '/privacy-policy': typeof PrivacyPolicyLazyRoute;
   '/terms-of-service': typeof TermsOfServiceLazyRoute;
   '/resume/experience': typeof ResumeExperienceRouteWithChildren;
@@ -344,7 +327,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/contact'
     | '/delete-data'
-    | '/error'
     | '/privacy-policy'
     | '/terms-of-service'
     | '/resume/experience'
@@ -360,7 +342,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/contact'
     | '/delete-data'
-    | '/error'
     | '/privacy-policy'
     | '/terms-of-service'
     | '/resume/about'
@@ -376,7 +357,6 @@ export interface FileRouteTypes {
     | '/work'
     | '/contact'
     | '/delete-data'
-    | '/error'
     | '/privacy-policy'
     | '/terms-of-service'
     | '/resume/experience'
@@ -395,7 +375,6 @@ export interface RootRouteChildren {
   WorkRoute: typeof WorkRoute;
   ContactLazyRoute: typeof ContactLazyRoute;
   DeleteDataLazyRoute: typeof DeleteDataLazyRoute;
-  ErrorLazyRoute: typeof ErrorLazyRoute;
   PrivacyPolicyLazyRoute: typeof PrivacyPolicyLazyRoute;
   TermsOfServiceLazyRoute: typeof TermsOfServiceLazyRoute;
 }
@@ -406,7 +385,6 @@ const rootRouteChildren: RootRouteChildren = {
   WorkRoute: WorkRoute,
   ContactLazyRoute: ContactLazyRoute,
   DeleteDataLazyRoute: DeleteDataLazyRoute,
-  ErrorLazyRoute: ErrorLazyRoute,
   PrivacyPolicyLazyRoute: PrivacyPolicyLazyRoute,
   TermsOfServiceLazyRoute: TermsOfServiceLazyRoute,
 };
@@ -426,7 +404,6 @@ export const routeTree = rootRoute
         "/work",
         "/contact",
         "/delete-data",
-        "/error",
         "/privacy-policy",
         "/terms-of-service"
       ]
@@ -452,9 +429,6 @@ export const routeTree = rootRoute
     },
     "/delete-data": {
       "filePath": "delete-data.lazy.tsx"
-    },
-    "/error": {
-      "filePath": "error.lazy.ts"
     },
     "/privacy-policy": {
       "filePath": "privacy-policy.lazy.tsx"

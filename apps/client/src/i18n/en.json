@@ -260,5 +260,23 @@
   "easter": {
     "title": "🥚 You found the Easter Egg!",
     "description": "Well done, you clicked the right spot 😎"
-  }
+  },
+  "not_found": {
+    "title": "Lost in space 🧭",
+    "description": "This page doesn’t exist. Maybe you took a wrong turn?",
+    "suggestion": "Don’t worry — we’ll get you back on track.",
+    "contact": "If you believe this is a mistake, please ",
+    "contact_me": "contact me",
+    "button": "Back to homepage"
+  },
+  "error": {
+    "title": "Oh no, something went wrong",
+    "working": "Our developers",
+    "emoji": "🧑‍💻🧑‍💻🧑‍💻",
+    "message": "are working hard to solve this problem.",
+    "suggestion": "If the issue continues, please ",
+    "contact_me": "get in touch",
+    "button": "Go to homepage"
+  },
+  "loading": "Loading..."
 }
