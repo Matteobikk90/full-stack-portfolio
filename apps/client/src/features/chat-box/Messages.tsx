@@ -7,10 +7,12 @@ import { cn } from '@/lib/utils';
 import { adminEmail } from '@/utils/constants';
 import { PaperPlaneRightIcon } from '@phosphor-icons/react';
 import { useLayoutEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const Messages = () => {
   const { activeUserId, socket, messages, sendMessage } = useChatSocket();
   const { user } = useAuth();
+  const { t } = useTranslation();
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState('');
@@ -106,7 +108,7 @@ export const Messages = () => {
             (user.email === adminEmail && !activeUserId)
           }
         >
-          <PopUpInfo hoverText="Send message" align="left">
+          <PopUpInfo hoverText={t('contact.send')} align="left">
             <PaperPlaneRightIcon className="size-5" weight="duotone" />
           </PopUpInfo>
         </Button>

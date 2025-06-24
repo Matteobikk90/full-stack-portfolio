@@ -200,6 +200,7 @@ async function main() {
           'Zustand',
           'Node.js',
           'Express.js',
+          'i18n',
           'TailwindCSS',
           'TypeScript',
           'Prisma',

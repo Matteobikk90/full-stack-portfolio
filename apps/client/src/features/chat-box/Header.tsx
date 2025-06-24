@@ -34,7 +34,7 @@ export const Header = () => {
         />
       </div>
       <Button variant="outline" size="icon" onClick={closeChat}>
-        <PopUpInfo hoverText="Close chat" align="left">
+        <PopUpInfo hoverText={t('close_chat')} align="left">
           <XIcon className="size-5" weight="duotone" />
         </PopUpInfo>
       </Button>

@@ -16,7 +16,7 @@ export const ChatBox = () => {
   if (!isChatOpen || !isAuthenticated) return null;
 
   return (
-    <aside className="fixed bottom-16 right-0 z-11 w-96">
+    <aside className="fixed bottom-22 right-0 z-11 w-96">
       <div className="rounded-l-md shadow-xl bg-background border">
         <Header />
         {isAdmin && <Tabs />}

@@ -7,12 +7,7 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get(
-  '/:projectId',
-  authenticateToken,
-  validateParams(likeSchema),
-  asyncHandler(getLikes)
-);
+router.get('/:projectId', validateParams(likeSchema), asyncHandler(getLikes));
 
 router.post(
   '/',

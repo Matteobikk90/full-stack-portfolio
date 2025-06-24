@@ -36,11 +36,7 @@ export const ErrorFallbackUI = () => {
           </Link>
         </article>
         <article>
-          <img
-            src={avatar}
-            alt="Avatar"
-            className="w-[200px] h-[300px] sm:h-[375px] sm:w-[250px]"
-          />
+          <img src={avatar} alt="Avatar" className="w-[200px] sm:w-[250px]" />
         </article>
       </section>
     </main>

@@ -13,7 +13,7 @@ export const NotFound = () => {
     <main>
       <ParticlesBackground />
       <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-center lg:grid-cols-2 z-10 lg:justify-items-center items-center justify-center h-full relative">
-        <article className="space-y-4 sm:space-y-6 text-center">
+        <article className="space-y-4 sm:space-y-6">
           <h1>{t('not_found.title')}</h1>
           <p>
             {t('not_found.description')}
@@ -34,7 +34,7 @@ export const NotFound = () => {
           <img
             src={avatar}
             alt="Lost Avatar"
-            className="w-[200px] h-[300px] sm:h-[375px] sm:w-[250px]"
+            className="w-[200px] sm:w-[250px]"
           />
         </article>
       </section>
