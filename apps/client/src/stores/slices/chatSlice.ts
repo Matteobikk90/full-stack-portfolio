@@ -7,13 +7,16 @@ const createModalSlice: StateCreator<ChatSliceType> = (set) => ({
   closeChat: () => set({ isChatOpen: false }),
   chatMode: 'admin',
   setChatMode: (mode) => set({ chatMode: mode }),
-  aiMessages: [],
-  setAiMessages: (msgsOrUpdater) =>
+  aiMessages: {},
+  setAiMessages: (userId, update) =>
     set((state) => ({
-      aiMessages:
-        typeof msgsOrUpdater === 'function'
-          ? msgsOrUpdater(state.aiMessages)
-          : msgsOrUpdater,
+      aiMessages: {
+        ...state.aiMessages,
+        [userId]:
+          typeof update === 'function'
+            ? update(state.aiMessages[userId] ?? [])
+            : update,
+      },
     })),
 });
 

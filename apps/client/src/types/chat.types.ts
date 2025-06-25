@@ -6,8 +6,9 @@ export type ChatSliceType = {
   closeChat: () => void;
   chatMode: 'admin' | 'ai';
   setChatMode: (mode: 'admin' | 'ai') => void;
-  aiMessages: ChatMessageType[];
+  aiMessages: Record<string, ChatMessageType[]>;
   setAiMessages: (
+    userId: string,
     updater:
       | ChatMessageType[]
       | ((prev: ChatMessageType[]) => ChatMessageType[])
