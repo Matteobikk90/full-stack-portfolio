@@ -19,7 +19,11 @@ export const ChatBox = () => {
 
   return (
     <aside className="fixed bottom-22 right-0 z-11 w-96 rounded-l-md shadow-xl bg-background border">
-      {isAdmin ? 'Admin' : <Header />}
+      {isAdmin ? (
+        <h3 className="flex justify-center font-medium">Admin</h3>
+      ) : (
+        <Header />
+      )}
       {chatMode === 'admin' && isAdmin && (
         <Tabs
           threads={threads}
