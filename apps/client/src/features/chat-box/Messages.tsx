@@ -1,21 +1,29 @@
 import PopUpInfo from '@/components/pop-up-info';
 import { useAuth } from '@/hooks/useAuth';
-import { useChatSocket } from '@/hooks/useChatSocket';
+import type { ReturnTypeChat } from '@/hooks/useChatSocket';
 import { Button } from '@/lib/ui/button';
 import { Input } from '@/lib/ui/input';
 import { cn } from '@/lib/utils';
-import { adminEmail } from '@/utils/constants';
 import { PaperPlaneRightIcon } from '@phosphor-icons/react';
 import { useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export const Messages = () => {
-  const { activeUserId, socket, messages, sendMessage } = useChatSocket();
-  const { user } = useAuth();
+export const Messages = ({
+  messages,
+  socket,
+  activeUserId,
+  sendMessage,
+}: Pick<
+  ReturnTypeChat,
+  'messages' | 'socket' | 'activeUserId' | 'sendMessage'
+>) => {
+  const { user, isAdmin } = useAuth();
   const { t } = useTranslation();
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState('');
+  const canType = socket?.connected && (!isAdmin || !!activeUserId);
+  const canSend = canType && input.trim().length > 0;
 
   useLayoutEffect(() => {
     scrollRef.current?.scrollTo({
@@ -53,17 +61,24 @@ export const Messages = () => {
                   : 'justify-start'
               )}
             >
-              <div className="flex flex-col items-center gap-1">
-                {msg.sender?.avatarUrl && (
-                  <img
-                    width={30}
-                    height={30}
-                    src={msg.sender.avatarUrl}
-                    alt={msg.sender.name}
-                    className="object-cover rounded-full"
-                  />
-                )}
-              </div>
+              {msg.sender?.avatarUrl ? (
+                <img
+                  width={32}
+                  height={32}
+                  src={msg.sender.avatarUrl}
+                  alt={msg.sender.name}
+                  className="object-cover rounded-full"
+                />
+              ) : (
+                <span
+                  className={cn(
+                    'bg-primary w-8 h-8 flex items-center justify-center rounded-full bg-muted text-xs font-medium text-foreground/70 shadow-elevation',
+                    isOwnMessage ? 'bg-primary' : 'bg-background'
+                  )}
+                >
+                  {msg.sender?.name?.[0]?.toUpperCase() ?? '?'}
+                </span>
+              )}
               <div
                 className={cn(
                   'rounded-xl p-3 max-w-[75%] text-sm shadow-elevation',
@@ -79,7 +94,9 @@ export const Messages = () => {
                   <span>•</span>
                   <time dateTime={msg.createdAt}>{timestamp}</time>
                 </div>
-                <div>{msg.content}</div>
+                <div className="break-words whitespace-pre-wrap">
+                  {msg.content}
+                </div>
               </div>
             </div>
           );
@@ -92,22 +109,11 @@ export const Messages = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type your message..."
-          disabled={
-            !socket?.connected || (user.email === adminEmail && !activeUserId)
-          }
+          disabled={!canType}
           maxLength={350}
           className="flex-1"
         />
-        <Button
-          type="submit"
-          variant="outline"
-          size="icon"
-          disabled={
-            !input.trim() ||
-            !socket?.connected ||
-            (user.email === adminEmail && !activeUserId)
-          }
-        >
+        <Button type="submit" variant="outline" size="icon" disabled={!canSend}>
           <PopUpInfo hoverText={t('contact.send')} align="left">
             <PaperPlaneRightIcon className="size-5" weight="duotone" />
           </PopUpInfo>

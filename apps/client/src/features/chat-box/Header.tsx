@@ -1,4 +1,5 @@
 import PopUpInfo from '@/components/pop-up-info';
+import { useAuth } from '@/hooks/useAuth';
 import { useChatSocket } from '@/hooks/useChatSocket';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
@@ -8,7 +9,8 @@ import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
-  const { isConnecting, connectionError, socket, isAdmin } = useChatSocket();
+  const { isConnecting, connectionError, socket } = useChatSocket();
+  const { isAdmin } = useAuth();
   const { closeChat } = useStore(
     useShallow(({ closeChat }) => ({ closeChat }))
   );

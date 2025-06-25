@@ -41,7 +41,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="flex items-center justify-between p-4 w-full container mx-auto relative max-h-max flex-1">
+    <header className="flex items-center justify-between px-4 py-2 w-full container mx-auto relative shrink">
       <MenuDesktop />
       <MenuMobile />
       <div className="flex items-center gap-4 z-12">
