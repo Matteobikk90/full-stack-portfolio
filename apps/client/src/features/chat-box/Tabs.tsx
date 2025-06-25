@@ -1,10 +1,13 @@
 import { useAuth } from '@/hooks/useAuth';
-import { useChatSocket } from '@/hooks/useChatSocket';
+import type { ReturnTypeChat } from '@/hooks/useChatSocket';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 
-export const Tabs = () => {
-  const { threads, selectUser, activeUserId } = useChatSocket();
+export const Tabs = ({
+  threads,
+  selectUser,
+  activeUserId,
+}: Pick<ReturnTypeChat, 'threads' | 'selectUser' | 'activeUserId'>) => {
   const { user } = useAuth();
 
   return (
