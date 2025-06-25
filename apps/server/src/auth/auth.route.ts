@@ -1,11 +1,49 @@
 import { getMe, handleRefreshToken } from '@/auth/auth.controller';
 import { authenticateToken } from '@/auth/auth.middleware';
 import { authRateLimiter } from '@/middleware/rate-limit.middleware';
-import { Router, type Response } from 'express';
+import prisma from '@/utils/prisma';
+import { Request, Response, Router } from 'express';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
 
 const router = Router();
+
+export const devLoginHandler = async (req: Request, res: Response) => {
+  const { email } = req.body;
+  if (!email) res.status(400).json({ error: 'Email required' });
+
+  const user = await prisma.user.upsert({
+    where: { email },
+    update: {},
+    create: {
+      email,
+      name: email.split('@')[0],
+      provider: 'dev',
+    },
+  });
+
+  const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
+    expiresIn: '30m',
+  });
+  const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
+    expiresIn: '7d',
+  });
+
+  res
+    .cookie('accessToken', accessToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax',
+      maxAge: 30 * 60 * 1000,
+    })
+    .cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    })
+    .json({ message: 'Dev login successful' });
+};
 
 const createTokens = (userId: string) => {
   const accessToken = jwt.sign({ userId }, process.env.JWT_SECRET!, {
@@ -130,5 +168,7 @@ router.get(
     sendTokensAndRedirect(res, user.id, redirect);
   }
 );
+
+router.post('/dev-login', devLoginHandler);
 
 export default router;

@@ -12,6 +12,7 @@ import { createFileRoute } from '@tanstack/react-router';
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root';
+import { Route as DevLoginImport } from './routes/dev-login';
 import { Route as ResumeImport } from './routes/resume';
 import { Route as ResumeExperienceImport } from './routes/resume.experience';
 import { Route as ResumeExperienceIdImport } from './routes/resume.experience.$id';
@@ -71,6 +72,12 @@ const WorkRoute = WorkImport.update({
 const ResumeRoute = ResumeImport.update({
   id: '/resume',
   path: '/resume',
+  getParentRoute: () => rootRoute,
+} as any);
+
+const DevLoginRoute = DevLoginImport.update({
+  id: '/dev-login',
+  path: '/dev-login',
   getParentRoute: () => rootRoute,
 } as any);
 
@@ -139,6 +146,13 @@ declare module '@tanstack/react-router' {
       path: '/';
       fullPath: '/';
       preLoaderRoute: typeof IndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/dev-login': {
+      id: '/dev-login';
+      path: '/dev-login';
+      fullPath: '/dev-login';
+      preLoaderRoute: typeof DevLoginImport;
       parentRoute: typeof rootRoute;
     };
     '/resume': {
@@ -271,6 +285,7 @@ const ResumeRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute;
+  '/dev-login': typeof DevLoginRoute;
   '/resume': typeof ResumeRouteWithChildren;
   '/work': typeof WorkRoute;
   '/contact': typeof ContactLazyRoute;
@@ -288,6 +303,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute;
+  '/dev-login': typeof DevLoginRoute;
   '/work': typeof WorkRoute;
   '/contact': typeof ContactLazyRoute;
   '/delete-data': typeof DeleteDataLazyRoute;
@@ -304,6 +320,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute;
   '/': typeof IndexLazyRoute;
+  '/dev-login': typeof DevLoginRoute;
   '/resume': typeof ResumeRouteWithChildren;
   '/work': typeof WorkRoute;
   '/contact': typeof ContactLazyRoute;
@@ -323,6 +340,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/'
+    | '/dev-login'
     | '/resume'
     | '/work'
     | '/contact'
@@ -339,6 +357,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
+    | '/dev-login'
     | '/work'
     | '/contact'
     | '/delete-data'
@@ -353,6 +372,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/dev-login'
     | '/resume'
     | '/work'
     | '/contact'
@@ -371,6 +391,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute;
+  DevLoginRoute: typeof DevLoginRoute;
   ResumeRoute: typeof ResumeRouteWithChildren;
   WorkRoute: typeof WorkRoute;
   ContactLazyRoute: typeof ContactLazyRoute;
@@ -381,6 +402,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  DevLoginRoute: DevLoginRoute,
   ResumeRoute: ResumeRouteWithChildren,
   WorkRoute: WorkRoute,
   ContactLazyRoute: ContactLazyRoute,
@@ -400,6 +422,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/dev-login",
         "/resume",
         "/work",
         "/contact",
@@ -410,6 +433,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/dev-login": {
+      "filePath": "dev-login.ts"
     },
     "/resume": {
       "filePath": "resume.tsx",
