@@ -4,6 +4,14 @@ export type ChatSliceType = {
   isChatOpen: boolean;
   openChat: () => void;
   closeChat: () => void;
+  chatMode: 'admin' | 'ai';
+  setChatMode: (mode: 'admin' | 'ai') => void;
+  aiMessages: ChatMessageType[];
+  setAiMessages: (
+    updater:
+      | ChatMessageType[]
+      | ((prev: ChatMessageType[]) => ChatMessageType[])
+  ) => void;
 };
 
 export type ChatMessageType = {

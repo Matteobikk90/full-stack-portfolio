@@ -4,9 +4,12 @@ import type { ReturnTypeChat } from '@/hooks/useChatSocket';
 import { Button } from '@/lib/ui/button';
 import { Input } from '@/lib/ui/input';
 import { cn } from '@/lib/utils';
+import { useStore } from '@/stores';
+import { sendAIMessage } from '@/utils/ai';
 import { PaperPlaneRightIcon } from '@phosphor-icons/react';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
 
 export const Messages = ({
   messages,
@@ -17,6 +20,9 @@ export const Messages = ({
   ReturnTypeChat,
   'messages' | 'socket' | 'activeUserId' | 'sendMessage'
 >) => {
+  const { chatMode, setAiMessages } = useStore(
+    useShallow(({ chatMode, setAiMessages }) => ({ chatMode, setAiMessages }))
+  );
   const { user, isAdmin } = useAuth();
   const { t } = useTranslation();
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -32,12 +38,40 @@ export const Messages = ({
     });
   }, [messages]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-    sendMessage(input);
+
     setInput('');
     inputRef.current?.focus();
+
+    if (chatMode === 'ai') {
+      const localUserMessage = {
+        id: crypto.randomUUID(),
+        content: input,
+        createdAt: new Date().toISOString(),
+        sender: user!,
+        receiver: { id: 'ai', name: 'AI', avatarUrl: null },
+      };
+
+      setAiMessages((prev) => [...prev, localUserMessage]);
+
+      try {
+        const aiReply = await sendAIMessage(input);
+        const aiMessage = {
+          id: crypto.randomUUID(),
+          content: aiReply,
+          createdAt: new Date().toISOString(),
+          sender: { id: 'ai', name: 'AI', avatarUrl: null },
+          receiver: user!,
+        };
+        setAiMessages((prev) => [...prev, aiMessage]);
+      } catch (err) {
+        console.error('AI error:', err);
+      }
+    } else {
+      sendMessage(input);
+    }
   };
 
   return (
@@ -72,8 +106,8 @@ export const Messages = ({
               ) : (
                 <span
                   className={cn(
-                    'bg-primary w-8 h-8 flex items-center justify-center rounded-full bg-muted text-xs font-medium text-foreground/70 shadow-elevation',
-                    isOwnMessage ? 'bg-primary' : 'bg-background'
+                    'bg-secondary w-8 h-8 flex items-center justify-center rounded-full bg-muted text-xs font-medium text-foreground/70 shadow-elevation',
+                    isOwnMessage ? 'bg-secondary' : 'bg-background'
                   )}
                 >
                   {msg.sender?.name?.[0]?.toUpperCase() ?? '?'}
@@ -83,7 +117,7 @@ export const Messages = ({
                 className={cn(
                   'rounded-xl p-3 max-w-[75%] text-sm shadow-elevation',
                   isOwnMessage
-                    ? 'bg-primary rounded-br-none'
+                    ? 'bg-secondary rounded-br-none'
                     : 'bg-background rounded-bl-none'
                 )}
               >
