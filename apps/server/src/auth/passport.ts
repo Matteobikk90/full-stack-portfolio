@@ -4,6 +4,7 @@ import {
   ProviderTypes,
   type LinkedInOpenIDProfile,
 } from '@/types/oauth.types';
+import { adminEmails } from '@/utils/constants';
 import prisma from '@/utils/prisma';
 import passport from 'passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
@@ -55,7 +56,7 @@ const handleOAuthCallback =
       let user = await prisma.user.findUnique({ where: { email } });
 
       if (!user) {
-        const isAdmin = email === 'matteo.soresini@hotmail.it';
+        const isAdmin = adminEmails.includes(email);
 
         user = await prisma.user.create({
           data: {

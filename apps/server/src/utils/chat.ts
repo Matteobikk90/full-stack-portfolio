@@ -1,9 +1,10 @@
+import { transporter } from '@/config/mailer';
 import prisma from '@/utils/prisma';
 import type { ChatMessage } from '@prisma/client';
 import type { Socket } from 'socket.io';
 
 export const sendHistory = async (a: string, b: string, socket: Socket) => {
-  const hist = await prisma.chatMessage.findMany({
+  const history = await prisma.chatMessage.findMany({
     where: {
       OR: [
         { senderId: a, receiverId: b },
@@ -11,15 +12,20 @@ export const sendHistory = async (a: string, b: string, socket: Socket) => {
       ],
     },
     orderBy: { createdAt: 'asc' },
+    include: {
+      sender: { select: { id: true, name: true, avatarUrl: true } },
+      receiver: { select: { id: true, name: true, avatarUrl: true } },
+    },
   });
 
-  socket.emit('chat:history', hist);
+  socket.emit('chat:history', history);
 };
 
 export const sendAllThreads = async (socket: Socket, adminId: string) => {
   const msgs = await prisma.chatMessage.findMany({
     where: { OR: [{ senderId: adminId }, { receiverId: adminId }] },
     orderBy: { createdAt: 'asc' },
+    include: { sender: true, receiver: true },
   });
 
   const threads: Record<string, ChatMessage[]> = {};
@@ -32,13 +38,38 @@ export const sendAllThreads = async (socket: Socket, adminId: string) => {
   socket.emit('admin:all-conversations', threads);
 };
 
-// export const notifyAdmin = (msg: ChatMessage) => {
-//   transporter
-//     .sendMail({
-//       from: `"Portfolio Chat" <${process.env.SMTP_USER}>`,
-//       to: process.env.CONTACT_EMAIL,
-//       subject: '💬 New chat message',
-//       text: msg.content,
-//     })
-//     .catch((err) => console.error('mail error', err));
-// };
+export const notifyEmail = (
+  isAdmin: boolean,
+  msg: ChatMessage & {
+    sender: { email: string };
+    receiver: { email: string };
+  }
+) => {
+  const target = isAdmin ? msg.receiver : msg.sender;
+
+  if (!target?.email) return;
+
+  const subject = isAdmin
+    ? '💬 Matteo replied to your message'
+    : '💬 New chat message';
+
+  const text = isAdmin ? `Matteo replied: ${msg.content}` : msg.content;
+
+  transporter
+    .sendMail({
+      from: `"Matteo Soresini Portfolio Chat" <${process.env.SMTP_USER}>`,
+      to: target.email,
+      subject,
+      text,
+      html: `
+              <div style="font-family: sans-serif; font-size: 14px;">
+                <p>${isAdmin ? 'Matteo replied to your message:' : 'You have a new message:'}</p>
+                <blockquote style="margin: 0; padding-left: 1em; border-left: 3px solid #ccc;">
+                  ${msg.content}
+                </blockquote>
+                <p>Reply on <a href="https://matteosoresini.com">matteosoresini.com</a></p>
+              </div>
+            `,
+    })
+    .catch((err) => console.error('mail error', err));
+};

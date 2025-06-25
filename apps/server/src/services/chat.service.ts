@@ -1,5 +1,5 @@
-import { sendAllThreads, sendHistory } from '@/utils/chat';
-import { adminEmail, JWT_SECRET } from '@/utils/constants';
+import { notifyEmail, sendAllThreads, sendHistory } from '@/utils/chat';
+import { adminEmails, emailCooldowns, JWT_SECRET } from '@/utils/constants';
 import prisma from '@/utils/prisma';
 import jwt from 'jsonwebtoken';
 import { Server, Socket } from 'socket.io';
@@ -26,12 +26,12 @@ export const registerChat = (io: Server) => {
   io.on('connection', async (socket: Socket) => {
     const connectedId = socket.data.userId as string;
     const user = await prisma.user.findUnique({ where: { id: connectedId } });
-    const admin = await prisma.user.findUnique({
-      where: { email: adminEmail },
+    const admin = await prisma.user.findFirst({
+      where: { email: { in: adminEmails } },
     });
     if (!user || !admin) return;
 
-    const isAdmin = user.email === adminEmail;
+    const isAdmin = adminEmails.includes(user.email);
 
     if (isAdmin) sendAllThreads(socket, admin.id);
     else sendHistory(connectedId, admin.id, socket);
@@ -57,6 +57,7 @@ export const registerChat = (io: Server) => {
         data: { senderId: connectedId, receiverId: to, content },
         include: { sender: true, receiver: true },
       });
+      const targetId = isAdmin ? msg.receiverId : msg.senderId;
 
       io.sockets.sockets.forEach((s) => {
         const uid = s.data.userId;
@@ -65,7 +66,17 @@ export const registerChat = (io: Server) => {
         }
       });
 
-      //   if (!isAdmin) notifyAdmin(msg);
+      if (emailCooldowns.has(targetId)) {
+        clearTimeout(emailCooldowns.get(targetId)!);
+      }
+
+      emailCooldowns.set(
+        targetId,
+        setTimeout(() => {
+          notifyEmail(isAdmin, msg);
+          emailCooldowns.delete(targetId);
+        }, 20_000)
+      );
     });
 
     socket.on('disconnect', () =>

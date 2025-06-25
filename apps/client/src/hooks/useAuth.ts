@@ -1,5 +1,5 @@
 import api from '@/config/axios';
-import { adminEmail } from '@/utils/constants';
+import { adminEmails } from '@/utils/constants';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
@@ -11,7 +11,10 @@ export const useAuth = () => {
       return data;
     },
   });
-  const isAdmin = useMemo(() => data?.email === adminEmail, [data?.email]);
+  const isAdmin = useMemo(
+    () => adminEmails.includes(data?.email),
+    [data?.email]
+  );
 
   return {
     user: data,

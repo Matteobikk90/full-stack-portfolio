@@ -14,4 +14,7 @@ export const URL_ENDPOINTS = {
 export const skillsFontSize = 60;
 export const currentYear = new Date().getFullYear();
 export const experienceYears = new Date().getFullYear() - 2017;
-export const adminEmail = 'matteo.soresini@hotmail.it';
+export const adminEmails = [
+  'matteo.soresini@hotmail.it',
+  'matteo.soresini90@gmail.com',
+];

@@ -94,7 +94,9 @@ export const Messages = ({
                   <span>•</span>
                   <time dateTime={msg.createdAt}>{timestamp}</time>
                 </div>
-                <div>{msg.content}</div>
+                <div className="break-words whitespace-pre-wrap">
+                  {msg.content}
+                </div>
               </div>
             </div>
           );

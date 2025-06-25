@@ -105,7 +105,6 @@ export const useChatSocket = () => {
     setActiveUserId,
     sendMessage,
     selectUser,
-    isAdmin,
   };
 };
 
