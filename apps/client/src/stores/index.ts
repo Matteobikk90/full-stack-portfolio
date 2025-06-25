@@ -32,10 +32,11 @@ export const useStore = create<StoreState>()(
     })),
     {
       name: 'global-store',
-      partialize: (state) => ({
-        mode: state.mode,
-        discovered: state.discovered,
-        lang: state.lang,
+      partialize: ({ mode, discovered, lang, aiMessages }) => ({
+        mode,
+        discovered,
+        lang,
+        aiMessages,
       }),
     }
   )

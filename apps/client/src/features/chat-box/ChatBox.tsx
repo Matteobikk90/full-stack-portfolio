@@ -7,9 +7,10 @@ import { useStore } from '@/stores';
 import { useShallow } from 'zustand/shallow';
 
 export const ChatBox = () => {
-  const { isChatOpen } = useStore(
-    useShallow(({ isChatOpen }) => ({ isChatOpen }))
+  const { isChatOpen, chatMode } = useStore(
+    useShallow(({ isChatOpen, chatMode }) => ({ isChatOpen, chatMode }))
   );
+
   const { isAuthenticated, isAdmin } = useAuth();
   const { activeUserId, threads, selectUser, messages, socket, sendMessage } =
     useChatSocket();
@@ -17,23 +18,25 @@ export const ChatBox = () => {
   if (!isChatOpen || !isAuthenticated) return null;
 
   return (
-    <aside className="fixed bottom-22 right-0 z-11 w-96">
-      <div className="rounded-l-md shadow-xl bg-background border">
+    <aside className="fixed bottom-22 right-0 z-11 w-96 rounded-l-md shadow-xl bg-background border">
+      {isAdmin ? (
+        <h3 className="flex justify-center font-medium">Admin</h3>
+      ) : (
         <Header />
-        {isAdmin && (
-          <Tabs
-            threads={threads}
-            selectUser={selectUser}
-            activeUserId={activeUserId}
-          />
-        )}
-        <Messages
-          messages={messages}
-          socket={socket}
+      )}
+      {chatMode === 'admin' && isAdmin && (
+        <Tabs
+          threads={threads}
+          selectUser={selectUser}
           activeUserId={activeUserId}
-          sendMessage={sendMessage}
         />
-      </div>
+      )}
+      <Messages
+        messages={messages}
+        socket={socket}
+        activeUserId={activeUserId}
+        sendMessage={sendMessage}
+      />
     </aside>
   );
 };

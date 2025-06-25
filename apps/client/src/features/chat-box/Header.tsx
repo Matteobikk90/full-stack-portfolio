@@ -1,5 +1,4 @@
 import PopUpInfo from '@/components/pop-up-info';
-import { useAuth } from '@/hooks/useAuth';
 import { useChatSocket } from '@/hooks/useChatSocket';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
@@ -10,21 +9,35 @@ import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
   const { isConnecting, connectionError, socket } = useChatSocket();
-  const { isAdmin } = useAuth();
-  const { closeChat } = useStore(
-    useShallow(({ closeChat }) => ({ closeChat }))
+  const { closeChat, chatMode, setChatMode } = useStore(
+    useShallow(({ closeChat, chatMode, setChatMode }) => ({
+      closeChat,
+      chatMode,
+      setChatMode,
+    }))
   );
   const { t } = useTranslation();
 
   return (
     <div className="p-2 border-b flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <span className="text-sm font-medium">
-          {isAdmin ? 'Admin Chat' : t('chat_me')}
-        </span>
+        <Button
+          size="sm"
+          className={cn(chatMode === 'admin' && 'bg-secondary text-white')}
+          onClick={() => setChatMode('admin')}
+        >
+          {t('chat_me')}
+        </Button>
+        <Button
+          className={cn(chatMode === 'ai' && 'bg-secondary text-white')}
+          size="sm"
+          onClick={() => setChatMode('ai')}
+        >
+          Ask AI
+        </Button>
         <span
           className={cn(
-            'w-2 h-2 rounded-full',
+            'w-3 h-3 rounded-full',
             isConnecting
               ? 'bg-experience animate-pulse'
               : socket?.connected

@@ -2,6 +2,7 @@ import '@/auth/passport';
 import authRoutes from '@/auth/auth.route';
 import { Sentry } from '@/config/sentry';
 import { globalErrorHandler } from '@/middleware/error.middleware';
+import aiRoutes from '@/routes/ai.route';
 import commentRoutes from '@/routes/comments.route';
 import contactRoutes from '@/routes/contact.route';
 import experiencesRoute from '@/routes/experieces.route';
@@ -31,6 +32,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/auth', authRoutes);
+app.use('/api/ai-chat', aiRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/experiences', experiencesRoute);
 app.use('/api/projects', projectsRoute);

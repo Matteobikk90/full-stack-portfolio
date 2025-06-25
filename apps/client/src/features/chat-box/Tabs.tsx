@@ -20,7 +20,7 @@ export const Tabs = ({
           <Button
             key={uid}
             onClick={() => selectUser(uid)}
-            className={cn(activeUserId === uid && 'bg-primary text-white')}
+            className={cn(activeUserId === uid && 'bg-secondary text-white')}
           >
             {other?.name || 'User'}
           </Button>
