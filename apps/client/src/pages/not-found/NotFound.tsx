@@ -42,7 +42,7 @@ export const NotFound = () => {
                 {t('not_found.contact_me')}
               </Link>
             </p>
-            <Link to="/">
+            <Link className="flex justify-center" to="/">
               <Button aria-label="Reload">{t('not_found.button')}</Button>
             </Link>
           </article>

@@ -4,8 +4,8 @@ export const Pending = () => {
   const { t } = useTranslation();
 
   return (
-    <main className="flex items-center justify-center h-screen">
-      <div className="flex flex-col items-center justify-center gap-4">
+    <main className="flex items-center justify-center h-full">
+      <section className="flex flex-col items-center justify-center gap-4">
         <svg
           className="animate-spin"
           xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ export const Pending = () => {
           </g>
         </svg>
         <p>{t('loading')}</p>
-      </div>
+      </section>
     </main>
   );
 };

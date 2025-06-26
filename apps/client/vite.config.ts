@@ -32,16 +32,16 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:4000',
+        target: 'https://matteosoresini.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '/api'),
       },
       '/auth': {
-        target: 'http://localhost:4000',
+        target: 'https://matteosoresini.com',
         changeOrigin: true,
       },
       '/socket.io': {
-        target: 'http://localhost:4000',
+        target: 'https://matteosoresini.com',
         ws: true,
         changeOrigin: true,
       },

@@ -1,3 +1,4 @@
+import { Pending } from '@/components/pending';
 import { queryClient } from '@/config/queryClient';
 import { fetchWorks } from '@/queries/works';
 import { createFileRoute } from '@tanstack/react-router';
@@ -14,4 +15,5 @@ export const Route = createFileRoute('/work')({
       crumb: 'Work',
     };
   },
+  pendingComponent: Pending,
 });
