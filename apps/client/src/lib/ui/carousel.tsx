@@ -8,7 +8,6 @@ import useEmblaCarousel, {
 } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import * as React from 'react';
-import { useShallow } from 'zustand/shallow';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -52,11 +51,7 @@ function Carousel({
   children,
   ...props
 }: React.ComponentProps<'div'> & CarouselProps) {
-  const { setActiveSlide } = useStore(
-    useShallow((state) => ({
-      setActiveSlide: state.setActiveSlide,
-    }))
-  );
+  const setActiveSlide = useStore((state) => state.setActiveSlide);
   const [carouselRef, api] = useEmblaCarousel(
     {
       ...opts,

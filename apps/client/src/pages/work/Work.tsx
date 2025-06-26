@@ -12,16 +12,11 @@ import { imageMap } from '@/utils/slider';
 import { useLoaderData } from '@tanstack/react-router';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { useShallow } from 'zustand/shallow';
 
 export const Work = () => {
   const { t } = useTranslation();
   const { data } = useLoaderData({ from: '/work' });
-  const { activeSlide } = useStore(
-    useShallow((state) => ({
-      activeSlide: state.activeSlide,
-    }))
-  );
+  const activeSlide = useStore((state) => state.activeSlide);
   const activeWork = data[activeSlide];
 
   return (

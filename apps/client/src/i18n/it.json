@@ -199,7 +199,7 @@
     },
     "section2": {
       "title": "2. Gestione dei dati",
-      "content1": "Inviando il modulo, acconsenti alla raccolta del tuo nome, email e messaggio per fini di comunicazione. I dati verranno archiviati in modo sicuro e inviati alla mia casella email personale.",
+      "content1": "Inviando il modulo, acconsenti alla raccolta del tuo nome, email e messaggio per fini di comunicazione. I dati verranno archiviati in modo sicuro, trattenuti per un massimo di 10 giorni e poi eliminati automaticamente dai nostri server e dal tuo browser.",
       "content2": "Per maggiori dettagli, consulta la nostra"
     },
     "section3": {
@@ -227,7 +227,7 @@
       "list": [
         "Quando invii il modulo di contatto: nome, email e messaggio.",
         "Quando accedi tramite provider (es. GitHub, Google): email, nome utente e immagine profilo.",
-        "Dati opzionali come messaggi in chat o like ai progetti durante l’interazione."
+        "Dati opzionali come messaggi in chat o like ai progetti durante l’interazione. I messaggi con me (l’amministratore) vengono salvati nel database e cancellati automaticamente dopo 10 giorni, mentre i messaggi con l’AI vengono salvati solo nel tuo browser e cancellati dopo 10 giorni."
       ]
     },
     "section2": {
@@ -242,7 +242,7 @@
     },
     "section3": {
       "title": "3. Conservazione dei dati",
-      "description": "I messaggi vengono salvati in un database sicuro e inoltrati alla mia email personale. I dati di login servono solo per autenticarti sul sito. Non usiamo cookie né sistemi di tracciamento."
+      "description": "I messaggi con me vengono salvati in un database sicuro e inoltrati alla mia email personale. I messaggi con l’AI sono memorizzati solo nel tuo browser (local storage). Entrambi vengono eliminati automaticamente dopo 10 giorni. I dati di login servono solo per autenticarti sul sito. Non usiamo cookie né sistemi di tracciamento."
     },
     "section4": {
       "title": "4. I tuoi diritti",

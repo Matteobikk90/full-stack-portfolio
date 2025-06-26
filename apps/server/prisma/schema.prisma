@@ -26,16 +26,15 @@ enum Provider {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  name      String
-  email     String    @unique
-  provider  Provider
-  role      Role      @default(user)
-  avatarUrl String?
-  createdAt DateTime  @default(now())
-  comments  Comment[]
-  likes     Like[]
-
+  id               String        @id @default(cuid())
+  name             String
+  email            String        @unique
+  provider         Provider
+  role             Role          @default(user)
+  avatarUrl        String?
+  createdAt        DateTime      @default(now())
+  comments         Comment[]
+  likes            Like[]
   sentMessages     ChatMessage[] @relation("SentMessages")
   receivedMessages ChatMessage[] @relation("ReceivedMessages")
 }

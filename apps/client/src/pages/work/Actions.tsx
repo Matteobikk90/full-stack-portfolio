@@ -15,7 +15,6 @@ import {
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { useShallow } from 'zustand/shallow';
 
 export const Actions = ({
   activeWork,
@@ -24,11 +23,7 @@ export const Actions = ({
 }) => {
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
-  const { toggleModal } = useStore(
-    useShallow(({ toggleModal }) => ({
-      toggleModal,
-    }))
-  );
+  const toggleModal = useStore((state) => state.toggleModal);
   const { data: likeStatus } = useQuery({
     queryKey: ['likeStatus', activeWork.id],
     queryFn: () => getLikes(activeWork.id),

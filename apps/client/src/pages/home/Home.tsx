@@ -12,9 +12,9 @@ import { useShallow } from 'zustand/shallow';
 
 export const Home = () => {
   const { discovered, setDiscovered } = useStore(
-    useShallow((state) => ({
-      discovered: state.discovered,
-      setDiscovered: state.setDiscovered,
+    useShallow(({ discovered, setDiscovered }) => ({
+      discovered,
+      setDiscovered,
     }))
   );
   const { play } = useUISound();
