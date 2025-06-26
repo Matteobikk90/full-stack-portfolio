@@ -281,5 +281,6 @@
     "contact_me": "contattami",
     "button": "Vai alla homepage"
   },
-  "loading": "Caricamento..."
+  "loading": "Caricamento...",
+  "cancel_policy": "I messaggi verranno eliminati automaticamente dopo 10 giorni dai nostri server e dal tuo browser. Vuoi rimuoverli prima? Contattami tramite il modulo di contatto."
 }

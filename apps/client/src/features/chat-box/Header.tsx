@@ -4,7 +4,7 @@ import { useChatSocket } from '@/hooks/useChatSocket';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
-import { XIcon } from '@phosphor-icons/react';
+import { InfoIcon, XIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
@@ -28,13 +28,19 @@ export const Header = () => {
         <div className="flex items-center gap-2">
           <Button
             size="sm"
-            className={cn(chatMode === 'admin' && 'bg-secondary text-white')}
+            className={cn(
+              chatMode === 'admin' &&
+                'bg-primary hover:bg-primary focus:bg-primary text-white shadow-none'
+            )}
             onClick={() => setChatMode('admin')}
           >
             {t('chat_me')}
           </Button>
           <Button
-            className={cn(chatMode === 'ai' && 'bg-secondary text-white')}
+            className={cn(
+              chatMode === 'ai' &&
+                'bg-primary hover:bg-primary focus:bg-primary text-white shadow-none'
+            )}
             size="sm"
             onClick={() => setChatMode('ai')}
           >
@@ -54,11 +60,24 @@ export const Header = () => {
           />
         </div>
       )}
-      <Button variant="outline" size="icon" onClick={closeChat}>
-        <PopUpInfo hoverText={t('close_chat')} align="left">
-          <XIcon className="size-5" weight="duotone" />
-        </PopUpInfo>
-      </Button>
+
+      <div>
+        <Button variant="ghost">
+          <PopUpInfo
+            hoverText={t('cancel_policy')}
+            align="left"
+            className="gap-2"
+            wrapText
+          >
+            <InfoIcon weight="duotone" className="size-5" />
+          </PopUpInfo>
+        </Button>
+        <Button variant="outline" size="icon" onClick={closeChat}>
+          <PopUpInfo hoverText={t('close_chat')} align="left">
+            <XIcon className="size-5" weight="duotone" />
+          </PopUpInfo>
+        </Button>
+      </div>
     </div>
   );
 };
