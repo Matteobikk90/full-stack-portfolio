@@ -8,40 +8,7 @@ const createModalSlice: StateCreator<ChatSliceType> = (set, get) => ({
   closeChat: () => set({ isChatOpen: false }),
   chatMode: 'admin',
   setChatMode: (mode) => set({ chatMode: mode }),
-  aiMessages: {
-    'visitor-123': [
-      {
-        id: 'msg-1',
-        content: 'Hello! How can I assist you with Matteo’s portfolio?',
-        createdAt: new Date(Date.now() - 1000 * 60 * 5).toISOString(), // 5 min ago
-        sender: {
-          id: '',
-          name: '',
-          avatarUrl: '',
-        },
-        receiver: {
-          id: '',
-          name: '',
-          avatarUrl: '',
-        },
-      },
-      {
-        id: 'msg-2',
-        content: 'Can you tell me more about his experience?',
-        createdAt: new Date(Date.now() - 1000 * 60 * 4).toISOString(), // 4 min ago
-        sender: {
-          id: '',
-          name: '',
-          avatarUrl: '',
-        },
-        receiver: {
-          id: '',
-          name: '',
-          avatarUrl: '',
-        },
-      },
-    ],
-  },
+  aiMessages: {},
   setAiMessages: (userId, update) =>
     set((state) => ({
       aiMessages: {
