@@ -1,3 +1,4 @@
+import { systemPrompt } from '@/utils/ai';
 import { Request, Response } from 'express';
 import OpenAI from 'openai';
 
@@ -16,15 +17,8 @@ export const handleAIChat = async (req: Request, res: Response) => {
     const chatResponse = await openai.chat.completions.create({
       model: 'gpt-4.1-nano',
       messages: [
-        {
-          role: 'system',
-          content:
-            'You are a helpful assistant on Matteo Soresini’s portfolio website. Reply concisely and friendly.',
-        },
-        {
-          role: 'user',
-          content: message,
-        },
+        { role: 'system', content: systemPrompt.trim() },
+        { role: 'user', content: message },
       ],
     });
 

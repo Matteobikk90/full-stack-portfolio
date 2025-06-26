@@ -18,3 +18,4 @@ export const adminEmails = [
   'matteo.soresini@hotmail.it',
   'matteo.soresini90@gmail.com',
 ];
+export const tenDays = 10 * 24 * 60 * 60 * 1000;

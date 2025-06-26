@@ -3,7 +3,7 @@
     "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "dist",
     "esModuleInterop": true,
     "strict": true,
@@ -23,5 +23,5 @@
       "outputCheck": ["js", "json", "jsx", "mjs", "ts", "tsx"]
     }
   },
-  "include": ["src", "src/types"]
+  "include": ["src", "src/types", "scripts"]
 }

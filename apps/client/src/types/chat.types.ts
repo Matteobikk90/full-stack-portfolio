@@ -13,6 +13,7 @@ export type ChatSliceType = {
       | ChatMessageType[]
       | ((prev: ChatMessageType[]) => ChatMessageType[])
   ) => void;
+  clearOldAiMessages: () => void;
 };
 
 export type ChatMessageType = {

@@ -143,7 +143,10 @@ export const Messages = ({
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="flex border-t p-3 gap-2">
+      <form
+        onSubmit={handleSubmit}
+        className="flex border-t p-2 gap-2 justify-between"
+      >
         <Input
           ref={inputRef}
           value={input}

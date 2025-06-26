@@ -4,9 +4,9 @@ import { useShallow } from 'zustand/shallow';
 
 export const useTheme = () => {
   const { mode, updateBackground } = useStore(
-    useShallow((state) => ({
-      mode: state.mode,
-      updateBackground: state.updateBackground,
+    useShallow(({ mode, updateBackground }) => ({
+      mode,
+      updateBackground,
     }))
   );
 

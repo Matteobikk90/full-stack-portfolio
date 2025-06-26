@@ -200,7 +200,7 @@
     },
     "section2": {
       "title": "2. Data Handling",
-      "content1": "By submitting the form, you consent to the collection and processing of your name, email address, and message for the purpose of communication. Your data will be stored securely and also forwarded to my personal email inbox.",
+      "content1": "By submitting the form, you consent to the collection and processing of your name, email address, and message for the purpose of communication. Your data will be stored securely and retained for a maximum of 10 days, after which admin chat messages are deleted from our servers and AI messages from your browser.",
       "content2": "For more details, see our"
     },
     "section3": {
@@ -228,7 +228,7 @@
       "list": [
         "When submitting the contact form: your name, email, and message.",
         "When logging in via a provider (e.g., GitHub, Google): your email, display name, and profile picture.",
-        "Optional chat or project like data you submit while using the chat or liking a project."
+        "Optional data such as chat messages or project likes. Messages with me (the admin) are stored securely in a database, while messages with the AI are saved only in your browser. Both are deleted automatically after 10 days."
       ]
     },
     "section2": {
@@ -243,7 +243,7 @@
     },
     "section3": {
       "title": "3. How Your Data Is Stored",
-      "description": "Contact messages are securely stored in a private database and also sent to my personal email address. Login data is used only to create or access your user identity on this site. No cookies or analytics are used to track your activity."
+      "description": "Contact messages are securely stored in a private database and also sent to my personal email address. Login data is used only to create or access your user identity on this site. No cookies or analytics are used to track your activity. Chat messages with me are stored in a secure database and forwarded to my personal email. Messages with the AI are saved only in your browser (local storage). Both are deleted automatically after 10 days."
     },
     "section4": {
       "title": "4. Your Rights",
@@ -282,5 +282,6 @@
     "contact_me": "get in touch",
     "button": "Go to homepage"
   },
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "cancel_policy": "Messages will be deleted automatically after 10 days from our servers and your browser. Want to remove earlier? Contact me from the contact form."
 }

@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { type PopUpInfoType } from '@/types/pop-up.types';
 
 const commonClasses =
-  'absolute z-12 rounded-md text-xs p-2 bg-black text-white border border-white/30 shadow-lg text-center';
+  'absolute z-12 rounded-md text-xs p-2 bg-foreground text-background shadow-elevation text-center';
 
 export const PopUpInfo = ({
   children,

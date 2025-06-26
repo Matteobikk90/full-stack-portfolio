@@ -1,7 +1,8 @@
 import type { ChatSliceType } from '@/types/chat.types';
+import { tenDays } from '@/utils/constants';
 import type { StateCreator } from 'zustand';
 
-const createModalSlice: StateCreator<ChatSliceType> = (set) => ({
+const createModalSlice: StateCreator<ChatSliceType> = (set, get) => ({
   isChatOpen: false,
   openChat: () => set({ isChatOpen: true }),
   closeChat: () => set({ isChatOpen: false }),
@@ -18,6 +19,19 @@ const createModalSlice: StateCreator<ChatSliceType> = (set) => ({
             : update,
       },
     })),
+  clearOldAiMessages: () => {
+    const now = Date.now();
+    const updated = Object.fromEntries(
+      Object.entries(get().aiMessages).map(([userId, messages]) => [
+        userId,
+        messages.filter(
+          (msg) => now - new Date(msg.createdAt).getTime() < tenDays
+        ),
+      ])
+    );
+
+    set({ aiMessages: updated });
+  },
 });
 
 export default createModalSlice;
