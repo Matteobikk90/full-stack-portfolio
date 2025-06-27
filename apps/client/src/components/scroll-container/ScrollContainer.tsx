@@ -18,7 +18,7 @@ export const ScrollContainer = ({
 
     <ScrollArea.Scrollbar
       orientation="vertical"
-      className="w-2 !-right-2 !relative"
+      className="w-2 !-right-2 !relative bg-foreground/10 rounded-full"
     >
       <ScrollArea.Thumb className={cn(backgroundColor, 'rounded-full')} />
     </ScrollArea.Scrollbar>

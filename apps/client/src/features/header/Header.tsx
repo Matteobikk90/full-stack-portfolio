@@ -13,13 +13,15 @@ export const Header = () => {
   const { t } = useTranslation();
   const { mode, toggleTheme, updateBackground, toggleModal, openChat } =
     useStore(
-      useShallow((state) => ({
-        mode: state.mode,
-        toggleTheme: state.toggleTheme,
-        updateBackground: state.updateBackground,
-        toggleModal: state.toggleModal,
-        openChat: state.openChat,
-      }))
+      useShallow(
+        ({ mode, toggleTheme, updateBackground, toggleModal, openChat }) => ({
+          mode,
+          toggleTheme,
+          updateBackground,
+          toggleModal,
+          openChat,
+        })
+      )
     );
 
   useEffect(() => {

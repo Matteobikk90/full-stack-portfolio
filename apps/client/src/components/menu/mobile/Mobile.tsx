@@ -15,9 +15,9 @@ import { useShallow } from 'zustand/shallow';
 export const MenuMobile = () => {
   const { t } = useTranslation();
   const { lang, toggleLang } = useStore(
-    useShallow((state) => ({
-      lang: state.lang,
-      toggleLang: state.toggleLang,
+    useShallow(({ lang, toggleLang }) => ({
+      lang,
+      toggleLang,
     }))
   );
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,7 @@ export const MenuMobile = () => {
     <>
       <nav
         className={cn(
-          'md:hidden fixed inset-0 top-[4.4rem] h-[calc(100dvh_-_4.4rem)] px-4 py-2 pt-0 flex flex-col justify-between container mx-auto',
+          'md:hidden fixed inset-0 top-[3.5rem] h-[calc(100dvh_-_3.5rem)] px-4 py-2 pt-0 flex flex-col justify-between container mx-auto',
           isOpen
             ? 'opacity-100 bg-background z-12'
             : 'opacity-0 bg-transparent delay-[800ms] z-10'

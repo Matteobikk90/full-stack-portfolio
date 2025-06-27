@@ -62,7 +62,7 @@ export const ContactForm = () => {
         e.preventDefault();
         form.handleSubmit();
       }}
-      className="space-y-6"
+      className="space-y-6 p-0.5"
     >
       <div className="grid grid-cols-2 gap-6">
         <form.Field
