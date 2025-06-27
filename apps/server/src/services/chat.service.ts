@@ -33,8 +33,12 @@ export const registerChat = (io: Server) => {
 
     const isAdmin = adminEmails.includes(user.email);
 
-    if (isAdmin) sendAllThreads(socket, admin.id);
-    else sendHistory(connectedId, admin.id, socket);
+    if (isAdmin) {
+      sendAllThreads(socket, admin.id);
+    } else {
+      sendHistory(connectedId, admin.id, socket);
+      socket.emit('chat:init', { adminId: admin.id });
+    }
 
     socket.on('admin:set-partner', (partnerId, callback) => {
       socket.data.chatPartnerId = partnerId;

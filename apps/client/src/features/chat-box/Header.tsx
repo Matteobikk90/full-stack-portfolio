@@ -1,6 +1,5 @@
 import PopUpInfo from '@/components/pop-up-info';
 import { useAuth } from '@/hooks/useAuth';
-import { useChatSocket } from '@/hooks/useChatSocket';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
@@ -9,14 +8,32 @@ import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
-  const { isConnecting, connectionError, socket } = useChatSocket();
   const { isAdmin } = useAuth();
-  const { closeChat, chatMode, setChatMode } = useStore(
-    useShallow(({ closeChat, chatMode, setChatMode }) => ({
-      closeChat,
-      chatMode,
-      setChatMode,
-    }))
+  const {
+    closeChat,
+    chatMode,
+    setChatMode,
+    isConnecting,
+    socket,
+    connectionError,
+  } = useStore(
+    useShallow(
+      ({
+        closeChat,
+        chatMode,
+        setChatMode,
+        isConnecting,
+        socket,
+        connectionError,
+      }) => ({
+        closeChat,
+        chatMode,
+        setChatMode,
+        isConnecting,
+        socket,
+        connectionError,
+      })
+    )
   );
   const { t } = useTranslation();
 
@@ -50,7 +67,7 @@ export const Header = () => {
             className={cn(
               'w-3 h-3 rounded-full',
               isConnecting
-                ? 'bg-experience animate-pulse'
+                ? 'animate-pulse bg-work'
                 : socket?.connected
                   ? 'bg-success'
                   : connectionError

@@ -1,6 +1,10 @@
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
+const adminEmails = [
+  'matteo.soresini@hotmail.it',
+  'matteo.soresini90@gmail.com',
+];
 
 async function main() {
   await prisma.$transaction([
@@ -8,6 +12,22 @@ async function main() {
     prisma.project.deleteMany(),
     prisma.experience.deleteMany(),
   ]);
+
+  await Promise.all(
+    adminEmails.map((email) =>
+      prisma.user.upsert({
+        where: { email },
+        update: {},
+        create: {
+          email,
+          name: 'Matteo',
+          avatarUrl: 'https://matteosoresini.com/favicon.png',
+          role: 'admin',
+          provider: 'google',
+        },
+      })
+    )
+  );
 
   await prisma.experience.create({
     data: {

@@ -1,14 +1,18 @@
 import { useAuth } from '@/hooks/useAuth';
-import type { ReturnTypeChat } from '@/hooks/useChatSocket';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
+import { useStore } from '@/stores';
+import { useShallow } from 'zustand/shallow';
 
-export const Tabs = ({
-  threads,
-  selectUser,
-  activeUserId,
-}: Pick<ReturnTypeChat, 'threads' | 'selectUser' | 'activeUserId'>) => {
+export const Tabs = () => {
   const { user } = useAuth();
+  const { activeUserId, threads, selectUser } = useStore(
+    useShallow(({ activeUserId, threads, selectUser }) => ({
+      activeUserId,
+      threads,
+      selectUser,
+    }))
+  );
 
   return (
     <div className="border-b overflow-x-auto p-2 whitespace-nowrap flex gap-2">
