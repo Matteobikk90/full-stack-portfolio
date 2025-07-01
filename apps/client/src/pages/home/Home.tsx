@@ -51,9 +51,9 @@ export const Home = () => {
           <div className="text-lg sm:text-xxl">
             <TypedText
               text={[
-                'React, TypeScript, Node.js, Prisma.',
-                'Testing, Design Systems, CI/CD.',
-                'Made with ❤️ in Italy.',
+                'React, TypeScript, Node.js, Prisma, PostgreSQL.',
+                'Testing, Design Systems, CI/CD, AWS.',
+                'Made with ❤️.',
               ]}
             />
           </div>

@@ -8,9 +8,9 @@
   "home": {
     "title": "Ciao, sono ",
     "name": "Matteo",
-    "subtitle": "Creo eleganti",
+    "subtitle": "Sviluppo eleganti",
     "subtitle2": "full-stack",
-    "subtitle3": "web app."
+    "subtitle3": "apps."
   },
   "footer": {
     "text": "Tutti i diritti riservati."
@@ -21,6 +21,7 @@
   "login_chat": "Accedi alla chat",
   "chat": "Chatta con me",
   "chat_me": "Chatta con Matteo",
+  "close_chat": "Close chat",
   "like": {
     "popup": "Metti like a questo progetto",
     "remove_popup": "Rimuovi il like",
