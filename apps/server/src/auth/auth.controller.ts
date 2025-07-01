@@ -70,6 +70,7 @@ export const handleRefreshToken = (req: Request, res: Response): void => {
 
 export const getMe = async (req: Request, res: Response) => {
   const userId = (req.user && (req.user as { userId: string }).userId) || null;
+  console.log('🔐 req.user:', req.user);
 
   if (!userId) {
     res.status(401).json({ message: 'Not authenticated' });

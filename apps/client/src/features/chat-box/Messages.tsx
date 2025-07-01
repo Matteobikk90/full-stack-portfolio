@@ -55,12 +55,6 @@ export const Messages = () => {
     [canType, input]
   );
 
-  console.log('[canType]', canType, {
-    connected: socket?.connected,
-    isAdmin,
-    activeUserId,
-  });
-
   useLayoutEffect(() => {
     scrollRef.current?.scrollTo({
       top: scrollRef.current.scrollHeight,

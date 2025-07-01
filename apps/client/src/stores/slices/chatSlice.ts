@@ -95,7 +95,6 @@ const createChatSlice: StateCreator<ChatSliceType> = (set, get) => ({
     });
 
     socket.on('chat:history', (hist) => {
-      console.log('ghj');
       if (!isAdmin && hist.length) {
         const adminId =
           hist[0].sender?.id === userId

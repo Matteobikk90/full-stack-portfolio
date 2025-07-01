@@ -15,10 +15,13 @@ export const useAuth = () => {
     () => adminEmails.includes(data?.email),
     [data?.email]
   );
+  console.log({ data });
+  console.log(!!data?.email);
+  console.log(!!data);
 
   return {
     user: data,
-    isAuthenticated: !!data,
+    isAuthenticated: !!data?.email,
     isLoading,
     isError,
     isAdmin,
