@@ -69,6 +69,16 @@ const createChatSlice: StateCreator<ChatSliceType> = (set, get) => ({
 
     socket.on('connect', () => {
       set({ isConnecting: false, connectionError: null });
+
+      if (isAdmin && get().activeUserId) {
+        socket.emit('admin:set-partner', get().activeUserId, () => {
+          const uid = get().activeUserId;
+          const threads = get().threads;
+          if (uid && threads[uid]) {
+            get().setChatMessages(uid, threads[uid]);
+          }
+        });
+      }
     });
 
     socket.on('connect_error', (err) => {
@@ -77,7 +87,11 @@ const createChatSlice: StateCreator<ChatSliceType> = (set, get) => ({
     });
 
     socket.on('disconnect', (reason) => {
-      if (reason === 'io server disconnect') socket.connect();
+      console.warn('Socket disconnected:', reason);
+      set({
+        isConnecting: true,
+        connectionError: 'Disconnected. Reconnecting...',
+      });
     });
 
     socket.on('chat:history', (hist) => {

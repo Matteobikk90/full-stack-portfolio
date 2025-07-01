@@ -45,7 +45,7 @@ export const notifyEmail = (
     receiver: { email: string };
   }
 ) => {
-  const target = isAdmin ? msg.receiver : msg.sender;
+  const target = msg.receiver;
 
   if (!target?.email) return;
 
@@ -57,19 +57,19 @@ export const notifyEmail = (
 
   transporter
     .sendMail({
-      from: `"Matteo Soresini Portfolio Chat" <${process.env.SMTP_USER}>`,
+      from: `Matteo Soresini Portfolio Chat`,
       to: target.email,
       subject,
       text,
       html: `
-              <div style="font-family: sans-serif; font-size: 14px;">
-                <p>${isAdmin ? 'Matteo replied to your message:' : 'You have a new message:'}</p>
-                <blockquote style="margin: 0; padding-left: 1em; border-left: 3px solid #ccc;">
-                  ${msg.content}
-                </blockquote>
-                <p>Reply on <a href="https://matteosoresini.com">matteosoresini.com</a></p>
-              </div>
-            `,
+        <div style="font-family: sans-serif; font-size: 14px;">
+          <p>${isAdmin ? 'Matteo replied to your message:' : 'You have a new message:'}</p>
+          <blockquote style="margin: 0; padding-left: 1em; border-left: 3px solid #ccc;">
+            ${msg.content}
+          </blockquote>
+          <p>Reply on <a href="https://matteosoresini.com">matteosoresini.com</a></p>
+        </div>
+      `,
     })
     .catch((err) => console.error('mail error', err));
 };
