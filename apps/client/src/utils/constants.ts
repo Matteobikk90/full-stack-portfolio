@@ -19,3 +19,4 @@ export const adminEmails = [
   'matteo.soresini90@gmail.com',
 ];
 export const tenDays = 10 * 24 * 60 * 60 * 1000;
+export const virtualAdminId = 'admin_virtual_id';

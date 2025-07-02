@@ -5,3 +5,5 @@ export const adminEmails = [
   'matteo.soresini90@gmail.com',
 ];
 export const emailCooldowns = new Map<string, ReturnType<typeof setTimeout>>();
+
+export const virtualAdminId = 'admin_virtual_id';

@@ -98,7 +98,7 @@ export const Actions = ({
           onClick={handleClick}
           className="flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed !p-0"
           variant="ghost"
-          sound={hasLiked ? 'like' : 'click'}
+          sound={isAuthenticated ? (hasLiked ? 'click' : 'like') : 'click'}
         >
           <HeartIcon
             weight={hasLiked ? 'fill' : 'regular'}

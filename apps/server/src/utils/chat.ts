@@ -1,4 +1,5 @@
 import { transporter } from '@/config/mailer';
+import { virtualAdminId } from '@/utils/constants';
 import prisma from '@/utils/prisma';
 import type { ChatMessage } from '@prisma/client';
 import type { Socket } from 'socket.io';
@@ -21,16 +22,18 @@ export const sendHistory = async (a: string, b: string, socket: Socket) => {
   socket.emit('chat:history', history);
 };
 
-export const sendAllThreads = async (socket: Socket, adminId: string) => {
+export const sendAllThreads = async (socket: Socket) => {
   const msgs = await prisma.chatMessage.findMany({
-    where: { OR: [{ senderId: adminId }, { receiverId: adminId }] },
+    where: {
+      OR: [{ senderId: virtualAdminId }, { receiverId: virtualAdminId }],
+    },
     orderBy: { createdAt: 'asc' },
     include: { sender: true, receiver: true },
   });
 
   const threads: Record<string, ChatMessage[]> = {};
   msgs.forEach((m) => {
-    const other = m.senderId === adminId ? m.receiverId : m.senderId;
+    const other = m.senderId === virtualAdminId ? m.receiverId : m.senderId;
     threads[other] ??= [];
     threads[other].push(m);
   });

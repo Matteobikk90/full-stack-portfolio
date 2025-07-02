@@ -23,7 +23,6 @@ async function main() {
           name: 'Matteo',
           avatarUrl: 'https://matteosoresini.com/favicon.png',
           role: 'admin',
-          provider: 'google',
         },
       })
     )

@@ -1,5 +1,10 @@
 import { notifyEmail, sendAllThreads, sendHistory } from '@/utils/chat';
-import { adminEmails, emailCooldowns, JWT_SECRET } from '@/utils/constants';
+import {
+  adminEmails,
+  emailCooldowns,
+  JWT_SECRET,
+  virtualAdminId,
+} from '@/utils/constants';
 import prisma from '@/utils/prisma';
 import jwt from 'jsonwebtoken';
 import { Server, Socket } from 'socket.io';
@@ -15,7 +20,7 @@ export const registerChat = (io: Server) => {
 
     try {
       const { userId } = jwt.verify(token, JWT_SECRET) as { userId: string };
-      socket.data.userId = userId;
+      socket.data.realUserId = userId;
       next();
     } catch (err) {
       console.error('JWT error', err);
@@ -24,25 +29,24 @@ export const registerChat = (io: Server) => {
   });
 
   io.on('connection', async (socket: Socket) => {
-    const connectedId = socket.data.userId as string;
-    const user = await prisma.user.findUnique({ where: { id: connectedId } });
-    const admin = await prisma.user.findFirst({
-      where: { email: { in: adminEmails } },
-    });
-    if (!user || !admin) return;
+    const realUserId = socket.data.realUserId;
+    const user = await prisma.user.findUnique({ where: { id: realUserId } });
+    if (!user) return;
 
     const isAdmin = adminEmails.includes(user.email);
+    const connectedId = isAdmin ? virtualAdminId : user.id;
+    socket.data.userId = connectedId;
 
     if (isAdmin) {
-      sendAllThreads(socket, admin.id);
+      sendAllThreads(socket);
     } else {
-      sendHistory(connectedId, admin.id, socket);
-      socket.emit('chat:init', { adminId: admin.id });
+      sendHistory(connectedId, virtualAdminId, socket);
+      socket.emit('chat:init', { adminId: virtualAdminId });
     }
 
     socket.on('admin:set-partner', (partnerId, callback) => {
       socket.data.chatPartnerId = partnerId;
-      sendHistory(admin.id, partnerId, socket).then(() => {
+      sendHistory(virtualAdminId, partnerId, socket).then(() => {
         if (callback) callback();
       });
     });
@@ -51,16 +55,21 @@ export const registerChat = (io: Server) => {
       const content = txt.trim();
       if (!content) return;
 
-      const to = isAdmin ? socket.data.chatPartnerId : admin.id;
+      const to = isAdmin ? socket.data.chatPartnerId : virtualAdminId;
       if (!to) {
         console.warn(`admin socket ${socket.id} has no partner set`);
         return;
       }
 
       const msg = await prisma.chatMessage.create({
-        data: { senderId: connectedId, receiverId: to, content },
+        data: {
+          senderId: connectedId,
+          receiverId: to,
+          content,
+        },
         include: { sender: true, receiver: true },
       });
+
       const targetId = isAdmin ? msg.receiverId : msg.senderId;
 
       io.sockets.sockets.forEach((s) => {
