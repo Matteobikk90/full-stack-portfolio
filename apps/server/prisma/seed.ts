@@ -5,6 +5,7 @@ const adminEmails = [
   'matteo.soresini@hotmail.it',
   'matteo.soresini90@gmail.com',
 ];
+const virtualAdminId = 'admin_virtual_id';
 
 async function main() {
   await prisma.$transaction([
@@ -12,6 +13,18 @@ async function main() {
     prisma.project.deleteMany(),
     prisma.experience.deleteMany(),
   ]);
+
+  await prisma.user.upsert({
+    where: { id: virtualAdminId },
+    update: {},
+    create: {
+      id: virtualAdminId,
+      email: 'matteo@admin.com',
+      name: 'Matteo',
+      avatarUrl: 'https://matteosoresini.com/favicon.png',
+      role: 'admin',
+    },
+  });
 
   await Promise.all(
     adminEmails.map((email) =>
