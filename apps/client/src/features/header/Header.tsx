@@ -86,23 +86,23 @@ export const Header = () => {
               <ChatsIcon className="size-5" weight="duotone" />
             </Button>
           </PopUpInfo>
-          {/* {isAuthenticated && ( */}
-          <PopUpInfo
-            hoverText="Logout"
-            position="bottom"
-            align="left"
-            className="md:static md:m-0 absolute mt-12"
-          >
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={handleLogout}
-              aria-label="Logout"
+          {isAuthenticated && (
+            <PopUpInfo
+              hoverText="Logout"
+              position="bottom"
+              align="left"
+              className="md:static md:m-0 absolute mt-12"
             >
-              <SignOutIcon className="size-5" weight="duotone" />
-            </Button>
-          </PopUpInfo>
-          {/* )} */}
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={handleLogout}
+                aria-label="Logout"
+              >
+                <SignOutIcon className="size-5" weight="duotone" />
+              </Button>
+            </PopUpInfo>
+          )}
         </div>
       </div>
     </header>
