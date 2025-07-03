@@ -1,4 +1,8 @@
-import { getMe, handleRefreshToken } from '@/auth/auth.controller';
+import {
+  getMe,
+  handleLogout,
+  handleRefreshToken,
+} from '@/auth/auth.controller';
 import { authenticateToken } from '@/auth/auth.middleware';
 import { authRateLimiter } from '@/middleware/rate-limit.middleware';
 import { Router, type Response } from 'express';
@@ -51,6 +55,8 @@ router.get('/protected', authenticateToken, (_req, res) => {
 router.get('/me', authenticateToken, getMe);
 
 router.post('/refresh', authRateLimiter, handleRefreshToken);
+
+router.post('/logout', handleLogout);
 
 // --- GitHub OAuth ---
 router.get('/github', authRateLimiter, (req, res, next) => {

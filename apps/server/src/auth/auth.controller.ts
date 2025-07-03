@@ -99,3 +99,18 @@ export const getMe = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Failed to retrieve user' });
   }
 };
+
+export const handleLogout = async (_req: Request, res: Response) => {
+  res
+    .clearCookie('accessToken', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+    })
+    .clearCookie('refreshToken', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+    })
+    .json({ message: 'Logged out' });
+};

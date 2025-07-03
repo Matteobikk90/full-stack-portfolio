@@ -23,9 +23,8 @@ export const useAuth = () => {
       id: isAdmin ? virtualAdminId : data.id,
     };
   }, [data, isAdmin]);
-  console.log({ data });
-  console.log(!!data?.email);
-  console.log(!!data);
+  console.log({ normalizedUser });
+  console.log({ isauth: !!normalizedUser });
 
   return {
     user: normalizedUser,
