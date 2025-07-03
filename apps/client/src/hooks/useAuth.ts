@@ -24,9 +24,6 @@ export const useAuth = () => {
     };
   }, [data, isAdmin, isError]);
 
-  console.log({ normalizedUser });
-  console.log({ isauth: !!normalizedUser });
-
   return {
     user: normalizedUser,
     isAuthenticated: !!normalizedUser,

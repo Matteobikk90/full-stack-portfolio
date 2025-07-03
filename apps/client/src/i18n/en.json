@@ -19,6 +19,7 @@
   "cv": "Download CV",
   "hire": "Hire me",
   "login_chat": "Login to chat",
+  "login_error": "Authentication failed. Please try again or with a different provider.",
   "chat": "Chat with me",
   "chat_placeholder": "Type your message...",
   "chat_me": "Chat with Matteo",

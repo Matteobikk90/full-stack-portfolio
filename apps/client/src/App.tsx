@@ -5,10 +5,12 @@ import { useTheme } from '@/hooks/useTheme';
 import { Toaster } from '@/lib/ui/sonner';
 import { Outlet } from '@tanstack/react-router';
 import AnimatedCursor from 'react-animated-cursor';
+import { useLoginErrorToast } from './hooks/useLoginAuthError';
 
 export default function App() {
   useTheme();
   useClearOldAiMessages();
+  useLoginErrorToast();
 
   return (
     <>
