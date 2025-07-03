@@ -68,9 +68,9 @@ importers:
       passport-linkedin-oauth2:
         specifier: github:auth0/passport-linkedin-oauth2#v3.0.0
         version: https://codeload.github.com/auth0/passport-linkedin-oauth2/tar.gz/8fe01d1c50124b25b6eaca3950151e6aceb800fe
-      passport-oauth2:
-        specifier: ^1.8.0
-        version: 1.8.0
+      passport-slack-oauth2:
+        specifier: ^1.2.0
+        version: 1.2.0
       socket.io:
         specifier: ^4.8.1
         version: 4.8.1
@@ -2130,6 +2130,9 @@ packages:
   passport-oauth2@1.8.0:
     resolution: {integrity: sha512-cjsQbOrXIDE4P8nNb3FQRCCmJJ/utnFKEz2NX209f7KOHPoX18gF7gBzBbLLsj2/je4KrgiwLLGjf0lm9rtTBA==}
     engines: {node: '>= 0.4.0'}
+
+  passport-slack-oauth2@1.2.0:
+    resolution: {integrity: sha512-SeQl8uPoi4ajhzgIvwQM7gW/6yPrKH0hPFjxcP/426SOZ0M9ZNDOfSa32q3NTw7KcwYOTjyWX/2xdJndQE7Rkg==}
 
   passport-strategy@1.0.0:
     resolution: {integrity: sha512-CB97UUvDKJde2V0KDWWB3lyf6PC3FaZP7YxZ2G8OAtn9p4HI9j9JLP9qjOGZFvyl8uwNT8qM+hGnz/n16NI7oA==}
@@ -4839,6 +4842,10 @@ snapshots:
       passport-strategy: 1.0.0
       uid2: 0.0.4
       utils-merge: 1.0.1
+
+  passport-slack-oauth2@1.2.0:
+    dependencies:
+      passport-oauth2: 1.8.0
 
   passport-strategy@1.0.0: {}
 

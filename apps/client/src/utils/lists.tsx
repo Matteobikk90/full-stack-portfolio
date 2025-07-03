@@ -4,8 +4,10 @@ import { Icon } from '@iconify/react';
 import {
   FilePdfIcon,
   GithubLogoIcon,
+  GoogleLogoIcon,
   HandshakeIcon,
   LinkedinLogoIcon,
+  SlackLogoIcon,
   WhatsappLogoIcon,
 } from '@phosphor-icons/react';
 
@@ -14,6 +16,34 @@ export const resumeItems = [
   { href: '/resume/education', id: 'education' },
   { href: '/resume/skills', id: 'skills' },
   { href: '/resume/about', id: 'about' },
+];
+
+export const authProviders = [
+  {
+    id: 'github',
+    label: 'GitHub',
+    icon: <GithubLogoIcon className="size-5" weight="duotone" />,
+  },
+  {
+    id: 'google',
+    label: 'Google',
+    icon: <GoogleLogoIcon className="size-5" weight="duotone" />,
+  },
+  // {
+  //   id: 'facebook',
+  //   label: 'Facebook',
+  //   icon: <FacebookLogoIcon className="size-5" weight="duotone" />,
+  // },
+  {
+    id: 'slack',
+    label: 'Slack',
+    icon: <SlackLogoIcon className="size-5" weight="duotone" />,
+  },
+  {
+    id: 'linkedin',
+    label: 'LinkedIn',
+    icon: <LinkedinLogoIcon className="size-5" weight="duotone" />,
+  },
 ];
 
 export const educationItems = [
