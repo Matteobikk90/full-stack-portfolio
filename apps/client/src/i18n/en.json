@@ -20,6 +20,7 @@
   "hire": "Hire me",
   "login_chat": "Login to chat",
   "chat": "Chat with me",
+  "chat_placeholder": "Type your message...",
   "chat_me": "Chat with Matteo",
   "close_chat": "Close chat",
   "like": {
@@ -283,5 +284,12 @@
     "button": "Go to homepage"
   },
   "loading": "Loading...",
-  "cancel_policy": "Messages will be deleted automatically after 10 days from our servers and your browser. Want to remove earlier? Contact me from the contact form."
+  "cancel_policy": "Messages will be deleted automatically after 10 days from our servers and your browser. Want to remove earlier? Contact me from the contact form.",
+  "toast": {
+    "title": "Info"
+  },
+  "logout": {
+    "success": "Successfully logged out",
+    "error": "An error occurred while logging out"
+  }
 }

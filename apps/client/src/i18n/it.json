@@ -20,8 +20,9 @@
   "hire": "Assumimi",
   "login_chat": "Accedi alla chat",
   "chat": "Chatta con me",
+  "chat_placeholder": "Scrivi messaggio...",
   "chat_me": "Chatta con Matteo",
-  "close_chat": "Close chat",
+  "close_chat": "Chiudi chat",
   "like": {
     "popup": "Metti like a questo progetto",
     "remove_popup": "Rimuovi il like",
@@ -283,5 +284,12 @@
     "button": "Vai alla homepage"
   },
   "loading": "Caricamento...",
-  "cancel_policy": "I messaggi verranno eliminati automaticamente dopo 10 giorni dai nostri server e dal tuo browser. Vuoi rimuoverli prima? Contattami tramite il modulo di contatto."
+  "cancel_policy": "I messaggi verranno eliminati automaticamente dopo 10 giorni dai nostri server e dal tuo browser. Vuoi rimuoverli prima? Contattami tramite il modulo di contatto.",
+  "toast": {
+    "title": "Info"
+  },
+  "logout": {
+    "success": "Logout avvenuto con successo",
+    "error": "Errore durante il logout"
+  }
 }

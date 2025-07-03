@@ -17,15 +17,15 @@ export const useAuth = () => {
   );
 
   const normalizedUser = useMemo(() => {
-    if (!data) return null;
+    if (!data || isError) return null;
     return {
       ...data,
       id: isAdmin ? virtualAdminId : data.id,
     };
-  }, [data, isAdmin]);
-  console.log({ data });
-  console.log(!!data?.email);
-  console.log(!!data);
+  }, [data, isAdmin, isError]);
+
+  console.log({ normalizedUser });
+  console.log({ isauth: !!normalizedUser });
 
   return {
     user: normalizedUser,
