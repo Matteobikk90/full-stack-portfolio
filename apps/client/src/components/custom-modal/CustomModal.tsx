@@ -6,13 +6,8 @@ import {
   DialogTitle,
 } from '@/lib/ui/dialog';
 import { useStore } from '@/stores';
-import {
-  FacebookLogoIcon,
-  GithubLogoIcon,
-  GoogleLogoIcon,
-  LinkedinLogoIcon,
-  XIcon,
-} from '@phosphor-icons/react';
+import { authProviders } from '@/utils/lists';
+import { XIcon } from '@phosphor-icons/react';
 import { Link, useLocation } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -49,36 +44,18 @@ export const CustomModal = () => {
         </DialogDescription>
 
         <div className="grid grid-cols-2 gap-4 mb-0">
-          <a href={`https://matteosoresini.com/auth/github?state=${pathname}`}>
-            <Button variant="outline" className="w-full">
-              <GithubLogoIcon className="size-5" weight="duotone" />
-              GitHub
-            </Button>
-          </a>
-          <a href={`https://matteosoresini.com/auth/google?state=${pathname}`}>
-            <Button variant="outline" className="w-full">
-              <GoogleLogoIcon className="size-5" weight="duotone" />
-              Google
-            </Button>
-          </a>
-          <a
-            href={`https://matteosoresini.com/auth/facebook?state=${pathname}`}
-            className="w-full"
-          >
-            <Button variant="outline" className="w-full">
-              <FacebookLogoIcon className="size-5" weight="duotone" />
-              Facebook
-            </Button>
-          </a>
-          <a
-            href={`https://matteosoresini.com/auth/linkedin?state=${pathname}`}
-            className="w-full"
-          >
-            <Button variant="outline" className="w-full">
-              <LinkedinLogoIcon className="size-5" weight="duotone" />
-              LinkedIn
-            </Button>
-          </a>
+          {authProviders.map(({ id, label, icon }) => (
+            <a
+              key={id}
+              href={`https://matteosoresini.com/auth/${id}?state=${pathname}`}
+              className="w-full"
+            >
+              <Button variant="outline" className="w-full">
+                {icon}
+                {label}
+              </Button>
+            </a>
+          ))}
         </div>
         <p className="text-xs leading-relaxed">
           {t('modal.privacy.one')}{' '}

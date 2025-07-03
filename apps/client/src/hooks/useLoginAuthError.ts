@@ -1,12 +1,13 @@
+import { Route } from '@/routes/__root';
 import { toastDuration } from '@/utils/constants';
-import { useNavigate, useSearch } from '@tanstack/react-router';
+import { useNavigate } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 export const useLoginErrorToast = () => {
   const navigate = useNavigate();
-  const { reason }: { reason: string } = useSearch({ from: '/' });
+  const { reason }: { reason?: string } = Route.useSearch();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -15,7 +16,12 @@ export const useLoginErrorToast = () => {
         description: t('login_error'),
         duration: toastDuration,
       });
-      navigate({ to: '/', replace: true });
+
+      navigate({
+        to: '/',
+        search: {},
+        replace: true,
+      });
     }
-  }, [t, reason, navigate]);
+  }, [reason, navigate, t]);
 };

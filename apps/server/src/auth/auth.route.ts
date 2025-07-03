@@ -148,5 +148,26 @@ router.get(
     sendTokensAndRedirect(res, user.id, redirect);
   }
 );
+// --- Slack OAuth ---
+router.get('/slack', authRateLimiter, (req, res, next) => {
+  passport.authenticate('slack', {
+    session: false,
+    state: req.query.state as string,
+  })(req, res, next);
+});
+
+router.get(
+  '/slack/callback',
+  authRateLimiter,
+  passport.authenticate('slack', {
+    session: false,
+    failureRedirect: '/?reason=oauth-failed',
+  }),
+  (req, res) => {
+    const user = req.user as { id: string };
+    const redirect = (req.query.state as string) || '/';
+    sendTokensAndRedirect(res, user.id, redirect);
+  }
+);
 
 export default router;

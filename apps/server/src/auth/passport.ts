@@ -1,3 +1,4 @@
+import { createRequire } from 'node:module';
 import {
   OAuthProfile,
   ProviderEnum,
@@ -13,6 +14,9 @@ import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as LinkedInStrategy } from 'passport-linkedin-oauth2';
 import type { VerifyCallback } from 'passport-oauth2';
 
+const require = createRequire(import.meta.url);
+const { Strategy: SlackStrategy } = require('passport-slack-oauth2');
+
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
 const GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL!;
@@ -22,6 +26,9 @@ const GOOGLE_CALLBACK_URL = process.env.GOOGLE_CALLBACK_URL!;
 const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID!;
 const FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_CLIENT_SECRET!;
 const FACEBOOK_CALLBACK_URL = process.env.FACEBOOK_CALLBACK_URL!;
+const SLACK_CLIENT_ID = process.env.SLACK_CLIENT_ID!;
+const SLACK_CLIENT_SECRET = process.env.SLACK_CLIENT_SECRET!;
+const SLACK_CALLBACK_URL = process.env.SLACK_CALLBACK_URL!;
 const LINKEDIN_CLIENT_ID = process.env.LINKEDIN_CLIENT_ID!;
 const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET!;
 const LINKEDIN_CALLBACK_URL = process.env.LINKEDIN_CALLBACK_URL!;
@@ -118,5 +125,17 @@ passport.use(
       scope: ['openid', 'profile', 'email'],
     },
     handleOAuthCallback(ProviderEnum.linkedin)
+  )
+);
+
+passport.use(
+  new SlackStrategy(
+    {
+      clientID: SLACK_CLIENT_ID,
+      clientSecret: SLACK_CLIENT_SECRET,
+      callbackURL: SLACK_CALLBACK_URL,
+      scope: ['identity.basic', 'identity.email', 'identity.avatar'],
+    },
+    handleOAuthCallback(ProviderEnum.slack)
   )
 );

@@ -23,5 +23,5 @@
       "outputCheck": ["js", "json", "jsx", "mjs", "ts", "tsx"]
     }
   },
-  "include": ["src", "src/types", "scripts"]
+  "include": ["src", "src/types", "scripts", "passport-slack-oauth2.d.ts"]
 }

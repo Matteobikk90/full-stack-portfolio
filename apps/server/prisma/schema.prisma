@@ -23,6 +23,7 @@ enum Provider {
   google
   facebook
   linkedin
+  slack
 }
 
 model User {
