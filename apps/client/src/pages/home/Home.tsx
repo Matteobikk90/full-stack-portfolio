@@ -59,7 +59,7 @@ export const Home = () => {
           </div>
         </article>
         <article
-          className="relative m-auto z-11 cursor-pointer w-[200px] h-[300px] sm:h-[375px] sm:w-[250px]"
+          className="relative m-auto z-11 w-[200px] h-[300px] sm:h-[375px] sm:w-[250px]"
           onClick={handleClick}
         >
           <img

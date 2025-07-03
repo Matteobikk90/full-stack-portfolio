@@ -179,7 +179,7 @@ export const Messages = () => {
           ref={inputRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message..."
+          placeholder={t('chat_placeholder')}
           disabled={!canType}
           maxLength={350}
           className="flex-1"

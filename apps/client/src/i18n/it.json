@@ -20,8 +20,9 @@
   "hire": "Assumimi",
   "login_chat": "Accedi alla chat",
   "chat": "Chatta con me",
+  "chat_placeholder": "Scrivi messaggio...",
   "chat_me": "Chatta con Matteo",
-  "close_chat": "Close chat",
+  "close_chat": "Chiudi chat",
   "like": {
     "popup": "Metti like a questo progetto",
     "remove_popup": "Rimuovi il like",

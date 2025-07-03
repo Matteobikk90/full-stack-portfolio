@@ -1,7 +1,7 @@
 import { MenuDesktop, MenuMobile } from '@/components/menu';
 import PopUpInfo from '@/components/pop-up-info';
 import { useAuth } from '@/hooks/useAuth';
-import { useLogout } from '@/hooks/useLogOut';
+import { useLogout } from '@/hooks/useLogout';
 import { Button } from '@/lib/ui/button';
 import { useStore } from '@/stores';
 import {
@@ -70,23 +70,29 @@ export const Header = () => {
             )}
           </Button>
         </PopUpInfo>
-        <PopUpInfo
-          hoverText={isAuthenticated ? t('chat') : t('login_chat')}
-          position="bottom"
-          align="left"
-        >
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handleClick}
-            className="animate-pulse-slow"
-            aria-label={isAuthenticated ? t('chat') : t('login_chat')}
+        <div className="flex flex-col md:flex-row gap-3 sm:gap-4 relative">
+          <PopUpInfo
+            hoverText={isAuthenticated ? t('chat') : t('login_chat')}
+            position="bottom"
+            align="left"
           >
-            <ChatsIcon className="size-5" weight="duotone" />
-          </Button>
-        </PopUpInfo>
-        {isAuthenticated && (
-          <PopUpInfo hoverText="Logout" position="bottom" align="left">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={handleClick}
+              className="animate-pulse-slow"
+              aria-label={isAuthenticated ? t('chat') : t('login_chat')}
+            >
+              <ChatsIcon className="size-5" weight="duotone" />
+            </Button>
+          </PopUpInfo>
+          {/* {isAuthenticated && ( */}
+          <PopUpInfo
+            hoverText="Logout"
+            position="bottom"
+            align="left"
+            className="md:static md:m-0 absolute mt-12"
+          >
             <Button
               variant="outline"
               size="icon"
@@ -96,7 +102,8 @@ export const Header = () => {
               <SignOutIcon className="size-5" weight="duotone" />
             </Button>
           </PopUpInfo>
-        )}
+          {/* )} */}
+        </div>
       </div>
     </header>
   );
