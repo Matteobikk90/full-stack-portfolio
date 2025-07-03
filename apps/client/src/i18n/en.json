@@ -283,5 +283,12 @@
     "button": "Go to homepage"
   },
   "loading": "Loading...",
-  "cancel_policy": "Messages will be deleted automatically after 10 days from our servers and your browser. Want to remove earlier? Contact me from the contact form."
+  "cancel_policy": "Messages will be deleted automatically after 10 days from our servers and your browser. Want to remove earlier? Contact me from the contact form.",
+  "toast": {
+    "title": "Info"
+  },
+  "logout": {
+    "success": "Successfully logged out",
+    "error": "An error occurred while logging out"
+  }
 }

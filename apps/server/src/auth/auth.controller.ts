@@ -112,5 +112,5 @@ export const handleLogout = async (_req: Request, res: Response) => {
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
     })
-    .json({ message: 'Logged out' });
+    .json({ message: 'Successfully logged out' });
 };
