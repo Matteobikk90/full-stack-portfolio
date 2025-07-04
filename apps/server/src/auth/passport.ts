@@ -1,4 +1,3 @@
-import { createRequire } from 'node:module';
 import {
   OAuthProfile,
   ProviderEnum,
@@ -13,9 +12,9 @@ import { Strategy as GitHubStrategy } from 'passport-github2';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as LinkedInStrategy } from 'passport-linkedin-oauth2';
 import type { VerifyCallback } from 'passport-oauth2';
+import SlackStrategyModule from 'passport-slack-oauth2';
 
-const require = createRequire(import.meta.url);
-const { Strategy: SlackStrategy } = require('passport-slack-oauth2');
+const SlackStrategy = SlackStrategyModule.Strategy;
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
@@ -134,6 +133,8 @@ passport.use(
       clientID: SLACK_CLIENT_ID,
       clientSecret: SLACK_CLIENT_SECRET,
       callbackURL: SLACK_CALLBACK_URL,
+      authorizationURL: 'https://slack.com/oauth/authorize',
+      tokenURL: 'https://slack.com/api/oauth.access',
       scope: ['identity.basic', 'identity.email', 'identity.avatar'],
     },
     handleOAuthCallback(ProviderEnum.slack)

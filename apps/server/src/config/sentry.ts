@@ -8,7 +8,6 @@ export function initSentry() {
     sendDefaultPii: true,
     integrations: [nodeProfilingIntegration()],
     tracesSampleRate: 1.0,
-    profilesSampleRate: 1.0,
     profileLifecycle: 'trace',
     environment: String(PORT) === '4000' ? 'development' : 'production',
   });
