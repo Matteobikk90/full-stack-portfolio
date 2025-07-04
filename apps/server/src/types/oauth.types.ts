@@ -15,8 +15,10 @@ export interface SlackOAuthProfile extends Omit<Profile, 'name'> {
     givenName: string;
     middleName?: string;
   };
-  emails?: { value: string }[];
-  photos?: { value: string }[];
+  user?: {
+    email?: string;
+    image_192?: string;
+  };
 }
 
 export type OAuthProfile =
