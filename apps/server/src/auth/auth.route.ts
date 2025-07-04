@@ -166,7 +166,12 @@ router.get(
   (req, res) => {
     const user = req.user as { id: string };
     const redirect = (req.query.state as string) || '/';
-    sendTokensAndRedirect(res, user.id, redirect);
+    try {
+      sendTokensAndRedirect(res, user.id, redirect);
+    } catch (err) {
+      console.error('❌ Error in Slack callback redirect:', err);
+      res.redirect('/?reason=oauth-callback-error');
+    }
   }
 );
 

@@ -1,3 +1,4 @@
+import type { Profile } from 'passport';
 import { type Profile as FacebookProfile } from 'passport-facebook';
 import { type Profile as GitHubProfile } from 'passport-github2';
 import { type Profile as GoogleProfile } from 'passport-google-oauth20';
@@ -8,13 +9,12 @@ export interface LinkedInOpenIDProfile extends LinkedinProfile {
   picture?: string;
 }
 
-export interface SlackOAuthProfile {
-  id: string;
-  displayName: string;
-  username?: string;
-  name?: string | { familyName?: string; givenName?: string };
-  emails?: { value: string }[];
-  photos?: { value: string }[];
+export interface SlackOAuthProfile extends Omit<Profile, 'name'> {
+  name?: {
+    familyName: string;
+    givenName: string;
+    middleName?: string;
+  };
   user?: {
     email?: string;
     image_192?: string;

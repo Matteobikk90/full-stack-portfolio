@@ -3,6 +3,7 @@ import {
   ProviderEnum,
   ProviderTypes,
   type LinkedInOpenIDProfile,
+  type SlackOAuthProfile,
 } from '@/types/oauth.types';
 import { adminEmails } from '@/utils/constants';
 import prisma from '@/utils/prisma';
@@ -41,19 +42,32 @@ const handleOAuthCallback =
     done: VerifyCallback
   ) => {
     try {
+      console.log(
+        `📥 [${provider}] Raw profile:`,
+        JSON.stringify(profile, null, 2)
+      );
+
       const email =
-        provider === ProviderEnum.linkedin
-          ? (profile as LinkedInOpenIDProfile).email
-          : profile.emails?.[0]?.value;
+        provider === ProviderEnum.slack
+          ? (profile as SlackOAuthProfile).user?.email
+          : provider === ProviderEnum.linkedin
+            ? (profile as LinkedInOpenIDProfile).email
+            : profile.emails?.[0]?.value;
       const name =
         profile.displayName ||
         profile.username ||
-        (typeof profile.name === 'string' ? profile.name : '') ||
+        (typeof profile.name === 'string'
+          ? profile.name
+          : `${profile.name?.givenName ?? ''} ${profile.name?.familyName ?? ''}`.trim()) ||
         '';
       const avatarUrl =
-        profile.photos?.[0]?.value ||
-        (profile as LinkedInOpenIDProfile).picture;
+        provider === ProviderEnum.slack
+          ? (profile as SlackOAuthProfile).user?.image_192
+          : profile.photos?.[0]?.value ||
+            (profile as LinkedInOpenIDProfile).picture;
+
       if (!email) {
+        console.warn(`⚠️ [${provider}] No email found`);
         return done(null, false, {
           message: `${provider} account has no public email`,
         });
@@ -63,7 +77,6 @@ const handleOAuthCallback =
 
       if (!user) {
         const isAdmin = adminEmails.includes(email);
-
         user = await prisma.user.create({
           data: {
             email,
@@ -77,6 +90,7 @@ const handleOAuthCallback =
 
       return done(null, user);
     } catch (err) {
+      console.error(`❌ [${provider}] Error in handleOAuthCallback:`, err);
       return done(err);
     }
   };
