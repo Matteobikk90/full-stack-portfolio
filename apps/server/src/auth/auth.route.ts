@@ -150,7 +150,7 @@ router.get(
 );
 // --- Slack OAuth ---
 router.get('/slack', authRateLimiter, (req, res, next) => {
-  passport.authenticate('slack', {
+  passport.authenticate('Slack', {
     session: false,
     state: req.query.state as string,
   })(req, res, next);
@@ -159,7 +159,7 @@ router.get('/slack', authRateLimiter, (req, res, next) => {
 router.get(
   '/slack/callback',
   authRateLimiter,
-  passport.authenticate('slack', {
+  passport.authenticate('Slack', {
     session: false,
     failureRedirect: '/?reason=oauth-failed',
   }),
