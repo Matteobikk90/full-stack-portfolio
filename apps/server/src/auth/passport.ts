@@ -3,7 +3,6 @@ import {
   ProviderEnum,
   ProviderTypes,
   type LinkedInOpenIDProfile,
-  type SlackOAuthProfile,
 } from '@/types/oauth.types';
 import { adminEmails } from '@/utils/constants';
 import prisma from '@/utils/prisma';
@@ -50,11 +49,8 @@ const handleOAuthCallback =
       );
 
       const email =
-        provider === ProviderEnum.slack
-          ? (profile as SlackOAuthProfile).user?.email
-          : provider === ProviderEnum.linkedin
-            ? (profile as LinkedInOpenIDProfile).email
-            : profile.emails?.[0]?.value;
+        profile.emails?.[0]?.value || (profile as LinkedInOpenIDProfile).email;
+
       const name =
         profile.displayName ||
         profile.username ||
@@ -62,11 +58,10 @@ const handleOAuthCallback =
           ? profile.name
           : `${profile.name?.givenName ?? ''} ${profile.name?.familyName ?? ''}`.trim()) ||
         '';
+
       const avatarUrl =
-        provider === ProviderEnum.slack
-          ? (profile as SlackOAuthProfile).user?.image_192
-          : profile.photos?.[0]?.value ||
-            (profile as LinkedInOpenIDProfile).picture;
+        profile.photos?.[0]?.value ||
+        (profile as LinkedInOpenIDProfile).picture;
 
       if (!email) {
         console.warn(`⚠️ [${provider}] No email found`);
@@ -151,7 +146,7 @@ passport.use(
       callbackURL: SLACK_CALLBACK_URL,
       authorizationURL: SLACK_AUTH_URL,
       tokenURL: SLACK_TOKEN_URL,
-      scope: ['identity.basic', 'identity.email', 'identity.avatar'],
+      scope: ['users:read', 'users:read.email'],
     },
     handleOAuthCallback(ProviderEnum.slack)
   )
