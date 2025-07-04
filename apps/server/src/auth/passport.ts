@@ -29,6 +29,8 @@ const FACEBOOK_CALLBACK_URL = process.env.FACEBOOK_CALLBACK_URL!;
 const SLACK_CLIENT_ID = process.env.SLACK_CLIENT_ID!;
 const SLACK_CLIENT_SECRET = process.env.SLACK_CLIENT_SECRET!;
 const SLACK_CALLBACK_URL = process.env.SLACK_CALLBACK_URL!;
+const SLACK_AUTH_URL = process.env.SLACK_AUTH_URL!;
+const SLACK_TOKEN_URL = process.env.SLACK_TOKEN_URL!;
 const LINKEDIN_CLIENT_ID = process.env.LINKEDIN_CLIENT_ID!;
 const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET!;
 const LINKEDIN_CALLBACK_URL = process.env.LINKEDIN_CALLBACK_URL!;
@@ -147,8 +149,8 @@ passport.use(
       clientID: SLACK_CLIENT_ID,
       clientSecret: SLACK_CLIENT_SECRET,
       callbackURL: SLACK_CALLBACK_URL,
-      authorizationURL: 'https://slack.com/oauth/authorize',
-      tokenURL: 'https://slack.com/api/oauth.access',
+      authorizationURL: SLACK_AUTH_URL,
+      tokenURL: SLACK_TOKEN_URL,
       scope: ['identity.basic', 'identity.email', 'identity.avatar'],
     },
     handleOAuthCallback(ProviderEnum.slack)
