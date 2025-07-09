@@ -33,6 +33,8 @@ full-stack-portfolio/
 - Zod for validation
 - Zustand for global state
 - Socket.io integration
+- AI Chat powered by OpenAI
+- Internationalization (i18n) with i18next and react-i18next
 
 ### Backend (`apps/server`)
 
@@ -42,7 +44,9 @@ full-stack-portfolio/
 - Socket.IO integration
 - Zod for request validation
 - Sentry integration
+- OpenAI SDK for AI assistant
 - Nodemailer email support
+- Notifications: Nodemailer (admin alerts)
 
 ---
 
