@@ -10,50 +10,71 @@ import { Actions } from '@/pages/work/Actions';
 import { useStore } from '@/stores';
 import { imageMap } from '@/utils/slider';
 import { useLoaderData } from '@tanstack/react-router';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useMemo } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const Work = () => {
   const { t } = useTranslation();
   const { data } = useLoaderData({ from: '/work' });
   const activeSlide = useStore(({ activeSlide }) => activeSlide);
-  const activeWork = useMemo(() => data[activeSlide], [activeSlide, data]);
+  const activeWork = data[activeSlide];
+
+  // Work around for Firefox (Not working with motion)
+  const [isFadingOut, setIsFadingOut] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(activeWork);
+  const isFirstRender = useRef(true);
+  const previousSlide = useRef(activeSlide);
+  useLayoutEffect(() => {
+    const isInitial = isFirstRender.current;
+    const hasChanged = previousSlide.current !== activeSlide;
+
+    if (isInitial || !hasChanged) {
+      isFirstRender.current = false;
+      previousSlide.current = activeSlide;
+      setCurrentSlide(activeWork);
+      return;
+    }
+
+    setIsFadingOut(true);
+    const timeoutId = setTimeout(() => {
+      previousSlide.current = activeSlide;
+      setCurrentSlide(activeWork);
+      setIsFadingOut(false);
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, [activeSlide, activeWork]);
 
   return (
     <main className="flex flex-col gap-4 md:gap-12">
       <h1 className="text-work">{t('work.title')}</h1>
       <ScrollContainer className="flex-1 min-h-0" backgroundColor="bg-work">
-        <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-center lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12 flex-1 min-h-0">
-          <AnimatePresence mode="wait">
-            <motion.article
-              key={activeWork.slug}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1, ease: 'easeInOut' }}
-              className="space-y-2"
+        <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-start lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12 flex-1 min-h-0">
+          <article
+            className={`transition-opacity duration-1000 space-y-2 ${isFadingOut ? 'opacity-0' : 'opacity-100'}`}
+          >
+            <h2 className="lg:text-9xl text-5xl leading-none text-outline font-medium">
+              {currentSlide.number}
+            </h2>
+            <h3 className="font-medium">{currentSlide.title}</h3>
+            <p>{t(`work.${currentSlide.slug}.description`)}</p>
+            <ul
+              key={currentSlide.slug}
+              className="flex flex-wrap gap-2 text-xs"
             >
-              <h2 className="lg:text-9xl text-5xl leading-none text-outline font-medium">
-                {activeWork.number}
-              </h2>
-              <h3 className="font-medium">{activeWork.title}</h3>
-              <p>{t(`work.${activeWork.slug}.description`)}</p>
-              <ul className="flex flex-wrap gap-2 text-xs">
-                {activeWork.technologies.map((tech, index) => (
-                  <li
-                    key={tech}
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                    className="bg-gray text-work p-2 rounded-md animate-fade-up"
-                  >
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-              <hr className="my-4 border-work" />
-              <Actions activeWork={activeWork} />
-            </motion.article>
-          </AnimatePresence>
+              {currentSlide.technologies.map((tech, index) => (
+                <li
+                  key={tech}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="bg-gray text-work p-2 rounded-md animate-fade-up"
+                >
+                  {tech}
+                </li>
+              ))}
+            </ul>
+            <hr className="my-4 border-work" />
+            <Actions activeWork={currentSlide} />
+          </article>
           <article>
             <Carousel className="relative flex flex-col space-y-8">
               <CarouselContent>
