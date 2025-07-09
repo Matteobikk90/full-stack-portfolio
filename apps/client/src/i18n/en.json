@@ -292,5 +292,6 @@
   "logout": {
     "success": "Successfully logged out",
     "error": "An error occurred while logging out"
-  }
+  },
+  "info_provider": "✅ Google and LinkedIn are the simplest. Just log in with your email and password.\n⚠️ GitHub requires a public email in your profile to work properly.\n🧩 Slack asks you to choose or log into a Slack workspace first. If you don’t have one, Slack login won’t work."
 }

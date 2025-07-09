@@ -292,5 +292,6 @@
   "logout": {
     "success": "Logout avvenuto con successo",
     "error": "Errore durante il logout"
-  }
+  },
+  "info_provider": "✅ Google e LinkedIn sono i più semplici: accedi con email e password.\n⚠️ GitHub richiede che la tua email sia pubblica nel profilo.\n🧩 Slack ti chiederà di scegliere o accedere a un workspace Slack. Se non ne hai uno, l’accesso con Slack non funzionerà."
 }

@@ -20,14 +20,14 @@ export const resumeItems = [
 
 export const authProviders = [
   {
-    id: 'github',
-    label: 'GitHub',
-    icon: <GithubLogoIcon className="size-5" weight="duotone" />,
-  },
-  {
     id: 'google',
     label: 'Google',
     icon: <GoogleLogoIcon className="size-5" weight="duotone" />,
+  },
+  {
+    id: 'linkedin',
+    label: 'LinkedIn',
+    icon: <LinkedinLogoIcon className="size-5" weight="duotone" />,
   },
   // {
   //   id: 'facebook',
@@ -40,9 +40,9 @@ export const authProviders = [
     icon: <SlackLogoIcon className="size-5" weight="duotone" />,
   },
   {
-    id: 'linkedin',
-    label: 'LinkedIn',
-    icon: <LinkedinLogoIcon className="size-5" weight="duotone" />,
+    id: 'github',
+    label: 'GitHub',
+    icon: <GithubLogoIcon className="size-5" weight="duotone" />,
   },
 ];
 

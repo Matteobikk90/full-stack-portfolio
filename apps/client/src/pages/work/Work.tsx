@@ -11,13 +11,14 @@ import { useStore } from '@/stores';
 import { imageMap } from '@/utils/slider';
 import { useLoaderData } from '@tanstack/react-router';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const Work = () => {
   const { t } = useTranslation();
   const { data } = useLoaderData({ from: '/work' });
-  const activeSlide = useStore((state) => state.activeSlide);
-  const activeWork = data[activeSlide];
+  const activeSlide = useStore(({ activeSlide }) => activeSlide);
+  const activeWork = useMemo(() => data[activeSlide], [activeSlide, data]);
 
   return (
     <main className="flex flex-col gap-4 md:gap-12">
@@ -26,7 +27,7 @@ export const Work = () => {
         <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-center lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12 flex-1 min-h-0">
           <AnimatePresence mode="wait">
             <motion.article
-              key={activeSlide}
+              key={activeWork.slug}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -38,7 +39,7 @@ export const Work = () => {
               </h2>
               <h3 className="font-medium">{activeWork.title}</h3>
               <p>{t(`work.${activeWork.slug}.description`)}</p>
-              <ul key={activeSlide} className="flex flex-wrap gap-2 text-xs">
+              <ul className="flex flex-wrap gap-2 text-xs">
                 {activeWork.technologies.map((tech, index) => (
                   <li
                     key={tech}
