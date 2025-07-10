@@ -12,9 +12,7 @@ export const ScrollContainer = ({
     type={type}
     className={cn('relative w-full flex', className)}
   >
-    <ScrollArea.Viewport className="w-full h-full">
-      {children}
-    </ScrollArea.Viewport>
+    <ScrollArea.Viewport className="w-full">{children}</ScrollArea.Viewport>
 
     <ScrollArea.Scrollbar
       orientation="vertical"

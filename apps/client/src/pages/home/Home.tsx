@@ -1,6 +1,7 @@
 import avatarMask from '@/assets/images/avatar-aku.png';
 import avatar from '@/assets/images/avatar.png';
 import ParticlesBackground from '@/components/particles';
+import { ScrollContainer } from '@/components/scroll-container';
 import TypedText from '@/components/typed-text';
 import { useUISound } from '@/hooks/useUISound';
 import { cn } from '@/lib/utils';
@@ -33,61 +34,65 @@ export const Home = () => {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center gap-5">
+    <main className="flex flex-col">
       <ParticlesBackground />
-      <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-center lg:grid-cols-2">
-        <article className="space-y-4 sm:space-y-6">
-          <h1 className="p-0 text-left">
-            {t('home.title')}
-            <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-transparent [background-clip:text] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
-              Matteo
-            </span>{' '}
-            👋
-          </h1>
-          <h2>
-            {t('home.subtitle')} <strong>{t('home.subtitle2')}</strong>{' '}
-            {t('home.subtitle3')}
-          </h2>
-          <div className="text-lg sm:text-xxl">
-            <TypedText
-              text={[
-                'React, TypeScript, Node.js, Prisma, PostgreSQL.',
-                'Testing, Design Systems, CI/CD, AWS.',
-                'Made with ❤️.',
-              ]}
-            />
+      <ScrollContainer className="flex-1 min-h-0 z-10">
+        <section className="firefox-cell h-full">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 items-center justify-center lg:place-items-center h-full">
+            <article className="space-y-4 sm:space-y-6 order-2 lg:order-1">
+              <h1 className="p-0 text-left">
+                {t('home.title')}
+                <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-transparent [background-clip:text] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
+                  Matteo
+                </span>{' '}
+                👋
+              </h1>
+              <h2>
+                {t('home.subtitle')} <strong>{t('home.subtitle2')}</strong>{' '}
+                {t('home.subtitle3')}
+              </h2>
+              <div className="text-lg sm:text-xxl">
+                <TypedText
+                  text={[
+                    'React, TypeScript, Node.js, Prisma, PostgreSQL.',
+                    'Testing, Design Systems, CI/CD, AWS.',
+                    'Made with ❤️.',
+                  ]}
+                />
+              </div>
+            </article>
+            <article
+              className="relative z-11 w-[200px] h-[300px] sm:h-[375px] sm:w-[250px] order-1 lg:order-2"
+              onClick={handleClick}
+            >
+              <img
+                src={avatarMask}
+                alt="Avatar Mask"
+                className={cn(
+                  'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
+                  discovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                )}
+              />
+
+              <img
+                src={avatar}
+                alt="Avatar"
+                className={cn(
+                  'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
+                  discovered ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                )}
+              />
+
+              {!discovered && (
+                <>
+                  <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[65px] sm:top-[99px] sm:left-[82px]"></span>
+                  <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[121px] sm:top-[99px] sm:left-[151px]"></span>
+                </>
+              )}
+            </article>
           </div>
-        </article>
-        <article
-          className="relative m-auto z-11 w-[200px] h-[300px] sm:h-[375px] sm:w-[250px]"
-          onClick={handleClick}
-        >
-          <img
-            src={avatarMask}
-            alt="Avatar Mask"
-            className={cn(
-              'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
-              discovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            )}
-          />
-
-          <img
-            src={avatar}
-            alt="Avatar"
-            className={cn(
-              'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
-              discovered ? 'opacity-0 pointer-events-none' : 'opacity-100'
-            )}
-          />
-
-          {!discovered && (
-            <>
-              <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[65px] sm:top-[99px] sm:left-[82px]"></span>
-              <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[121px] sm:top-[99px] sm:left-[151px]"></span>
-            </>
-          )}
-        </article>
-      </section>
+        </section>
+      </ScrollContainer>
     </main>
   );
 };

@@ -148,7 +148,7 @@
     @apply flex flex-col h-[100dvh];
   }
 
-  @media (orientation: landscape) and (max-width: 768px) {
+  @media (orientation: landscape) and (max-width: 1024px) {
     #root {
       height: auto;
       min-height: 100vh;
@@ -209,5 +209,18 @@
 
   .text-outline:hover {
     -webkit-text-fill-color: var(--section-work);
+  }
+}
+
+[data-radix-scroll-area-viewport] > div {
+  height: 100% !important;
+}
+
+@supports (-moz-appearance: none) {
+  .firefox-cell {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
   }
 }
