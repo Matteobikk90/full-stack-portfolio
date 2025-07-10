@@ -7,6 +7,7 @@ const api = axios.create({
 });
 
 let isRefreshing = false;
+let refreshPromise: Promise<void> | null = null;
 
 api.interceptors.request.use(
   (config) => config,
@@ -22,14 +23,26 @@ api.interceptors.response.use(
 
       if (!isRefreshing) {
         isRefreshing = true;
-        try {
-          await api.post('/auth/refresh');
-        } finally {
-          isRefreshing = false;
-        }
+        refreshPromise = api
+          .post('/auth/refresh')
+          .then(() => {
+            isRefreshing = false;
+            refreshPromise = null;
+          })
+          .catch(() => {
+            isRefreshing = false;
+            refreshPromise = null;
+          });
       }
 
-      return api(original);
+      try {
+        if (refreshPromise) {
+          await refreshPromise;
+          return api(original);
+        }
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
     }
 
     return Promise.reject(err);

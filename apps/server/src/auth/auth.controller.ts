@@ -39,7 +39,7 @@ export const handleRefreshToken = (req: Request, res: Response): void => {
   const refreshToken = req.cookies?.refreshToken;
 
   if (!refreshToken) {
-    res.status(400).json({ message: 'Missing refresh token' });
+    res.status(401).json({ message: 'Missing refresh token' });
     return;
   }
 
