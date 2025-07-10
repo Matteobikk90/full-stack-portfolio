@@ -197,25 +197,25 @@
     "title": "Terms of Service",
     "intro": "By using the contact form on this website, you agree to the following terms and conditions.",
     "section1": {
-      "title": "1. Use of the Contact Form",
-      "content": "This form and login system are intended solely for legitimate inquiries, collaboration requests, or professional communication. Use of the form or login feature for spam, impersonation, or disruptive behavior is strictly prohibited and may result in access revocation."
+      "title": "1. Use of the Website",
+      "content": "This site and its login system are intended solely for real interactions such as chatting with Matteo, chatting with the AI, or liking projects. Spam, impersonation, or misuse will result in revoked access."
     },
     "section2": {
       "title": "2. Data Handling",
-      "content1": "By submitting the form, you consent to the collection and processing of your name, email address, and message for the purpose of communication. Your data will be stored securely and retained for a maximum of 10 days, after which admin chat messages are deleted from our servers and AI messages from your browser.",
+      "content1": "When you log in using Google, GitHub, LinkedIn, or Slack, we collect your name, email, and avatar. Likes and user identity are stored permanently unless requested for removal. Admin chat messages are deleted after 10 days. AI chat messages are stored in your browser and are also deleted after 10 days.",
       "content2": "For more details, see our"
     },
     "section3": {
       "title": "3. Limitation of Use",
-      "content": "I reserve the right to ignore, delete, or decline to respond to any message that is irrelevant, inappropriate, or outside the scope of this site's purpose."
+      "content": "We reserve the right to ignore or delete any interaction that is irrelevant, abusive, or off-purpose."
     },
     "section4": {
       "title": "4. Changes to These Terms",
-      "content": "These terms may be updated at any time. The most recent version will always be available on this page."
+      "content": "These terms may be updated at any time. The latest version will always be visible on this page."
     },
     "section5": {
-      "title": "5. Facebook Login and Data Removal",
-      "content": "Users who sign in using Facebook may request removal of their data by visiting the"
+      "title": "5. Data Deletion Request",
+      "content": "You may request the deletion of your personal data at any time by using the contact form on this website."
     },
     "privacyLink": "privacy policy",
     "deleteLink": "Data Deletion page",
@@ -226,40 +226,34 @@
     "intro": "This Privacy Policy explains how your personal data is collected, used, and protected when you interact with this portfolio website.",
     "section1": {
       "title": "1. What We Collect",
-      "description": "We collect the following types of information:",
+      "description": "We collect:",
       "list": [
-        "When submitting the contact form: your name, email, and message.",
-        "When logging in via a provider (e.g., GitHub, Google): your email, display name, and profile picture.",
-        "Optional data such as chat messages or project likes. Messages with me (the admin) are stored securely in a database, while messages with the AI are saved only in your browser. Both are deleted automatically after 10 days."
+        "Login via Google, GitHub, Slack, or LinkedIn: name, email, avatar",
+        "Project likes",
+        "Chat messages: admin messages stored in a secure DB and deleted after 10 days, AI messages stored only in your browser and also deleted after 10 days"
       ]
     },
     "section2": {
       "title": "2. Why We Collect It",
-      "description": "Your data is collected solely to:",
+      "description": "To:",
       "list": [
-        "Respond to your contact messages",
-        "Authenticate you as a real user (e.g., before you can like or chat)",
-        "Prevent spam and ensure respectful interactions"
+        "Authenticate users",
+        "Enable real-time chat and project likes",
+        "Prevent abuse and ensure fair use"
       ],
-      "disclaimer": "Your data is not shared with third parties and is not used for marketing purposes."
+      "disclaimer": "We do not use your data for marketing or share it with third parties."
     },
     "section3": {
       "title": "3. How Your Data Is Stored",
-      "description": "Contact messages are securely stored in a private database and also sent to my personal email address. Login data is used only to create or access your user identity on this site. No cookies or analytics are used to track your activity. Chat messages with me are stored in a secure database and forwarded to my personal email. Messages with the AI are saved only in your browser (local storage). Both are deleted automatically after 10 days."
+      "description": "User data and likes are securely stored. Admin chats are deleted after 10 days. AI messages never leave your browser and are deleted locally after 10 days."
     },
     "section4": {
       "title": "4. Your Rights",
-      "description": "You may request access to, correction of, or deletion of your data at any time by using the contact form."
+      "description": "You can request access or deletion of your data any time using the contact form."
     },
     "section5": {
       "title": "5. Contact",
-      "description": "For any questions about this Privacy Policy or your data, feel free to reach out using the contact form."
-    },
-    "section6": {
-      "title": "6. Data Deletion",
-      "description": "If you signed in with Facebook and would like your account data deleted from this website, please visit our",
-      "link": "Data Deletion page",
-      "afterLink": "and follow the instructions."
+      "description": "If you have questions or requests, please use the contact form."
     },
     "effectiveDate": "Effective Date"
   },

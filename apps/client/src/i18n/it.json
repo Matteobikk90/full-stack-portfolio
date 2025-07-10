@@ -197,25 +197,25 @@
     "title": "Termini di Servizio",
     "intro": "Utilizzando il modulo di contatto su questo sito, accetti i seguenti termini e condizioni.",
     "section1": {
-      "title": "1. Uso del modulo di contatto",
-      "content": "Il modulo e il sistema di login sono riservati a comunicazioni autentiche, richieste di collaborazione o contatti professionali. L’uso per spam, impersonificazione o abusi è vietato e può comportare la revoca dell’accesso."
+      "title": "1. Uso del modulo e del login",
+      "content": "Il modulo di contatto e il sistema di login sono riservati a comunicazioni autentiche, richieste di collaborazione o interazioni con l’AI. È vietato l’uso per spam, impersonificazione o abusi, e può comportare la revoca dell’accesso."
     },
     "section2": {
       "title": "2. Gestione dei dati",
-      "content1": "Inviando il modulo, acconsenti alla raccolta del tuo nome, email e messaggio per fini di comunicazione. I dati verranno archiviati in modo sicuro, trattenuti per un massimo di 10 giorni e poi eliminati automaticamente dai nostri server e dal tuo browser.",
+      "content1": "Quando effettui l’accesso, raccogliamo il tuo nome, email e immagine profilo per permetterti di chattare o mettere like. I tuoi dati vengono salvati in modo sicuro e mantenuti fino a richiesta di cancellazione.",
       "content2": "Per maggiori dettagli, consulta la nostra"
     },
     "section3": {
       "title": "3. Limitazioni d’uso",
-      "content": "Mi riservo il diritto di non rispondere o eliminare messaggi fuori tema, offensivi o non pertinenti allo scopo del sito."
+      "content": "Mi riservo il diritto di ignorare o cancellare messaggi offensivi, fuori tema o non pertinenti allo scopo di questo sito."
     },
     "section4": {
       "title": "4. Modifiche ai termini",
-      "content": "I termini possono essere aggiornati in qualsiasi momento. La versione più recente sarà disponibile su questa pagina."
+      "content": "Questi termini possono essere aggiornati in qualsiasi momento. La versione più recente sarà sempre disponibile su questa pagina."
     },
     "section5": {
-      "title": "5. Accesso tramite Facebook",
-      "content": "Gli utenti che accedono con Facebook possono richiedere la cancellazione dei dati accedendo alla"
+      "title": "5. Richiesta cancellazione dati",
+      "content": "Puoi richiedere la cancellazione dei tuoi dati in qualsiasi momento tramite il modulo di contatto presente sul sito."
     },
     "privacyLink": "privacy policy",
     "deleteLink": "pagina di cancellazione dati",
@@ -228,38 +228,32 @@
       "title": "1. Quali dati raccogliamo",
       "description": "Raccogliamo le seguenti informazioni:",
       "list": [
-        "Quando invii il modulo di contatto: nome, email e messaggio.",
-        "Quando accedi tramite provider (es. GitHub, Google): email, nome utente e immagine profilo.",
-        "Dati opzionali come messaggi in chat o like ai progetti durante l’interazione. I messaggi con me (l’amministratore) vengono salvati nel database e cancellati automaticamente dopo 10 giorni, mentre i messaggi con l’AI vengono salvati solo nel tuo browser e cancellati dopo 10 giorni."
+        "Nome, email e messaggio tramite il modulo di contatto.",
+        "Email, nome utente e avatar quando accedi tramite provider (Google, LinkedIn, GitHub, Slack).",
+        "Messaggi in chat e like ai progetti: i messaggi con me (admin) sono salvati nel database e cancellati dopo 10 giorni. I messaggi con l’AI restano solo nel tuo browser e vengono anch’essi cancellati dopo 10 giorni."
       ]
     },
     "section2": {
       "title": "2. Finalità della raccolta",
-      "description": "Usiamo i tuoi dati solo per:",
+      "description": "Utilizziamo i dati esclusivamente per:",
       "list": [
-        "Rispondere ai messaggi inviati dal modulo",
-        "Verificare che tu sia un utente autentico (prima di chattare o mettere like)",
-        "Prevenire spam e garantire interazioni corrette"
+        "Rispondere ai tuoi messaggi",
+        "Verificare la tua identità prima di chattare o mettere like",
+        "Prevenire spam o comportamenti inappropriati"
       ],
-      "disclaimer": "I dati non vengono condivisi con terzi né utilizzati a scopo pubblicitario."
+      "disclaimer": "I tuoi dati non vengono condivisi con terzi né utilizzati per fini pubblicitari."
     },
     "section3": {
       "title": "3. Conservazione dei dati",
-      "description": "I messaggi con me vengono salvati in un database sicuro e inoltrati alla mia email personale. I messaggi con l’AI sono memorizzati solo nel tuo browser (local storage). Entrambi vengono eliminati automaticamente dopo 10 giorni. I dati di login servono solo per autenticarti sul sito. Non usiamo cookie né sistemi di tracciamento."
+      "description": "I messaggi inviati vengono salvati in un database sicuro e inoltrati alla mia email. I messaggi con l’AI sono salvati solo nel tuo browser. Entrambi sono eliminati automaticamente dopo 10 giorni. I dati di accesso servono solo per autenticarti sul sito. Non vengono usati cookie né strumenti di tracciamento."
     },
     "section4": {
       "title": "4. I tuoi diritti",
-      "description": "Puoi in qualsiasi momento richiedere accesso, correzione o cancellazione dei tuoi dati tramite il modulo di contatto."
+      "description": "Puoi chiedere l’accesso, la modifica o la cancellazione dei tuoi dati in qualsiasi momento tramite il modulo di contatto."
     },
     "section5": {
       "title": "5. Contatti",
-      "description": "Per qualsiasi dubbio sui tuoi dati o sulla privacy, contattami tramite il modulo."
-    },
-    "section6": {
-      "title": "6. Eliminazione dati",
-      "description": "Se hai effettuato l’accesso con Facebook e desideri eliminare i tuoi dati, visita la nostra",
-      "link": "pagina di cancellazione dati",
-      "afterLink": "e segui le istruzioni indicate."
+      "description": "Per qualsiasi dubbio sulla privacy o sull’uso dei tuoi dati, contattami tramite il modulo."
     },
     "effectiveDate": "Data di entrata in vigore"
   },
