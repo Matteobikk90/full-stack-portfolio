@@ -1,13 +1,16 @@
 'use client';
 
+import { router } from '@/config/router';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
+import { useLoaderData } from '@tanstack/react-router';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import * as React from 'react';
+import { useRef } from 'react';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -52,6 +55,7 @@ function Carousel({
   ...props
 }: React.ComponentProps<'div'> & CarouselProps) {
   const setActiveSlide = useStore((state) => state.setActiveSlide);
+  const { data } = useLoaderData({ from: '/work/$slug' });
   const [carouselRef, api] = useEmblaCarousel(
     {
       ...opts,
@@ -61,6 +65,16 @@ function Carousel({
   );
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
   const [canScrollNext, setCanScrollNext] = React.useState(false);
+
+  const activeSlide = useStore((state) => state.activeSlide);
+  const hasScrolledToInitial = useRef(false);
+
+  React.useEffect(() => {
+    if (!api || hasScrolledToInitial.current) return;
+
+    api.scrollTo(activeSlide); // smooth scroll on mount
+    hasScrolledToInitial.current = true;
+  }, [api, activeSlide]);
 
   const onSelect = React.useCallback(
     (api: CarouselApi) => {
@@ -75,12 +89,30 @@ function Carousel({
   );
 
   const scrollPrev = React.useCallback(() => {
-    api?.scrollPrev();
-  }, [api]);
+    if (!api) return;
+    api.scrollPrev();
+
+    setTimeout(() => {
+      const newIndex = api.selectedScrollSnap();
+      const slug = data?.[newIndex]?.slug;
+      if (slug) {
+        router.navigate({ to: '/work/$slug', params: { slug } });
+      }
+    }, 0); // wait for scroll to settle
+  }, [api, data]);
 
   const scrollNext = React.useCallback(() => {
-    api?.scrollNext();
-  }, [api]);
+    if (!api) return;
+    api.scrollNext();
+
+    setTimeout(() => {
+      const newIndex = api.selectedScrollSnap();
+      const slug = data?.[newIndex]?.slug;
+      if (slug) {
+        router.navigate({ to: '/work/$slug', params: { slug } });
+      }
+    }, 0);
+  }, [api, data]);
 
   const handleKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
