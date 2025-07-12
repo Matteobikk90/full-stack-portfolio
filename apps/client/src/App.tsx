@@ -1,4 +1,4 @@
-import CustomModal from '@/components/custom-modal';
+import { CustomModal } from '@/components/custom-modal';
 import ChatBox from '@/features/chat-box';
 import { useClearOldAiMessages } from '@/hooks/useClearOldMessages';
 import { useTheme } from '@/hooks/useTheme';

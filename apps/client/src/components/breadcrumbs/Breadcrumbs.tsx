@@ -21,7 +21,12 @@ export const Breadcrumbs = () => {
     <nav className="text-sm mb-4 text-secondary">
       <ul className="flex items-center gap-2">
         <Link to={'/'}>
-          <PopUpInfo hoverText="Home" align="right" className="gap-2">
+          <PopUpInfo
+            hoverText="Home"
+            position="bottom"
+            align="right"
+            className="gap-2"
+          >
             <HouseIcon weight="duotone" className="size-5" />/
           </PopUpInfo>
         </Link>

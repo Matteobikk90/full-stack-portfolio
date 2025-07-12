@@ -6,7 +6,11 @@ import { useStore } from '@/stores';
 import { currentYear } from '@/utils/constants';
 import { actions } from '@/utils/lists';
 import { hoverStyles, menuLinks } from '@/utils/menu';
-import { DotsThreeOutlineVerticalIcon, XIcon } from '@phosphor-icons/react';
+import {
+  BinocularsIcon,
+  DotsThreeOutlineVerticalIcon,
+  XIcon,
+} from '@phosphor-icons/react';
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,10 +18,11 @@ import { useShallow } from 'zustand/shallow';
 
 export const MenuMobile = () => {
   const { t } = useTranslation();
-  const { lang, toggleLang } = useStore(
-    useShallow(({ lang, toggleLang }) => ({
+  const { lang, toggleLang, toggleModal } = useStore(
+    useShallow(({ lang, toggleLang, toggleModal }) => ({
       lang,
       toggleLang,
+      toggleModal,
     }))
   );
   const [isOpen, setIsOpen] = useState(false);
@@ -136,26 +141,45 @@ export const MenuMobile = () => {
         </div>
       </nav>
 
-      <PopUpInfo
-        hoverText={`${isOpen ? 'Close' : 'Open'} menu`}
-        position="bottom"
-        align="right"
-      >
-        <Button
-          variant="outline"
-          size="icon"
-          className="md:hidden relative"
-          onClick={() => setIsOpen((prev) => !prev)}
-          aria-label="Toggle menu"
-          sound="menu"
+      <div className="flex items-center gap-3">
+        <PopUpInfo
+          hoverText={`${isOpen ? 'Close' : 'Open'} menu`}
+          position="bottom"
+          align="right"
         >
-          {isOpen ? (
-            <XIcon className="size-5" weight="duotone" />
-          ) : (
-            <DotsThreeOutlineVerticalIcon className="size-5" weight="duotone" />
-          )}
-        </Button>
-      </PopUpInfo>
+          <Button
+            variant="outline"
+            size="icon"
+            className="md:hidden relative"
+            onClick={() => setIsOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+            sound="menu"
+          >
+            {isOpen ? (
+              <XIcon className="size-5" weight="duotone" />
+            ) : (
+              <DotsThreeOutlineVerticalIcon
+                className="size-5"
+                weight="duotone"
+              />
+            )}
+          </Button>
+        </PopUpInfo>
+        <PopUpInfo
+          hoverText={t('search.title')}
+          position="bottom"
+          className="md:hidden block"
+        >
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => toggleModal('filter')}
+            aria-label="Search"
+          >
+            <BinocularsIcon className="size-5" weight="duotone" />
+          </Button>
+        </PopUpInfo>
+      </div>
 
       <Link
         to="/"

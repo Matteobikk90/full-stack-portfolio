@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 export const ParticlesBackground = () => {
   const [init, setInit] = useState(false);
-  const background = useStore((state) => state.background);
+  const background = useStore(({ background }) => background);
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {

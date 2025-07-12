@@ -287,5 +287,21 @@
     "success": "Successfully logged out",
     "error": "An error occurred while logging out"
   },
-  "info_provider": "✅ Google and LinkedIn are the simplest. Just log in with your email and password.\n⚠️ GitHub requires a public email in your profile to work properly.\n🧩 Slack asks you to choose or log into a Slack workspace first. If you don’t have one, Slack login won’t work."
+  "info_provider": "✅ Google and LinkedIn are the simplest. Just log in with your email and password.\n⚠️ GitHub requires a public email in your profile to work properly.\n🧩 Slack asks you to choose or log into a Slack workspace first. If you don’t have one, Slack login won’t work.",
+  "search": {
+    "title": "Search",
+    "description": "Filter projects and work experience by technology, location, or company.",
+    "info": "Select a category from the dropdown to add filters. You can filter by multiple categories, one at a time.",
+    "category": "Search category...",
+    "value": "Search...",
+    "selected": "selected",
+    "select_category": "Select category",
+    "select": "Select",
+    "no_results": "No results found."
+  },
+  "close_modal": "Close modal",
+  "open": "open",
+  "close": "Close",
+  "confirm": "Confirm",
+  "clear": "Reset all"
 }

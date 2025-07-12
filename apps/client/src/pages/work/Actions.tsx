@@ -23,7 +23,7 @@ export const Actions = ({
 }) => {
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
-  const toggleModal = useStore((state) => state.toggleModal);
+  const toggleModal = useStore(({ toggleModal }) => toggleModal);
   const { data: likeStatus } = useQuery({
     queryKey: ['likeStatus', activeWork.id],
     queryFn: () => getLikes(activeWork.id),
@@ -54,7 +54,7 @@ export const Actions = ({
   });
 
   const handleClick = () =>
-    isAuthenticated ? mutate(activeWork.id) : toggleModal();
+    isAuthenticated ? mutate(activeWork.id) : toggleModal('auth');
 
   const likesCount = likeData?.likesCount ?? likeStatus?.likesCount ?? 0;
   const hasLiked = likeData?.hasLiked ?? likeStatus?.hasLiked ?? false;
