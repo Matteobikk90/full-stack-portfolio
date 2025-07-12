@@ -8,9 +8,9 @@ export const Skills = () => {
   return (
     <section className="flex flex-col gap-4 md:gap-6 animate-fade-up w-full flex-1 min-h-0">
       <h2>{t('resume.skills.title')}</h2>
-      <p>{t('resume.skills.subtitle')}</p>
       <ScrollContainer className="flex-1 min-h-0">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <p>{t('resume.skills.subtitle')}</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mt-4">
           {skillItems.map(({ id, icon }, index) => (
             <article
               key={id}
