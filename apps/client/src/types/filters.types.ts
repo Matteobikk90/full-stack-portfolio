@@ -1,3 +1,5 @@
+import type { ExperienceTypes } from '@/types/experiences.types';
+import type { WorkTypes } from '@/types/works.types';
 import type { filterConfig } from '@/utils/filters';
 
 export type FilterSliceType = {
@@ -16,3 +18,14 @@ export type FilterSliceType = {
 };
 
 export type FilterKey = keyof typeof filterConfig;
+
+export type SearchResultTypes = {
+  experiences: ExperienceTypes[];
+  projects: WorkTypes[];
+};
+
+export type FilterRequestTypes = {
+  technology?: string[];
+  location?: string[];
+  company?: string[];
+};

@@ -15,6 +15,7 @@ import { Route as rootRoute } from './routes/__root';
 import { Route as ResumeExperienceImport } from './routes/resume/experience';
 import { Route as ResumeExperienceIdImport } from './routes/resume/experience.$id';
 import { Route as ResumeIndexImport } from './routes/resume/index';
+import { Route as SearchIndexImport } from './routes/search/index';
 import { Route as WorkSlugImport } from './routes/work/$slug';
 import { Route as WorkIndexImport } from './routes/work/index';
 
@@ -80,6 +81,12 @@ const WorkIndexRoute = WorkIndexImport.update({
   path: '/work/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/work/index.lazy').then((d) => d.Route));
+
+const SearchIndexRoute = SearchIndexImport.update({
+  id: '/search/',
+  path: '/search/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/search/index.lazy').then((d) => d.Route));
 
 const ResumeIndexRoute = ResumeIndexImport.update({
   id: '/',
@@ -225,6 +232,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResumeIndexImport;
       parentRoute: typeof ResumeLazyImport;
     };
+    '/search/': {
+      id: '/search/';
+      path: '/search';
+      fullPath: '/search';
+      preLoaderRoute: typeof SearchIndexImport;
+      parentRoute: typeof rootRoute;
+    };
     '/work/': {
       id: '/work/';
       path: '/work';
@@ -297,6 +311,7 @@ export interface FileRoutesByFullPath {
   '/resume/education': typeof ResumeEducationLazyRoute;
   '/resume/skills': typeof ResumeSkillsLazyRoute;
   '/resume/': typeof ResumeIndexRoute;
+  '/search': typeof SearchIndexRoute;
   '/work': typeof WorkIndexRoute;
   '/resume/experience/$id': typeof ResumeExperienceIdRoute;
   '/resume/experience/': typeof ResumeExperienceIndexLazyRoute;
@@ -313,6 +328,7 @@ export interface FileRoutesByTo {
   '/resume/education': typeof ResumeEducationLazyRoute;
   '/resume/skills': typeof ResumeSkillsLazyRoute;
   '/resume': typeof ResumeIndexRoute;
+  '/search': typeof SearchIndexRoute;
   '/work': typeof WorkIndexRoute;
   '/resume/experience/$id': typeof ResumeExperienceIdRoute;
   '/resume/experience': typeof ResumeExperienceIndexLazyRoute;
@@ -332,6 +348,7 @@ export interface FileRoutesById {
   '/resume/education': typeof ResumeEducationLazyRoute;
   '/resume/skills': typeof ResumeSkillsLazyRoute;
   '/resume/': typeof ResumeIndexRoute;
+  '/search/': typeof SearchIndexRoute;
   '/work/': typeof WorkIndexRoute;
   '/resume/experience/$id': typeof ResumeExperienceIdRoute;
   '/resume/experience/': typeof ResumeExperienceIndexLazyRoute;
@@ -352,6 +369,7 @@ export interface FileRouteTypes {
     | '/resume/education'
     | '/resume/skills'
     | '/resume/'
+    | '/search'
     | '/work'
     | '/resume/experience/$id'
     | '/resume/experience/';
@@ -367,6 +385,7 @@ export interface FileRouteTypes {
     | '/resume/education'
     | '/resume/skills'
     | '/resume'
+    | '/search'
     | '/work'
     | '/resume/experience/$id'
     | '/resume/experience';
@@ -384,6 +403,7 @@ export interface FileRouteTypes {
     | '/resume/education'
     | '/resume/skills'
     | '/resume/'
+    | '/search/'
     | '/work/'
     | '/resume/experience/$id'
     | '/resume/experience/';
@@ -398,6 +418,7 @@ export interface RootRouteChildren {
   ResumeLazyRoute: typeof ResumeLazyRouteWithChildren;
   TermsOfServiceLazyRoute: typeof TermsOfServiceLazyRoute;
   WorkSlugRoute: typeof WorkSlugRoute;
+  SearchIndexRoute: typeof SearchIndexRoute;
   WorkIndexRoute: typeof WorkIndexRoute;
 }
 
@@ -409,6 +430,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResumeLazyRoute: ResumeLazyRouteWithChildren,
   TermsOfServiceLazyRoute: TermsOfServiceLazyRoute,
   WorkSlugRoute: WorkSlugRoute,
+  SearchIndexRoute: SearchIndexRoute,
   WorkIndexRoute: WorkIndexRoute,
 };
 
@@ -429,6 +451,7 @@ export const routeTree = rootRoute
         "/resume",
         "/terms-of-service",
         "/work/$slug",
+        "/search/",
         "/work/"
       ]
     },
@@ -483,6 +506,9 @@ export const routeTree = rootRoute
     "/resume/": {
       "filePath": "resume/index.ts",
       "parent": "/resume"
+    },
+    "/search/": {
+      "filePath": "search/index.tsx"
     },
     "/work/": {
       "filePath": "work/index.ts"

@@ -7,7 +7,6 @@ export const filterConfig = {
     options: [
       'AWS',
       'Angular',
-      'Atlassian Suite (Jira, Confluence)',
       'BootStrap',
       'CSS3',
       'Docker',

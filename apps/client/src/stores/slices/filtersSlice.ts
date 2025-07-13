@@ -13,15 +13,25 @@ const createFiltersSlice: StateCreator<FilterSliceType> = (set) => ({
 
   setFilter: (key, values) =>
     set((state) => ({
-      filters: { ...state.filters, [key]: values },
-    })),
-  removeValue: (key, value) =>
-    set((state) => ({
       filters: {
         ...state.filters,
-        [key]: (state.filters[key] || []).filter((v) => v !== value),
+        [key]: Array.isArray(values)
+          ? values.filter((v): v is string => typeof v === 'string')
+          : [],
       },
     })),
+  removeValue: (key, value) =>
+    set((state) => {
+      const current = state.filters[key];
+      if (!Array.isArray(current)) return {};
+
+      return {
+        filters: {
+          ...state.filters,
+          [key]: current.filter((v) => v !== value),
+        },
+      };
+    }),
   resetAll: () =>
     set({
       filters: {},

@@ -16,7 +16,8 @@ import { useStore } from '@/stores';
 import type { FilterKey } from '@/types/filters.types';
 import { categoryColorClasses, filterConfig } from '@/utils/filters';
 import { InfoIcon } from '@phosphor-icons/react';
-import { Check, ChevronsUpDown, X } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
+import { Check, ChevronsUpDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
 
@@ -44,10 +45,9 @@ export const Filters = () => {
   const toggleValue = (val: string) => {
     if (!category) return;
 
-    const current = filters[category] || [];
-    const updated = current.includes(val)
-      ? current.filter((v) => v !== val)
-      : [...current, val];
+    const updated = selectedValues.includes(val)
+      ? selectedValues.filter((v) => v !== val)
+      : [...selectedValues, val];
 
     setFilter(category, updated);
   };
@@ -162,32 +162,29 @@ export const Filters = () => {
                 vals.map((val) => (
                   <Button
                     key={`${key}-${val}`}
-                    size="sm"
+                    onClick={() => removeValue(key as FilterKey, val)}
                     className={cn(
                       'gap-1 rounded-md px-3 py-1 text-xs shadow-sm hover:opacity-80',
                       categoryColorClasses[key as FilterKey]
                     )}
-                    onClick={() => removeValue(key, val)}
                   >
                     {val}
-                    <X className="size-3" />
                   </Button>
                 ))
               )}
             </div>
 
-            <div className="flex justify-between gap-2 mt-4">
-              <div className="flex gap-2">
-                <Button onClick={resetAll}>{t('clear')}</Button>
-                <Button
-                  disabled={!category || selectedValues.length === 0}
-                  onClick={() => {
-                    alert();
-                  }}
-                >
-                  {t('confirm')}
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              <Button onClick={resetAll}>{t('clear')}</Button>
+              {!category || selectedValues.length === 0 ? (
+                <Button disabled>{t('confirm')}</Button>
+              ) : (
+                <Button asChild>
+                  <Link to="/search" search={filters}>
+                    {t('confirm')}
+                  </Link>
                 </Button>
-              </div>
+              )}
             </div>
           </>
         )}

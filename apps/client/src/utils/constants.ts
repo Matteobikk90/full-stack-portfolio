@@ -9,6 +9,7 @@ export const URL_ENDPOINTS = {
   getWorks: '/api/projects',
   getLikes: (projectId: string) => `/api/likes/${projectId}`,
   toggleLike: '/api/likes',
+  search: '/api/search',
 };
 
 export const skillsFontSize = 60;
