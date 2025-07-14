@@ -297,7 +297,12 @@
     "selected": "selezionato/i",
     "select_category": "Seleziona categoria",
     "select": "Seleziona",
-    "no_results": "Nessun risultato."
+    "no_results": "Nessun risultato trovato",
+    "no_results_subtitle": "Prova a cambiare i filtri",
+    "results_title": "Selezionati per Te",
+    "found_results": "{{count}} risultato/i",
+    "based_on_filters": "In base ai tuoi filtri",
+    "click_for_more": "Clicca per saperne di più"
   },
   "close_modal": "Chiudi modal",
   "open": "Apri",

@@ -34,6 +34,7 @@ export const Filters = () => {
     setFilter,
     removeValue,
     resetAll,
+    toggleModal,
   } = useStore(
     useShallow((state) => ({
       ...state,
@@ -180,7 +181,11 @@ export const Filters = () => {
                 <Button disabled>{t('confirm')}</Button>
               ) : (
                 <Button asChild>
-                  <Link to="/search" search={filters}>
+                  <Link
+                    onClick={() => toggleModal(null)}
+                    to="/search"
+                    search={filters}
+                  >
                     {t('confirm')}
                   </Link>
                 </Button>

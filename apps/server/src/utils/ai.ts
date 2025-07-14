@@ -113,7 +113,7 @@ Always try to be helpful while gently pointing users to explore the portfolio th
    - Repo: https://github.com/Matteobikk90/barber-shop  
    - Live: https://blendon-barber-shop.it/
 
-9. **AGS Ori Illuminazione**  
+9. **AGS Sorit Illuminazione**  
    - Corporate website for lighting company.  
    - Technologies: HTML5, CSS3, JavaScript  
    - Live: https://agsoritilluminazione.com/

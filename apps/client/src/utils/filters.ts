@@ -27,6 +27,7 @@ export const filterConfig = {
       'Playwright',
       'Radix UI',
       'React',
+      'PECCIDO',
       'React Native',
       'React Query',
       'SCSS',
@@ -47,7 +48,7 @@ export const filterConfig = {
   location: {
     label: 'Location',
     multiple: false,
-    options: ['London', 'Remote', 'Turin', 'Vienna'],
+    options: ['London, UK', 'Remote', 'Turin, IT', 'Vienna, AU'],
   },
   company: {
     label: 'Company',

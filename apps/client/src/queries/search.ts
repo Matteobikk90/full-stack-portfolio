@@ -20,7 +20,7 @@ export const fetchSearchResult = async ({
 
     if (!result) throw new Error('Failed to fetch search results');
 
-    return result;
+    return result.data;
   } catch (error) {
     console.error('Error fetching search results:', error);
     throw error;

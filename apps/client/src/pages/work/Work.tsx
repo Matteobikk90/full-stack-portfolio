@@ -60,7 +60,7 @@ export const Work = () => {
   }, [slug, data, activeSlide, setActiveSlide]);
 
   return (
-    <main className="flex flex-col gap-4 md:gap-12">
+    <main className="flex flex-col gap-4 md:gap-12 p-4">
       <h1 className="text-work">{t('work.title')}</h1>
       <ScrollContainer className="flex-1 min-h-0" backgroundColor="bg-work">
         <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-start lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12 flex-1 min-h-0">

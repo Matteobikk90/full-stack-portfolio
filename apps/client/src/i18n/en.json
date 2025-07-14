@@ -297,7 +297,12 @@
     "selected": "selected",
     "select_category": "Select category",
     "select": "Select",
-    "no_results": "No results found."
+    "no_results": "No results found",
+    "no_results_subtitle": "Try changing the filters",
+    "results_title": "Selected for You",
+    "found_results": "{{count}} result/s",
+    "based_on_filters": "Based on your filters",
+    "click_for_more": "Click an item to view more details"
   },
   "close_modal": "Close modal",
   "open": "open",

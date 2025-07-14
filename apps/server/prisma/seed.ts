@@ -391,7 +391,7 @@ async function main() {
         updatedAt: new Date(),
       },
       {
-        title: 'AGS Ori Illuminazione',
+        title: 'AGS Sorit Illuminazione',
         number: '09',
         description: 'Corporate website for lighting company.',
         slug: 'ags-illuminazione',
