@@ -7,6 +7,7 @@ export const ScrollContainer = ({
   className,
   type = 'auto',
   backgroundColor = 'bg-secondary',
+  isFromFilters = false,
 }: ScrollContainerTypes) => (
   <ScrollArea.Root
     type={type}
@@ -16,7 +17,10 @@ export const ScrollContainer = ({
 
     <ScrollArea.Scrollbar
       orientation="vertical"
-      className="w-2 !-right-2 !relative bg-foreground/10 rounded-full"
+      className={cn(
+        isFromFilters ? '!right-0' : '!-right-2',
+        'w-2 !relative bg-foreground/10 rounded-full'
+      )}
     >
       <ScrollArea.Thumb className={cn(backgroundColor, 'rounded-full')} />
     </ScrollArea.Scrollbar>

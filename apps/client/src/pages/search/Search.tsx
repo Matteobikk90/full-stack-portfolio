@@ -36,7 +36,7 @@ export const Search = () => {
         </h1>
 
         {Object.values(filters).some((vals) => vals?.length) && (
-          <div className="flex justify-center gap-2 items-center">
+          <div className="flex flex-wrap justify-center gap-2 items-center">
             <p>
               {results > 0
                 ? t('search.based_on_filters')
@@ -48,7 +48,7 @@ export const Search = () => {
                 <span
                   key={`${key}-${val}`}
                   className={cn(
-                    'rounded-md hover:opacity-80 py-1 px-2',
+                    'rounded-md py-1 px-2',
                     categoryColorClasses[key as FilterKey]
                   )}
                 >

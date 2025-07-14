@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
 import type { FilterKey } from '@/types/filters.types';
 import { categoryColorClasses, filterConfig } from '@/utils/filters';
-import { InfoIcon } from '@phosphor-icons/react';
+import { InfoIcon, XIcon } from '@phosphor-icons/react';
 import { Link } from '@tanstack/react-router';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -132,7 +132,11 @@ export const Filters = () => {
                     <CommandEmpty className="p-2.5">
                       {t('search.no_results')}
                     </CommandEmpty>{' '}
-                    <ScrollContainer className="max-h-64">
+                    <ScrollContainer
+                      className="max-h-64 overflow-y-auto"
+                      backgroundColor="bg-foreground"
+                      isFromFilters={true}
+                    >
                       <CommandGroup>
                         {filterConfig[category].options.map((option) => (
                           <CommandItem
@@ -165,11 +169,12 @@ export const Filters = () => {
                     key={`${key}-${val}`}
                     onClick={() => removeValue(key as FilterKey, val)}
                     className={cn(
-                      'gap-1 rounded-md px-3 py-1 text-xs shadow-sm hover:opacity-80',
+                      'rounded-md px-3 py-1 flex items-center gap-2 text-xs shadow-sm hover:opacity-80',
                       categoryColorClasses[key as FilterKey]
                     )}
                   >
                     {val}
+                    <XIcon className="size-5" />
                   </Button>
                 ))
               )}
