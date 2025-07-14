@@ -10,12 +10,11 @@ import PopUpInfo from '../pop-up-info';
 
 export const CustomModal = () => {
   const { t } = useTranslation();
-  const { isOpen, toggleModal, activeModal, resetAll } = useStore(
-    useShallow(({ isOpen, toggleModal, activeModal, resetAll }) => ({
+  const { isOpen, toggleModal, activeModal } = useStore(
+    useShallow(({ isOpen, toggleModal, activeModal }) => ({
       isOpen,
       toggleModal,
       activeModal,
-      resetAll,
     }))
   );
 
@@ -24,7 +23,6 @@ export const CustomModal = () => {
       open={isOpen}
       onOpenChange={() => {
         toggleModal(null);
-        resetAll();
       }}
     >
       {activeModal && (

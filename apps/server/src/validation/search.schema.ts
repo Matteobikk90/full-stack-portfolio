@@ -13,4 +13,8 @@ export const filterSchema = z.object({
     .string()
     .transform((val) => val.split(',').filter(Boolean))
     .optional(),
+  role: z
+    .string()
+    .transform((val) => val.split(',').filter(Boolean))
+    .optional(),
 });

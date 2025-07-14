@@ -27,7 +27,6 @@ export const filterConfig = {
       'Playwright',
       'Radix UI',
       'React',
-      'PECCIDO',
       'React Native',
       'React Query',
       'SCSS',
@@ -37,6 +36,7 @@ export const filterConfig = {
       'TailwindCSS',
       'TanStack Form',
       'TanStack Router',
+      'PECCIDO',
       'TypeScript',
       'Vite',
       'Vitest',
@@ -48,7 +48,12 @@ export const filterConfig = {
   location: {
     label: 'Location',
     multiple: false,
-    options: ['London, UK', 'Remote', 'Turin, IT', 'Vienna, AU'],
+    options: ['London', 'Remote', 'Turin', 'Vienna'],
+  },
+  role: {
+    label: 'Role',
+    multiple: false,
+    options: ['Front End Developer', 'Full Stack Developer'],
   },
   company: {
     label: 'Company',
@@ -67,4 +72,5 @@ export const categoryColorClasses: Record<FilterKey, string> = {
   technology: 'bg-work text-background',
   location: 'bg-contact text-background',
   company: 'bg-resume text-background',
+  role: 'bg-gray',
 };

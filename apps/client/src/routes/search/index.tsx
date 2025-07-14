@@ -9,6 +9,7 @@ export const Route = createFileRoute('/search/')({
     location: search?.location,
     technology: search?.technology,
     company: search?.company,
+    role: search?.role,
   }),
   loader: async ({ deps }) => {
     const data = await queryClient.ensureQueryData({

@@ -7,6 +7,7 @@ export const handleSearch = async (_req: Request, res: Response) => {
     technology = [],
     location = [],
     company = [],
+    role = [],
   } = res.locals.query as Record<string, string[]>;
 
   const [experiences, projects] = await Promise.all([
@@ -16,11 +17,14 @@ export const handleSearch = async (_req: Request, res: Response) => {
           technology.length && { technologies: { hasSome: technology } },
           location.length && {
             OR: [
-              { location: { in: location } },
-              { isRemote: location.includes('Remote') },
+              ...location.map((loc) => ({
+                location: { contains: loc, mode: 'insensitive' },
+              })),
+              ...(location.includes('Remote') ? [{ isRemote: true }] : []),
             ],
           },
           company.length && { company: { in: company } },
+          role.length && { role: { in: role } },
         ].filter(Boolean) as Prisma.ExperienceWhereInput[],
       },
       orderBy: { startDate: 'desc' },
@@ -30,13 +34,16 @@ export const handleSearch = async (_req: Request, res: Response) => {
       where: {
         AND: [
           technology.length && { technologies: { hasSome: technology } },
-          company.length && {
-            experience: {
-              some: {
-                company: { in: company },
-              },
-            },
+          location.length && {
+            OR: [
+              ...location.map((loc) => ({
+                company: { contains: loc, mode: 'insensitive' },
+              })),
+              ...(location.includes('Remote') ? [{ isRemote: true }] : []),
+            ],
           },
+          company.length && { company: { in: company } },
+          role.length && { role: { in: role } },
         ].filter(Boolean) as Prisma.ProjectWhereInput[],
       },
       orderBy: { createdAt: 'desc' },

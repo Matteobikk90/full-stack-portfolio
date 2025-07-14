@@ -5,10 +5,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/lib/ui/accordion';
-import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 import type { FilterKey } from '@/types/filters.types';
 import { categoryColorClasses } from '@/utils/filters';
+import { formatDateRange } from '@/utils/formatting';
 import { DotIcon, HandPointingIcon } from '@phosphor-icons/react';
 import { Link, useLoaderData, useSearch } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
@@ -41,23 +41,22 @@ export const Search = () => {
             </p>
             {Object.entries(filters).flatMap(([key, vals]) =>
               vals.map((val) => (
-                <Button
+                <span
                   key={`${key}-${val}`}
-                  variant="outline"
                   className={cn(
-                    'rounded-md hover:opacity-80',
+                    'rounded-md hover:opacity-80 py-1 px-2',
                     categoryColorClasses[key as FilterKey]
                   )}
                 >
                   {val}
-                </Button>
+                </span>
               ))
             )}
           </div>
         )}
 
         {experiences.length + projects.length > 0 && (
-          <span className="flex items-center gap-4 mx-auto">
+          <span className="flex items-center gap-2 mx-auto">
             <HandPointingIcon
               aria-label="View"
               role="img"
@@ -88,31 +87,48 @@ export const Search = () => {
                 <AccordionContent className="p-0">
                   <ul>
                     {experiences.map(
-                      ({ id, company, title, location, slug }) => (
+                      ({
+                        id,
+                        company,
+                        title,
+                        location,
+                        slug,
+                        isRemote,
+                        startDate,
+                        endDate,
+                      }) => (
                         <li
                           key={id}
-                          className="flex items-center md:px-4 group hover:bg-gray gap-4"
+                          className="flex items-center group hover:bg-gray gap-4"
                         >
                           <Link
                             to="/resume/experience/$id"
                             params={{ id: slug }}
-                            className="w-full h-full py-4 flex gap-2"
+                            className="w-full h-full space-y-2 py-4 md:px-4"
                           >
-                            <DotIcon
-                              className="text-secondary size-5"
-                              weight="duotone"
-                            />
-                            <strong className="text-resume">{title}</strong> -
+                            <span className="flex items-center gap-2 text-resume">
+                              <DotIcon
+                                className="text-secondary size-5"
+                                weight="duotone"
+                              />
+                              <strong className="text-resume">{title}</strong> /
+                              <strong>
+                                {formatDateRange(startDate, endDate!)}
+                              </strong>
+                              <HandPointingIcon
+                                aria-label="View"
+                                role="img"
+                                className="ml-auto text-secondary size-5 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-200"
+                                weight="duotone"
+                              />
+                            </span>
                             <em>
                               {company} – {location}
+                              {isRemote && (
+                                <span className="text-xs"> (Remote)</span>
+                              )}
                             </em>
                           </Link>
-                          <HandPointingIcon
-                            aria-label="View"
-                            role="img"
-                            className=" text-secondary size-5 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-200"
-                            weight="duotone"
-                          />
                         </li>
                       )
                     )}
@@ -131,12 +147,12 @@ export const Search = () => {
                     {projects.map(({ id, title, slug }) => (
                       <li
                         key={id}
-                        className="flex items-center md:px-4 group hover:bg-gray"
+                        className="flex items-center group hover:bg-gray"
                       >
                         <Link
                           to="/work/$slug"
                           params={{ slug }}
-                          className="w-full h-full space-y-2 py-4"
+                          className="w-full h-full space-y-2 py-4 md:px-4"
                         >
                           <span className="flex items-center gap-2">
                             <DotIcon

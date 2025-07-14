@@ -30,13 +30,16 @@ export const Info = () => {
                 {data.isRemote && <span className="text-xs">(Remote)</span>}
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <h2 className="text-xl font-bold">{data.company}</h2>
               <h3 className="flex items-center gap-2">
                 <DotIcon className="text-secondary size-5" weight="duotone" />
                 {data.title}
               </h3>
             </div>
+            <a className="flex text-resume text-sm" href={data.url}>
+              {data.url}
+            </a>
             <div>
               <h4 className="font-semibold mb-2">{t('info.duties')}</h4>
               <ul className="space-y-2">
