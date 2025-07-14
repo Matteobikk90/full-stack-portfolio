@@ -290,7 +290,7 @@
   "info_provider": "✅ Google and LinkedIn are the simplest. Just log in with your email and password.\n⚠️ GitHub requires a public email in your profile to work properly.\n🧩 Slack asks you to choose or log into a Slack workspace first. If you don’t have one, Slack login won’t work.",
   "search": {
     "title": "Search",
-    "description": "Filter projects and work experience by technology, location, or company.",
+    "description": "Filter projects and work experience by technology, roles, location, or company.",
     "info": "Select a category from the dropdown to add filters. You can filter by multiple categories, one at a time.",
     "category": "Search category...",
     "value": "Search...",
@@ -300,7 +300,8 @@
     "no_results": "No results found",
     "no_results_subtitle": "Try changing the filters",
     "results_title": "Selected for You",
-    "found_results": "{{count}} result/s",
+    "found_result_one": "{{count}} result found",
+    "found_result_other": "{{count}} results found",
     "based_on_filters": "Based on your filters",
     "click_for_more": "Click an item to view more details"
   },

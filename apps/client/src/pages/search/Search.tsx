@@ -11,6 +11,7 @@ import { categoryColorClasses } from '@/utils/filters';
 import { formatDateRange } from '@/utils/formatting';
 import { DotIcon, HandPointingIcon } from '@phosphor-icons/react';
 import { Link, useLoaderData, useSearch } from '@tanstack/react-router';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const Search = () => {
@@ -20,21 +21,24 @@ export const Search = () => {
   const filters = useSearch({ from: '/search/' });
   const { t } = useTranslation();
 
+  const results = useMemo(
+    () => experiences.length + projects.length,
+    [experiences.length, projects.length]
+  );
+
   return (
     <main className="flex flex-col p-4">
       <section className="flex flex-col flex-1 min-h-0 space-y-6 md:space-y-10">
         <h1>
-          {experiences.length + projects.length > 0
-            ? t('search.found_results', {
-                count: experiences.length + projects.length,
-              })
+          {results > 0
+            ? t('search.found_result', { count: results })
             : t('search.no_results')}
         </h1>
 
         {Object.values(filters).some((vals) => vals?.length) && (
           <div className="flex justify-center gap-2 items-center">
             <p>
-              {experiences.length + projects.length > 0
+              {results > 0
                 ? t('search.based_on_filters')
                 : t('search.no_results_subtitle')}
               :
@@ -55,7 +59,7 @@ export const Search = () => {
           </div>
         )}
 
-        {experiences.length + projects.length > 0 && (
+        {results > 0 && (
           <span className="flex items-center gap-2 mx-auto">
             <HandPointingIcon
               aria-label="View"
