@@ -35,6 +35,7 @@ beforeAll(async () => {
       location: 'Remote',
       isRemote: true,
       url: 'https://example.com',
+      role: 'Front End Developer',
     },
   });
   experienceId = experience.id;
@@ -49,6 +50,9 @@ beforeAll(async () => {
       description: 'Test Desc',
       slug: `project-${Date.now()}`,
       technologies: ['React'],
+      role: 'Front End Developer',
+      company: 'Remote',
+      isRemote: true,
     },
   });
   projectId = project.id;

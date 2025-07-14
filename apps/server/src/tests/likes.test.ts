@@ -31,6 +31,9 @@ beforeAll(async () => {
       description: 'Test Desc',
       slug: `project-${Date.now()}`,
       technologies: ['React'],
+      role: 'Front End Developer',
+      company: 'Remote',
+      isRemote: true,
     },
   });
 
@@ -46,6 +49,7 @@ beforeAll(async () => {
       location: 'Remote',
       isRemote: true,
       url: 'https://example.com',
+      role: 'Front End Developer',
     },
   });
 
