@@ -287,5 +287,27 @@
     "success": "Logout avvenuto con successo",
     "error": "Errore durante il logout"
   },
-  "info_provider": "✅ Google e LinkedIn sono i più semplici: accedi con email e password.\n⚠️ GitHub richiede che la tua email sia pubblica nel profilo.\n🧩 Slack ti chiederà di scegliere o accedere a un workspace Slack. Se non ne hai uno, l’accesso con Slack non funzionerà."
+  "info_provider": "✅ Google e LinkedIn sono i più semplici: accedi con email e password.\n⚠️ GitHub richiede che la tua email sia pubblica nel profilo.\n🧩 Slack ti chiederà di scegliere o accedere a un workspace Slack. Se non ne hai uno, l’accesso con Slack non funzionerà.",
+  "search": {
+    "title": "Ricerca",
+    "description": "Filtra progetti ed esperienze lavorative per tecnologia, ruolo, località o azienda.",
+    "info": "Seleziona una categoria dal menu a tendina per aggiungere filtri. Puoi filtrare per più categorie, una alla volta.",
+    "category": "Cerca categoria...",
+    "value": "Cerca...",
+    "selected": "selezionato/i",
+    "select_category": "Seleziona categoria",
+    "select": "Seleziona",
+    "no_results": "Nessun risultato trovato",
+    "no_results_subtitle": "Prova a cambiare i filtri",
+    "results_title": "Selezionati per Te",
+    "found_result_one": "{{count}} risultato trovato",
+    "found_result_other": "{{count}} risultati trovati",
+    "based_on_filters": "In base ai tuoi filtri",
+    "click_for_more": "Clicca su un risultato per maggiori dettagli"
+  },
+  "close_modal": "Chiudi modal",
+  "open": "Apri",
+  "close": "Chiudi",
+  "confirm": "Conferma",
+  "clear": "Resetta tutto"
 }

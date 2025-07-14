@@ -130,7 +130,7 @@ export const actions = [
     id: 'LinkedIn',
     label: 'LinkedIn',
     icon: <LinkedinLogoIcon className="size-5" weight="duotone" />,
-    href: 'https://www.linkedin.com/in/matteosoresini90/',
+    href: 'https://linkedin.com/in/matteosoresini90/',
     external: true,
     align: 'center' as const,
   },

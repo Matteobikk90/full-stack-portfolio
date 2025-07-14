@@ -12,9 +12,9 @@ export const About = () => {
   return (
     <section className="flex flex-col gap-4 md:gap-6 w-full flex-1 min-h-0">
       <h2>{t('resume.about.title')}</h2>
-      <p>{t('resume.about.subtitle')}</p>
       <ScrollContainer className="flex-1 min-h-0">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 space-y-3">
+        <p>{t('resume.about.subtitle')}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 space-y-3 mt-4">
           {aboutInfo.map(({ label, value, i18nKey, args }) => (
             <div
               key={label}

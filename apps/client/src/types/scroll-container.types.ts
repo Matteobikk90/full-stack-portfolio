@@ -5,4 +5,5 @@ export type ScrollContainerTypes = {
   className?: string;
   type?: 'auto' | 'always';
   backgroundColor?: string;
+  isFromFilters?: boolean;
 };

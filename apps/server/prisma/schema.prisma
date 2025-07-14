@@ -56,6 +56,7 @@ model Experience {
   imageUrl     String?
   createdAt    DateTime            @default(now())
   projects     ProjectExperience[]
+  role         String
 }
 
 model ProjectExperience {
@@ -79,6 +80,9 @@ model Project {
   isFeatured   Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  company      String
+  isRemote     Boolean
+  role         String
 }
 
 model Comment {

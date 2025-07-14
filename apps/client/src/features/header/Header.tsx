@@ -5,6 +5,7 @@ import { useLogout } from '@/hooks/useLogout';
 import { Button } from '@/lib/ui/button';
 import { useStore } from '@/stores';
 import {
+  BinocularsIcon,
   ChatsIcon,
   MoonIcon,
   SignOutIcon,
@@ -45,7 +46,7 @@ export const Header = () => {
     if (isAuthenticated) {
       openChat();
     } else {
-      toggleModal();
+      toggleModal('auth');
     }
   };
 
@@ -54,6 +55,20 @@ export const Header = () => {
       <MenuDesktop />
       <MenuMobile />
       <div className="flex items-center gap-3 sm:gap-4 z-12">
+        <PopUpInfo
+          hoverText={t('search.title')}
+          position="bottom"
+          className="hidden md:block"
+        >
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => toggleModal('filter')}
+            aria-label="Search"
+          >
+            <BinocularsIcon className="size-5" weight="duotone" />
+          </Button>
+        </PopUpInfo>
         <PopUpInfo hoverText={t('theme')} position="bottom">
           <Button
             variant="outline"

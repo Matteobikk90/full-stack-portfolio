@@ -7,7 +7,7 @@ export const ResumeSidebar = () => {
 
   return (
     <aside className="space-y-6 lg:max-w-[25rem] w-full">
-      <h1 className="text-left">{t('resume.title')}</h1>
+      <h1 className="text-center text-resume">{t('resume.title')}</h1>
       <p>{t('resume.subtitle')}</p>
       <nav className="grid grid-cols-2 lg:flex flex-col gap-4">
         {resumeItems.map(({ href, id }) => (

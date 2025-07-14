@@ -14,9 +14,9 @@ export const Experience = () => {
   return (
     <section className="flex flex-col gap-4 md:gap-6 animate-fade-up w-full flex-1 min-h-0">
       <h2>{t('resume.experience.title')}</h2>
-      <p>{t('resume.experience.subtitle')}</p>
       <ScrollContainer className="flex-1 min-h-0">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+        <p>{t('resume.experience.subtitle')}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-4">
           {data.map(
             (
               {

@@ -9,9 +9,9 @@ export const Education = () => {
   return (
     <section className="flex flex-col gap-4 md:gap-6 w-full flex-1 min-h-0">
       <h2>{t('resume.education.title')}</h2>
-      <p>{t('resume.education.subtitle')}</p>
       <ScrollContainer className="flex-1 min-h-0">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+        <p>{t('resume.education.subtitle')}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-4">
           {educationItems.map(
             ({ id, year, location, title, institution }, index) => (
               <article

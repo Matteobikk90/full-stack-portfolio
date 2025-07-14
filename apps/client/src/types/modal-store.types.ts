@@ -1,4 +1,5 @@
 export type ModalSliceType = {
   isOpen: boolean;
-  toggleModal: () => void;
+  activeModal: 'auth' | 'filter' | null;
+  toggleModal: (modal?: 'auth' | 'filter' | null) => void;
 };

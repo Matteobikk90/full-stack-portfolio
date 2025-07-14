@@ -9,14 +9,21 @@ import {
 import { Actions } from '@/pages/work/Actions';
 import { useStore } from '@/stores';
 import { imageMap } from '@/utils/slider';
-import { useLoaderData } from '@tanstack/react-router';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLoaderData, useParams } from '@tanstack/react-router';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useShallow } from 'zustand/shallow';
 
 export const Work = () => {
   const { t } = useTranslation();
-  const { data } = useLoaderData({ from: '/work' });
-  const activeSlide = useStore(({ activeSlide }) => activeSlide);
+  const { data } = useLoaderData({ from: '/work/$slug' });
+  const { slug } = useParams({ from: '/work/$slug' });
+  const { activeSlide, setActiveSlide } = useStore(
+    useShallow(({ activeSlide, setActiveSlide }) => ({
+      activeSlide,
+      setActiveSlide,
+    }))
+  );
   const activeWork = data[activeSlide];
 
   // Work around for Firefox (Not working with motion)
@@ -45,8 +52,15 @@ export const Work = () => {
     return () => clearTimeout(timeoutId);
   }, [activeSlide, activeWork]);
 
+  useEffect(() => {
+    const index = data.findIndex((p) => p.slug === slug);
+    if (index !== -1 && index !== activeSlide) {
+      setActiveSlide(index);
+    }
+  }, [slug, data, activeSlide, setActiveSlide]);
+
   return (
-    <main className="flex flex-col gap-4 md:gap-12">
+    <main className="flex flex-col gap-4 md:gap-12 p-4">
       <h1 className="text-work">{t('work.title')}</h1>
       <ScrollContainer className="flex-1 min-h-0" backgroundColor="bg-work">
         <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-start lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12 flex-1 min-h-0">

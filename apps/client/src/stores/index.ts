@@ -1,11 +1,13 @@
 import createChatSlice from '@/stores/slices/chatSlice';
 import createEasterEggSlice from '@/stores/slices/easterEggSlice';
+import createFiltersSlice from '@/stores/slices/filtersSlice';
 import createLangSlice from '@/stores/slices/langSlice';
 import createModalSlice from '@/stores/slices/modalSlice';
 import createThemeSlice from '@/stores/slices/themeSlice';
 import createWorkSlice from '@/stores/slices/workSlice';
 import type { ChatSliceType } from '@/types/chat.types';
 import type { EasterEggSliceType } from '@/types/easter-egg.types';
+import type { FilterSliceType } from '@/types/filters.types';
 import type { LangSliceType } from '@/types/lang.types';
 import type { ModalSliceType } from '@/types/modal-store.types';
 import type { ThemeSliceType } from '@/types/theme-store.types';
@@ -18,6 +20,7 @@ type StoreState = ModalSliceType &
   ChatSliceType &
   WorkSliceType &
   EasterEggSliceType &
+  FilterSliceType &
   LangSliceType;
 
 export const useStore = create<StoreState>()(
@@ -29,6 +32,7 @@ export const useStore = create<StoreState>()(
       ...createWorkSlice(set, get, store),
       ...createEasterEggSlice(set, get, store),
       ...createLangSlice(set, get, store),
+      ...createFiltersSlice(set, get, store),
     })),
     {
       name: 'global-store',
