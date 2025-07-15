@@ -63,7 +63,7 @@ export const Work = () => {
     <main className="flex flex-col gap-4 md:gap-12 p-4">
       <h1 className="text-work">{t('work.title')}</h1>
       <ScrollContainer className="flex-1 min-h-0" backgroundColor="bg-work">
-        <section className="flex flex-col-reverse lg:grid grid-cols-1 lg:items-start lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12 flex-1 min-h-0">
+        <section className="flex flex-col-reverse lg:grid grid-cols-1 items-center xl:items-start lg:grid-cols-2 xl:grid-cols-[35rem_1fr] gap-12 flex-1 min-h-0">
           <article
             className={`transition-opacity duration-1000 space-y-2 ${isFadingOut ? 'opacity-0' : 'opacity-100'}`}
           >

@@ -14,11 +14,11 @@ export const About = () => {
       <h2>{t('resume.about.title')}</h2>
       <ScrollContainer className="flex-1 min-h-0">
         <p>{t('resume.about.subtitle')}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 space-y-3 mt-4">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-2 space-y-3 mt-4">
           {aboutInfo.map(({ label, value, i18nKey, args }) => (
             <div
               key={label}
-              className="flex justify-between items-center sm:justify-start gap-2"
+              className="flex justify-between items-center xl:justify-start gap-2"
             >
               <Label className="text-foreground/50">
                 {t(`resume.about.${label}`)}:
