@@ -72,7 +72,7 @@ function Carousel({
   React.useEffect(() => {
     if (!api || hasScrolledToInitial.current) return;
 
-    api.scrollTo(activeSlide); // smooth scroll on mount
+    api.scrollTo(activeSlide);
     hasScrolledToInitial.current = true;
   }, [api, activeSlide]);
 

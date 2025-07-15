@@ -70,7 +70,11 @@ export const Filters = () => {
       </DialogDescription>
 
       <div className="flex flex-col gap-4">
-        <Popover open={categoryOpen} onOpenChange={toggleCategoryOpen}>
+        <Popover
+          modal={true}
+          open={categoryOpen}
+          onOpenChange={toggleCategoryOpen}
+        >
           <PopoverTrigger asChild>
             <Button
               variant="outline"
@@ -83,7 +87,7 @@ export const Filters = () => {
               <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-full p-0 bg-background">
+          <PopoverContent side="top" className="w-full p-0 bg-background">
             <Command>
               <CommandInput placeholder={t('search.category')} />
               <CommandList>
@@ -112,7 +116,11 @@ export const Filters = () => {
 
         {category && (
           <>
-            <Popover open={valueOpen} onOpenChange={toggleValueOpen}>
+            <Popover
+              modal={true}
+              open={valueOpen}
+              onOpenChange={toggleValueOpen}
+            >
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
@@ -125,7 +133,7 @@ export const Filters = () => {
                   <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-full p-0 bg-background">
+              <PopoverContent side="top" className="w-full p-0 bg-background">
                 <Command>
                   <CommandInput placeholder={t('search.value')} />
                   <CommandList>
@@ -133,7 +141,7 @@ export const Filters = () => {
                       {t('search.no_results')}
                     </CommandEmpty>{' '}
                     <ScrollContainer
-                      className="max-h-64 overflow-y-auto"
+                      className="max-h-64"
                       backgroundColor="bg-foreground"
                       isFromFilters={true}
                     >

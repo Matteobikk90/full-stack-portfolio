@@ -210,11 +210,6 @@
   .text-outline:hover {
     -webkit-text-fill-color: var(--section-work);
   }
-
-  [data-slot='command-group'],
-  [data-slot='command-group'] > div:first-of-type {
-    @apply !overflow-y-scroll;
-  }
 }
 
 [data-radix-scroll-area-viewport] > div {
