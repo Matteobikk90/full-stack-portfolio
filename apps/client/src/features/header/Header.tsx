@@ -17,6 +17,7 @@ import { useShallow } from 'zustand/shallow';
 
 export const Header = () => {
   const { isAuthenticated } = useAuth();
+  console.log({ isAuthenticated });
   const { handleLogout } = useLogout();
   const { t } = useTranslation();
   const { mode, toggleTheme, updateBackground, toggleModal, openChat } =

@@ -10,7 +10,7 @@ export const useLogout = () => {
   const handleLogout = async () => {
     try {
       await api.post('/auth/logout');
-      queryClient.refetchQueries({ queryKey: ['me'] });
+      queryClient.setQueryData(['me'], null);
       toast.success(t('toast.title'), {
         description: t('logout.success'),
         duration: toastDuration,
