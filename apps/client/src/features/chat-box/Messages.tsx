@@ -127,6 +127,7 @@ export const Messages = () => {
             >
               {typeof msg.sender?.avatarUrl === 'string' ? (
                 <img
+                  loading="lazy"
                   width={32}
                   height={32}
                   src={msg.sender.avatarUrl}

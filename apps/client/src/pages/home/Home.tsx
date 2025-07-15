@@ -65,24 +65,28 @@ export const Home = () => {
               className="relative z-11 w-[200px] h-[300px] sm:h-[375px] sm:w-[250px] order-1 lg:order-2"
               onClick={handleClick}
             >
-              <img
-                src={avatarMask}
-                alt="Avatar Mask"
-                className={cn(
-                  'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
-                  discovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                )}
-              />
-
-              <img
-                src={avatar}
-                alt="Avatar"
-                className={cn(
-                  'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
-                  discovered ? 'opacity-0 pointer-events-none' : 'opacity-100'
-                )}
-              />
-
+              <figure>
+                <img
+                  loading="lazy"
+                  src={avatarMask}
+                  alt="Avatar Mask"
+                  className={cn(
+                    'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
+                    discovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  )}
+                />
+              </figure>
+              <figure>
+                <img
+                  loading="lazy"
+                  src={avatar}
+                  alt="Avatar"
+                  className={cn(
+                    'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
+                    discovered ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                  )}
+                />
+              </figure>
               {!discovered && (
                 <>
                   <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[65px] sm:top-[99px] sm:left-[82px]"></span>

@@ -32,11 +32,14 @@ export const NotFound = () => {
               </Link>
             </article>
             <article className="order-1 lg:order-2">
-              <img
-                src={avatar}
-                alt="Lost Avatar"
-                className="w-[200px] sm:w-[250px]"
-              />
+              <figure>
+                <img
+                  loading="lazy"
+                  src={avatar}
+                  alt="Lost Avatar"
+                  className="w-[200px] sm:w-[250px]"
+                />
+              </figure>
             </article>
           </div>
         </section>
