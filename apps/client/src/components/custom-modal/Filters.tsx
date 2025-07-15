@@ -70,11 +70,7 @@ export const Filters = () => {
       </DialogDescription>
 
       <div className="flex flex-col gap-4">
-        <Popover
-          modal={true}
-          open={categoryOpen}
-          onOpenChange={toggleCategoryOpen}
-        >
+        <Popover open={categoryOpen} onOpenChange={toggleCategoryOpen}>
           <PopoverTrigger asChild>
             <Button
               variant="outline"

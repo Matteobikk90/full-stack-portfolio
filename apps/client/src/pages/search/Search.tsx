@@ -36,7 +36,7 @@ export const Search = () => {
         </h1>
 
         {Object.values(filters).some((vals) => vals?.length) && (
-          <div className="flex flex-wrap justify-center gap-2 items-center">
+          <div className="flex flex-wrap sm:justify-center gap-2 items-center">
             <p>
               {results > 0
                 ? t('search.based_on_filters')
@@ -60,7 +60,7 @@ export const Search = () => {
         )}
 
         {results > 0 && (
-          <span className="flex items-center gap-2 mx-auto">
+          <span className="flex items-center gap-2 sm:mx-auto">
             <HandPointingIcon
               aria-label="View"
               role="img"
@@ -81,7 +81,7 @@ export const Search = () => {
           <Accordion
             defaultValue={['experience', 'work']}
             type="multiple"
-            className="w-full grid xl:grid-cols-2 gap-8 md:gap-20"
+            className="w-full grid xl:grid-cols-2 gap-8 xl:gap-20"
           >
             {!!experiences.length && (
               <AccordionItem value="experience" className="border-0 rounded-md">

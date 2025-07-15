@@ -55,8 +55,11 @@ async function main() {
       description:
         'Built responsive web applications delivering real-time data and projections out to 2030. Developed models for data visualization on various global issues such as population, hunger, poverty, and water shortage.',
       duties: [
-        'Built responsive web applications delivering real-time data and projections out to 2030',
-        'Developed models for data visualization on global issues',
+        'Built interactive, UIs using React, TypeScript, TailwindCSS, and Zustand',
+        'Integrated routing, forms, and queries via TanStack tools',
+        'Developed a lightweight Node.js API with Express',
+        'Implemented testing with Vitest and Playwright, monitored UX with Sentry and Hotjar',
+        'Collaborated in CI/CD setup using Docker, GitHub Actions, and AWS',
       ],
       technologies: [
         'React',
@@ -71,7 +74,7 @@ async function main() {
         'TailwindCSS',
         'TanStack Router',
         'TanStack Form',
-        'React Query',
+        'TanStack Query',
         'Framer Motion',
         'ShadeCn',
         'Material UI',
@@ -128,9 +131,10 @@ async function main() {
         description:
           'Maintained real-time electricity dashboards for Hydrogrid using React with Hooks. Supported both client-facing and internal systems.',
         duties: [
-          'Designed and maintained real-time electricity dashboards',
-          'Used React.js with Hooks for fast, secure, and interactive UIs',
-          'Developed internal dashboard for simulation and onboarding',
+          'Developed and maintained real-time electricity dashboards using React, TypeScript, and TailwindCSS',
+          'Built an internal platform with React Native for company staff to manage client information',
+          'Implemented interactive UIs using React Hooks for responsive and high-performance experiences',
+          'Contributed to system observability and UX improvements via Sentry, Hotjar, and Figma',
         ],
         technologies: [
           'React',
@@ -157,7 +161,7 @@ async function main() {
         startDate: new Date('2019-01-01'),
         endDate: new Date('2020-01-01'),
         description:
-          'Built websites from scratch, led GIT merging processes, and handled backend tasks using PHP and MySQL.',
+          'Built websites from scratch, led GIT merging processes, and handled backend tasks using PHP and MySQL',
         duties: [
           'Developed websites using modern web technologies',
           'Managed Git merges as team lead',

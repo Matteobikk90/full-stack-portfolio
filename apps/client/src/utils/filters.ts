@@ -1,6 +1,27 @@
 import type { FilterKey } from '@/types/filters.types';
 
 export const filterConfig = {
+  company: {
+    label: 'Company',
+    multiple: false,
+    options: [
+      'Eis World',
+      'Hydrogrid',
+      'Loro Piana',
+      'VideoSmart',
+      'World Data Lab',
+    ],
+  },
+  location: {
+    label: 'Location',
+    multiple: false,
+    options: ['London', 'Remote', 'Turin', 'Vienna'],
+  },
+  role: {
+    label: 'Role',
+    multiple: false,
+    options: ['Front End Developer', 'Full Stack Developer'],
+  },
   technology: {
     label: 'Technology',
     multiple: true,
@@ -35,35 +56,14 @@ export const filterConfig = {
       'Storybook',
       'TailwindCSS',
       'TanStack Form',
+      'TanStack Query',
       'TanStack Router',
-      'PECCIDO',
       'TypeScript',
       'Vite',
       'Vitest',
       'WCAG',
       'Zustand',
       'jQuery',
-    ],
-  },
-  location: {
-    label: 'Location',
-    multiple: false,
-    options: ['London', 'Remote', 'Turin', 'Vienna'],
-  },
-  role: {
-    label: 'Role',
-    multiple: false,
-    options: ['Front End Developer', 'Full Stack Developer'],
-  },
-  company: {
-    label: 'Company',
-    multiple: false,
-    options: [
-      'Eis World',
-      'Hydrogrid',
-      'Loro Piana',
-      'VideoSmart',
-      'World Data Lab',
     ],
   },
 };
