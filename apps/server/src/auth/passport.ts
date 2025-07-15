@@ -44,11 +44,6 @@ const handleOAuthCallback =
     done: VerifyCallback
   ) => {
     try {
-      console.log(
-        `📥 [${provider}] Raw profile:`,
-        JSON.stringify(profile, null, 2)
-      );
-
       const email =
         provider === ProviderEnum.slack
           ? (profile as SlackOAuthProfile).user?.email

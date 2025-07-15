@@ -17,8 +17,6 @@ export const useAuth = () => {
   );
 
   const normalizedUser = useMemo(() => {
-    console.log({ data });
-    console.log({ isError });
     if (!data || isError) return null;
     return {
       ...data,
