@@ -113,18 +113,13 @@ Clicking a filtered result will redirect the user to a detailed section with mor
    - Technologies: React, TypeScript, GraphQL, i18next, TailwindCSS, Leaflet  
    - Live: https://worldwater.io/
 
-7. **Categories Clock**  
-   - Forecasts global consumer demand across 240+ categories through 2034 for companies like Coca-Cola and L’Oréal.  
-   - Technologies: React, TypeScript, React Router, React Query, i18next, TailwindCSS, Leaflet  
-   - Live: https://futureconsumerdemand.io/
-
-8. **Blendon Barber Shop**  
+7. **Blendon Barber Shop**  
    - Business website for a local barbershop.  
    - Technologies: React, Node.js, Vercel, Firebase, TailwindCSS, TypeScript  
    - Repo: https://github.com/Matteobikk90/barber-shop  
    - Live: https://blendon-barber-shop.it/
 
-9. **AGS Sorit Illuminazione**  
+8. **AGS Sorit Illuminazione**  
    - Corporate website for a lighting company.  
    - Technologies: HTML5, CSS3, JavaScript  
    - Live: https://agsoritilluminazione.com/
