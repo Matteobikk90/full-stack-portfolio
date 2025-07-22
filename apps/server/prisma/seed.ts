@@ -289,7 +289,7 @@ async function main() {
       },
       {
         title: 'Africa Social Protection (at World Data Lab)',
-        number: '04',
+        number: '03',
         description: 'Map of social protection initiatives in Africa.',
         slug: 'africa-social-protection',
         company: 'World Data Lab',
@@ -312,7 +312,7 @@ async function main() {
       },
       {
         title: 'Water Crisis Clock (at World Data Lab)',
-        number: '05',
+        number: '04',
         description: 'Visualization of global water stress.',
         slug: 'water-crisis-clock',
         company: 'World Data Lab',
@@ -335,7 +335,7 @@ async function main() {
       },
       {
         title: 'Internet Poverty Index (at World Data Lab)',
-        number: '06',
+        number: '05',
         description: 'Interactive data on digital access inequality.',
         slug: 'internet-poverty-index',
         company: 'World Data Lab',
@@ -358,7 +358,7 @@ async function main() {
       },
       {
         title: 'World Emissions Clock (at World Data Lab)',
-        number: '07',
+        number: '06',
         description: 'Global CO₂ emissions visualized over time.',
         slug: 'world-emissions-clock',
         company: 'World Data Lab',
@@ -374,7 +374,7 @@ async function main() {
       },
       {
         title: 'Blendon Barber Shop',
-        number: '08',
+        number: '07',
         description: 'Business website for a local barbershop.',
         slug: 'blendon-barber-shop',
         company: 'Remote',
@@ -397,7 +397,7 @@ async function main() {
       },
       {
         title: 'AGS Sorit Illuminazione',
-        number: '09',
+        number: '08',
         description: 'Corporate website for lighting company.',
         slug: 'ags-illuminazione',
         company: 'Remote',
