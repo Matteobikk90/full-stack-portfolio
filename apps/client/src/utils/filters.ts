@@ -45,6 +45,7 @@ export const filterConfig = {
       'Node.js',
       'PHP',
       'PNPM',
+      'PostgreSQL',
       'Playwright',
       'Radix UI',
       'React',

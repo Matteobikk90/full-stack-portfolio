@@ -1,12 +1,12 @@
 import { Filters } from '@/components/custom-modal/Filters';
 import { Login } from '@/components/custom-modal/Login';
+import PopUpInfo from '@/components/pop-up-info';
 import { Button } from '@/lib/ui/button';
 import { Dialog, DialogContent, DialogTitle } from '@/lib/ui/dialog';
 import { useStore } from '@/stores';
 import { XIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
-import PopUpInfo from '../pop-up-info';
 
 export const CustomModal = () => {
   const { t } = useTranslation();
