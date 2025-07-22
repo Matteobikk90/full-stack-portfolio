@@ -3,6 +3,7 @@ import { Button } from '@/lib/ui/button';
 import { useStore } from '@/stores';
 import { currentYear } from '@/utils/constants';
 import { actions } from '@/utils/lists';
+import { Icon } from '@iconify/react';
 import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/shallow';
@@ -27,15 +28,17 @@ export const Footer = () => {
             variant="outline"
             size="icon"
             onClick={() => toggleLang(lang === 'en' ? 'it' : 'en')}
-            aria-label="Toggle language"
+            aria-label={`Switch to ${lang === 'en' ? 'Italian' : 'English'}`}
           >
-            <span
-              role="img"
-              className="text-xl"
-              aria-label={lang === 'en' ? 'UK flag' : 'Italian flag'}
-            >
-              {lang === 'en' ? '🇬🇧' : '🇮🇹'}
-            </span>
+            <Icon
+              className="size-5"
+              icon={
+                lang === 'en'
+                  ? 'emojione-v1:flag-for-united-kingdom'
+                  : 'emojione-v1:flag-for-italy'
+              }
+              width={24}
+            />
           </Button>
         </PopUpInfo>
         {actions.map(
