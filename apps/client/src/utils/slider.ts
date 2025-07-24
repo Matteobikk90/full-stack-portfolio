@@ -1,6 +1,5 @@
 import ags from '@/assets/images/ags.png';
 import blendon from '@/assets/images/blendon.png';
-import categories from '@/assets/images/categories.png';
 import emissions from '@/assets/images/emissions.png';
 import internet from '@/assets/images/internet.png';
 import portfolio from '@/assets/images/portfolio.png';
@@ -17,5 +16,4 @@ export const imageMap: Record<string, string> = {
   'africa-youth-clock': youth,
   'africa-social-protection': social,
   'water-crisis-clock': water,
-  'categories-clock': categories,
 };

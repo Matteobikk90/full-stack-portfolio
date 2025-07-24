@@ -53,7 +53,6 @@ Clicking a filtered result will redirect the user to a detailed section with mor
      - Africa Youth Clock
      - Africa Social Protection
      - Water Crisis Clock
-     - Categories Clock
 
 2. **Hydrogrid** – Front End Developer  
    Vienna, Austria | Nov 2020 – Feb 2022  
