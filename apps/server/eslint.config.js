@@ -50,6 +50,6 @@ export default [
     },
   },
   {
-    ignores: ['dist', '**/*.config.ts'],
+    ignores: ['dist', '**/*.config.ts', 'lambda'],
   },
 ];
