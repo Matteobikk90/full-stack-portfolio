@@ -23,6 +23,7 @@
   "license": "MIT",
   "packageManager": "pnpm@10.6.5",
   "devDependencies": {
+    "esbuild": "^0.25.8",
     "husky": "^8.0.0"
   }
 }
