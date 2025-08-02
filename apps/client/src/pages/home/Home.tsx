@@ -45,7 +45,9 @@ export const Home = () => {
                 <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-transparent [background-clip:text] [-webkit-background-clip:text] [-webkit-text-fill-color:transparent]">
                   Matteo
                 </span>{' '}
-                👋
+                <span className="inline-block animate-wave origin-[70%_70%]">
+                  👋
+                </span>
               </h1>
               <h2>
                 {t('home.subtitle')} <strong>{t('home.subtitle2')}</strong>{' '}
