@@ -77,6 +77,9 @@
   },
   "work": {
     "title": "Progetti",
+    "file-upload": {
+      "description": "Una semplice applicazione per l’upload e la gestione di file (PDF, immagini, video). Include tabella responsive con preview dei file."
+    },
     "full-stack-portfolio": {
       "description": "Portfolio personale sviluppato con tecnologie full-stack."
     },

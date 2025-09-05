@@ -77,6 +77,9 @@
   },
   "work": {
     "title": "Work",
+    "file-upload": {
+      "description": "A simple file upload and management app supporting PDFs, images, and videos. Features a responsive table with file previews."
+    },
     "full-stack-portfolio": {
       "description": "Personal portfolio built with full-stack technologies."
     },
