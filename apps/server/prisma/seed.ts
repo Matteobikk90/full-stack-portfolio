@@ -226,8 +226,35 @@ async function main() {
   await prisma.project.createMany({
     data: [
       {
-        title: 'Full Stack Portfolio',
+        title: 'File Upload',
         number: '01',
+        description:
+          'A simple file upload and management app built with SvelteKit, PostgreSQL, and Docker.',
+        slug: 'file-upload',
+        company: 'Assignment',
+        isRemote: true,
+        technologies: [
+          'SvelteKit',
+          'TypeScript',
+          'PostgreSQL',
+          'Prisma',
+          'Docker',
+          'Docker Compose',
+          'AWS S3',
+          'Neon',
+          'Vercel',
+        ],
+        repoUrl: 'https://github.com/Matteobikk90/pack-file-upload',
+        demoUrl: 'https://pack-file-upload-gray.vercel.app/',
+        imageUrl: 'pack.png',
+        isFeatured: false,
+        createdAt: new Date('2025-08-01'),
+        updatedAt: new Date(),
+        role: 'Full Stack Developer',
+      },
+      {
+        title: 'Full Stack Portfolio',
+        number: '02',
         description: 'Personal full-stack portfolio project.',
         slug: 'full-stack-portfolio',
         technologies: [
@@ -265,7 +292,7 @@ async function main() {
       },
       {
         title: 'Africa Youth Clock (at World Data Lab)',
-        number: '02',
+        number: '03',
         description: 'Data visualization of youth demographics in Africa.',
         slug: 'africa-youth-clock',
         company: 'World Data Lab',
@@ -289,7 +316,7 @@ async function main() {
       },
       {
         title: 'Africa Social Protection (at World Data Lab)',
-        number: '03',
+        number: '04',
         description: 'Map of social protection initiatives in Africa.',
         slug: 'africa-social-protection',
         company: 'World Data Lab',
@@ -312,7 +339,7 @@ async function main() {
       },
       {
         title: 'Water Crisis Clock (at World Data Lab)',
-        number: '04',
+        number: '05',
         description: 'Visualization of global water stress.',
         slug: 'water-crisis-clock',
         company: 'World Data Lab',
@@ -335,7 +362,7 @@ async function main() {
       },
       {
         title: 'Internet Poverty Index (at World Data Lab)',
-        number: '05',
+        number: '06',
         description: 'Interactive data on digital access inequality.',
         slug: 'internet-poverty-index',
         company: 'World Data Lab',
@@ -358,7 +385,7 @@ async function main() {
       },
       {
         title: 'World Emissions Clock (at World Data Lab)',
-        number: '06',
+        number: '07',
         description: 'Global CO₂ emissions visualized over time.',
         slug: 'world-emissions-clock',
         company: 'World Data Lab',
@@ -374,7 +401,7 @@ async function main() {
       },
       {
         title: 'Blendon Barber Shop',
-        number: '07',
+        number: '08',
         description: 'Business website for a local barbershop.',
         slug: 'blendon-barber-shop',
         company: 'Remote',
@@ -397,7 +424,7 @@ async function main() {
       },
       {
         title: 'AGS Sorit Illuminazione',
-        number: '08',
+        number: '09',
         description: 'Corporate website for lighting company.',
         slug: 'ags-illuminazione',
         company: 'Remote',

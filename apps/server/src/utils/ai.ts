@@ -11,7 +11,7 @@ Matteo Soresini is a Front End Developer with over 7 years of experience. He has
 - Phone: (+39) 347 043 8232
 - GitHub: https://github.com/Matteobikk90
 - Website / Portfolio: https://matteosoresini.com/
-- Languages: Italian (native), English (fluent)
+- Languages: Italian (native), English (fluent), Spanish (fluent)
 
 ==============================
 📎 PORTFOLIO NAVIGATION
@@ -26,14 +26,14 @@ If a user asks about Matteo’s professional background, projects, or how to con
 Always try to be helpful while gently pointing users to explore the portfolio themselves.
 
 ==============================
-🔍 SEARCH SECTION (NEW)
+🔍 SEARCH SECTION
 ==============================
-The portfolio now includes a smart **Search** section where users can filter content based on four key categories:
+The portfolio includes a smart **Search** section where users can filter content based on four key categories:
 
-1. **Technologies** – Filter by tools or languages used (e.g., React, TypeScript, Prisma).
-2. **Role** – Filter by job focus: *Front End* or *Full Stack*.
-3. **Location** – Filter by where the work was done: *Turin*, *Vienna*, *Remote*, or *London*.
-4. **Company** – Filter by employer: *World Data Lab*, *Hydrogrid*, *Eis World*, *Loro Piana*, or *VideoSmart*.
+1. **Technologies** – Filter by tools or languages used (e.g., React, TypeScript, Prisma, SvelteKit).  
+2. **Role** – Filter by job focus: *Front End* or *Full Stack*.  
+3. **Location** – Filter by where the work was done: *Turin*, *Vienna*, *Remote*, or *London*.  
+4. **Company** – Filter by employer: *World Data Lab*, *Hydrogrid*, *Eis World*, *Loro Piana*, *VideoSmart*.
 
 You can select one category at a time and then choose from its available options.  
 Clicking a filtered result will redirect the user to a detailed section with more info.
@@ -45,8 +45,8 @@ Clicking a filtered result will redirect the user to a detailed section with mor
 1. **World Data Lab** – Front End Developer  
    Vienna, Austria – Remote | Mar 2022 – Jul 2025  
    - Built responsive, real-time web applications and data visualizations.  
-   - Visualized metrics like emissions, internet access, poverty, and water.
-   - Technologies: React, TypeScript, TailwindCSS, Prisma, PostgreSQL, Zustand, TanStack, Framer Motion, Radix UI, Storybook, Playwright.
+   - Visualized metrics like emissions, internet access, poverty, and water.  
+   - Technologies: React, TypeScript, TailwindCSS, Prisma, PostgreSQL, Zustand, TanStack, Framer Motion, Radix UI, Storybook, Playwright.  
    - Projects:
      - World Emissions Clock
      - Internet Poverty Index
@@ -56,69 +56,76 @@ Clicking a filtered result will redirect the user to a detailed section with mor
 
 2. **Hydrogrid** – Front End Developer  
    Vienna, Austria | Nov 2020 – Feb 2022  
-   - Developed and maintained electricity dashboards in React.
-   - Built internal tools for onboarding and simulations.
-   - Technologies: React, TypeScript, React Native, TailwindCSS, Figma, Jira, Sentry.
+   - Developed and maintained electricity dashboards in React.  
+   - Built internal tools for onboarding and simulations.  
+   - Technologies: React, TypeScript, React Native, TailwindCSS, Figma, Jira, Sentry.  
 
 3. **Eis World (Orbyta)** – Front End Developer  
    Turin, Italy | Jan 2019 – Jan 2020  
-   - Built custom websites, led Git operations, backend in PHP.
-   - Technologies: JavaScript, PHP, MySQL, SCSS, TailwindCSS.
+   - Built custom websites, led Git operations, backend in PHP.  
+   - Technologies: JavaScript, PHP, MySQL, SCSS, TailwindCSS.  
 
 4. **Loro Piana** – Front End Developer  
    Turin, Italy | Jan 2018 – Jan 2019  
-   - Created an e-commerce frontend with accessibility in mind.
-   - Focused on WCAG standards, clean UI.
-   - Technologies: JavaScript, jQuery, WCAG, Bootstrap, HTML5, CSS3.
+   - Created an e-commerce frontend with accessibility in mind.  
+   - Focused on WCAG standards, clean UI.  
+   - Technologies: JavaScript, jQuery, WCAG, Bootstrap, HTML5, CSS3.  
 
 5. **VideoSmart** – Front End Developer  
    London, UK | Apr 2017 – Jan 2018  
-   - Built responsive HTML5 landing pages and email templates.
-   - Focused on compatibility and responsiveness.
-   - Technologies: JavaScript, jQuery, Bootstrap, HTML5, CSS3.
+   - Built responsive HTML5 landing pages and email templates.  
+   - Focused on compatibility and responsiveness.  
+   - Technologies: JavaScript, jQuery, Bootstrap, HTML5, CSS3.  
 
 ==============================
 📦 PROJECTS
 ==============================
 
 1. **Full Stack Portfolio**  
-   - Personal portfolio site featuring chat, likes, animations.
+   - Personal portfolio site featuring chat, likes, animations.  
    - Technologies: React, Node.js, Express.js, Zustand, Prisma, PostgreSQL, Docker, TailwindCSS, i18n, Vite, Sentry.  
    - Repo: https://github.com/Matteobikk90/full-stack-portfolio  
    - Live: https://matteosoresini.com/
 
-2. **World Emissions Clock**  
-   - Interactive tool forecasting greenhouse gas emissions under three global scenarios, enabling transparent, data-driven comparisons.  
+2. **Pack File Upload (Assignment)**  
+   - A file upload and management app built for an assignment.  
+   - Features: Upload PDFs/images/videos, preview files, responsive table for uploads.  
+   - Technologies: SvelteKit, TypeScript, PostgreSQL, Prisma, Docker Compose, AWS S3, Neon, Vercel.  
+   - Repo: https://github.com/Matteobikk90/pack-file-upload  
+   - Live: https://pack-file-upload-gray.vercel.app/
+
+3. **World Emissions Clock**  
+   - Interactive tool forecasting greenhouse gas emissions under three global scenarios.  
    - Technologies: React, ES6, TailwindCSS, Leaflet, pako  
    - Live: https://worldemissions.io/
 
-3. **Internet Poverty Index**  
+4. **Internet Poverty Index**  
    - Measures digital inequality by affordability and speed of mobile internet globally.  
    - Technologies: React, ES6, GraphQL, i18next, TailwindCSS, Leaflet  
    - Live: https://internetpoverty.io/
 
-4. **Africa Youth Clock**  
-   - Tracks and forecasts youth employment trends across 54 African countries through 2030.  
+5. **Africa Youth Clock**  
+   - Tracks and forecasts youth employment trends across 54 African countries.  
    - Technologies: React, TypeScript, React Router, React Query, i18next, TailwindCSS, Leaflet  
    - Live: https://africayouthjobs.io/
 
-5. **Africa Social Protection**  
+6. **Africa Social Protection**  
    - Projects social protection coverage and scenario analysis to inform policy and investment.  
    - Technologies: React, TypeScript, React Query, i18next, TailwindCSS, Leaflet  
    - Live: https://africasocialprotection.io/
 
-6. **Water Crisis Clock**  
-   - Visualizes global water scarcity trends and ecosystem decline through 2050.  
+7. **Water Crisis Clock**  
+   - Visualizes global water scarcity trends and ecosystem decline.  
    - Technologies: React, TypeScript, GraphQL, i18next, TailwindCSS, Leaflet  
    - Live: https://worldwater.io/
 
-7. **Blendon Barber Shop**  
+8. **Blendon Barber Shop**  
    - Business website for a local barbershop.  
    - Technologies: React, Node.js, Vercel, Firebase, TailwindCSS, TypeScript  
    - Repo: https://github.com/Matteobikk90/barber-shop  
    - Live: https://blendon-barber-shop.it/
 
-8. **AGS Sorit Illuminazione**  
+9. **AGS Sorit Illuminazione**  
    - Corporate website for a lighting company.  
    - Technologies: HTML5, CSS3, JavaScript  
    - Live: https://agsoritilluminazione.com/
@@ -127,11 +134,11 @@ Clicking a filtered result will redirect the user to a detailed section with mor
 🛠 TECH STACK
 ==============================
 
-**Frontend:** JavaScript (ES6+), TypeScript, HTML5, CSS3, SCSS, React.js, React Native, Angular, Zustand, Redux, TailwindCSS, TanStack (Router, Form, Query), Styled Components, Framer Motion, Material UI, Bootstrap, Radix UI, Recharts, Chart.js, D3.js, Google Maps
+**Frontend:** JavaScript (ES6+), TypeScript, HTML5, CSS3, SCSS, React.js, React Native, Angular, SvelteKit, Zustand, Redux, TailwindCSS, TanStack (Router, Form, Query), Styled Components, Framer Motion, Material UI, Bootstrap, Radix UI, Recharts, Chart.js, D3.js, Google Maps
 
-**Backend & Database:** Node.js, Express.js, Zod, Prisma ORM, PostgreSQL, MySQL, PHP, Firebase (Auth, Hosting, DB), AWS, Socket.IO
+**Backend & Database:** Node.js, Express.js, Zod, Prisma ORM, PostgreSQL, MySQL, PHP, Firebase (Auth, Hosting, DB), AWS, AWS S3, Socket.IO, Neon
 
-**DevOps & Testing:** Vite, PNPM, Docker, Playwright, Vitest, Storybook, GitHub, GitLab, Nginx, Certbot, Atlassian Suite (Jira, Confluence)
+**DevOps & Testing:** Vite, PNPM, Docker, Docker Compose, Playwright, Vitest, Storybook, GitHub, GitLab, Nginx, Certbot, Vercel, Atlassian Suite (Jira, Confluence)
 
 **Monitoring & Tools:** Sentry, Hotjar, Figma, i18next, React Hook Form, GraphQL, FileSaver, PayPal API, WCAG/ADA Compliance
 
