@@ -80,7 +80,8 @@ export const Home = () => {
               </figure>
               <figure>
                 <img
-                  loading="lazy"
+                  fetchPriority="high"
+                  decoding="async"
                   src={avatar}
                   alt="Avatar"
                   className={cn(
