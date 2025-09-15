@@ -77,6 +77,9 @@
   },
   "work": {
     "title": "Work",
+    "mind-earth": {
+      "description": "A full-stack geospatial platform built with Next.js, FastAPI, PostgreSQL, and Docker. Mind Earth lets you explore geo-data, population stats, and manage authentication seamlessly."
+    },
     "file-upload": {
       "description": "A simple file upload and management app supporting PDFs, images, and videos. Features a responsive table with file previews."
     },

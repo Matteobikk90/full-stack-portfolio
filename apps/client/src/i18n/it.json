@@ -77,6 +77,9 @@
   },
   "work": {
     "title": "Progetti",
+    "mind-earth": {
+      "description": "Una piattaforma geospaziale full-stack sviluppata con Next.js, FastAPI, PostgreSQL e Docker. Mind Earth consente di esplorare geo-dati, statistiche sulla popolazione e gestire l’autenticazione in modo semplice e sicuro."
+    },
     "file-upload": {
       "description": "Una semplice applicazione per l’upload e la gestione di file (PDF, immagini, video). Include tabella responsive con preview dei file."
     },

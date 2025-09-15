@@ -90,5 +90,15 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "@sentry-internal/node-cpu-profiler",
+      "bcrypt",
+      "esbuild",
+      "prisma"
+    ]
   }
 }
