@@ -44,8 +44,8 @@ async function main() {
   await prisma.experience.create({
     data: {
       company: 'World Data Lab',
-      title: 'Front End Developer',
-      role: 'Front End Developer',
+      title: 'Full Stack Developer (Front End focus)',
+      role: 'Full Stack Developer (Front End focus)',
       slug: 'world-data-lab',
       location: 'Vienna, AT',
       url: 'https://worlddatalab.com/',
@@ -226,8 +226,45 @@ async function main() {
   await prisma.project.createMany({
     data: [
       {
-        title: 'Mind Earth (Assignment)',
+        title: 'NeuraNFT',
         number: '01',
+        description:
+          'NeuraNFT is a cross-platform mobile DApp built with Expo (React Native), Solidity, and Node.js. Users can connect their wallet, view tokens and transactions, and mint custom or AI-generated NFTs powered by OpenAI, with metadata stored on Pinata IPFS.',
+        slug: 'neura-nft',
+        company: 'Personal Project',
+        isRemote: true,
+        technologies: [
+          'React Native',
+          'Expo',
+          'TypeScript',
+          'Zustand',
+          'TanStack Query',
+          'NativeWind',
+          'Lottie',
+          'Node.js',
+          'Express.js',
+          'MongoDB',
+          'Mongoose',
+          'Solidity',
+          'Hardhat',
+          'OpenAI API',
+          'Pinata IPFS',
+          'Alchemy API',
+          'Render',
+          'AWS',
+        ],
+        repoUrl: 'https://github.com/Matteobikk90/neura-nft',
+        demoUrl:
+          'https://expo.dev/accounts/matteobikk90/projects/neura-nft/builds/e3c555de-ca08-4ce1-af2c-161707b2d1bf',
+        imageUrl: 'neura-nft.png',
+        isFeatured: true,
+        createdAt: new Date('2025-09-01'),
+        updatedAt: new Date(),
+        role: 'Full Stack Developer',
+      },
+      {
+        title: 'Mind Earth (Assignment)',
+        number: '02',
         description:
           'A full-stack geospatial platform built with Next.js, FastAPI, PostgreSQL, and Docker. Mind Earth lets you explore geo-data, population stats, and manage authentication seamlessly.',
         slug: 'mind-earth',
@@ -259,7 +296,7 @@ async function main() {
       },
       {
         title: 'File Upload',
-        number: '02',
+        number: '03',
         description:
           'A simple file upload and management app built with SvelteKit, PostgreSQL, and Docker.',
         slug: 'file-upload',
@@ -286,7 +323,7 @@ async function main() {
       },
       {
         title: 'Full Stack Portfolio',
-        number: '03',
+        number: '04',
         description: 'Personal full-stack portfolio project.',
         slug: 'full-stack-portfolio',
         technologies: [
@@ -324,7 +361,7 @@ async function main() {
       },
       {
         title: 'Africa Youth Clock (at World Data Lab)',
-        number: '04',
+        number: '05',
         description: 'Data visualization of youth demographics in Africa.',
         slug: 'africa-youth-clock',
         company: 'World Data Lab',
@@ -348,7 +385,7 @@ async function main() {
       },
       {
         title: 'Africa Social Protection (at World Data Lab)',
-        number: '05',
+        number: '06',
         description: 'Map of social protection initiatives in Africa.',
         slug: 'africa-social-protection',
         company: 'World Data Lab',
@@ -371,7 +408,7 @@ async function main() {
       },
       {
         title: 'Water Crisis Clock (at World Data Lab)',
-        number: '06',
+        number: '07',
         description: 'Visualization of global water stress.',
         slug: 'water-crisis-clock',
         company: 'World Data Lab',
@@ -394,7 +431,7 @@ async function main() {
       },
       {
         title: 'Internet Poverty Index (at World Data Lab)',
-        number: '07',
+        number: '08',
         description: 'Interactive data on digital access inequality.',
         slug: 'internet-poverty-index',
         company: 'World Data Lab',
@@ -417,7 +454,7 @@ async function main() {
       },
       {
         title: 'World Emissions Clock (at World Data Lab)',
-        number: '08',
+        number: '09',
         description: 'Global CO₂ emissions visualized over time.',
         slug: 'world-emissions-clock',
         company: 'World Data Lab',
@@ -433,7 +470,7 @@ async function main() {
       },
       {
         title: 'Blendon Barber Shop',
-        number: '09',
+        number: '10',
         description: 'Business website for a local barbershop.',
         slug: 'blendon-barber-shop',
         company: 'Remote',
@@ -456,7 +493,7 @@ async function main() {
       },
       {
         title: 'AGS Sorit Illuminazione',
-        number: '10',
+        number: '11',
         description: 'Corporate website for lighting company.',
         slug: 'ags-illuminazione',
         company: 'Remote',

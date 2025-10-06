@@ -2,7 +2,8 @@ import ags from '@/assets/images/ags.png';
 import blendon from '@/assets/images/blendon.png';
 import emissions from '@/assets/images/emissions.png';
 import internet from '@/assets/images/internet.png';
-import mind from '@/assets/images/mind-earth.png';
+import mind from '@/assets/images/mind-earth.svg';
+import neura from '@/assets/images/neura-nft.svg';
 import pack from '@/assets/images/pack.png';
 import portfolio from '@/assets/images/portfolio.png';
 import social from '@/assets/images/social.png';
@@ -20,4 +21,5 @@ export const imageMap: Record<string, string> = {
   'africa-social-protection': social,
   'water-crisis-clock': water,
   'mind-earth': mind,
+  'neura-nft': neura,
 };

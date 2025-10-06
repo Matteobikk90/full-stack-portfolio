@@ -77,6 +77,9 @@
   },
   "work": {
     "title": "Progetti",
+    "neura-nft": {
+      "description": "NeuraNFT è una DApp mobile multipiattaforma dove gli utenti possono connettere il proprio wallet, visualizzare token e transazioni e creare NFT personalizzati o generati tramite IA basata su OpenAI, con i metadati archiviati su Pinata IPFS."
+    },
     "mind-earth": {
       "description": "Una piattaforma geospaziale full-stack sviluppata con Next.js, FastAPI, PostgreSQL e Docker. Mind Earth consente di esplorare geo-dati, statistiche sulla popolazione e gestire l’autenticazione in modo semplice e sicuro."
     },

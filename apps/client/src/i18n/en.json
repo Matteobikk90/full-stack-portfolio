@@ -77,6 +77,9 @@
   },
   "work": {
     "title": "Work",
+    "neura-nft": {
+      "description": "NeuraNFT is a cross-platform mobile DApp where users can connect their wallet, view tokens and transactions, and mint custom or AI-generated NFTs powered by OpenAI, with metadata stored on Pinata IPFS."
+    },
     "mind-earth": {
       "description": "A full-stack geospatial platform built with Next.js, FastAPI, PostgreSQL, and Docker. Mind Earth lets you explore geo-data, population stats, and manage authentication seamlessly."
     },
