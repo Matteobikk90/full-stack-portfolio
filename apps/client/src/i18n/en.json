@@ -164,7 +164,8 @@
     "world-data-lab": {
       "duties": [
         "Built responsive web applications delivering real-time data and projections out to 2030",
-        "Developed models for data visualization on various global issues such as population, hunger, poverty, and water shortage"
+        "Developed models for data visualization on various global issues such as population, hunger, poverty, and water shortage",
+        "Built RESTful APIs using Node.js and Express to fetch dynamic translations via Localize and query databases efficiently"
       ]
     },
     "hydrogrid": {
