@@ -1,5 +1,5 @@
-import '@/auth/passport';
 import authRoutes from '@/auth/auth.route';
+import '@/auth/passport';
 import { Sentry } from '@/config/sentry';
 import { globalErrorHandler } from '@/middleware/error.middleware';
 import aiRoutes from '@/routes/ai.route';
