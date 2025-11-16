@@ -92,8 +92,8 @@ export const Home = () => {
               </figure>
               {!discovered && (
                 <>
-                  <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[65px] sm:top-[99px] sm:left-[82px]"></span>
-                  <span className="absolute animate-blink w-[26px] h-[26px] sm:w-8 sm:h-8 bg-skin top-[79px] left-[121px] sm:top-[99px] sm:left-[151px]"></span>
+                  <span className="absolute animate-blink w-[26px] h-[26px] sm:w-9 sm:h-9 bg-skin top-[79px] left-[65px] sm:top-[99px] sm:left-[82px]"></span>
+                  <span className="absolute animate-blink w-[26px] h-[26px] sm:w-9 sm:h-9 bg-skin top-[79px] left-[121px] sm:top-[99px] sm:left-[151px]"></span>
                 </>
               )}
             </article>
