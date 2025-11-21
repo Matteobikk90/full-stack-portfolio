@@ -15,12 +15,12 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     env:
-      IMAGE_TAG: ${{ github.sha }}
       REGISTRY: ghcr.io/matteobikk90
       FOLDER: full-stack-portfolio
+      IMAGE_TAG: ${{ github.sha }}
 
     steps:
       - name: 📥 Checkout repository
@@ -50,34 +50,25 @@ jobs:
           VITE_PROXY_TARGET=$([ "${{ github.ref_name }}" = "main" ] && echo "https://matteosoresini.com" || echo "https://dev.matteosoresini.com")
           docker build \
             --build-arg VITE_PROXY_TARGET=$VITE_PROXY_TARGET \
-            -t $REGISTRY/$FOLDER-client:$IMAGE_TAG \
+            -t $REGISTRY/$FOLDER-client:${IMAGE_TAG} \
             -f apps/client/Dockerfile apps/client
 
       - name: 🐳 Build server image
         run: |
           SERVER_SUFFIX=$( [ "${{ github.ref_name }}" = "main" ] && echo "prod" || echo "dev" )
-          docker build -t $REGISTRY/$FOLDER-server-$SERVER_SUFFIX:$IMAGE_TAG -f apps/server/Dockerfile apps/server
+          docker build \
+            -t $REGISTRY/$FOLDER-server-${SERVER_SUFFIX}:${IMAGE_TAG} \
+            -f apps/server/Dockerfile apps/server
 
       - name: 📤 Push images to registry
         run: |
-          docker push $REGISTRY/$FOLDER-client:$IMAGE_TAG
+          docker push $REGISTRY/$FOLDER-client:${IMAGE_TAG}
           SERVER_SUFFIX=$( [ "${{ github.ref_name }}" = "main" ] && echo "prod" || echo "dev" )
-          docker push $REGISTRY/$FOLDER-server-$SERVER_SUFFIX:$IMAGE_TAG
+          docker push $REGISTRY/$FOLDER-server-${SERVER_SUFFIX}:${IMAGE_TAG}
 
-      - name: 🧠 Set Nginx config filename
-        run: |
-          CONFIG_FILE=$([ "${{ github.ref_name }}" = "main" ] && echo "prod.conf" || echo "dev.conf")
-          echo "CONFIG_FILE=$CONFIG_FILE" >> $GITHUB_ENV
-
-      - name: 📤 Copy Nginx config to EC2
-        uses: appleboy/scp-action@v0.1.5
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_KEY }}
-          source: nginx/conf.d/${{ env.CONFIG_FILE }}
-          target: /home/ubuntu/full-stack-portfolio/nginx/conf.d/
-          strip_components: 2
+      #############################################
+      # COPY NGINX CONFIG AND DOCKER-COMPOSE FILE #
+      #############################################
 
       - name: 📤 Copy docker-compose.yml to EC2
         uses: appleboy/scp-action@v0.1.5
@@ -88,52 +79,50 @@ jobs:
           source: docker-compose.yml
           target: /home/ubuntu/full-stack-portfolio/
 
+      - name: 📤 Copy Nginx config to EC2
+        uses: appleboy/scp-action@v0.1.5
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          source: nginx/default.conf
+          target: /home/ubuntu/full-stack-portfolio/nginx/
+          strip_components: 2
+
+      ##########################
+      # DEPLOY ON THE SERVER   #
+      ##########################
+
       - name: 🚀 Deploy on EC2 via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
-          envs: GITHUB_SHA,GITHUB_REF_NAME,CONFIG_FILE
           script: |
-            set -e
-            REGISTRY=ghcr.io/matteobikk90
-            FOLDER=full-stack-portfolio
-            TAG=$GITHUB_SHA
+            cd ~/full-stack-portfolio
 
-            if [ "$GITHUB_REF_NAME" = "main" ]; then
-              IMAGE_ENV="prod"
-              ENV="production"
-              SERVER_PORT="4000"
+            # ENV settings
+            if [ "${{ github.ref_name }}" = "main" ]; then
+              echo "ENV=production" > .env
+              echo "IMAGE_ENV=prod" >> .env
+              echo "SERVER_PORT=4000" >> .env
             else
-              IMAGE_ENV="dev"
-              ENV="development"
-              SERVER_PORT="4001"
+              echo "ENV=development" > .env
+              echo "IMAGE_ENV=dev" >> .env
+              echo "SERVER_PORT=4001" >> .env
             fi
 
-            echo "📥 Pulling images from GHCR..."
-            docker pull $REGISTRY/$FOLDER-client:$TAG
-            docker pull $REGISTRY/$FOLDER-server-$IMAGE_ENV:$TAG
+            echo "GITHUB_SHA=${IMAGE_TAG}" >> .env
 
-            echo "🛑 Stopping existing containers..."
-            mv ~/full-stack-portfolio/nginx/conf.d/${CONFIG_FILE} ~/full-stack-portfolio/nginx/conf.d/default.conf
-            cd ~/full-stack-portfolio
+            echo "📥 Pulling updated images..."
+            docker compose pull
+
+            echo "🛑 Stopping old stack..."
             docker compose down || true
 
-            CONTAINERS=$(docker ps -q --filter "publish=80" --filter "publish=4000" --filter "publish=4001")
-            [ -n "$CONTAINERS" ] && docker stop $CONTAINERS || true
-
-            echo "🚀 Starting containers..."
-            cd ~/full-stack-portfolio
-            echo "GITHUB_SHA=$TAG" > .env
-            echo "ENV=$ENV" >> .env
-            echo "IMAGE_ENV=$IMAGE_ENV" >> .env
-            echo "SERVER_PORT=$SERVER_PORT" >> .env
+            echo "🚀 Starting new stack..."
             docker compose up -d
 
-            echo "🧹 Cleaning unused Docker resources..."
-            docker image prune -af 
-            docker container prune -f
-        env:
-          GITHUB_SHA: ${{ github.sha }}
-          GITHUB_REF_NAME: ${{ github.ref_name }}
+            echo "🧹 Cleaning old Docker images..."
+            docker image prune -af || true
