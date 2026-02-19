@@ -92,7 +92,6 @@ jobs:
       ##########################
       # DEPLOY ON THE SERVER   #
       ##########################
-
       - name: 🚀 Deploy on EC2 via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -124,6 +123,10 @@ jobs:
 
             echo "🚀 Starting new stack..."
             docker compose up -d
+
+            echo "🔄 Reloading nginx..."
+            sleep 5
+            docker exec web nginx -s reload || true
 
             echo "🧹 Cleaning old Docker images..."
             docker image prune -af || true
