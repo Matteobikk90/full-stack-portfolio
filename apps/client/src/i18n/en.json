@@ -161,6 +161,22 @@
     "duties": "Key Duties",
     "tech": "Technologies",
     "projects": "Projects",
+    "cheope": {
+      "duties": [
+        "Build scalable dashboard interfaces using React and TypeScript",
+        "Collaborate with product and backend to define features and data flows",
+        "Design reusable frontend architecture and component systems",
+        "Optimize performance and user experience across the platform"
+      ]
+    },
+    "cosmico": {
+      "duties": [
+        "Develop AWS Lambda functions for e-commerce workflows processing high-volume events",
+        "Design and orchestrate serverless processes using Step Functions and SQS",
+        "Expose scalable APIs via API Gateway and integrate distributed services",
+        "Improve observability and debugging using CloudWatch"
+      ]
+    },
     "world-data-lab": {
       "duties": [
         "Built responsive web applications delivering real-time data and projections out to 2030",

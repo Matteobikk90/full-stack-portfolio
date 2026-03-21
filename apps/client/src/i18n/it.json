@@ -161,6 +161,22 @@
     "duties": "Responsabilità principali",
     "tech": "Tecnologie",
     "projects": "Progetti",
+    "cheope": {
+      "duties": [
+        "Sviluppo interfacce dashboard scalabili con React e TypeScript",
+        "Collaboro con product e backend per definire funzionalità e flussi dati",
+        "Progetto architetture frontend e componenti riutilizzabili",
+        "Ottimizzo performance ed esperienza utente della piattaforma"
+      ]
+    },
+    "cosmico": {
+      "duties": [
+        "Sviluppo funzioni AWS Lambda per flussi e-commerce ad alto volume",
+        "Progetto e gestisco processi serverless con Step Functions e SQS",
+        "Espongo API scalabili tramite API Gateway e integro servizi distribuiti",
+        "Miglioro logging e debugging con CloudWatch"
+      ]
+    },
     "world-data-lab": {
       "duties": [
         "Sviluppato applicazioni web responsive per la visualizzazione di dati e proiezioni fino al 2030",

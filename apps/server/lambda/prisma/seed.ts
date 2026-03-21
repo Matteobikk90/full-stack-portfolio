@@ -55,7 +55,7 @@ async function main() {
       description:
         'Built responsive web applications delivering real-time data and projections out to 2030. Developed models for data visualization on various global issues such as population, hunger, poverty, and water shortage.',
       duties: [
-        'Built interactive, UIs using React, TypeScript, TailwindCSS, and Zustand',
+        'Built interactive UIs using React, TypeScript, TailwindCSS, and Zustand',
         'Integrated routing, forms, and queries via TanStack tools',
         'Developed a lightweight Node.js API with Express',
         'Implemented testing with Vitest and Playwright, monitored UX with Sentry and Hotjar',
