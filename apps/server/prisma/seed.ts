@@ -41,6 +41,72 @@ async function main() {
     )
   );
 
+  await prisma.experience.createMany({
+    data: [
+      {
+        company: 'Cheope',
+        title: 'Full Stack Developer (Front End focus)',
+        role: 'Full Stack Developer (Front End focus)',
+        slug: 'cheope',
+        location: 'Chiasso, CH',
+        url: 'https://www.cheope.io/',
+        isRemote: true,
+        startDate: new Date('2025-12-01'),
+        endDate: null,
+        description:
+          'Building a modern dashboard platform in a small cross-functional team, focusing on frontend architecture and user experience.',
+        duties: [
+          'Build scalable dashboard interfaces using React and TypeScript',
+          'Collaborate with product and backend to define features and data flows',
+          'Design reusable frontend architecture and component systems',
+          'Optimize performance and user experience across the platform',
+        ],
+        technologies: [
+          'React',
+          'TypeScript',
+          'TailwindCSS',
+          'Zustand',
+          'TanStack Query',
+          'Vite',
+          'REST APIs',
+          'Figma',
+        ],
+        imageUrl: null,
+      },
+      {
+        company: 'Cosmico',
+        title: 'Full Stack Developer',
+        role: 'Full Stack Developer',
+        slug: 'cosmico',
+        location: 'Milan, IT',
+        url: 'https://wearecosmico.com/it',
+        isRemote: true,
+        startDate: new Date('2025-11-01'),
+        endDate: null,
+        description:
+          'Developing serverless backend systems for e-commerce platforms, focusing on scalability, automation, and integrations.',
+        duties: [
+          'Develop AWS Lambda functions for e-commerce workflows processing high-volume events',
+          'Design and orchestrate serverless processes using Step Functions and SQS',
+          'Expose scalable APIs via API Gateway and integrate distributed services',
+          'Improve observability and debugging using CloudWatch',
+        ],
+        technologies: [
+          'Node.js',
+          'AWS Lambda',
+          'AWS Step Functions',
+          'AWS SQS',
+          'AWS CloudWatch',
+          'AWS API Gateway',
+          'JavaScript',
+          'REST APIs',
+          'Event-driven architecture',
+        ],
+        imageUrl: null,
+      },
+    ],
+  });
+
   await prisma.experience.create({
     data: {
       company: 'World Data Lab',
