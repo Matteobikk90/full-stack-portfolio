@@ -1,12 +1,12 @@
+import { LanguageFlag } from '@/components/LanguageFlag';
 import PopUpInfo from '@/components/pop-up-info';
 import { Logo } from '@/features/header/Logo';
 import { Button } from '@/lib/ui/button';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
+import { actions } from '@/utils/actions';
 import { currentYear } from '@/utils/constants';
-import { actions } from '@/utils/lists';
 import { hoverStyles, menuLinks } from '@/utils/menu';
-import { Icon } from '@iconify/react';
 import {
   BinocularsIcon,
   DotsThreeOutlineVerticalIcon,
@@ -85,15 +85,7 @@ export const MenuMobile = () => {
                 onClick={() => toggleLang(lang === 'en' ? 'it' : 'en')}
                 aria-label={`Switch to ${lang === 'en' ? 'Italian' : 'English'}`}
               >
-                <Icon
-                  className="size-5"
-                  icon={
-                    lang === 'en'
-                      ? 'emojione-v1:flag-for-united-kingdom'
-                      : 'emojione-v1:flag-for-italy'
-                  }
-                  width={24}
-                />
+                <LanguageFlag lang={lang} />
               </Button>
             </PopUpInfo>
             {actions.map(
