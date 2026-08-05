@@ -63,6 +63,8 @@ export const Messages = () => {
     inputRef.current?.focus();
   }, [chatMode, chatMessages, aiMessages]);
 
+  if (!user) return null;
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;

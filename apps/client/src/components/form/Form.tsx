@@ -8,12 +8,12 @@ import {
   currentSchema,
   currentSchemaDefault,
 } from '@/schemas/contact-form.schema';
+import { apiPost } from '@/utils/api';
 import { toastDuration } from '@/utils/constants';
 import { asyncDebounceMs, getValidationClass } from '@/utils/form';
 import { SpinnerIcon } from '@phosphor-icons/react';
 import { useForm } from '@tanstack/react-form';
 import { Link } from '@tanstack/react-router';
-import axios from 'axios';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -34,7 +34,7 @@ export const ContactForm = () => {
       const { name, email, message } = value;
 
       try {
-        await axios.post('/api/contact', {
+        await apiPost('/api/contact', {
           name,
           email,
           message,

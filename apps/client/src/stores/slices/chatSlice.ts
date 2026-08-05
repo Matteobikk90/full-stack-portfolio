@@ -1,6 +1,5 @@
 import type { ChatSliceType } from '@/types/chat.types';
 import { SOCKET_URL } from '@/utils/constants';
-import { io } from 'socket.io-client';
 import type { StateCreator } from 'zustand';
 
 const createChatSlice: StateCreator<ChatSliceType> = (set, get) => ({
@@ -63,84 +62,94 @@ const createChatSlice: StateCreator<ChatSliceType> = (set, get) => ({
     });
   },
   initSocket: (userId, isAdmin) => {
-    const socket = io(SOCKET_URL, { withCredentials: true });
+    if (get().socket) return;
 
-    set({ socket, isConnecting: true, connectionError: null });
+    set({ isConnecting: true, connectionError: null });
 
-    socket.on('connect', () => {
-      set({ isConnecting: false, connectionError: null });
+    void import('socket.io-client')
+      .then(({ io }) => {
+        if (get().socket) return;
 
-      if (isAdmin && get().activeUserId) {
-        socket.emit('admin:set-partner', get().activeUserId, () => {
-          const uid = get().activeUserId;
-          const threads = get().threads;
-          if (uid && threads[uid]) {
-            get().setChatMessages(uid, threads[uid]);
+        const socket = io(SOCKET_URL, { withCredentials: true });
+        set({ socket });
+
+        socket.on('connect', () => {
+          set({ isConnecting: false, connectionError: null });
+
+          if (isAdmin && get().activeUserId) {
+            socket.emit('admin:set-partner', get().activeUserId, () => {
+              const uid = get().activeUserId;
+              const threads = get().threads;
+              if (uid && threads[uid]) {
+                get().setChatMessages(uid, threads[uid]);
+              }
+            });
           }
         });
-      }
-    });
 
-    socket.on('connect_error', (err) => {
-      console.error(err);
-      set({ connectionError: 'Failed to connect', isConnecting: false });
-    });
-
-    socket.on('disconnect', (reason) => {
-      console.warn('Socket disconnected:', reason);
-      set({
-        isConnecting: true,
-        connectionError: 'Disconnected. Reconnecting...',
-      });
-    });
-
-    socket.on('chat:history', (hist) => {
-      if (!isAdmin && hist.length) {
-        const adminId =
-          hist[0].sender?.id === userId
-            ? hist[0].receiver?.id
-            : hist[0].sender?.id;
-        set({
-          activeUserId: adminId,
+        socket.on('connect_error', (err) => {
+          console.error(err);
+          set({ connectionError: 'Failed to connect', isConnecting: false });
         });
-        get().setChatMessages(adminId, hist);
-      }
-    });
 
-    socket.on('chat:message', (msg) => {
-      const otherId =
-        msg.sender?.id === userId ? msg.receiver?.id : msg.sender?.id;
-      if (!otherId) return;
+        socket.on('disconnect', (reason) => {
+          console.warn('Socket disconnected:', reason);
+          set({
+            isConnecting: true,
+            connectionError: 'Disconnected. Reconnecting...',
+          });
+        });
 
-      const threads = get().threads;
-      const existing = threads[otherId] ?? [];
-      const alreadyInThread = existing.some((m) => m.id === msg.id);
-      if (alreadyInThread) return;
+        socket.on('chat:history', (hist) => {
+          if (!isAdmin && hist.length) {
+            const adminId =
+              hist[0].sender?.id === userId
+                ? hist[0].receiver?.id
+                : hist[0].sender?.id;
+            set({ activeUserId: adminId });
+            get().setChatMessages(adminId, hist);
+          }
+        });
 
-      const updated = { ...threads, [otherId]: [...existing, msg] };
-      set({ threads: updated });
+        socket.on('chat:message', (msg) => {
+          const otherId =
+            msg.sender?.id === userId ? msg.receiver?.id : msg.sender?.id;
+          if (!otherId) return;
 
-      if (!isAdmin || get().activeUserId === otherId) {
-        get().setChatMessages(otherId, (prev) =>
-          prev.some((m) => m.id === msg.id) ? prev : [...prev, msg]
-        );
-      }
-    });
+          const threads = get().threads;
+          const existing = threads[otherId] ?? [];
+          const alreadyInThread = existing.some((m) => m.id === msg.id);
+          if (alreadyInThread) return;
 
-    socket.on('chat:init', ({ adminId }) => {
-      if (!get().activeUserId) {
-        set({ activeUserId: adminId });
-      }
-    });
+          const updated = { ...threads, [otherId]: [...existing, msg] };
+          set({ threads: updated });
 
-    socket.on('admin:all-conversations', (allThreads) => {
-      set({ threads: allThreads });
-      if (isAdmin && Object.keys(allThreads).length) {
-        const firstUserId = Object.keys(allThreads)[0];
-        set({ activeUserId: firstUserId });
-        get().setChatMessages(firstUserId, allThreads[firstUserId]);
-      }
-    });
+          if (!isAdmin || get().activeUserId === otherId) {
+            get().setChatMessages(otherId, (prev) =>
+              prev.some((m) => m.id === msg.id) ? prev : [...prev, msg]
+            );
+          }
+        });
+
+        socket.on('chat:init', ({ adminId }) => {
+          if (!get().activeUserId) {
+            set({ activeUserId: adminId });
+          }
+        });
+
+        socket.on('admin:all-conversations', (allThreads) => {
+          set({ threads: allThreads });
+          if (isAdmin && Object.keys(allThreads).length) {
+            const firstUserId = Object.keys(allThreads)[0];
+            set({ activeUserId: firstUserId });
+            get().setChatMessages(firstUserId, allThreads[firstUserId]);
+          }
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        set({ connectionError: 'Failed to load chat', isConnecting: false });
+      });
   },
 });
 

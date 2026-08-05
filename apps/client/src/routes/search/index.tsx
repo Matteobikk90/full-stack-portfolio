@@ -1,10 +1,42 @@
 import { queryClient } from '@/config/queryClient';
 import { fetchSearchResult } from '@/queries/search';
-import { filterSchema } from '@/schemas/search.schema';
 import { createFileRoute } from '@tanstack/react-router';
 
+const toStringArray = (value: unknown) => {
+  const values = Array.isArray(value)
+    ? value
+    : typeof value === 'string'
+      ? value.split(',')
+      : [];
+  const strings = values.filter(
+    (item): item is string => typeof item === 'string' && item.length > 0
+  );
+
+  return strings.length ? strings : undefined;
+};
+
+type SearchFilters = {
+  technology?: string[];
+  location?: string[];
+  company?: string[];
+  role?: string[];
+};
+
 export const Route = createFileRoute('/search/')({
-  validateSearch: filterSchema,
+  validateSearch: (search: Record<string, unknown>): SearchFilters => {
+    const filters: SearchFilters = {};
+    const technology = toStringArray(search.technology);
+    const location = toStringArray(search.location);
+    const company = toStringArray(search.company);
+    const role = toStringArray(search.role);
+
+    if (technology) filters.technology = technology;
+    if (location) filters.location = location;
+    if (company) filters.company = company;
+    if (role) filters.role = role;
+
+    return filters;
+  },
   loaderDeps: ({ search }) => ({
     location: search?.location,
     technology: search?.technology,

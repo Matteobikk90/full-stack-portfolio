@@ -1,12 +1,12 @@
 import type { LikeType } from '@/types/likes.types';
-import { axiosGet, axiosPost } from '@/utils/api';
+import { apiGet, apiPost } from '@/utils/api';
 import { URL_ENDPOINTS } from '@/utils/constants';
 
 export const getLikes = async (projectId: string): Promise<LikeType> => {
   if (!projectId) throw new Error('Project ID is required');
 
   try {
-    const result = await axiosGet<LikeType>(URL_ENDPOINTS.getLikes(projectId));
+    const result = await apiGet<LikeType>(URL_ENDPOINTS.getLikes(projectId));
     if (!result) {
       throw new Error('Failed to fetch likes');
     }
@@ -21,7 +21,7 @@ export const toggleLike = async (projectId: string): Promise<LikeType> => {
   if (!projectId) throw new Error('Project ID is required');
 
   try {
-    const result = await axiosPost<LikeType, { projectId: string }>(
+    const result = await apiPost<LikeType, { projectId: string }>(
       URL_ENDPOINTS.toggleLike,
       {
         projectId,

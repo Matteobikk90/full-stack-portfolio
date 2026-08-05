@@ -87,7 +87,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           source: nginx/default.conf
           target: /home/ubuntu/full-stack-portfolio/nginx/
-          strip_components: 2
+          strip_components: 1
 
       ##########################
       # DEPLOY ON THE SERVER   #
@@ -100,6 +100,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           envs: IMAGE_TAG
           script: |
+            set -e
             cd ~/full-stack-portfolio
 
             # ENV settings
@@ -126,7 +127,9 @@ jobs:
 
             echo "🔄 Reloading nginx..."
             sleep 5
-            docker exec web nginx -s reload || true
+            docker exec web nginx -t
+            docker exec web nginx -T 2>&1 | grep -q "gzip_comp_level 6"
+            docker exec web nginx -s reload
 
             echo "🧹 Cleaning old Docker images..."
             docker image prune -af || true

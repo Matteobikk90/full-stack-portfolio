@@ -14,6 +14,8 @@ export const Tabs = () => {
     }))
   );
 
+  if (!user) return null;
+
   return (
     <div className="border-b overflow-x-auto p-2 whitespace-nowrap flex gap-2">
       {Object.entries(threads).map(([uid, msgs]) => {

@@ -44,7 +44,7 @@ export const Search = () => {
               :
             </p>
             {Object.entries(filters).flatMap(([key, vals]) =>
-              vals.map((val) => (
+              (vals ?? []).map((val) => (
                 <span
                   key={`${key}-${val}`}
                   className={cn(

@@ -9,6 +9,7 @@ import { useUISound } from '@/hooks/useUISound';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
 import { toastDuration } from '@/utils/constants';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { useShallow } from 'zustand/shallow';
@@ -22,6 +23,8 @@ export const Home = () => {
   );
   const { play } = useUISound();
   const { t } = useTranslation();
+  const [isMaskLoaded, setIsMaskLoaded] = useState(false);
+  const showMask = discovered && isMaskLoaded;
 
   const handleClick = () => {
     if (discovered) return;
@@ -69,22 +72,24 @@ export const Home = () => {
               className="relative z-11 w-[200px] h-[300px] sm:h-[375px] sm:w-[250px] order-1 lg:order-2"
               onClick={handleClick}
             >
-              <figure>
-                <img
-                  loading="lazy"
-                  src={avatarMask}
-                  srcSet={`${avatarMaskSmall} 250w, ${avatarMask} 500w`}
-                  sizes="(min-width: 640px) 250px, 200px"
-                  width="500"
-                  height="750"
-                  alt="Matteo Soresini avatar with Aku Aku mask"
-                  aria-hidden={!discovered}
-                  className={cn(
-                    'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
-                    discovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                  )}
-                />
-              </figure>
+              {discovered && (
+                <figure>
+                  <img
+                    src={avatarMask}
+                    srcSet={`${avatarMaskSmall} 250w, ${avatarMask} 500w`}
+                    sizes="(min-width: 640px) 250px, 200px"
+                    width="500"
+                    height="750"
+                    alt="Matteo Soresini avatar with Aku Aku mask"
+                    aria-hidden={!showMask}
+                    onLoad={() => setIsMaskLoaded(true)}
+                    className={cn(
+                      'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
+                      showMask ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    )}
+                  />
+                </figure>
+              )}
               <figure>
                 <img
                   fetchPriority="high"
@@ -95,17 +100,17 @@ export const Home = () => {
                   width="500"
                   height="750"
                   alt="Matteo Soresini avatar"
-                  aria-hidden={discovered}
+                  aria-hidden={showMask}
                   className={cn(
                     'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
-                    discovered ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                    showMask ? 'opacity-0 pointer-events-none' : 'opacity-100'
                   )}
                 />
               </figure>
-              {!discovered && (
+              {!showMask && (
                 <>
-                  <span className="absolute animate-blink w-[26px] h-[26px] sm:w-9 sm:h-9 bg-skin top-[79px] left-[65px] sm:top-[99px] sm:left-[82px]"></span>
-                  <span className="absolute animate-blink w-[26px] h-[26px] sm:w-9 sm:h-9 bg-skin top-[79px] left-[121px] sm:top-[99px] sm:left-[151px]"></span>
+                  <span className="absolute origin-top animate-blink w-[26px] h-[26px] sm:w-9 sm:h-9 bg-skin top-[79px] left-[65px] sm:top-[99px] sm:left-[82px]"></span>
+                  <span className="absolute origin-top animate-blink w-[26px] h-[26px] sm:w-9 sm:h-9 bg-skin top-[79px] left-[121px] sm:top-[99px] sm:left-[151px]"></span>
                 </>
               )}
             </article>

@@ -1,5 +1,5 @@
-import api from '@/config/axios';
 import { queryClient } from '@/config/queryClient';
+import { apiPost } from '@/utils/api';
 import { toastDuration } from '@/utils/constants';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -9,7 +9,7 @@ export const useLogout = () => {
 
   const handleLogout = async () => {
     try {
-      await api.post('/auth/logout');
+      await apiPost('/auth/logout');
       queryClient.setQueryData(['me'], null);
       toast.success(t('toast.title'), {
         description: t('logout.success'),

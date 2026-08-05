@@ -1,55 +1,83 @@
-import axios, { type AxiosRequestConfig } from 'axios';
-
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
-export const axiosRequest = async <TResponse, TBody = unknown>(
+let refreshPromise: Promise<boolean> | null = null;
+
+const refreshSession = () => {
+  if (!refreshPromise) {
+    refreshPromise = fetch('/auth/refresh', {
+      method: 'POST',
+      credentials: 'include',
+    })
+      .then((response) => response.ok)
+      .catch(() => false)
+      .finally(() => {
+        refreshPromise = null;
+      });
+  }
+
+  return refreshPromise;
+};
+
+const readResponse = async <TResponse>(response: Response) => {
+  if (response.status === 204) return undefined;
+
+  const contentType = response.headers.get('content-type');
+  if (!contentType?.includes('application/json')) return undefined;
+
+  return (await response.json()) as TResponse;
+};
+
+export const apiRequest = async <TResponse, TBody = unknown>(
   method: Method,
   url: string,
   data?: TBody,
   signal?: AbortSignal,
-  externalConfig?: AxiosRequestConfig
+  retryAuth = true
 ): Promise<TResponse | undefined> => {
-  const config: AxiosRequestConfig = {
-    ...externalConfig,
-    signal,
-  };
-
   try {
-    const response =
-      method === 'GET'
-        ? await axios.get<TResponse>(url, config)
-        : method === 'POST'
-          ? await axios.post<TResponse>(url, data, config)
-          : method === 'PUT'
-            ? await axios.put<TResponse>(url, data, config)
-            : await axios.delete<TResponse>(url, config);
+    const hasBody = data !== undefined && method !== 'GET';
+    const response = await fetch(url, {
+      method,
+      signal,
+      credentials: 'include',
+      headers: hasBody ? { 'Content-Type': 'application/json' } : undefined,
+      body: hasBody ? JSON.stringify(data) : undefined,
+    });
 
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error.code === 'ERR_CANCELED') {
-        console.warn('Request canceled');
-        return undefined;
-      }
-      console.error(
-        `Axios error: ${error.response?.status || 'Unknown'} - ${error.message}`
-      );
-    } else {
-      console.error('Unexpected error occurred', error);
+    if (
+      response.status === 401 &&
+      retryAuth &&
+      url !== '/auth/refresh' &&
+      (await refreshSession())
+    ) {
+      return apiRequest(method, url, data, signal, false);
     }
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+
+    return readResponse<TResponse>(response);
+  } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      return undefined;
+    }
+
+    console.error('API request failed', error);
     throw error;
   }
 };
 
-// Convenience helpers
-export const axiosGet = async <T>(url: string, signal?: AbortSignal) =>
-  axiosRequest<T>('GET', url, undefined, signal);
+export const apiGet = async <T>(url: string, signal?: AbortSignal) =>
+  apiRequest<T>('GET', url, undefined, signal);
 
-export const axiosPost = async <TResponse, TBody>(url: string, data: TBody) =>
-  axiosRequest<TResponse, TBody>('POST', url, data);
+export const apiPost = async <TResponse, TBody = unknown>(
+  url: string,
+  data?: TBody
+) => apiRequest<TResponse, TBody>('POST', url, data);
 
-export const axiosPut = async <TResponse, TBody>(url: string, data: TBody) =>
-  axiosRequest<TResponse, TBody>('PUT', url, data);
+export const apiPut = async <TResponse, TBody>(url: string, data: TBody) =>
+  apiRequest<TResponse, TBody>('PUT', url, data);
 
-export const axiosDelete = async (url: string, signal?: AbortSignal) =>
-  axiosRequest<void>('DELETE', url, undefined, signal);
+export const apiDelete = async (url: string, signal?: AbortSignal) =>
+  apiRequest<void>('DELETE', url, undefined, signal);

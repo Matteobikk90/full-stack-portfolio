@@ -1,18 +1,23 @@
-import api from '@/config/axios';
+import { apiGet } from '@/utils/api';
 import { adminEmails, virtualAdminId } from '@/utils/constants';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
+type AuthUser = {
+  id: string;
+  email: string;
+  name: string;
+  createdAt: string;
+  [key: string]: unknown;
+};
+
 export const useAuth = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['me'],
-    queryFn: async () => {
-      const { data } = await api.get('/auth/me');
-      return data;
-    },
+    queryFn: () => apiGet<AuthUser | null>('/auth/me'),
   });
   const isAdmin = useMemo(
-    () => adminEmails.includes(data?.email),
+    () => !!data?.email && adminEmails.includes(data.email),
     [data?.email]
   );
 
@@ -21,6 +26,7 @@ export const useAuth = () => {
     return {
       ...data,
       id: isAdmin ? virtualAdminId : data.id,
+      avatarUrl: null,
     };
   }, [data, isAdmin, isError]);
 

@@ -1,4 +1,3 @@
-import ChatBox from '@/features/chat-box';
 import { useClearOldAiMessages } from '@/hooks/useClearOldMessages';
 import { useLoginErrorToast } from '@/hooks/useLoginAuthError';
 import { useTheme } from '@/hooks/useTheme';
@@ -7,11 +6,18 @@ import { useStore } from '@/stores';
 import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react';
 
 const CustomModal = lazy(() => import('@/components/custom-modal/CustomModal'));
+const ChatBox = lazy(() =>
+  import('@/features/chat-box/ChatBox').then(({ ChatBox }) => ({
+    default: ChatBox,
+  }))
+);
 const AnimatedCursor = lazy(() => import('react-animated-cursor'));
 
 export const UIWrapper = ({ children }: { children: ReactNode }) => {
   const activeModal = useStore(({ activeModal }) => activeModal);
+  const isChatOpen = useStore(({ isChatOpen }) => isChatOpen);
   const [hasFinePointer, setHasFinePointer] = useState(false);
+  const [hasOpenedChat, setHasOpenedChat] = useState(isChatOpen);
 
   useTheme();
   useClearOldAiMessages();
@@ -29,6 +35,10 @@ export const UIWrapper = ({ children }: { children: ReactNode }) => {
     return () => pointerQuery.removeEventListener('change', updatePointer);
   }, []);
 
+  useEffect(() => {
+    if (isChatOpen) setHasOpenedChat(true);
+  }, [isChatOpen]);
+
   return (
     <>
       {children}
@@ -38,7 +48,11 @@ export const UIWrapper = ({ children }: { children: ReactNode }) => {
           <CustomModal />
         </Suspense>
       )}
-      <ChatBox />
+      {hasOpenedChat && (
+        <Suspense fallback={null}>
+          <ChatBox />
+        </Suspense>
+      )}
       {hasFinePointer && (
         <Suspense fallback={null}>
           <AnimatedCursor
