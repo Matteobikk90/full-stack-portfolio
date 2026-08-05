@@ -18,24 +18,37 @@ export const Breadcrumbs = () => {
     .filter(Boolean) as { label: string; path: string }[];
 
   return (
-    <nav className="text-sm mb-4 text-secondary">
+    <nav aria-label="Breadcrumb" className="text-sm mb-4 text-primary">
       <ul className="flex items-center gap-2">
-        <Link to={'/'}>
+        <li className="flex items-center gap-2">
           <PopUpInfo
             hoverText="Home"
             position="bottom"
             align="right"
             className="gap-2"
           >
-            <HouseIcon weight="duotone" className="size-5" />/
+            <Link to="/" aria-label="Home">
+              <HouseIcon
+                aria-hidden="true"
+                weight="duotone"
+                className="size-5"
+              />
+            </Link>
           </PopUpInfo>
-        </Link>
+          {breadcrumbs.length > 0 && <span aria-hidden="true">/</span>}
+        </li>
         {breadcrumbs.map(({ label, path }, i) => (
           <li key={path} className="flex items-center gap-2">
-            <Link to={path} className="hover:underline">
+            <Link
+              to={path}
+              className="hover:underline"
+              aria-current={i === breadcrumbs.length - 1 ? 'page' : undefined}
+            >
               {label}
             </Link>
-            {i < breadcrumbs.length - 1 && <span>/</span>}
+            {i < breadcrumbs.length - 1 && (
+              <span aria-hidden="true">/</span>
+            )}
           </li>
         ))}
       </ul>

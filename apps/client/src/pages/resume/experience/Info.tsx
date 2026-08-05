@@ -37,7 +37,12 @@ export const Info = () => {
                 {data.title}
               </h3>
             </div>
-            <a className="flex text-resume text-sm" href={data.url}>
+            <a
+              className="flex text-resume text-sm"
+              href={data.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {data.url}
             </a>
             <div>
@@ -69,7 +74,7 @@ export const Info = () => {
             {data.projects?.length > 0 && (
               <>
                 <h4 className="font-semibold mb-2">{t('info.projects')}</h4>
-                <ul className="text-secondary flex flex-wrap gap-4">
+                <ul className="text-primary flex flex-wrap gap-4">
                   {data.projects.map(({ id, title, url }) => (
                     <li key={id}>
                       <a
