@@ -60,7 +60,7 @@ export const Info = () => {
                 <li
                   style={{ animationDelay: `${index * 0.1}s` }}
                   key={tech}
-                  className="bg-secondary text-background p-2 rounded-md animate-fade-up"
+                  className="bg-secondary text-secondary-foreground p-2 rounded-md animate-fade-up"
                 >
                   {tech}
                 </li>

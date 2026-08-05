@@ -25,6 +25,7 @@
 
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
 
   --color-gray: var(--gray);
 
@@ -135,6 +136,7 @@
 
   --primary: rgba(0, 110, 201, 1);
   --secondary: rgba(100, 160, 255, 1);
+  --secondary-foreground: rgba(16, 42, 67, 1);
 
   --gray: rgba(243, 244, 246, 1);
 
@@ -158,6 +160,7 @@
 
   --primary: rgba(20, 203, 124, 1);
   --secondary: rgba(9, 254, 155, 1);
+  --secondary-foreground: rgba(7, 59, 43, 1);
 
   --gray: rgba(32, 31, 38, 1);
 

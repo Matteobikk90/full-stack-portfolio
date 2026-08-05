@@ -14,9 +14,9 @@ export const ResumeSidebar = () => {
           <Link
             key={href}
             to={href}
-            className="text-center p-2 rounded-md hover:bg-secondary hover:text-background bg-gray"
+            className="text-center p-2 rounded-md hover:bg-secondary hover:text-secondary-foreground bg-gray"
             activeProps={{
-              className: 'bg-secondary text-background',
+              className: 'bg-secondary text-secondary-foreground',
             }}
           >
             {t(`resume.menu.${id}`)}

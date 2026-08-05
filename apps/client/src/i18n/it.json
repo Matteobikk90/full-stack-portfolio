@@ -49,7 +49,8 @@
     },
     "experience": {
       "title": "Esperienza professionale",
-      "subtitle": "Dal frontend al database, ho lavorato su tutto lo stack per creare web app moderne e veloci, apprezzate dagli utenti."
+      "subtitle": "Dal frontend al database, ho lavorato su tutto lo stack per creare web app moderne e veloci, apprezzate dagli utenti.",
+      "details": "Vedi i dettagli di {{company}}"
     },
     "education": {
       "title": "La mia formazione",

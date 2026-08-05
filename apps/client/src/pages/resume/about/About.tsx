@@ -20,7 +20,7 @@ export const About = () => {
               key={label}
               className="flex justify-between items-center xl:justify-start gap-2"
             >
-              <Label className="text-foreground/50">
+              <Label className="text-foreground/70">
                 {t(`resume.about.${label}`)}:
               </Label>
               <h3 className="font-medium mb-0.5 break-all">

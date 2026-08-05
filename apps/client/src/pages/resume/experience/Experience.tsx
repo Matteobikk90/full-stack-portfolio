@@ -45,7 +45,7 @@ export const Experience = () => {
                     )}
                   </div>
                 </div>
-                <h4 className="text-foreground/50">{company}</h4>
+                <h4 className="text-foreground/70">{company}</h4>
                 <div className="flex items-center justify-between gap-2">
                   <h5 className="flex items-center gap-1">
                     <DotIcon
@@ -54,11 +54,18 @@ export const Experience = () => {
                     />
                     {title}
                   </h5>
-                  <Link to="/resume/experience/$id" params={{ id: slug }}>
-                    <Button className="flex items-center gap-1 text-xs border rounded-lg hover:-translate-y-1">
+                  <Button
+                    asChild
+                    className="flex items-center gap-1 text-xs border rounded-lg hover:-translate-y-1"
+                  >
+                    <Link
+                      to="/resume/experience/$id"
+                      params={{ id: slug }}
+                      aria-label={t('resume.experience.details', { company })}
+                    >
                       Info
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
                 </div>
               </article>
             )

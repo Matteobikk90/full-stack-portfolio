@@ -23,7 +23,7 @@ export const Education = () => {
                   <h3>{year}</h3>
                   <h3>{location}</h3>
                 </div>
-                <h4 className="text-foreground/50">{title}</h4>
+                <h4 className="text-foreground/70">{title}</h4>
                 <h5 className="flex items-center gap-2">
                   <DotIcon className="text-secondary size-5" weight="duotone" />
                   {institution}
