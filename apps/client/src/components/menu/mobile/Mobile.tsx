@@ -123,7 +123,6 @@ export const MenuMobile = () => {
                       <Link
                         to={href}
                         aria-label={label}
-                        className="w-full h-full flex items-center justify-center"
                         onClick={() => setIsOpen((prev) => !prev)}
                       >
                         {icon}
