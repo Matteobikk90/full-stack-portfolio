@@ -1,5 +1,5 @@
 import { ScrollContainer } from '@/components/scroll-container';
-import { educationItems } from '@/utils/lists';
+import { educationItems } from '@/utils/education-items';
 import { DotIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 

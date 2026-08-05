@@ -1,7 +1,7 @@
 import { ScrollContainer } from '@/components/scroll-container';
 import { Button } from '@/lib/ui/button';
+import { aboutInfo } from '@/utils/about-info';
 import { handleDownload } from '@/utils/download';
-import { aboutInfo } from '@/utils/lists';
 import { FilePdfIcon } from '@phosphor-icons/react';
 import { Label } from '@radix-ui/react-label';
 import { useTranslation } from 'react-i18next';

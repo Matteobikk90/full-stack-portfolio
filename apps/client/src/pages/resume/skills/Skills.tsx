@@ -1,5 +1,5 @@
 import { ScrollContainer } from '@/components/scroll-container';
-import { skillItems } from '@/utils/lists';
+import { skillItems } from '@/utils/skill-items';
 import { useTranslation } from 'react-i18next';
 
 export const Skills = () => {

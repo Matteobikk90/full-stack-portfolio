@@ -1,4 +1,4 @@
-import { resumeItems } from '@/utils/lists';
+import { resumeItems } from '@/utils/resume-items';
 import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 

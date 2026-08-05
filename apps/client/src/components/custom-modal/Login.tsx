@@ -2,7 +2,7 @@ import PopUpInfo from '@/components/pop-up-info';
 import { Button } from '@/lib/ui/button';
 import { DialogDescription } from '@/lib/ui/dialog';
 import { useStore } from '@/stores';
-import { authProviders } from '@/utils/lists';
+import { authProviders } from '@/utils/auth-providers';
 import { InfoIcon } from '@phosphor-icons/react';
 import { Link, useLocation } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
