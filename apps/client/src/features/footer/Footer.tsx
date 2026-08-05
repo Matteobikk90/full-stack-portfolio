@@ -47,7 +47,7 @@ export const Footer = () => {
               <Button
                 variant="outline"
                 size="icon"
-                asChild={!onClick && !isLink}
+                asChild={!onClick}
                 onClick={onClick}
                 className={className}
                 aria-label={label}
@@ -78,7 +78,7 @@ export const Footer = () => {
         )}
       </div>
 
-      <p className="text-xs text-center md:text-sm md:text-right">
+      <p className="text-xs text-center text-foreground/70 md:text-sm md:text-right">
         © {currentYear} Matteo Soresini. {t('footer.text')}
       </p>
     </footer>

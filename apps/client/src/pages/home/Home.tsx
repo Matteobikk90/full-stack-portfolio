@@ -1,5 +1,7 @@
-import avatarMask from '@/assets/images/avatar-aku.png';
-import avatar from '@/assets/images/avatar.png';
+import avatarSmall from '@/assets/images/avatar-250.webp';
+import avatar from '@/assets/images/avatar-500.webp';
+import avatarMaskSmall from '@/assets/images/avatar-aku-250.webp';
+import avatarMask from '@/assets/images/avatar-aku-500.webp';
 import ParticlesBackground from '@/components/particles';
 import { ScrollContainer } from '@/components/scroll-container';
 import TypedText from '@/components/typed-text';
@@ -53,7 +55,7 @@ export const Home = () => {
                 {t('home.subtitle')} <strong>{t('home.subtitle2')}</strong>{' '}
                 {t('home.subtitle3')}
               </h2>
-              <div className="text-lg sm:text-xxl">
+              <div className="min-h-14 text-lg sm:min-h-7 sm:text-xxl">
                 <TypedText
                   text={[
                     'React, TypeScript, Node.js, Prisma, PostgreSQL.',
@@ -71,7 +73,12 @@ export const Home = () => {
                 <img
                   loading="lazy"
                   src={avatarMask}
-                  alt="Avatar Mask"
+                  srcSet={`${avatarMaskSmall} 250w, ${avatarMask} 500w`}
+                  sizes="(min-width: 640px) 250px, 200px"
+                  width="500"
+                  height="750"
+                  alt="Matteo Soresini avatar with Aku Aku mask"
+                  aria-hidden={!discovered}
                   className={cn(
                     'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
                     discovered ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -83,7 +90,12 @@ export const Home = () => {
                   fetchPriority="high"
                   decoding="async"
                   src={avatar}
-                  alt="Avatar"
+                  srcSet={`${avatarSmall} 250w, ${avatar} 500w`}
+                  sizes="(min-width: 640px) 250px, 200px"
+                  width="500"
+                  height="750"
+                  alt="Matteo Soresini avatar"
+                  aria-hidden={discovered}
                   className={cn(
                     'absolute inset-0 w-full h-full object-contain transition-opacity duration-500',
                     discovered ? 'opacity-0 pointer-events-none' : 'opacity-100'

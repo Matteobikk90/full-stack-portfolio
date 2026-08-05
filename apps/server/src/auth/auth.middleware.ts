@@ -7,7 +7,11 @@ export function authenticateToken(
   res: Response,
   next: NextFunction
 ): void {
-  const token = req.cookies?.accessToken;
+  const authorization = req.get('authorization');
+  const bearerToken = authorization?.startsWith('Bearer ')
+    ? authorization.slice(7)
+    : undefined;
+  const token = req.cookies?.accessToken || bearerToken;
 
   if (!token) {
     res.status(401).json({ message: 'Missing token' });

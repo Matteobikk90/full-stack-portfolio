@@ -1,22 +1,27 @@
-import { useStore } from '@/stores';
-import { getParticlesOptions } from '@/utils/particles';
-import Particles, { initParticlesEngine } from '@tsparticles/react';
-import { loadSlim } from '@tsparticles/slim';
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
+
+const ParticlesCanvas = lazy(
+  () => import('@/components/particles/ParticlesCanvas')
+);
 
 export const ParticlesBackground = () => {
-  const [init, setInit] = useState(false);
-  const background = useStore(({ background }) => background);
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => setInit(true));
+    const shouldEnableParticles =
+      import.meta.env.MODE === 'test' ||
+      window.matchMedia(
+        '(min-width: 768px) and (prefers-reduced-motion: no-preference)'
+      ).matches;
+
+    setShouldRender(shouldEnableParticles);
   }, []);
 
-  const options = useMemo(() => getParticlesOptions(background), [background]);
+  if (!shouldRender) return null;
 
-  if (!init) return null;
-
-  return <Particles options={options} />;
+  return (
+    <Suspense fallback={null}>
+      <ParticlesCanvas />
+    </Suspense>
+  );
 };

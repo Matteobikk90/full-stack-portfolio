@@ -1,0 +1,15 @@
+# Matteo Soresini Portfolio
+
+> Portfolio of Matteo Soresini, a full-stack web developer focused on React, TypeScript, Node.js, testing, design systems, CI/CD, and AWS.
+
+## Main pages
+
+- [Home](https://www.matteosoresini.com/): Introduction and technology overview.
+- [Work](https://www.matteosoresini.com/work): Selected web development projects.
+- [Resume](https://www.matteosoresini.com/resume): Professional experience, education, skills, and background.
+- [Contact](https://www.matteosoresini.com/contact): Contact form and professional links.
+
+## Policies
+
+- [Privacy policy](https://www.matteosoresini.com/privacy-policy)
+- [Terms of service](https://www.matteosoresini.com/terms-of-service)

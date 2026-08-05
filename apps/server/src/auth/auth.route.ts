@@ -5,7 +5,12 @@ import {
 } from '@/auth/auth.controller';
 import { authenticateToken } from '@/auth/auth.middleware';
 import { authRateLimiter } from '@/middleware/rate-limit.middleware';
-import { Router, type Response } from 'express';
+import {
+  Router,
+  type NextFunction,
+  type Request,
+  type Response,
+} from 'express';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
 
@@ -52,7 +57,22 @@ router.get('/protected', authenticateToken, (_req, res) => {
   res.json({ message: 'Protected content' });
 });
 
-router.get('/me', authenticateToken, getMe);
+router.get(
+  '/me',
+  (req: Request, res: Response, next: NextFunction) => {
+    if (
+      !req.cookies?.accessToken &&
+      !req.cookies?.refreshToken &&
+      !req.get('authorization')
+    ) {
+      res.json(null);
+      return;
+    }
+
+    authenticateToken(req, res, next);
+  },
+  getMe
+);
 
 router.post('/refresh', authRateLimiter, handleRefreshToken);
 

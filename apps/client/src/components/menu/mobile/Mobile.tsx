@@ -31,6 +31,8 @@ export const MenuMobile = () => {
   return (
     <>
       <nav
+        aria-hidden={!isOpen}
+        inert={!isOpen}
         className={cn(
           'md:hidden fixed inset-0 top-[3.5rem] h-[calc(100dvh_-_3.5rem)] px-4 py-2 pt-0 flex flex-col justify-between container mx-auto',
           isOpen
@@ -103,7 +105,7 @@ export const MenuMobile = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    asChild={!onClick && !isLink}
+                    asChild={!onClick}
                     onClick={onClick}
                     className={cn(
                       'transition-transform duration-300 ease-in-out -translate-x-[100vw]',
@@ -143,7 +145,7 @@ export const MenuMobile = () => {
               )
             )}
           </div>
-          <p className="text-xs text-center md:text-right">
+          <p className="text-xs text-center text-foreground/70 md:text-right">
             © {currentYear} Matteo Soresini. All rights reserved.
           </p>
         </div>

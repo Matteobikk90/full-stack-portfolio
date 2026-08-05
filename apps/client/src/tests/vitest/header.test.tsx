@@ -8,11 +8,19 @@ vi.mock('@/components/menu', () => ({
   MenuMobile: () => <nav data-testid="menu-mobile" />,
 }));
 
+vi.mock('@/hooks/useAuth', () => ({
+  useAuth: () => ({ isAuthenticated: false }),
+}));
+
+vi.mock('@/hooks/useLogout', () => ({
+  useLogout: () => ({ handleLogout: vi.fn() }),
+}));
+
 describe('Header', () => {
   test('toggles theme on button click', async () => {
     render(<Header />);
 
-    const toggleButton = screen.getAllByRole('button')[0];
+    const toggleButton = screen.getByTestId('theme-toggle');
     const initialMode = useStore.getState().mode;
 
     fireEvent.click(toggleButton);

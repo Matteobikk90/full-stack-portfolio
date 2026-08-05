@@ -32,9 +32,10 @@ describe('GET /auth/me', () => {
     await prisma.user.delete({ where: { id: user.id } });
   });
 
-  it('should return 401 if no token is provided', async () => {
+  it('should return an empty session if no token is provided', async () => {
     const res = await request(app).get('/auth/me');
-    expect(res.status).toBe(401);
+    expect(res.status).toBe(200);
+    expect(res.body).toBeNull();
   });
 });
 
