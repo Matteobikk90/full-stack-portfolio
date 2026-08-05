@@ -66,6 +66,8 @@ export const Actions = ({
           <a
             target="_blank"
             href={activeWork.demoUrl}
+            rel="noopener noreferrer"
+            aria-label={t('live')}
             className="bg-gray hover:text-work max-w-max p-3 flex rounded-full"
           >
             <ArrowUpRightIcon className="size-5" weight="duotone" />
@@ -77,6 +79,8 @@ export const Actions = ({
           <a
             target="_blank"
             href={activeWork.repoUrl}
+            rel="noopener noreferrer"
+            aria-label={t('source')}
             className="bg-gray hover:text-work max-w-max p-3 flex rounded-full"
           >
             <GithubLogoIcon className="size-5" weight="duotone" />

@@ -42,6 +42,7 @@
 
   --animate-rotate-in: rotate-in 1.5s ease-out forwards;
   --animate-pulse-slow: pulse-slow 1.5s ease-out infinite;
+  --animate-pulse-ring: pulse-ring 1.5s ease-out infinite;
   --animate-fade-up: fade-up 0.5s ease-out both;
   --animate-blink: blink 4s infinite;
   --animate-wave: wave 2s infinite;
@@ -72,17 +73,25 @@
     0% {
       transform: scale(1);
       opacity: 1;
-      box-shadow: 0 0 0 0 var(--pulse-shadow);
     }
     50% {
       transform: scale(1.2);
       opacity: 0.7;
-      box-shadow: 0 0 0 4px var(--pulse-shadow);
     }
     100% {
       transform: scale(1);
       opacity: 1;
-      box-shadow: 0 0 0 0 var(--pulse-shadow);
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.9);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1.45);
+      opacity: 0;
     }
   }
 
@@ -140,7 +149,7 @@
 
   --gray: rgba(243, 244, 246, 1);
 
-  --section-work: rgba(161, 122, 0, 1);
+  --section-work: rgba(138, 102, 0, 1);
   --section-resume: rgba(0, 110, 201, 1);
   --section-contact: rgba(203, 69, 79, 1);
 
@@ -166,7 +175,7 @@
 
   --section-work: rgba(221, 183, 73);
   --section-resume: rgba(20, 203, 124, 1);
-  --section-contact: rgba(183, 75, 75, 1);
+  --section-contact: rgba(208, 95, 103, 1);
 
   --error: rgba(255, 82, 144);
   --success: rgba(205, 255, 0, 1);

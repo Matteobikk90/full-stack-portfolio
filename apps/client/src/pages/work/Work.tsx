@@ -24,40 +24,54 @@ export const Work = () => {
       setActiveSlide,
     }))
   );
-  const activeWork = data[activeSlide];
+  const routeSlide = data.findIndex((project) => project.slug === slug);
+  const selectedSlide = routeSlide === -1 ? activeSlide : routeSlide;
+  const activeWork = data[selectedSlide];
 
   // Work around for Firefox (Not working with motion)
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(activeWork);
+  const [loadedSlides, setLoadedSlides] = useState(
+    () => new Set<number>([selectedSlide])
+  );
   const isFirstRender = useRef(true);
-  const previousSlide = useRef(activeSlide);
+  const previousSlide = useRef(selectedSlide);
   useLayoutEffect(() => {
     const isInitial = isFirstRender.current;
-    const hasChanged = previousSlide.current !== activeSlide;
+    const hasChanged = previousSlide.current !== selectedSlide;
 
     if (isInitial || !hasChanged) {
       isFirstRender.current = false;
-      previousSlide.current = activeSlide;
+      previousSlide.current = selectedSlide;
       setCurrentSlide(activeWork);
       return;
     }
 
     setIsFadingOut(true);
     const timeoutId = setTimeout(() => {
-      previousSlide.current = activeSlide;
+      previousSlide.current = selectedSlide;
       setCurrentSlide(activeWork);
       setIsFadingOut(false);
     }, 1000);
 
     return () => clearTimeout(timeoutId);
-  }, [activeSlide, activeWork]);
+  }, [selectedSlide, activeWork]);
 
   useEffect(() => {
-    const index = data.findIndex((p) => p.slug === slug);
-    if (index !== -1 && index !== activeSlide) {
-      setActiveSlide(index);
+    setLoadedSlides((loaded) => {
+      if (loaded.has(selectedSlide)) return loaded;
+
+      const next = new Set(loaded);
+      next.add(selectedSlide);
+      return next;
+    });
+  }, [selectedSlide]);
+
+  useEffect(() => {
+    if (selectedSlide !== activeSlide) {
+      setActiveSlide(selectedSlide);
     }
-  }, [slug, data, activeSlide, setActiveSlide]);
+  }, [selectedSlide, activeSlide, setActiveSlide]);
 
   return (
     <main className="flex flex-col gap-4 md:gap-12 p-4">
@@ -92,18 +106,33 @@ export const Work = () => {
           <article>
             <Carousel className="relative flex flex-col space-y-8">
               <CarouselContent>
-                {data.map(({ slug, title }) => (
-                  <CarouselItem key={title}>
-                    <figure className="overflow-hidden rounded-md border flex items-center justify-center">
-                      <img
-                        loading="lazy"
-                        src={imageMap[slug!]}
-                        alt={title}
-                        className="w-full h-auto object-cover"
-                      />
-                    </figure>
-                  </CarouselItem>
-                ))}
+                {data.map(({ slug, title }, index) => {
+                  const image = imageMap[slug!];
+                  const isActive = index === selectedSlide;
+
+                  return (
+                    <CarouselItem key={title}>
+                      <figure
+                        className="overflow-hidden rounded-md border flex items-center justify-center"
+                        style={{ aspectRatio: `${image.width} / ${image.height}` }}
+                      >
+                        {loadedSlides.has(index) && (
+                          <img
+                            loading={isActive ? 'eager' : 'lazy'}
+                            fetchPriority={isActive ? 'high' : 'auto'}
+                            src={image.src}
+                            srcSet={image.srcSet}
+                            sizes="(min-width: 1024px) 50vw, calc(100vw - 2rem)"
+                            width={image.width}
+                            height={image.height}
+                            alt={title}
+                            className="w-full h-full object-cover"
+                          />
+                        )}
+                      </figure>
+                    </CarouselItem>
+                  );
+                })}
               </CarouselContent>
               <div className="flex w-full gap-4 max-w-max relative mx-auto">
                 <CarouselPrevious className="bg-work w-10 h-10" />

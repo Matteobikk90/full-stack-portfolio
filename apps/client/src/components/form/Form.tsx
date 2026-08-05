@@ -162,13 +162,13 @@ export const ContactForm = () => {
 
               <span className="text-sm leading-relaxed flex flex-wrap">
                 {t('contact.privacy.one')}&nbsp;
-                <Link to="/privacy-policy" className="underline text-blue-500">
+                <Link to="/privacy-policy" className="underline text-primary">
                   {t('contact.privacy.two')}
                 </Link>
                 &nbsp;{t('contact.privacy.three')}&nbsp;
                 <Link
                   to="/terms-of-service"
-                  className="underline text-blue-500"
+                  className="underline text-primary"
                 >
                   {t('contact.privacy.four')}
                 </Link>

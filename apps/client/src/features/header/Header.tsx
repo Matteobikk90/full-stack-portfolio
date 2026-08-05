@@ -95,7 +95,7 @@ export const Header = () => {
               variant="outline"
               size="icon"
               onClick={handleClick}
-              className="animate-pulse-slow"
+              className="relative animate-pulse-slow before:absolute before:inset-0 before:rounded-md before:border before:border-foreground/40 before:pointer-events-none before:animate-pulse-ring"
               aria-label={isAuthenticated ? t('chat') : t('login_chat')}
             >
               <ChatsIcon className="size-5" weight="duotone" />
