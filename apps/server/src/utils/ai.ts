@@ -30,10 +30,10 @@ Always try to be helpful while gently pointing users to explore the portfolio th
 ==============================
 The portfolio includes a smart **Search** section where users can filter content based on four key categories:
 
-1. **Technologies** – Filter by tools or languages used (e.g., React, TypeScript, Prisma, SvelteKit).  
-2. **Role** – Filter by job focus: *Front End* or *Full Stack*.  
-3. **Location** – Filter by where the work was done: *Turin*, *Vienna*, *Remote*, or *London*.  
-4. **Company** – Filter by employer: *World Data Lab*, *Hydrogrid*, *Eis World*, *Loro Piana*, *VideoSmart*.
+1. **Technologies** – Filter by tools or languages used (e.g., React, React Native, TypeScript, Prisma, SvelteKit).
+2. **Role** – Filter by job focus: *Front End*, *Full Stack*, or *Technical Instructor*.
+3. **Location** – Filter by where the work was done, including *Italy*, *Turin*, *Vienna*, *Remote*, and *London*.
+4. **Company** – Filter by employer or engagement, including *Independent Training*, *World Data Lab*, *Hydrogrid*, *Eis World*, *Loro Piana*, and *VideoSmart*.
 
 You can select one category at a time and then choose from its available options.  
 Clicking a filtered result will redirect the user to a detailed section with more info.
@@ -42,7 +42,13 @@ Clicking a filtered result will redirect the user to a detailed section with mor
 💼 EXPERIENCE
 ==============================
 
-1. **World Data Lab** – Front End Developer  
+1. **Independent Training** – React Native Instructor
+   Italy – Remote | Feb 2026 – Mar 2026
+   - Designed and delivered an eight-module React Native course through two four-hour morning sessions per week.
+   - Combined theory, live coding, exercises, and a final cross-platform mobile app project.
+   - Technologies: React Native, JavaScript, React, Expo, React Native CLI, React Navigation, Redux, Zustand, REST APIs, Axios, AsyncStorage, Firebase Cloud Messaging, React Native Reanimated, Android Studio, Xcode.
+
+2. **World Data Lab** – Front End Developer
    Vienna, Austria – Remote | Mar 2022 – Jul 2025  
    - Built responsive, real-time web applications and data visualizations.  
    - Visualized metrics like emissions, internet access, poverty, and water.  
@@ -54,24 +60,24 @@ Clicking a filtered result will redirect the user to a detailed section with mor
      - Africa Social Protection
      - Water Crisis Clock
 
-2. **Hydrogrid** – Front End Developer  
+3. **Hydrogrid** – Front End Developer
    Vienna, Austria | Nov 2020 – Feb 2022  
    - Developed and maintained electricity dashboards in React.  
    - Built internal tools for onboarding and simulations.  
    - Technologies: React, TypeScript, React Native, TailwindCSS, Figma, Jira, Sentry.  
 
-3. **Eis World (Orbyta)** – Front End Developer  
+4. **Eis World (Orbyta)** – Front End Developer
    Turin, Italy | Jan 2019 – Jan 2020  
    - Built custom websites, led Git operations, backend in PHP.  
    - Technologies: JavaScript, PHP, MySQL, SCSS, TailwindCSS.  
 
-4. **Loro Piana** – Front End Developer  
+5. **Loro Piana** – Front End Developer
    Turin, Italy | Jan 2018 – Jan 2019  
    - Created an e-commerce frontend with accessibility in mind.  
    - Focused on WCAG standards, clean UI.  
    - Technologies: JavaScript, jQuery, WCAG, Bootstrap, HTML5, CSS3.  
 
-5. **VideoSmart** – Front End Developer  
+6. **VideoSmart** – Front End Developer
    London, UK | Apr 2017 – Jan 2018  
    - Built responsive HTML5 landing pages and email templates.  
    - Focused on compatibility and responsiveness.  

@@ -6,7 +6,7 @@ import { useLoaderData } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 export const Info = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data } = useLoaderData({
     from: '/resume/experience/$id',
   });
@@ -24,10 +24,20 @@ export const Info = () => {
         <ScrollContainer className="flex-1 min-h-0">
           <div className="space-y-4 bg-gray border border-secondary p-4 sm:p-6 rounded-md">
             <div className="flex items-start justify-between text-primary mb-0 text-xs md:text-sm lg:text-base">
-              <span>{formatDateRange(data.startDate, data.endDate!)}</span>
+              <span>
+                {formatDateRange(
+                  data.startDate,
+                  data.endDate,
+                  i18n.resolvedLanguage ?? i18n.language
+                )}
+              </span>
               <div className="flex flex-col">
                 <span>{data.location}</span>
-                {data.isRemote && <span className="text-xs">(Remote)</span>}
+                {data.isRemote && (
+                  <span className="text-xs">
+                    ({t('resume.experience.remote')})
+                  </span>
+                )}
               </div>
             </div>
             <div className="flex items-center gap-2 flex-wrap">

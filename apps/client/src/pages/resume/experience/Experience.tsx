@@ -6,7 +6,7 @@ import { Link, useLoaderData } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 export const Experience = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data } = useLoaderData({
     from: '/resume/experience',
   });
@@ -37,11 +37,19 @@ export const Experience = () => {
                 className="flex flex-col bg-gray p-4 rounded-md space-y-2 animate-fade-up border-secondary border"
               >
                 <div className="flex items-start justify-between text-primary">
-                  <h3>{formatDateRange(startDate, endDate!)}</h3>
+                  <h3>
+                    {formatDateRange(
+                      startDate,
+                      endDate,
+                      i18n.resolvedLanguage ?? i18n.language
+                    )}
+                  </h3>
                   <div>
                     <h3>{location}</h3>
                     {isRemote && (
-                      <span className="text-xs absolute">(Remote)</span>
+                      <span className="text-xs absolute">
+                        ({t('resume.experience.remote')})
+                      </span>
                     )}
                   </div>
                 </div>
@@ -61,7 +69,9 @@ export const Experience = () => {
                     <Link
                       to="/resume/experience/$id"
                       params={{ id: slug }}
-                      aria-label={t('resume.experience.details', { company })}
+                      aria-label={t('resume.experience.details', {
+                        company,
+                      })}
                     >
                       Info
                     </Link>

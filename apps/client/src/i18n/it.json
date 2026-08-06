@@ -50,7 +50,8 @@
     "experience": {
       "title": "Esperienza professionale",
       "subtitle": "Dal frontend al database, ho lavorato su tutto lo stack per creare web app moderne e veloci, apprezzate dagli utenti.",
-      "details": "Vedi i dettagli di {{company}}"
+      "details": "Vedi i dettagli di {{company}}",
+      "remote": "Da remoto"
     },
     "education": {
       "title": "La mia formazione",
@@ -162,6 +163,14 @@
     "duties": "Responsabilità principali",
     "tech": "Tecnologie",
     "projects": "Progetti",
+    "react-native-instructor": {
+      "duties": [
+        "Progettato e tenuto un corso React Native articolato in otto moduli, combinando teoria, live coding, esercitazioni pratiche e un progetto finale di app mobile",
+        "Condotto due lezioni mattutine settimanali da quattro ore durante febbraio e marzo 2026",
+        "Insegnato lo sviluppo multipiattaforma con Expo e React Native CLI, i componenti, la navigazione e la gestione dello stato con Redux e Zustand",
+        "Trattato l’integrazione con API REST, AsyncStorage, le funzionalità native, il debugging, l’ottimizzazione delle prestazioni, le build e la pubblicazione sugli app store"
+      ]
+    },
     "cheope": {
       "duties": [
         "Sviluppo interfacce dashboard scalabili con React e TypeScript",

@@ -44,6 +44,43 @@ async function main() {
   await prisma.experience.createMany({
     data: [
       {
+        company: 'Independent Training',
+        title: 'React Native Instructor',
+        role: 'Technical Instructor',
+        slug: 'react-native-instructor',
+        location: 'Italy',
+        url: 'https://www.linkedin.com/in/matteosoresini90/',
+        isRemote: true,
+        startDate: new Date('2026-02-01'),
+        endDate: new Date('2026-03-31'),
+        description:
+          'Designed and delivered a hands-on React Native training course covering cross-platform mobile development from project setup through testing, optimization, builds, and release.',
+        duties: [
+          'Designed and delivered an eight-module React Native course combining theory, live coding, hands-on exercises, and a final mobile app project',
+          'Led two four-hour morning sessions per week throughout February and March 2026',
+          'Taught cross-platform development with Expo and React Native CLI, components, navigation, and state management with Redux and Zustand',
+          'Covered REST API integration, AsyncStorage, native device features, debugging, performance optimization, builds, and app-store publishing',
+        ],
+        technologies: [
+          'React Native',
+          'JavaScript',
+          'React',
+          'Expo',
+          'React Native CLI',
+          'React Navigation',
+          'Redux',
+          'Zustand',
+          'REST APIs',
+          'Axios',
+          'AsyncStorage',
+          'Firebase Cloud Messaging',
+          'React Native Reanimated',
+          'Android Studio',
+          'Xcode',
+        ],
+        imageUrl: null,
+      },
+      {
         company: 'Cheope',
         title: 'Full Stack Developer (Front End focus)',
         role: 'Full Stack Developer (Front End focus)',

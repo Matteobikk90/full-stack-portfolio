@@ -50,7 +50,8 @@
     "experience": {
       "title": "Professional Experience",
       "subtitle": "From UI to database, I’ve worked across the stack to build fast, modern web apps that users enjoy.",
-      "details": "View details for {{company}}"
+      "details": "View details for {{company}}",
+      "remote": "Remote"
     },
     "education": {
       "title": "My education",
@@ -162,6 +163,14 @@
     "duties": "Key Duties",
     "tech": "Technologies",
     "projects": "Projects",
+    "react-native-instructor": {
+      "duties": [
+        "Designed and delivered an eight-module React Native course combining theory, live coding, hands-on exercises, and a final mobile app project",
+        "Led two four-hour morning sessions per week throughout February and March 2026",
+        "Taught cross-platform development with Expo and React Native CLI, components, navigation, and state management with Redux and Zustand",
+        "Covered REST API integration, AsyncStorage, native device features, debugging, performance optimization, builds, and app-store publishing"
+      ]
+    },
     "cheope": {
       "duties": [
         "Build scalable dashboard interfaces using React and TypeScript",
