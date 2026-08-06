@@ -164,6 +164,8 @@
     "tech": "Tecnologie",
     "projects": "Progetti",
     "react-native-instructor": {
+      "company": "Formazione indipendente",
+      "title": "Docente React Native",
       "duties": [
         "Progettato e tenuto un corso React Native articolato in otto moduli, combinando teoria, live coding, esercitazioni pratiche e un progetto finale di app mobile",
         "Condotto due lezioni mattutine settimanali da quattro ore durante febbraio e marzo 2026",

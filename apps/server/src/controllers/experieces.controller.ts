@@ -3,7 +3,10 @@ import { Request, Response } from 'express';
 
 export const getAllExperiences = async (_req: Request, res: Response) => {
   const experiences = await prisma.experience.findMany({
-    orderBy: { startDate: 'desc' },
+    orderBy: [
+      { endDate: { sort: 'desc', nulls: 'first' } },
+      { startDate: 'desc' },
+    ],
     select: {
       id: true,
       company: true,

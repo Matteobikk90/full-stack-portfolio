@@ -48,7 +48,7 @@ async function main() {
         title: 'React Native Instructor',
         role: 'Technical Instructor',
         slug: 'react-native-instructor',
-        location: 'Italy',
+        location: 'Turin, IT',
         url: 'https://www.linkedin.com/in/matteosoresini90/',
         isRemote: true,
         startDate: new Date('2026-02-01'),

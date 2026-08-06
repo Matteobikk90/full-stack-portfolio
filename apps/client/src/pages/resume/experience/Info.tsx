@@ -32,19 +32,28 @@ export const Info = () => {
                 )}
               </span>
               <div className="flex flex-col">
-                <span>{data.location}</span>
-                {data.isRemote && (
-                  <span className="text-xs">
-                    ({t('resume.experience.remote')})
-                  </span>
-                )}
+                <span className="whitespace-nowrap">
+                  {data.location}
+                  {data.isRemote && (
+                    <span className="text-xs">
+                      {' '}
+                      ({t('resume.experience.remote')})
+                    </span>
+                  )}
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <h2 className="text-xl font-bold">{data.company}</h2>
+              <h2 className="text-xl font-bold">
+                {t(`info.${data.slug}.company`, {
+                  defaultValue: data.company,
+                })}
+              </h2>
               <h3 className="flex items-center gap-2">
                 <DotIcon className="text-secondary size-5" weight="duotone" />
-                {data.title}
+                {t(`info.${data.slug}.title`, {
+                  defaultValue: data.title,
+                })}
               </h3>
             </div>
             <a

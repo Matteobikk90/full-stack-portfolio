@@ -45,22 +45,27 @@ export const Experience = () => {
                     )}
                   </h3>
                   <div>
-                    <h3>{location}</h3>
-                    {isRemote && (
-                      <span className="text-xs absolute">
-                        ({t('resume.experience.remote')})
-                      </span>
-                    )}
+                    <h3 className="whitespace-nowrap">
+                      {location}
+                      {isRemote && (
+                        <span className="text-xs">
+                          {' '}
+                          ({t('resume.experience.remote')})
+                        </span>
+                      )}
+                    </h3>
                   </div>
                 </div>
-                <h4 className="text-foreground/70">{company}</h4>
+                <h4 className="text-foreground/70">
+                  {t(`info.${slug}.company`, { defaultValue: company })}
+                </h4>
                 <div className="flex items-center justify-between gap-2">
                   <h5 className="flex items-center gap-1">
                     <DotIcon
                       className="text-secondary size-5"
                       weight="duotone"
                     />
-                    {title}
+                    {t(`info.${slug}.title`, { defaultValue: title })}
                   </h5>
                   <Button
                     asChild
