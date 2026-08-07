@@ -32,15 +32,12 @@ export const Info = () => {
                 )}
               </span>
               <div className="flex flex-col">
-                <span className="whitespace-nowrap">
-                  {data.location}
-                  {data.isRemote && (
-                    <span className="text-xs">
-                      {' '}
-                      ({t('resume.experience.remote')})
-                    </span>
-                  )}
-                </span>
+                <span className="whitespace-nowrap">{data.location}</span>
+                {data.isRemote && (
+                  <span className="text-xs">
+                    ({t('resume.experience.remote')})
+                  </span>
+                )}
               </div>
             </div>
             <div className="flex items-center gap-2 flex-wrap">

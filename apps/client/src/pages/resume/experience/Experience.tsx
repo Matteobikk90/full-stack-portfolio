@@ -45,15 +45,12 @@ export const Experience = () => {
                     )}
                   </h3>
                   <div>
-                    <h3 className="whitespace-nowrap">
-                      {location}
-                      {isRemote && (
-                        <span className="text-xs">
-                          {' '}
-                          ({t('resume.experience.remote')})
-                        </span>
-                      )}
-                    </h3>
+                    <h3 className="whitespace-nowrap">{location}</h3>
+                    {isRemote && (
+                      <span className="text-xs absolute">
+                        ({t('resume.experience.remote')})
+                      </span>
+                    )}
                   </div>
                 </div>
                 <h4 className="text-foreground/70">
