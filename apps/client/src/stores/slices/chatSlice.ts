@@ -50,6 +50,7 @@ const createChatSlice: StateCreator<ChatSliceType> = (set, get) => ({
   activeUserId: null,
 
   socket: null,
+  socketUserId: null,
   isConnecting: true,
   connectionError: null,
   selectUser: (uid) => {
@@ -62,15 +63,35 @@ const createChatSlice: StateCreator<ChatSliceType> = (set, get) => ({
     });
   },
   initSocket: (userId, isAdmin) => {
-    if (get().socket) return;
+    const currentSocket = get().socket;
+    const currentUserId = get().socketUserId;
 
-    set({ isConnecting: true, connectionError: null });
+    if (currentSocket && currentUserId === userId) {
+      if (!currentSocket.connected) {
+        set({ isConnecting: true, connectionError: null });
+        currentSocket.connect();
+      }
+      return;
+    }
+
+    if (currentSocket || currentUserId) {
+      get().disconnectSocket();
+    }
+
+    set({
+      socketUserId: userId,
+      isConnecting: true,
+      connectionError: null,
+    });
 
     void import('socket.io-client')
       .then(({ io }) => {
-        if (get().socket) return;
+        if (get().socket || get().socketUserId !== userId) return;
 
-        const socket = io(SOCKET_URL, { withCredentials: true });
+        const socket = io(SOCKET_URL, {
+          autoConnect: false,
+          withCredentials: true,
+        });
         set({ socket });
 
         socket.on('connect', () => {
@@ -140,16 +161,43 @@ const createChatSlice: StateCreator<ChatSliceType> = (set, get) => ({
         socket.on('admin:all-conversations', (allThreads) => {
           set({ threads: allThreads });
           if (isAdmin && Object.keys(allThreads).length) {
-            const firstUserId = Object.keys(allThreads)[0];
-            set({ activeUserId: firstUserId });
-            get().setChatMessages(firstUserId, allThreads[firstUserId]);
+            const activeUserId = get().activeUserId;
+            const selectedUserId =
+              activeUserId && allThreads[activeUserId]
+                ? activeUserId
+                : Object.keys(allThreads)[0];
+            set({ activeUserId: selectedUserId });
+            get().setChatMessages(selectedUserId, allThreads[selectedUserId]);
           }
         });
+
+        socket.connect();
       })
       .catch((error) => {
         console.error(error);
-        set({ connectionError: 'Failed to load chat', isConnecting: false });
+        if (get().socketUserId === userId) {
+          set({
+            socketUserId: null,
+            connectionError: 'Failed to load chat',
+            isConnecting: false,
+          });
+        }
       });
+  },
+  disconnectSocket: () => {
+    const socket = get().socket;
+    socket?.removeAllListeners();
+    socket?.disconnect();
+
+    set({
+      socket: null,
+      socketUserId: null,
+      isConnecting: false,
+      connectionError: null,
+      threads: {},
+      chatMessages: {},
+      activeUserId: null,
+    });
   },
 });
 

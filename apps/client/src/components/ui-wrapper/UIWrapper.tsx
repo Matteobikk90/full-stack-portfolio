@@ -1,3 +1,4 @@
+import { useChatSocket } from '@/hooks/useChatSocket';
 import { useClearOldAiMessages } from '@/hooks/useClearOldMessages';
 import { useLoginErrorToast } from '@/hooks/useLoginAuthError';
 import { useTheme } from '@/hooks/useTheme';
@@ -22,6 +23,7 @@ export const UIWrapper = ({ children }: { children: ReactNode }) => {
   useTheme();
   useClearOldAiMessages();
   useLoginErrorToast();
+  useChatSocket();
 
   useEffect(() => {
     const pointerQuery = window.matchMedia(

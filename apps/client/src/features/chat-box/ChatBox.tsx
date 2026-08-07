@@ -2,7 +2,6 @@ import { Header } from '@/features/chat-box/Header';
 import { Messages } from '@/features/chat-box/Messages';
 import { Tabs } from '@/features/chat-box/Tabs';
 import { useAuth } from '@/hooks/useAuth';
-import { useChatSocket } from '@/hooks/useChatSocket';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/stores';
 import { useShallow } from 'zustand/shallow';
@@ -13,8 +12,6 @@ export const ChatBox = () => {
   );
 
   const { isAuthenticated, isAdmin } = useAuth();
-
-  useChatSocket(isChatOpen && isAuthenticated);
 
   return isAuthenticated ? (
     <aside

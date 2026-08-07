@@ -29,12 +29,14 @@ export type ChatSliceType = {
   ) => void;
 
   socket: Socket | null;
+  socketUserId: string | null;
   isConnecting: boolean;
   connectionError: string | null;
   threads: Record<string, ChatMessageType[]>;
   activeUserId: string | null;
   selectUser: (userId: string) => void;
   initSocket: (userId: string, isAdmin: boolean) => void;
+  disconnectSocket: () => void;
 };
 
 export type ChatMessageType = {

@@ -2,13 +2,22 @@ import { useAuth } from '@/hooks/useAuth';
 import { useStore } from '@/stores';
 import { useEffect } from 'react';
 
-export const useChatSocket = (shouldConnect: boolean) => {
+export const useChatSocket = () => {
   const { isAuthenticated, user, isAdmin } = useAuth();
   const initSocket = useStore((s) => s.initSocket);
+  const disconnectSocket = useStore((s) => s.disconnectSocket);
 
   useEffect(() => {
-    if (shouldConnect && isAuthenticated && user?.id) {
+    if (isAuthenticated && user?.id) {
       initSocket(user.id, isAdmin);
+    } else {
+      disconnectSocket();
     }
-  }, [isAuthenticated, user?.id, isAdmin, initSocket, shouldConnect]);
+  }, [
+    disconnectSocket,
+    isAuthenticated,
+    user?.id,
+    isAdmin,
+    initSocket,
+  ]);
 };

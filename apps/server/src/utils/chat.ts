@@ -48,9 +48,9 @@ export const notifyEmail = (
     receiver: { email: string };
   }
 ) => {
-  const target = msg.receiver;
+  const targetEmail = isAdmin ? msg.receiver.email : process.env.CONTACT_EMAIL;
 
-  if (!target?.email) return;
+  if (!targetEmail) return;
 
   const subject = isAdmin
     ? '💬 Matteo replied to your message'
@@ -61,7 +61,7 @@ export const notifyEmail = (
   transporter
     .sendMail({
       from: `Matteo Soresini Portfolio Chat`,
-      to: target.email,
+      to: targetEmail,
       subject,
       text,
       html: `
